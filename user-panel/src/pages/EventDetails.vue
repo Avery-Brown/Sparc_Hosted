@@ -183,7 +183,7 @@
       <modal :show.sync="modals.payModal" headerClasses="justify-content-center">
         <h4 slot="header" class="text-danger text-center">Please Pay Participation Amount to Continue</h4>
         <div ref="card"></div>
-        <button class="btn btn-primary btn-block" v-on:click="purchase(userEmail, getSelectedEvent[0].event_price_per_person)">Pay Now</button>
+        <button class="btn btn-primary btn-block" :disabled="disablePay" v-on:click="purchase(userEmail, getSelectedEvent[0].event_price_per_person)">Pay Now</button>
       </modal>
     
   </div>
@@ -272,7 +272,8 @@ export default {
       fetchedRatings: [],
       shown: true,
       userEmail: null,
-      type: null
+      type: null,
+      disablePay: false
     }
   },
   computed: {
@@ -428,6 +429,7 @@ export default {
         this.modals.participateModal = true
         this.msg = "Your Seat has been confirmed"
         this.shown = false
+        this.disablePay = false
         return;
       }
       if(this.type == 'virtual') {
@@ -445,6 +447,7 @@ export default {
         this.modals.participateModal = true
         this.msg = "Your Seat has been confirmed"
         this.shown = false
+        this.disablePay = false
         return;
       }
     },
@@ -476,10 +479,14 @@ export default {
       }).catch(err => console.log("Error " + err))
     },
     purchase(userEmail, price) {
+      console.log('pay')
+      this.disablePay = true
+      //console.log(e)
       var self = this;
     stripe.createToken(card).then(function(result) {
       if (result.error) {
         self.hasCardErrors = true;
+        self.disablePay = false;
         self.$forceUpdate(); // Forcing the DOM to update so the Stripe Element can update.
         return;
       }
@@ -495,7 +502,10 @@ export default {
             
             self.paidParticipant(price, self.getSelectedEvent[0].created_by);
           }
-        }).catch(err => console.log(err))
+        }).catch(err => {
+          self.disablePay = false;
+          console.log(err)
+        })
       
     });
   }
