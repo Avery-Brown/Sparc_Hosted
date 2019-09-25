@@ -183,12 +183,12 @@
                     <div class = "row">
                         <div class = "col-md-3 ml-auto mr-auto">
                             <div class = "image-holder">
-                                <img src = "img/team/avatar.svg" class = "about-img" alt =/>
+                                <img src = "img/team/yash.jpg" class = "about-img" alt =/>
                                 <div class = "overlay">
-                                    <div class = "text"> Kyle Ryan is a Junior at Duke University studying Computer Science. In the summer of 2018, he interned at Delta Arts Alliance in Mississippi. He was a Campaign Fellow for the North Carolina Democratic Party in 2018. </div>
+                                    <div class = "text"> Yash is a CS student at Duke who works on product and development at Sparc </div>
                                 </div>
                             </div>
-                            <h4 class = "title text-center" style = "margin-top: 4px"> Kyle Ryan </h4>
+                            <h4 class = "title text-center" style = "margin-top: 4px"> Yash Patil </h4>
                             <h6 class = "text-center"> Developer </h6>
                         </div>
                         <div class = "col-md-3 ml-auto mr-auto">
@@ -231,6 +231,16 @@
                                 </div>
                             </div>
                             <h4 class = "title text-center" style = "margin-top: 10px"> Katelyn Chang </h4>
+                            <h6 class = "text-center"> Developer </h6>
+                        </div>
+                        <div class = "col-md-3 ml-auto mr-auto">
+                            <div class = "image-holder">
+                                <img src = "img/team/avatar.svg" class = "about-img" alt =/>
+                                <div class = "overlay">
+                                    <div class = "text"> Kyle Ryan is a Junior at Duke University studying Computer Science. In the summer of 2018, he interned at Delta Arts Alliance in Mississippi. He was a Campaign Fellow for the North Carolina Democratic Party in 2018. </div>
+                                </div>
+                            </div>
+                            <h4 class = "title text-center" style = "margin-top: 4px"> Kyle Ryan </h4>
                             <h6 class = "text-center"> Developer </h6>
                         </div>
                     </div>  
