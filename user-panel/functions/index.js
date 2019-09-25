@@ -54,3 +54,27 @@ exports.sendMail = functions.https.onRequest((req, res) => {
     });    
 });
 
+exports.sendContact = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    if(req.method == 'POST') {
+      const name = req.body.name;
+      const dest = req.body.dest;
+      const message = req.body.message;
+      sgMail.send({
+        to: dest,
+        from: 'info@sparc.world',
+        subject: 'Contact Verification',
+        text: 'Thank you, ' + name + ', for contacting us. We will get back to you shortly.'
+      }).then(res => res.send('Email Sent to User')).catch(err => res.send(err));
+
+      //Send info to sparc
+      sgMail.send({
+        to:'info@sparc.world',
+        from: 'info@sparc.world',
+        subject: 'Contact Request from ' + name,
+        text: message
+      }).then(res => res.send('Email Sent to Sparc')).catch(err => res.send(err));
+    }
+  })
+})
+
