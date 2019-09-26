@@ -5,12 +5,6 @@
       <div class="container">
         <div class="col-md-8 ml-auto mr-auto">
           <div class="alert alert-success" v-if="success">Verification Link has been sent. Please Check Email</div>
-          <alert type="danger" v-if="warning" dismissible>
-            <div class="alert-icon">
-              <i class="now-ui-icons objects_support-17"></i>
-            </div>
-            <strong>Something went wrong!</strong> {{ message }}
-          </alert>
             <card class="register-card">
               <h3 class="text-center text-info"><b>CREATE ACCOUNT</b></h3>
             <form action="" >
@@ -50,7 +44,7 @@
                           type="date"
                           class="bgc"
                           popper-class="date-picker date-picker-success"
-                          placeholder="Birthday"
+                          placeholder="Birth Date"
                           v-model="age"
                         >
                       </el-date-picker>
@@ -130,6 +124,12 @@
                       </multiselect>
                       <div class="card-footer text-center" id="button">
                     <!-- <button class="btn btn-info btn-round btn-block" @click="validateUser">Register</button> -->
+                    <alert type="danger" v-if="warning" dismissible>
+                      <div class="alert-icon">
+                        <i class="now-ui-icons objects_support-17"></i>
+                      </div>
+                      <strong>Something went wrong!</strong> {{ message }}
+                    </alert>
                     <input type="submit"
                     value="Register"
                     @click="validateUser"

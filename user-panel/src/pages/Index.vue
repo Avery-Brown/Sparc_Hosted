@@ -5,22 +5,25 @@
         <div class="container">
           <div class="col-md-12">
             <div class="row text-center">
-              
+
             </div>
             <div class="row">
               <div class="col-md-12 text-center">
-                <img src="sparclogo1.png" width="500" alt="">
+                <img src="sparclogo1.png" width="400" alt="">
               </div>
             </div>
             <div class="row">
-              
+
               <div class="col-md-8 ml-auto mr-auto mt-3 text-center">
                 <form action="" @submit="save">
-                <fg-input v-model="search" placeholder="Sparc the world"></fg-input>
+                <div>
+                  <fg-input v-model="search" class = "rq-form-element" placeholder="" autofocus></fg-input>
+                  <i></i>
+                </div>
                 <input type="submit" class="btn btn-info text-white" @click="save" value="Search" />
                 </form>
               </div>
-              
+
             </div>
           </div>
         </div>
