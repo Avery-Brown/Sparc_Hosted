@@ -18,16 +18,6 @@
                 <fg-input v-model="search" placeholder="Sparc the world"></fg-input>
                 <input type="submit" class="btn btn-info text-white" @click="save" value="Search" />
                 </form>
-                <div class = "row" style = "margin-top: 20px;"> 
-                  <div class = "col text-center"> 
-                    <router-link class="navbar-brand nav-link text-success text-center" to="/about">
-                      <b>About Us</b>
-                    </router-link>
-                    <router-link class="navbar-brand nav-link text-success text-center" to="/contact">
-                      <b>Contact</b>
-                    </router-link>  
-                  </div>
-                </div> 
               </div>
               
             </div>

@@ -36,12 +36,12 @@
         <b>Home</b>
         </router-link>
       </li>
-      <li class="nav-item" v-if="!this.logout">
+      <li class="nav-item">
         <router-link class="navbar-brand nav-link text-success" to="/about">
         <b>About Us</b>
         </router-link>
       </li>
-      <li class="nav-item" v-if="!this.logout">
+      <li class="nav-item">
         <router-link class="navbar-brand nav-link text-success" to="/contact">
         <b>Contact</b>
         </router-link>
