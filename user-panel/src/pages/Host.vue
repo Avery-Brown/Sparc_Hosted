@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
     <div class="main">
       <div class="section section-images">
         <div class="container">
@@ -12,16 +12,16 @@
                 <div class="col-md-4" v-for="(event, index) in events" :key="index">
                   <div class="card" style="cursor: pointer">
                   <div class="card-header" @click="viewEvent(event.id)">
-                    <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="">
-                    <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
+                    <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="">
+                    <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                   </div>
-                  <div class="card-body">
+                  <div class="card-body" style= "height:200px; position:relative;">
                     <div @click="viewEvent(event.id)">
                     <h5  class="text-success title-up"><b> {{ event.event_name }} </b></h5>
-                    <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                     <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                     <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                     <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
+                    <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                     </div>
                     <button class="btn btn-danger pull-right" @click="deleteEvent(event.id, event.event_name)">Delete</button>
                   </div>
@@ -40,7 +40,7 @@
           <button class="btn btn-danger mr-3" @click="deleteNow">Yes, Delete</button>
           <button class="btn btn-info" @click="delModal = false">No, Cancel</button>
         </div>
-        
+
       </div>
     </modal>
     </div>
@@ -93,7 +93,7 @@ export default {
         console.log(this.eventId)
         let abc=this.events.find(event_item=>event_item.id==this.eventId)
         // console.log(abc)
-        this.events.splice(abc, 1);           
+        this.events.splice(abc, 1);
 
         this.eventDelete(this.eventId)
         this.delModal = false
@@ -116,7 +116,7 @@ export default {
           sum += avgRating[i]
         }
         avg = sum / avgRating.length;
-        return avg          
+        return avg
       }
     },
     },
@@ -126,20 +126,20 @@ export default {
       console.log(this.getSelectedEvents)
       this.events=this.filterEvents
 
-          
+
         }
       }
 
     },
     created() {
-      
+
       const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
       for(var key in loggedUser.events_hosted){
         this.userEvents.push(loggedUser.events_hosted[key])
       }
       console.log("new runner")
       this.events=this.filterEvents
-      
+
 
       console.log(this.getSelectedEvents)
       //console.log("Count " + loggedUser.events_hosted)
@@ -150,5 +150,5 @@ export default {
 </script>
 
 <style scoped>
-    
+
 </style>

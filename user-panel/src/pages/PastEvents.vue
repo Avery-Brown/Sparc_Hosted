@@ -9,24 +9,24 @@
                 <h2 class="text-center ml-3 title title-up mb-5">Past Engagements</h2>
               </div>
             </div>
-          
+
             <div class="row">
-              
+
               <div class="col-md-4" v-for="(event, index) in foundEvents" v-if="event.deleted==false"  :key="index">
                 <div v-if="Date.parse(currentDate) > Date.parse(event.date)">
                   <div class="card" style="cursor: pointer" >
                     <div class="card-header">
-                    <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="" @click="viewEvent(event.id)">
-                    <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
+                    <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="" @click="viewEvent(event.id)">
+                    <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                     <div class="text-success pull-right mt-4 mr-3" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i></div>
                     </div>
-                    <div class="card-body" @click="viewEvent(event.id)">
+                    <div class="card-body" style= "height:200px; position:relative;" @click="viewEvent(event.id)">
                     <h5 class="text-success"><b> {{ event.event_name }}</b></h5>
-                    <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                     <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                     <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                     <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
-                    <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name }}</h6>
+                    <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                    <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
 
                     </div>
                 </div>
@@ -69,7 +69,7 @@ export default {
           }
         })
           return this.foundEvents;
-              
+
           })
     },
 
@@ -96,7 +96,7 @@ export default {
     },
     getUser(id) {
       let user_item = this.allUsers.find(user => user.id === id)
-        return user_item  
+        return user_item
     },
     getRatings(id) {
       let avgRating = [];
@@ -114,7 +114,7 @@ export default {
           sum += avgRating[i]
         }
         avg = sum / avgRating.length;
-        return avg          
+        return avg
       }
     },
   },
@@ -127,7 +127,7 @@ export default {
     var yyyy = today.getFullYear();
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
-    
+
     var link = window.location.href;
     this.url = link.replace('/past-events', '/events/')
 
