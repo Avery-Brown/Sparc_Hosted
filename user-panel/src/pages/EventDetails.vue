@@ -110,6 +110,8 @@
                       <h5 class="text-info"><b>Engagement Extras</b></h5>
                       <h6><b class="text-success">Engagement Free: </b> {{getSelectedEvent[0].event_free}}</h6>
                       <h6><b class="text-success">Engagement Type: </b> {{getSelectedEvent[0].event_type}}</h6>
+                      <h6 v-if="getSelectedEvent[0].event_cause1 != null"><b class="text-success">Charity 1: </b> {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}} </h6>
+                      <h6 v-if="getSelectedEvent[0].event_cause2 != null"><b class="text-success">Charity 2: </b> {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}</h6>
                       <h6 v-if="getSelectedEvent[0].event_price_per_person != null"><b class="text-success">Engagement Price: </b> $ {{getSelectedEvent[0].event_price_per_person}} PER PERSON</h6>
                       <h6><b class="text-success">Engagement Cause: </b> {{getSelectedEvent[0].cause}}</h6>
                       
