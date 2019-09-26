@@ -200,7 +200,7 @@
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Select Charity*</label>
                                 <select class="form-control select" placeholder="Select Charity" v-model="eventPayload.charity1">
-                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.id">{{charity.name}}</option>  
+                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.name">{{charity.name}}</option>  
                                 </select>
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
@@ -210,7 +210,7 @@
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Select Charity</label>
                                 <select class="form-control select" v-model="eventPayload.charity2">
-                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.id">{{charity.name}}</option>
+                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.name">{{charity.name}}</option>
                                 </select>
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
