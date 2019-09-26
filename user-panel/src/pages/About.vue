@@ -235,7 +235,7 @@
                         </div>
                         <div class = "col-md-3 ml-auto mr-auto">
                             <div class = "image-holder">
-                                <img src = "img/team/avatar.svg" class = "about-img" alt =/>
+                                <img src = "img/team/avatar.svg" class = "about-img" id = "avatar" alt =/>
                                 <div class = "overlay">
                                     <div class = "text"> Kyle Ryan is a Junior at Duke University studying Computer Science. In the summer of 2018, he interned at Delta Arts Alliance in Mississippi. He was a Campaign Fellow for the North Carolina Democratic Party in 2018. </div>
                                 </div>
@@ -253,8 +253,9 @@
 <style scoped>
 .about-img {
     vertical-align: center;
-    height: 325px;
+    height: 300px;
     width: 300px;
+    overflow: hidden;
 }
 
 .image-holder {
