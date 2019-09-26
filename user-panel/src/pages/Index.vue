@@ -13,7 +13,6 @@
               </div>
             </div>
             <div class="row">
-
               <div class="col-md-8 ml-auto mr-auto mt-3 text-center">
                 <form action="" @submit="save">
                 <div>

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Index from './pages/Index.vue';
+import About from './pages/About.vue';
+import Contact from './pages/Contact.vue';
 import Host from './pages/Host.vue';
 import CreateEngagement from './pages/CreateEngagement.vue';
 import Landing from './pages/Landing.vue';
@@ -34,6 +36,24 @@ export default new Router({
         footer: { backgroundColor: 'black' }
       }
     },
+    {
+      path:'/about',
+      name: 'about',
+      components: { default: About, header: MainNavbar, footer: MainFooter},
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: 'black' }
+      }
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      components: { default: Contact, header: MainNavbar, footer: MainFooter},
+      props: {
+        header: { colorOnScroll: 400 }, 
+        footer: { backgroundColor: 'black' }
+      }
+    }, 
     {
       path: '/host',
       name: 'host',
