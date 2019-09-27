@@ -475,7 +475,15 @@ export default {
     sendEmail() {
       axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendMail', {
         dest: this.userEmail,
-        event: this.getSelectedEvent[0].event_name
+        event: this.getSelectedEvent[0].event_name,
+        end_time: this.getSelectedEvent[0].end_time,
+        start_time: this.getSelectedEvent[0].start_time,
+        date: this.getSelectedEvent[0].date,
+        host_contact: this.getSelectedEvent[0].host_contact,
+        event_address: this.getSelectedEvent[0].event_address,
+        event_location_access: this.getSelectedEvent[0].event_location_access,
+        event_space: this.getSelectedEvent[0].event_space
+
       }).then(() => {
         console.log('Email Sent')
       }).catch(err => console.log("Error " + err))

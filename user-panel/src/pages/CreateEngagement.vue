@@ -153,12 +153,12 @@
                                 <fg-input type="number" min="1" placeholder="Capacity" v-model="eventPayload.virtual_capacity"></fg-input>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label for="">Zoom Link*</label>
-                                <fg-input placeholder="Zoom Link" v-model="eventPayload.zoom_link"></fg-input>
+                                <label for="">Zoom Link</label>
+                                <fg-input placeholder="Zoom Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.zoom_link"></fg-input>
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <label for="">Google Hangout Link*</label>
-                                <fg-input placeholder="Google Hangout Link" v-model="eventPayload.google_link"></fg-input>
+                                <fg-input placeholder="Google Hangout Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.google_link"></fg-input>
                             </div>
                         </div>
                         <div class="row mt-3" v-if="eventPayload.event_type == 'both'">
@@ -172,12 +172,12 @@
                             </div>
 
                             <div class="col-md-6 col-lg-6">
-                                <label for="">Zoom Link*</label>
-                                <fg-input placeholder="Zoom Link" v-model="eventPayload.zoom_link"></fg-input>
+                                <label for="">Zoom Link</label>
+                                <fg-input placeholder="Zoom Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.zoom_link"></fg-input>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label for="">Google Hangout Link*</label>
-                                <fg-input placeholder="Google Hangout Link" v-model="eventPayload.google_link"></fg-input>
+                                <label for="">Google Hangout Link</label>
+                                <fg-input placeholder="Google Hangout Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.google_link"></fg-input>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -199,9 +199,7 @@
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Select Charity*</label>
-                                <select class="form-control select" placeholder="Select Charity" v-model="eventPayload.charity1">
-                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.name">{{charity.name}}</option>  
-                                </select>
+                                <fg-input placeholder="Charity 1" v-model="eventPayload.charity1"></fg-input>
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Charity 1*</label>
@@ -209,9 +207,7 @@
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Select Charity</label>
-                                <select class="form-control select" v-model="eventPayload.charity2">
-                                    <option v-for="(charity, i) in charities" :key="i" :value="charity.name">{{charity.name}}</option>
-                                </select>
+                                    <fg-input placeholder="Charity 2" v-model="eventPayload.charity2"></fg-input>
                             </div>
                             <div class="col-md-3" v-if="eventPayload.cause == 'yes'">
                                 <label for="">Charity 2 (Optional)</label>
@@ -333,11 +329,11 @@ export default {
               this.message = "Please Set Valid In Person Capacity for Engagement"
               this.warning = true
           }
-          else if(this.eventPayload.event_type == 'virtual' && (this.eventPayload.zoom_link == null || this.eventPayload.google_link == null)) {
+          else if(this.eventPayload.event_type == 'virtual' && (this.eventPayload.zoom_link == null && this.eventPayload.google_link == null)) {
               this.message = "Please Enter Zoom Link and Google Hangout Link for Engagement"
               this.warning = true
           }
-          else if(this.eventPayload.event_type == 'both' && (this.eventPayload.zoom_link == null || this.eventPayload.google_link == null)) {
+          else if(this.eventPayload.event_type == 'both' && (this.eventPayload.zoom_link == null && this.eventPayload.google_link == null)) {
               this.message = "Please Enter Zoom Link and Google Hangout Link for Engagement"
               this.warning = true
           }
@@ -381,6 +377,10 @@ export default {
               this.message = "Please Select Valid Percentage for Charity 1"
               this.warning = true
           }
+          else if(this.eventPayload.event_cause1 + this.eventPayload.event_cause1 > 100) {
+              this.message = "Please Select Percentage Amounts that are less than 100"
+              this.warning = true
+          }          
           else if(this.eventPayload.charity2 != null && this.eventPayload.event_cause2 < 1) {
               this.message = "Please Enter Valid Percentage for Charity 2"
               this.warning = true
