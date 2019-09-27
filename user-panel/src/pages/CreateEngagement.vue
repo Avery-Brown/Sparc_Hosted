@@ -157,7 +157,7 @@
                                 <fg-input placeholder="Zoom Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.zoom_link"></fg-input>
                             </div>
                             <div class="col-md-6 col-lg-6">
-                                <label for="">Google Hangout Link*</label>
+                                <label for="">Google Hangout Link</label>
                                 <fg-input placeholder="Google Hangout Link (Please enter a Zoom or Google Hangout Link)" v-model="eventPayload.google_link"></fg-input>
                             </div>
                         </div>
