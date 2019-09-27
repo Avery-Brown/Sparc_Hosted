@@ -17,7 +17,7 @@
                   <option value="">Select Type</option>
                   <option value="virtual">Virtual</option>
                   <option value="in Person">In Person</option>
-                  <option value="both">Both</option>
+                  <option value="In-Person & Digital">In-Person & Digital</option>
                 </select>
               </div>
               <div class="col-md-3">

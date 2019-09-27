@@ -48,7 +48,7 @@
                         </b-card-text>
                     </b-card>
                 </b-card-group>
-                <b-card class="mt-3" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
+                <b-card class="mt-3" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'In-Person & Digital')">
                   <h4 class="title-up text-info">Engagement Links</h4>
                   <div class="row">
                     <div class="col-md-4">
@@ -139,13 +139,13 @@
                      <button class="btn btn-info btn-block" @click="viewProfile(getSelectedEvent[0].created_by)">View Profile</button>
                   </div>
                   <div class="mb-5">
-                    <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'in Person' || getSelectedEvent[0].event_type == 'both'">
+                    <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'in Person' || getSelectedEvent[0].event_type == 'In-Person & Digital'">
                     <h5 class="text-info"><b>In Person Participants</b></h5>
                       <div class="col-md-12" v-for="(user, index) in getParticipantsList" :key="index">
                         <strong class="text-success">{{ user.first_name + " " + user.last_name}}</strong>
                       </div>
                   </div>
-                  <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both'">
+                  <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'In-Person & Digital'">
                     <h5 class="text-info"><b>Virtual Participants</b></h5>
                       <div class="col-md-12" v-for="(user, index) in getVirtualParticipantsList" :key="index">
                         <strong class="text-success">{{ user.first_name + " " + user.last_name}}</strong>
@@ -358,7 +358,7 @@ export default {
         if(this.getSelectedEvent[0].event_type == 'virtual'){
           this.virtualParticipate();
         }
-        if(this.getSelectedEvent[0].event_type == 'both') {
+        if(this.getSelectedEvent[0].event_type == 'In-Person & Digital') {
           this.modals.selectModal = true
           return;
         }
