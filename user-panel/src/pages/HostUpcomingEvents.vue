@@ -7,24 +7,24 @@
             <div class="col-md-12">
                 <h2>Upcoming Engagements</h2>
                 <div class="row">
-                    
+
                 <div class="col-md-4" v-for="(event, index) in foundEvents" :key="index" >
                   <div @click="viewEvent(event.id)" style="cursor: pointer" v-if="Date.parse(currentDate) <= Date.parse(event.date)">
                       <div class="card">
                         <div class="card-header">
-                            <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="">
-                            <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
+                            <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="">
+                            <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style= "height:200px; position:relative;">
                             <h5 class="text-success title-up"><b> {{ event.event_name }} </b></h5>
-                            <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                             <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                             <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                             <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
+                            <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                         </div>
                       </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -61,14 +61,14 @@ export default {
       //       }
       //     })
       //       return this.foundEvents;
-                
+
       //       })
       // },
       thevents() {
           return this.userEvents.map(event_id=> {
                         // let event_date=moment(this.selected_event.date).format("MM/DD/YYYY")
             // return moment(event_date).isBefore(moment().format("MM/DD/YYYY"))
-          let event_item=this.getEvents.find(event_item=> event_item.id==event_id )// Date.parse(this.currentDate) <= Date.parse(event_item.date)) 
+          let event_item=this.getEvents.find(event_item=> event_item.id==event_id )// Date.parse(this.currentDate) <= Date.parse(event_item.date))
 
 return event_item;
           })
@@ -113,7 +113,7 @@ return event_item;
           sum += avgRating[i]
         }
         avg = sum / avgRating.length;
-        return avg          
+        return avg
       }
     },
     },
@@ -134,10 +134,10 @@ return event_item;
               console.log(this.dates)
               this.foundEvents=this.dates
          }
-      
+
       console.log(this.thevents)
       // console.log(moment('4/4/2019').isAfter(moment().format("MM/DD/YYYY")))
-      
+
 
       //console.log("Count " + loggedUser.events_hosted)
       // this.userEvents = loggedUser.events_hosted
@@ -147,5 +147,5 @@ return event_item;
 </script>
 
 <style scoped>
-    
+
 </style>

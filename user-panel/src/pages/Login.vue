@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </template>
 <script>
@@ -61,10 +61,10 @@ export default {
         email: 'arslanahmed983@gmail.com',
         password: '123456',
       },
-      
+
     }
   },
-  
+
   methods: {
     ...mapActions(['authenticateLogin']),
 

@@ -1,16 +1,10 @@
 <template>
   <div class="">
-    
+
     <div class="content">
       <div class="container">
         <div class="col-md-8 ml-auto mr-auto">
           <div class="alert alert-success" v-if="success">Verification Link has been sent. Please Check Email</div>
-          <alert type="danger" v-if="warning" dismissible>
-            <div class="alert-icon">
-              <i class="now-ui-icons objects_support-17"></i>
-            </div>
-            <strong>Something went wrong!</strong> {{ message }}
-          </alert>
             <card class="register-card">
               <h3 class="text-center text-info"><b>CREATE ACCOUNT</b></h3>
             <form action="" >
@@ -50,7 +44,7 @@
                           type="date"
                           class="bgc"
                           popper-class="date-picker date-picker-success"
-                          placeholder="Birth Day"
+                          placeholder="Birth Date"
                           v-model="age"
                         >
                       </el-date-picker>
@@ -64,7 +58,7 @@
                           addon-left-icon="now-ui-icons business_briefcase-24"
                           placeholder="Occupation"
                           v-model="job_occupation"
-                          
+
                           type="text">
                       </fg-input>
                   </div>
@@ -74,7 +68,7 @@
                           addon-left-icon="now-ui-icons education_hat"
                           placeholder="School"
                           v-model="institute"
-                          
+
                           type="text">
                       </fg-input>
                   </div>
@@ -95,12 +89,12 @@
                           addon-left-icon="now-ui-icons ui-1_lock-circle-open"
                           placeholder="Confirm Password"
                           v-model="confirmPassword"
-                          
+
                           type="password">
                       </fg-input>
                   </div>
               </div>
-            
+
               <div class="row inputField">
                   <div class="col-md-12">
                       <fg-input
@@ -108,7 +102,7 @@
                           addon-left-icon="now-ui-icons ui-2_chat-round"
                           placeholder="About"
                           v-model="about"
-                          
+
                           type="text">
                       </fg-input>
                   </div>
@@ -116,24 +110,30 @@
 
               <div class="row inputField">
                   <div class="col-md-12">
-                      <multiselect v-model="value" 
-                        :options="allTags" 
-                        :multiple="true" 
-                        :close-on-select="false" 
-                        :clear-on-select="false" 
-                        :preserve-search="true" 
-                        placeholder="Pick Your Interests" 
-                        label="value" 
-                        track-by="value" 
+                      <multiselect v-model="value"
+                        :options="allTags"
+                        :multiple="true"
+                        :close-on-select="false"
+                        :clear-on-select="false"
+                        :preserve-search="true"
+                        placeholder="Pick Your Interests"
+                        label="value"
+                        track-by="value"
                         :preselect-first="false">
                           <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
                       </multiselect>
                       <div class="card-footer text-center" id="button">
                     <!-- <button class="btn btn-info btn-round btn-block" @click="validateUser">Register</button> -->
+                    <alert type="danger" v-if="warning" dismissible>
+                      <div class="alert-icon">
+                        <i class="now-ui-icons objects_support-17"></i>
+                      </div>
+                      <strong>Something went wrong!</strong> {{ message }}
+                    </alert>
                     <input type="submit"
                     value="Register"
                     @click="validateUser"
-                    class="btn btn-info text-white btn-round btn-lg btn-block" 
+                    class="btn btn-info text-white btn-round btn-lg btn-block"
                     />
                 </div>
                 <div class="text-center">
@@ -176,8 +176,8 @@ export default {
   computed: { ...mapGetters(['allTags', 'status', 'error', 'user'])},
   data() {
       return {
-        
-        success: false,  
+
+        success: false,
         firstName: null,
         lastName: null,
         age: null,
@@ -202,7 +202,7 @@ export default {
         },
         message: '',
         warning: false,
-              
+
       }
   },
 
@@ -234,18 +234,18 @@ export default {
           this.value.forEach(item => {
             this.interestId.push(item.id)
           })
-          
+
           this.userData.first_name = this.firstName;
           this.userData.last_name = this.lastName;
-          
+
           this.userData.email = this.email;
           this.userData.password = this.password;
           this.userData.job_occupation = this.job_occupation;
           this.userData.institute = this.institute;
           this.userData.about = this.about;
           this.userData.interests = this.interestId
-          
-          this.createUser(this.userData);  
+
+          this.createUser(this.userData);
         }
         else {
           this.userData.first_name = this.firstName;
@@ -257,10 +257,10 @@ export default {
           this.userData.about = this.about;
 
           this.createUser(this.userData);
-          
-        }  
+
+        }
         console.log(this.userData.age)
-      
+
    },
   },
   watch: {
@@ -303,7 +303,7 @@ export default {
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-  
+
   /* .inputField {
       margin-top: -55px;
   } */
