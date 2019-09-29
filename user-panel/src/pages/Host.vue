@@ -15,7 +15,7 @@
                     <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="">
                     <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                   </div>
-                  <div class="card-body" style= "height:200px; position:relative;">
+                  <div class="card-body" style= "height:260px; position:relative;">
                     <div @click="viewEvent(event.id)">
                     <h5  class="text-success title-up"><b> {{ event.event_name }} </b></h5>
                     <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
