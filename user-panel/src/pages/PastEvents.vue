@@ -20,12 +20,14 @@
                     <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                     <div class="text-success pull-right mt-4 mr-3" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i></div>
                     </div>
-                    <div class="card-body" style= "height:200px; position:relative;" @click="viewEvent(event.id)">
+                    <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                     <h5 class="text-success"><b> {{ event.event_name }}</b></h5>
                     <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                     <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                     <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
                     <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                    <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
+
                     <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
 
                     </div>
