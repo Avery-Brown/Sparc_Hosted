@@ -46,16 +46,21 @@
         <b>Contact</b>
         </router-link>
       </li>
-      <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
-        <b>Upcoming Engagements</b>
-        </router-link>
-      </li>
-      <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/past-events">
-        <b>Past Engagements</b>
-        </router-link>
-      </li>
+      <div class="dropdown">
+        <button class="dropbtn">YOUR ENGAGEMENTS</button>
+        <div class="dropdown-content">
+          <li class="nav-item" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
+              <b>Upcoming Engagements</b>
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/past-events">
+              <b>Past Engagements</b>
+            </router-link>
+          </li>
+        </div>
+      </div>
       <!-- <li class="nav-item" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="">
         Billing History
@@ -72,7 +77,6 @@
         <b>Logout</b>
         </router-link>
       </li>
-      
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info" to="/login" v-if="this.logout">
         <b>Login</b>
