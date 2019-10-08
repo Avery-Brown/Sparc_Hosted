@@ -9,7 +9,8 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "/api/v1**",
+        "function": "webApi",
         "destination": "/index.html"
       }
     ]

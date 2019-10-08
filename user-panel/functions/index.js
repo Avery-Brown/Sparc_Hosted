@@ -1,13 +1,32 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const express = require('express');
-const app = express();
+const bodyParser = require('body-parser')
 const SENDGRID_API_KEY = functions.config().sendgrid.key
+const Keys = require("../src/config/keys")
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(SENDGRID_API_KEY);
-const stripe = require("stripe")("sk_test_vGhKOwerdYCzpTvvHi2nBUIk002Gt130RU");
+const stripe = require("stripe")(Keys.stripe);
 const cors = require('cors')({origin: true});
+
 admin.initializeApp();
+
+const main = express();
+const app = express();
+
+const ContactRouter = require('./routes/contact');
+const TransactRouter = require('./routes/transact');
+
+let contactRouter = new ContactRouter();
+let transactRouter = new TransactRouter();
+
+main.use('/api/v1', app);
+main.use(bodyParser.json());
+main.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/contact', contactRouter.router)
+app.use('/transact', transactRouter.router);
+
 
 exports.CheckoutSession = functions.https.onRequest((request, response) => {
   cors(request, response, () => {
@@ -95,4 +114,7 @@ exports.sendContact = functions.https.onRequest((req, res) => {
     }
   })
 })
+
+exports.webApi = functions.https.onRequest(main);
+
 
