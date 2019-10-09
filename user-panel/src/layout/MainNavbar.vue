@@ -1,8 +1,8 @@
 <template>
   <navbar
-    type="info"
-    :color-on-scroll="colorOnScroll"
-    menu-classes="ml-auto"
+          type="info"
+          :color-on-scroll="colorOnScroll"
+          menu-classes="ml-auto"
   >
     <template>
       <router-link class="navbar-brand" to="/">
@@ -33,28 +33,33 @@
       </li> -->
       <li class="nav-item" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="/events">
-        <b>Home</b>
+          <b>Home</b>
         </router-link>
       </li>
       <li class="nav-item">
         <router-link class="navbar-brand nav-link text-success" to="/about">
-        <b>About Us</b>
+          <b>About Us</b>
         </router-link>
       </li>
       <li class="nav-item">
         <router-link class="navbar-brand nav-link text-success" to="/contact">
-        <b>Contact</b>
+          <b>Contact</b>
         </router-link>
       </li>
-      <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
-        <b>Upcoming Engagements</b>
-        </router-link>
-      </li>
-      <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/past-events">
-        <b>Past Engagements</b>
-        </router-link>
+      <li class="nav-item dropdown">
+        <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
+        <div class="dropdown-content">
+          <li class="nav-item" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
+              <b>Upcoming Engagements</b>
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/past-events">
+              <b>Past Engagements</b>
+            </router-link>
+          </li>
+        </div>
       </li>
       <!-- <li class="nav-item" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="">
@@ -63,29 +68,30 @@
       </li> -->
       <li class="nav-item" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="/profile">
-        <b>Profile</b>
+          <b>Profile</b>
         </router-link>
       </li>
-      
+
       <li class="nav-item" v-if="!this.logout" @click="userLogout">
         <router-link class="navbar-brand nav-link text-success" to="/">
-        <b>Logout</b>
+          <b>Logout</b>
         </router-link>
       </li>
-      
+
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info" to="/login" v-if="this.logout">
-        <b>Login</b>
-        </router-link>  
+          <b>Login</b>
+        </router-link>
       </li>
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info text-white" to="/host" v-if="!this.logout">
-        Host
+          Host
         </router-link>
       </li>
     </template>
   </navbar>
 </template>
+
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -142,4 +148,18 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+
+</style>
