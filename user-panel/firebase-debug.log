@@ -1,0 +1,667 @@
+[debug] [2019-10-09T19:25:41.801Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:25:41.804Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:25:41.805Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:25:41.806Z] Platform:      darwin
+[debug] [2019-10-09T19:25:41.806Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:25:41.807Z] Time:          Wed Oct 09 2019 15:25:41 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:25:41.807Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:25:41.816Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:25:41.816Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:25:41.816Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:25:41.817Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:25:42.477Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:25:42.479Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:25:42.660Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:25:42.664Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T19:25:42.986Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T19:25:43.237Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:25:43.237Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[warn] ⚠  The Cloud Functions emulator requires the module "firebase-admin" to be installed. This package is in your package.json, but it's not available. You probably need to run "npm install" in your functions directory.
+[info] i  functions: Your functions could not be parsed due to an issue with your node_modules (see above)
+[debug] [2019-10-09T19:28:29.085Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:28:29.087Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:28:29.087Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:28:29.087Z] Platform:      darwin
+[debug] [2019-10-09T19:28:29.087Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:28:29.088Z] Time:          Wed Oct 09 2019 15:28:29 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:28:29.088Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:28:29.094Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:28:29.094Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:28:29.094Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:28:29.095Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:28:29.388Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:28:29.390Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:28:29.540Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:28:29.544Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[debug] [2019-10-09T19:28:29.803Z] <<< HTTP RESPONSE 200
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[info] ✔  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[debug] [2019-10-09T19:28:30.218Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:28:30.218Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:28:30.220Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:28:30.221Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:28:30.222Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T19:31:48.919Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:31:48.921Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:31:48.922Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:31:48.922Z] Platform:      darwin
+[debug] [2019-10-09T19:31:48.922Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:31:48.927Z] Time:          Wed Oct 09 2019 15:31:48 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:31:48.927Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:31:48.935Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:31:48.935Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:31:48.935Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:31:48.937Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:31:49.345Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:31:49.347Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:31:49.638Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:31:49.643Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T19:31:50.148Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T19:31:50.421Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:31:50.422Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:31:50.425Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:31:50.426Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:31:50.427Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T19:33:06.546Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:33:06.547Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:33:06.548Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:33:06.548Z] Platform:      darwin
+[debug] [2019-10-09T19:33:06.548Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:33:06.549Z] Time:          Wed Oct 09 2019 15:33:06 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:33:06.549Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:33:06.560Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:33:06.560Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:33:06.560Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:33:06.562Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:33:06.897Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:33:06.901Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:33:07.053Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:33:07.058Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[info] ✔  functions: Using node@10 from host.
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T19:33:07.609Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T19:33:07.866Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:33:07.866Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:33:07.870Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:33:07.871Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:33:07.872Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T19:33:17.092Z] File /Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/package.json changed, reloading triggers
+[debug] [2019-10-09T19:33:18.339Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:33:18.339Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:33:18.342Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:33:18.343Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:33:18.343Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T19:43:35.636Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:43:35.638Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:43:35.638Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:43:35.638Z] Platform:      darwin
+[debug] [2019-10-09T19:43:35.638Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:43:35.639Z] Time:          Wed Oct 09 2019 15:43:35 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:43:35.639Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:43:35.649Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:43:35.649Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:43:35.649Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:43:35.651Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:43:35.876Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:43:35.878Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:43:36.038Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:43:36.043Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T19:43:36.345Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T19:43:36.599Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:43:36.599Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:43:36.603Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:43:36.604Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:43:36.605Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T19:44:10.638Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T19:44:10.640Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T19:44:10.640Z] CLI Version:   7.5.0
+[debug] [2019-10-09T19:44:10.640Z] Platform:      darwin
+[debug] [2019-10-09T19:44:10.640Z] Node Version:  v10.16.3
+[debug] [2019-10-09T19:44:10.641Z] Time:          Wed Oct 09 2019 15:44:10 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T19:44:10.641Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T19:44:10.646Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T19:44:10.647Z] > authorizing via signed-in user
+[debug] [2019-10-09T19:44:10.647Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T19:44:10.648Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T19:44:10.859Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T19:44:10.861Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T19:44:11.031Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T19:44:11.036Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T19:44:11.364Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T19:44:11.624Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T19:44:11.624Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T19:44:11.626Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T19:44:11.627Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T19:44:11.628Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T20:04:36.391Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T20:04:36.394Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T20:04:36.394Z] CLI Version:   7.5.0
+[debug] [2019-10-09T20:04:36.394Z] Platform:      darwin
+[debug] [2019-10-09T20:04:36.394Z] Node Version:  v10.16.3
+[debug] [2019-10-09T20:04:36.399Z] Time:          Wed Oct 09 2019 16:04:36 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T20:04:36.399Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T20:04:36.410Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T20:04:36.410Z] > authorizing via signed-in user
+[debug] [2019-10-09T20:04:36.411Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T20:04:36.412Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-10-09T20:04:36.412Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-10-09T20:04:36.612Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:04:36.621Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T20:04:36.808Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:04:36.809Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T20:04:36.967Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T20:04:36.971Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T20:04:37.400Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T20:04:37.666Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T20:04:37.667Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T20:04:37.671Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T20:04:37.672Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T20:04:37.673Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T20:14:43.260Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T20:14:43.261Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T20:14:43.262Z] CLI Version:   7.5.0
+[debug] [2019-10-09T20:14:43.262Z] Platform:      darwin
+[debug] [2019-10-09T20:14:43.262Z] Node Version:  v10.16.3
+[debug] [2019-10-09T20:14:43.263Z] Time:          Wed Oct 09 2019 16:14:43 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T20:14:43.263Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T20:14:43.273Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T20:14:43.273Z] > authorizing via signed-in user
+[debug] [2019-10-09T20:14:43.273Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T20:14:43.274Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T20:14:43.518Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:14:43.520Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T20:14:43.693Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T20:14:43.697Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://localhost:5001
+[debug] [2019-10-09T20:14:44.122Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[debug] [2019-10-09T20:14:44.386Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T20:14:44.386Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T20:14:44.390Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T20:14:44.391Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T20:14:44.392Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
+[debug] [2019-10-09T20:15:25.968Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T20:15:25.970Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-10-09T20:15:25.970Z] CLI Version:   7.5.0
+[debug] [2019-10-09T20:15:25.970Z] Platform:      darwin
+[debug] [2019-10-09T20:15:25.970Z] Node Version:  v10.16.3
+[debug] [2019-10-09T20:15:25.971Z] Time:          Wed Oct 09 2019 16:15:25 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T20:15:25.971Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T20:15:25.981Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T20:15:25.981Z] > authorizing via signed-in user
+[debug] [2019-10-09T20:15:25.981Z] [iam] checking project sparc-9d9cb for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]
+[debug] [2019-10-09T20:15:25.982Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T20:15:26.315Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:26.318Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T20:15:26.445Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'sparc-9d9cb'...
+[info] 
+[info] i  deploying database, functions, hosting
+[info] i  database: checking rules syntax...
+[debug] [2019-10-09T20:15:28.054Z] >>> HTTP REQUEST PUT https://sparc-9d9cb.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+[debug] [2019-10-09T20:15:28.385Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database sparc-9d9cb is valid
+[debug] [2019-10-09T20:15:28.387Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.0.0",
+    "firebase-functions": "^3.1.0",
+    "nodemailer": "^6.3.0",
+    "request-promise": "^4.2.4",
+    "stripe": "^7.9.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-10-09T20:15:28.389Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sparc-9d9cb/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2019-10-09T20:15:28.389Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sparc-9d9cb/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2019-10-09T20:15:28.720Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:28.739Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-10-09T20:15:28.740Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/adminSdkConfig  
+ 
+[debug] [2019-10-09T20:15:28.876Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:28.877Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/sparc-test-jordan/versions  
+
+[debug] [2019-10-09T20:15:30.613Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2019-10-09T20:15:30.616Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/sparc-9d9cb/configs  
+ 
+[debug] [2019-10-09T20:15:30.919Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:30.920Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/sparc-9d9cb/configs/sendgrid/variables  
+ 
+[debug] [2019-10-09T20:15:31.046Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:31.046Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/sparc-9d9cb/configs/sendgrid/variables/key  
+ 
+[debug] [2019-10-09T20:15:31.163Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (32.8 KB) for uploading
+[debug] [2019-10-09T20:15:31.827Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2019-10-09T20:15:33.070Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:33.071Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-bb2fdd37-0e9a-4b88-a392-93ca2339fd95/71e406bc-a48f-4286-8198-990585d35a6e.zip?GoogleAccessId=service-1067799707116@gcf-admin-robot.iam.gserviceaccount.com&Expires=1570653932&Signature=bk%2FWagm7vFIGJ36%2FTFcK5AdbfQp7y5SlZwtbJes5tB96pvZijliBp3EtBZFgOZn0X4k7NwWyfzPOKRQcp4C0U8QKaJ1dV8%2BrgtHv5E6e%2FnWSvk1BPI3uYHKHaO6I31kOxHZwTL4uu4btlCc0F6QnQ%2Fvx33YnnTMH0Uood1m%2BM%2BbdBuJWWGe1N2tzFG0ZtWwmcMPiv6O3sjb6XGzFb8B76tZPuR6wdwteZBxGc0UDRDpKAzpEt8gyyUWdOwu3wc8ZgFQ7rS6sRDIZEjpkvuQ3GWwFNHuUIO5dn81QLjxBoFF6nhobkNRhtHldz6sNGoZ3hj5cWsChhCfwlaJuTyZkhg%3D%3D  
+ <request body omitted>
+[debug] [2019-10-09T20:15:33.377Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting[sparc-test-jordan]: beginning deploy...
+[info] i  hosting[sparc-test-jordan]: found 164 files in dist
+[debug] [2019-10-09T20:15:33.415Z] [hosting] hash cache [ZGlzdA] load error: lines is not defined
+[debug] [2019-10-09T20:15:34.576Z] [hosting] hash cache [ZGlzdA] stored for 164 files
+[debug] [2019-10-09T20:15:34.576Z] [hosting][hash queue][FINAL]
+[debug] [2019-10-09T20:15:34.576Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/sparc-test-jordan/versions/9fb90aa810feaa22:populateFiles  
+ <request body omitted>
+[debug] [2019-10-09T20:15:36.956Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:36.959Z] [hosting][populate queue][FINAL]
+[debug] [2019-10-09T20:15:36.959Z] [hosting] uploads queued: 4
+[debug] [2019-10-09T20:15:39.144Z] [hosting][upload queue][FINAL]
+[info] ✔  hosting[sparc-test-jordan]: file upload complete
+[debug] [2019-10-09T20:15:39.144Z] [hosting] deploy completed after 5766ms
+[info] i  database: releasing rules...
+[debug] [2019-10-09T20:15:39.215Z] >>> HTTP REQUEST PUT https://sparc-9d9cb.firebaseio.com/.settings/rules.json  
+ {
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+[debug] [2019-10-09T20:15:39.624Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules for database sparc-9d9cb released successfully
+[debug] [2019-10-09T20:15:39.627Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/-/functions  
+ 
+[debug] [2019-10-09T20:15:40.034Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function CheckoutSession(us-central1)...
+[debug] [2019-10-09T20:15:40.037Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function sendMail(us-central1)...
+[debug] [2019-10-09T20:15:40.038Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function sendContact(us-central1)...
+[debug] [2019-10-09T20:15:40.038Z] Trigger is:  {"httpsTrigger":{}}
+[info] 
+The following functions are found in your project but do not exist in your local source code:
+	webApi(us-central1)
+
+If you are renaming a function or changing its region, it is recommended that you create the new function first before deleting the old one to prevent event loss. For more info, visit https://firebase.google.com/docs/functions/manage-functions#modify
+
+[info] i  functions: continuing with other deployments.
+[debug] [2019-10-09T20:15:59.031Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/sparc-9d9cb/services/cloudscheduler.googleapis.com  
+ 
+[debug] [2019-10-09T20:15:59.284Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:15:59.286Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/us-central1/functions/CheckoutSession {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2019-10-09T20:15:59.287Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/us-central1/functions/sendMail {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2019-10-09T20:15:59.288Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/us-central1/functions/sendContact {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2019-10-09T20:16:00.000Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.002Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.003Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.005Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/sparc-9d9cb/locations/-/functions  
+ 
+[debug] [2019-10-09T20:16:00.513Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.514Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:00.515Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:00.515Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:00.664Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.786Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:00.790Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:02.666Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:02.792Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:02.793Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:03.072Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:03.073Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:03.074Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:05.073Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:05.075Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:05.075Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:05.427Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:05.428Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:05.429Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:07.429Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:07.430Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:07.430Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:07.742Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:07.952Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:07.963Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:09.747Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:09.956Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:09.965Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:10.047Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:10.238Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:10.243Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:12.051Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:12.242Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:12.245Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:12.300Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:12.598Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:12.600Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:14.305Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:14.601Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:14.602Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:14.608Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:14.951Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:14.952Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:16.610Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:16.857Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:16.955Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:16.956Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:17.202Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:17.216Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:18.859Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:19.204Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:19.214Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:19.217Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:19.559Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:19.560Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:21.216Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:21.563Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:21.565Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:21.581Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:21.709Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:21.826Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:23.584Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:23.711Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:23.831Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:23.859Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:24.028Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:24.112Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:25.861Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZENvbnRhY3QvbUNqLVd4Nk9nMm8  
+ 
+[debug] [2019-10-09T20:16:26.029Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvQ2hlY2tvdXRTZXNzaW9uL0FQRHI0b05ZM1Iw  
+ 
+[debug] [2019-10-09T20:16:26.118Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c3BhcmMtOWQ5Y2IvdXMtY2VudHJhbDEvc2VuZE1haWwvOXJtbWR4WHcyMXc  
+ 
+[debug] [2019-10-09T20:16:26.119Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:26.151Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:29.179Z] ----------------------------------------------------------------------
+[debug] [2019-10-09T20:16:29.181Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2019-10-09T20:16:29.181Z] CLI Version:   7.5.0
+[debug] [2019-10-09T20:16:29.181Z] Platform:      darwin
+[debug] [2019-10-09T20:16:29.181Z] Node Version:  v10.16.3
+[debug] [2019-10-09T20:16:29.182Z] Time:          Wed Oct 09 2019 16:16:29 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-09T20:16:29.182Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-09T20:16:29.187Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-09T20:16:29.188Z] > authorizing via signed-in user
+[debug] [2019-10-09T20:16:29.188Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get"]
+[debug] [2019-10-09T20:16:29.189Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-09T20:16:29.393Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-09T20:16:29.395Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-09T20:16:29.564Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel'...
+[info] 
+[debug] [2019-10-09T20:16:29.569Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[debug] [2019-10-09T20:16:29.825Z] <<< HTTP RESPONSE 200
+[info] i  hosting[sparc-test-jordan]: Serving hosting files from: dist
+[info] ✔  hosting[sparc-test-jordan]: Local server: http://localhost:5000
+[info] ✔  functions: Emulator started at http://localhost:5001
+[info] i  functions: Watching "/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions" for Cloud Functions...
+[debug] [2019-10-09T20:16:30.078Z] [runtime-status] Functions runtime initialized. {"cwd":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions","node_version":"10.16.3"}
+[debug] [2019-10-09T20:16:30.079Z] [runtime-status] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true} {}
+[debug] [2019-10-09T20:16:30.081Z] [runtime-status] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.5.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2019-10-09T20:16:30.081Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2019-10-09T20:16:30.082Z] [runtime-status] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.2.0","resolution":"/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/node_modules/firebase-functions/lib/index.js"}
+[warn] ⚠  TypeError: Cannot read property 'key' of undefined
+    at Object.<anonymous> (/Users/jordan/Desktop/CS408/Sparc_Hosted/user-panel/functions/index.js:5:53)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Module.require (internal/modules/cjs/loader.js:692:17)
+    at require (internal/modules/cjs/helpers.js:25:18)
+    at /usr/local/lib/node_modules/firebase-tools/lib/emulator/functionsEmulatorRuntime.js:677:33
+    at Generator.next (<anonymous>)
+[warn] ⚠  We were unable to load your functions code. (see above)
