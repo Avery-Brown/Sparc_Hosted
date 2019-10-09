@@ -58,8 +58,8 @@ export default {
       success: true,
       userVerified: true,
       userPayload: {
-        email: 'arslanahmed983@gmail.com',
-        password: '123456',
+        email: '',
+        password: '',
       },
 
     }

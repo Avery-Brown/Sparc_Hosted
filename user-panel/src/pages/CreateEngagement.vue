@@ -377,10 +377,18 @@ export default {
               this.message = "Please Select Valid Percentage for Charity 1"
               this.warning = true
           }
-          else if(this.eventPayload.event_cause1 + this.eventPayload.event_cause1 > 100) {
+          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 > 100) {
+              this.message = "Please select a percentage amount that is less than 100"
+              this.warning = true
+          }     
+          else if(this.eventPayload.charity2 != null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 + this.eventPayload.event_cause2 > 100) {
               this.message = "Please Select Percentage Amounts that are less than 100"
               this.warning = true
-          }          
+          }
+          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 > 100) {
+              this.message = "Please select a percentage amount that is less than 100"
+              this.warning = true
+          }                   
           else if(this.eventPayload.charity2 != null && this.eventPayload.event_cause2 < 1) {
               this.message = "Please Enter Valid Percentage for Charity 2"
               this.warning = true
