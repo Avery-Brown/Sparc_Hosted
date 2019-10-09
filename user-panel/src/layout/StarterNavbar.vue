@@ -7,7 +7,7 @@
       
     </template>
     <template slot="navbar-menu">
-        
+
         <li class="nav-item" v-if="!logout">
           <router-link class="navbar-brand nav-link" to="/host-upcoming-engagements">
           Upcoming Engagements
