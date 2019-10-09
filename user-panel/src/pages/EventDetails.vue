@@ -115,6 +115,8 @@
                       <h6 class="text-danger text-center"></h6>
                       <a class="btn btn-success text-white btn-block" id="myBtn" @click="participateEvent" v-if="Date.parse(currentDate) <= Date.parse(getSelectedEvent[0].date) && shown "> <span v-if="participated">You are Already Signed Up</span> <span v-if="!participated">PARTICIPATE NOW</span> </a>
                       <button class="btn btn-danger btn-block" v-else-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)" disabled>Engagement Expired</button>
+                      <!-- SHARE BUTTON HERE -->
+                      <a class="btn btn-success text-white btn-block" id="myShareBtn" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"></i></b> COPY ENGAGEMENT LINK </a>
                   </div>
                   <div class="event-info mt-2">
                       <h5 class="text-info"><b>Engagement Extras</b></h5>
@@ -207,6 +209,8 @@ let stripe = Stripe(`pk_test_VkqrGCFhu1QHtAQJ5xtAYdIH00dooEGlrN`),
 import { Parallax, FormGroupInput, Alert, Modal } from '@/components';
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
+import * as copy from 'copy-to-clipboard';
+import nativeToast from 'native-toast'
 import moment from 'moment'
 export default {
   name: 'event-details',
@@ -338,9 +342,18 @@ export default {
       var copyText = window.location.href;
       console.log(copyText)
       document.execCommand("copy");
+      copy(copyText);
     },
     clipboardSuccessHandler({ value, event }) {
         console.log('success', value)
+
+        nativeToast({
+            message: 'Link Copied to Clipboard',
+            position: 'north-east',
+            // Self destroy in 5 seconds
+            timeout: 3000,
+            type: 'success'
+        })
     },
 
     reviewedBy(id) {
