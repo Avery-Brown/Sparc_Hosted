@@ -216,14 +216,29 @@ export default {
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
-    //this.fetchEvents();
+    this.fetchEvents();
     this.filters = []
     this.filters = this.getEvents
-    //this.fetchAllUsers();
+    this.fetchAllUsers();
     this.getUsers = []
-        this.getUsers = this.allUsers
+    this.getUsers = this.allUsers
     this.fetchTags();
   },
+  
+  watch: {
+    getEvents(val) {
+      if(val) {
+        this.filters = []
+        this.filters = this.getEvents
+      }
+    },
+    allUsers(val) {
+      if(val) {
+        this.getUsers = []
+        this.getUsers = this.allUsers
+      }
+    }
+  }
 
 
 };
