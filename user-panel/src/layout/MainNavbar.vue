@@ -46,7 +46,7 @@
           <b>Contact</b>
         </router-link>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" v-if="!this.logout">
         <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
         <div class="dropdown-content">
           <li class="nav-item" v-if="!this.logout">
