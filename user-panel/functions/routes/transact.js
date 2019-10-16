@@ -1,5 +1,6 @@
 const express = require("express");
-const stripe = require("stripe")("sk_test_vGhKOwerdYCzpTvvHi2nBUIk002Gt130RU");
+const Keys = require("../config/keys")
+const stripe = require("stripe")(Keys.stripe);
 
 class TransactRouter {
     constructor() {

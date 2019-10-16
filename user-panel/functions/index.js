@@ -3,7 +3,7 @@ const admin = require('firebase-admin');
 const express = require('express');
 const bodyParser = require('body-parser')
 const SENDGRID_API_KEY = functions.config().sendgrid.key
-const Keys = require("../src/config/keys")
+const Keys = require("./config/keys")
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(SENDGRID_API_KEY);
 const stripe = require("stripe")(Keys.stripe);
