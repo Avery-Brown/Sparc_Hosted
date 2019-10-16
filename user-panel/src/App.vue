@@ -13,7 +13,7 @@ export default {
   created () {
     this.$store.dispatch("fetchAllUsers")
     this.$store.dispatch("fetchRatings")
-    this.$store.dispatch("fetchEvents")
+    //this.$store.dispatch("fetchEvents")
     
     
   }

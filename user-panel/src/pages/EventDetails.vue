@@ -27,7 +27,7 @@
 
                           <div class="col-md-12">
                             <h5 class="text-success"><b> {{ getSelectedEvent[0].event_name }}</b></h5>
-                            <h6> <star-rating v-model="eventRating" :star-size="16" disabled></star-rating></h6>
+                            <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                             
                            </div> 
                            </div>
@@ -115,8 +115,6 @@
                       <h6 class="text-danger text-center"></h6>
                       <a class="btn btn-success text-white btn-block" id="myBtn" @click="participateEvent" v-if="Date.parse(currentDate) <= Date.parse(getSelectedEvent[0].date) && shown "> <span v-if="participated">You are Already Signed Up</span> <span v-if="!participated">PARTICIPATE NOW</span> </a>
                       <button class="btn btn-danger btn-block" v-else-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)" disabled>Engagement Expired</button>
-                      <!-- SHARE BUTTON HERE -->
-                      <a class="btn btn-success text-white btn-block" id="myShareBtn" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"></i></b> COPY ENGAGEMENT LINK </a>
                   </div>
                   <div class="event-info mt-2">
                       <h5 class="text-info"><b>Engagement Extras</b></h5>
@@ -209,8 +207,6 @@ let stripe = Stripe(`pk_test_VkqrGCFhu1QHtAQJ5xtAYdIH00dooEGlrN`),
 import { Parallax, FormGroupInput, Alert, Modal } from '@/components';
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
-import * as copy from 'copy-to-clipboard';
-import nativeToast from 'native-toast'
 import moment from 'moment'
 export default {
   name: 'event-details',
@@ -290,7 +286,8 @@ export default {
       shown: true,
       userEmail: null,
       type: null,
-      disablePay: false
+      disablePay: false,
+      avgRating: []
     }
   },
   computed: {
@@ -342,18 +339,9 @@ export default {
       var copyText = window.location.href;
       console.log(copyText)
       document.execCommand("copy");
-      copy(copyText);
     },
     clipboardSuccessHandler({ value, event }) {
         console.log('success', value)
-
-        nativeToast({
-            message: 'Link Copied to Clipboard',
-            position: 'north-east',
-            // Self destroy in 5 seconds
-            timeout: 3000,
-            type: 'success'
-        })
     },
 
     reviewedBy(id) {
@@ -546,7 +534,27 @@ export default {
         })
       
     });
-  }
+  },
+
+  getAvgRatings(id) {
+      let avgRating = [];
+      this.allRatings.filter(rating => {
+        if(rating.host_id == id) {
+          avgRating.push(rating.ratingStars)
+        }
+      })
+
+      if(avgRating.length > 0) {
+        let sum = 0.0;
+        let avg = 0.0;
+
+        for(var i = 0; i < avgRating.length; i++) {
+          sum += avgRating[i]
+        }
+        avg = sum / avgRating.length;
+        return avg
+      }
+    },
   },
   created() {
 

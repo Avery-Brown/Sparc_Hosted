@@ -223,7 +223,24 @@ export default {
     this.getUsers = []
     this.getUsers = this.allUsers
     this.fetchTags();
+  },
+  
+  watch: {
+    getEvents(val) {
+      if(val) {
+        this.filters = []
+        this.filters = this.getEvents
+      }
+    },
+    allUsers(val) {
+      if(val) {
+        this.getUsers = []
+        this.getUsers = this.allUsers
+      }
+    }
   }
+
+
 };
 </script>
 <style>
