@@ -216,10 +216,10 @@ export default {
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
-    this.fetchEvents();
+    
     this.filters = []
     this.filters = this.getEvents
-    this.fetchAllUsers();
+    
     this.getUsers = []
     this.getUsers = this.allUsers
     this.fetchTags();
