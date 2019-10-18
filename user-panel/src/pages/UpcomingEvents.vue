@@ -13,17 +13,17 @@
               <div class="col-md-4" v-for="(event, index) in filterUpcoming"  v-if="event.deleted==false" :key="index">
                 <div class="card" style="cursor: pointer" v-if="Date.parse(currentDate) <= Date.parse(event.date)">
                     <div class="card-header" >
-                      <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="" @click="viewEvent(event.id)">
-                      <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
-                      <div class="text-success pull-right mt-4 mr-3" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i></div>
+                      <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="" @click="viewEvent(event.id)">
+                      <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                     </div>
-                      <div class="card-body" @click="viewEvent(event.id)">
+                      <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                       <h5 class="text-success"><strong> {{ event.event_name }}</strong></h5>
                       <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                       <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                       <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
-                      <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>  
-                      <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name }}</h6>
+                      <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
+                      <div class="text-success" style="position: absolute; bottom:10px; right: 20px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i></div>
+                      <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
 
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export default {
     },
     getUser(id) {
       let user_item = this.allUsers.find(user => user.id === id)
-        return user_item  
+        return user_item
     },
     getRatings(id) {
       let avgRating = [];
@@ -103,7 +103,7 @@ export default {
           sum += avgRating[i]
         }
         avg = sum / avgRating.length;
-        return avg          
+        return avg
       }
     },
   },
@@ -116,10 +116,10 @@ export default {
     var yyyy = today.getFullYear();
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
-    
+
     var link = window.location.href;
     this.url = link.replace('/upcoming-events', '/events/')
-    
+
 
     this.fetchUser();
 

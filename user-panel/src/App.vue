@@ -13,6 +13,7 @@ export default {
   created () {
     this.$store.dispatch("fetchAllUsers")
     this.$store.dispatch("fetchRatings")
+    this.$store.commit('unSetEvents')
     this.$store.dispatch("fetchEvents")
     
     

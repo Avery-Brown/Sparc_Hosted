@@ -13,6 +13,15 @@
     background-color: transparent;
     border-radius: 0;
     padding: 0;
+    align:center;
+    overflow:hidden;
+    position:relative;
+    height: 200px;
+  }
+
+  .lizzet_image {
+    min-width: 200px;
+    //height: 200px;
   }
 
   .card-footer{

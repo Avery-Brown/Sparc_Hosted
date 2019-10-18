@@ -27,7 +27,7 @@
 
                           <div class="col-md-12">
                             <h5 class="text-success"><b> {{ getSelectedEvent[0].event_name }}</b></h5>
-                            <h6> <star-rating v-model="eventRating" :star-size="16" disabled></star-rating></h6>
+                            <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                             
                            </div> 
                            </div>
@@ -48,6 +48,16 @@
                         </b-card-text>
                     </b-card>
                 </b-card-group>
+
+                <b-card class="mt-3" v-if="getSelectedEvent[0].event_video != null">
+                  <h4 class="title-up text-info">Engagement Video</h4>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <video :src="getSelectedEvent[0].event_video" controls height="300" ></video>
+                    </div>
+                </div>  
+                </b-card>
+
                 <b-card class="mt-3" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
                   <h4 class="title-up text-info">Engagement Links</h4>
                   <div class="row">
@@ -90,7 +100,7 @@
                   <b-card-text>
                     <h4 class="title-up text-info">Engagement Reviews</h4>
                     <div class="col-md-12" v-for="(rating, index) in getRatings" :key="index">
-                      <h6 class="text-success">{{getUserDetails(rating.user_id).first_name}}</h6>
+                      <h6 class="text-success">{{reviewedBy(rating.user_id).first_name}}</h6>
                       <star-rating :rating="rating.ratingStars" :read-only="true" :star-size="16" :increment="0.5"></star-rating>
                       <strong>{{rating.feedback}}</strong>
                       <hr>
@@ -197,6 +207,7 @@ let stripe = Stripe(`pk_test_VkqrGCFhu1QHtAQJ5xtAYdIH00dooEGlrN`),
 import { Parallax, FormGroupInput, Alert, Modal } from '@/components';
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
+import moment from 'moment'
 export default {
   name: 'event-details',
   bodyClass: 'event-details-page',
@@ -261,7 +272,7 @@ export default {
       participantsList: [],
 
       submitEventRating: {
-        ratingStars: null,
+        ratingStars: 0,
         feedback: null,
         host_id: null,
         event_id: null,
@@ -275,7 +286,8 @@ export default {
       shown: true,
       userEmail: null,
       type: null,
-      disablePay: false
+      disablePay: false,
+      avgRating: []
     }
   },
   computed: {
@@ -308,7 +320,7 @@ export default {
       this.fetchedRatings = [];
       let rating = this.allRatings.filter(item => item.event_id == this.newEvent.id)
       return rating;
-    }
+    },
   },
   methods: {
     ...mapActions(['fetchEventById','createBill', 'fetchVirtualParticipants', 'fetchRatings', 'fetchTags', 'fetchParticipants', 'eventParticipant', 'virtualParticipant', 'fetchUser', 'fetchUserById', 'saveRating']),
@@ -331,13 +343,23 @@ export default {
     clipboardSuccessHandler({ value, event }) {
         console.log('success', value)
     },
-    getUserDetails(id) {
 
-      // let ref = this;
+    reviewedBy(id) {
+      let user_obj = {};
+      this.allUsers.find(user_item=>{
+        if(user_item.id===id) {
+          user_obj = user_item
+        }
+      })
+      return user_obj
+    },
+
+    getUserDetails(id) {      
        let user_obj=this.allUsers.find(user_item=>user_item.id==id)
        this.userDetails = user_obj
        return user_obj
     },
+    
     participateEvent() {
       const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
       if(loggedUser != null) {
@@ -459,17 +481,19 @@ export default {
     },
 
     rateEngagementNow() {
-      this.submitEventRating.host_id = this.getSelectedEvent[0].created_by;
-      this.submitEventRating.user_id = this.newEvent.userId;
-      this.submitEventRating.event_id = this.$route.params.eventId;
+      if(this.submitEventRating.ratingStars > 0) {
+        this.submitEventRating.host_id = this.getSelectedEvent[0].created_by;
+        this.submitEventRating.user_id = this.newEvent.userId;
+        this.submitEventRating.event_id = this.$route.params.eventId;
 
-      this.saveRating(this.submitEventRating);
+        this.saveRating(this.submitEventRating);
 
-      console.log("Feedback " +  this.submitEventRating.feedback)
-      console.log("Stars " +  this.submitEventRating.ratingStars)
-      console.log("Host " +  this.submitEventRating.host_id)
-      console.log("User " +  this.submitEventRating.user_id)
-      console.log("Event " +  this.submitEventRating.event_id)
+        console.log("Feedback " +  this.submitEventRating.feedback)
+        console.log("Stars " +  this.submitEventRating.ratingStars)
+        console.log("Host " +  this.submitEventRating.host_id)
+        console.log("User " +  this.submitEventRating.user_id)
+        console.log("Event " +  this.submitEventRating.event_id)
+      }
     },
 
     sendEmail() {
@@ -510,7 +534,27 @@ export default {
         })
       
     });
-  }
+  },
+
+  getAvgRatings(id) {
+      let avgRating = [];
+      this.allRatings.filter(rating => {
+        if(rating.host_id == id) {
+          avgRating.push(rating.ratingStars)
+        }
+      })
+
+      if(avgRating.length > 0) {
+        let sum = 0.0;
+        let avg = 0.0;
+
+        for(var i = 0; i < avgRating.length; i++) {
+          sum += avgRating[i]
+        }
+        avg = sum / avgRating.length;
+        return avg
+      }
+    },
   },
   created() {
 
@@ -518,12 +562,9 @@ export default {
     this.newEvent.id = this.$route.params.eventId
     this.fetchTags();
     this.fetchParticipants(this.newEvent);
-    this.total = this.getParticipants.length;
-
+ 
     this.fetchVirtualParticipants(this.newEvent);
-    this.totalVirtual = this.getVirtualParticipants.length;
-    console.log(this.totalVirtual)
-
+   
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -558,18 +599,7 @@ export default {
           this.isUserRated = true
           console.log("Rated" + this.isUserRated) 
         }
-
-
     }
-    
-     
-
-    //this.getSelectedEventTags()
-    
-    // console.log("Participants")
-    // console.log(this.getParticipants)
-
-    
   },
   watch: {
       getParticipated(val) {
@@ -599,6 +629,17 @@ export default {
                     console.log("You Rated")
                   }
                 }, 500)
+        }
+      },
+
+      getParticipants(val) {
+        if(val) {
+          this.total = val.length;
+        }
+      },
+      getVirtualParticipants(val) {
+        if(val) {
+          this.totalVirtual = val.length;
         }
       }
   }

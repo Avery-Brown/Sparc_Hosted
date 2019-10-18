@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+
     <div class="main">
       <div class="section section-images">
         <div class="container">
@@ -13,15 +13,15 @@
                     <div @click="viewEvent(event.id)" style="cursor: pointer">
                         <div class="card">
                           <div class="card-header">
-                              <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="">
-                              <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
+                              <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="">
+                              <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" style= "height:260px; position:relative;">
                               <h5 class="text-success title-up"><b> {{ event.event_name }} </b></h5>
-                              <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                               <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                               <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                               <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
+                              <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                           </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ export default {
         ...mapGetters(['getEvents', 'allRatings']),
         thevents() {
           return this.userEvents.map(event_id=> {
-          let event_item=this.getEvents.find(event_item=> event_item.id==event_id)// Date.parse(this.currentDate) <= Date.parse(event_item.date)) 
+          let event_item=this.getEvents.find(event_item=> event_item.id==event_id)// Date.parse(this.currentDate) <= Date.parse(event_item.date))
           return event_item;
           })
         },
@@ -99,7 +99,7 @@ export default {
           this.userEvents.push(loggedUser.events_hosted[key])
         }
         console.log(" hook")
-      
+
         if(this.getEvents.length>0) {
               this.foundEvents=this.dates
          }
@@ -120,7 +120,7 @@ export default {
           sum += avgRating[i]
         }
         avg = sum / avgRating.length;
-        return avg          
+        return avg
       }
     },
     },
@@ -131,5 +131,5 @@ export default {
 </script>
 
 <style scoped>
-    
+
 </style>
