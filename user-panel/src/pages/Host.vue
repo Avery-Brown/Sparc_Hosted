@@ -13,7 +13,7 @@
                   <div class="card" style="cursor: pointer">
                   <div class="card-header" @click="viewEvent(event.id)">
                     <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="">
-                    <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
+                    <img v-else src="../../public/sparc_card_back.jpg" class="lizzet_image" alt="">
                   </div>
                   <div class="card-body" style= "height:260px; position:relative;">
                     <div @click="viewEvent(event.id)">

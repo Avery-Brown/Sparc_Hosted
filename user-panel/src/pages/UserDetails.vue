@@ -10,15 +10,15 @@
               </div>
             </div>
             <div class="row">
-                <div class="col-md-8"> 
+                <div class="col-md-8">
                     <h3 class="text-info"><b>Engagements Hosted</b></h3>
                     <div class="row">
-                       
+
                         <div class="col-md-6" v-for="(event, index) in getUserEvents" v-if="event.deleted==false" :key="index">
                             <div class="card" style="cursor: pointer">
                                 <div class="card-header">
                                 <img v-if="event.event_image != null" :src="event.event_image" width="500" height="200" alt="" @click="viewEvent(event.id)">
-                                <img v-else src="../../public/sparcS.png" width="500" height="200" alt="">
+                                <img v-else src="../../public/sparc_card_back.jpg" width="500" height="200" alt="">
                                 <!-- <div class="text-success pull-right mt-4 mr-3" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i> Copy Link</div> -->
                                 </div>
                                 <div class="card-body" @click="viewEvent(event.id)">
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <h3 class="text-info"><b>Host Details</b></h3>
@@ -123,10 +123,10 @@ export default {
     var yyyy = today.getFullYear();
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
-    
+
     var link = window.location.href;
     this.url = link.replace('/upcoming-events', '/events/')
-    
+
     this.userId = this.$route.params.userId;
 
     // this.fetchUser();
