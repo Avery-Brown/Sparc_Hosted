@@ -59,14 +59,13 @@
                     <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                     <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
                     <!-- <h6>{{event.tags}}</h6> -->
-
+                    <div class="col-md-4" v-if="now == 1">
+                        <h5 class="text-danger title-up">Sorry! No Engagements Found</h5>
+                    </div>
                   </div>
                 </div>
                 </div>
               </div>
-              <div class="col-md-4" v-if="filters.length <= 0">
-                  <h5 class="text-danger title-up">Sorry! No Engagement Found</h5>
-                </div>
             </div>
           </div>
         </div>
@@ -96,6 +95,7 @@ export default {
         dateFilter: '',
         locationFilter: '',
         filters: [],
+        now: 0,
         userName: '',
         data_name: '',
         getUsers: [],
@@ -230,6 +230,7 @@ export default {
       if(val) {
         this.filters = []
         this.filters = this.getEvents
+        now = 1;
       }
     },
     allUsers(val) {

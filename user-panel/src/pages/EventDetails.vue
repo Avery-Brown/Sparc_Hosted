@@ -19,7 +19,8 @@
             <div class="row" >
               <div class="col-md-8">
                 <b-card-group deck >
-                    <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
+                    <!-- <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top> -->
+
                         <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="500" height="200" alt="">
                         <img v-else src="../../public/sparc_card_back.jpg" width="500" height="200" alt=""> -->
                         <b-card-text>
