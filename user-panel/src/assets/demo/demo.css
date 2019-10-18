@@ -510,3 +510,15 @@
     display: none !important;
   }
 }
+.event_form_item {
+  margin: 15px;
+}
+
+#price_form {
+  display: flex;
+  flex-direction: row;
+}
+
+/*fg-input {
+  border-radius: 4px;
+}*/
