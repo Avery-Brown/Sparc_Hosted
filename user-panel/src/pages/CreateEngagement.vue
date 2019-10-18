@@ -281,12 +281,12 @@ export default {
             event_location: null,
             event_address: null,
             event_location_access: null,
-            event_space: null,
+            // event_space: null,
             host_contact: null,
             zoom_link: null,
             capacity: null,
             virtual_capacity: null,
-            google_link: null,
+            // google_link: null,
             event_cause1: null,
             event_cause2: null,
             event_price_per_person: null,
@@ -312,7 +312,7 @@ export default {
 
       validateEvent() {
 
-          if(this.eventPayload.event_name == null || this.eventPayload.event_location == null || this.eventPayload.host_contact == null || this.eventPayload.event_space == null || this.eventPayload.event_address == null || this.eventPayload.event_location_access == null || this.eventPayload.date == null || this.eventPayload.start_time == null || this.eventPayload.end_time == null || this.eventPayload.event_description == null || this.eventPayload.tags == null){
+          if(this.eventPayload.event_name == null || this.eventPayload.event_location == null || this.eventPayload.host_contact == null || this.eventPayload.event_address == null || this.eventPayload.event_location_access == null || this.eventPayload.date == null || this.eventPayload.start_time == null || this.eventPayload.end_time == null || this.eventPayload.event_description == null || this.eventPayload.tags == null){
               this.message = "Please Fill Required Fields"
               this.warning = true
           }
@@ -324,11 +324,11 @@ export default {
               this.message = "Please Set Valid In Person Capacity for Engagement"
               this.warning = true
           }
-          else if(this.eventPayload.event_type == 'virtual' && (this.eventPayload.zoom_link == null && this.eventPayload.google_link == null)) {
+          else if(this.eventPayload.event_type == 'virtual' && (this.eventPayload.zoom_link == null)) {
               this.message = "Please Enter Zoom Link and Google Hangout Link for Engagement"
               this.warning = true
           }
-          else if(this.eventPayload.event_type == 'both' && (this.eventPayload.zoom_link == null && this.eventPayload.google_link == null)) {
+          else if(this.eventPayload.event_type == 'both' && (this.eventPayload.zoom_link == null)) {
               this.message = "Please Enter Zoom Link and Google Hangout Link for Engagement"
               this.warning = true
           }
