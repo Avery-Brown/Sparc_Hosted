@@ -5,6 +5,7 @@ import user from './modules/user';
 import events from './modules/events';
 import ratings from './modules/ratings';
 import billings from './modules/billings';
+import messages from './modules/messages';
 
 // Load Vuex
 Vue.use(Vuex);
@@ -16,6 +17,7 @@ export default new Vuex.Store({
         user,
         events,
         ratings,
-        billings
+        billings,
+        messages
     }
 });
