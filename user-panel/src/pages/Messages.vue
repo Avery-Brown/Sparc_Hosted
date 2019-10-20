@@ -25,7 +25,7 @@
                           <div  class="chat_list " v-for="(users,i) in allUsers" v-bind:key="i">
                             <div class="chat_people" @click="fillProfile(users)">
                               <!-- users.profile_image!=null ? user.profile_image : -->
-                              <div class="chat_img"> <img class="rounded-circle" src="https://ptetutorials.com/images/user-profile.png" alt="Anika"> </div>
+                              <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                               <div class="chat_ib">
                                 <h5>{{users.first_name}} <span class="chat_date">Dec 25</span></h5>
                                 <p>Test, which is a new approach to have all solutions 
@@ -39,7 +39,7 @@
                         <div v-if="selected_messages.length>0" class="msg_history">
                           <div  v-for="(items,i) in selected_messages" :key="i">
                             <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg">
-                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="Anika"> </div>
+                            <!-- <div class="incoming_msg_img"> <img :src="items.profile_image!=null ? items.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div> -->
                             <div class="received_msg">
                               <div class="received_withd_msg">
                                 <p>{{items.message}}</p>
@@ -227,7 +227,7 @@ img{ max-width:100%;}
 .chat_ib p{ font-size:14px; color:#989898; margin:auto}
 .chat_img {
   float: left;
-  width: 11%;
+  width: 10%;
 }
 .chat_ib {
   float: left;
