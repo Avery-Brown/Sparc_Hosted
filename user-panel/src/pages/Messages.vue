@@ -21,7 +21,8 @@
                           </div>
                         </div>
                         <div class="inbox_chat">
-                          <div  class="chat_list active_chat" v-for="(users,i) in allUsers" v-bind:key="i">
+                          <!-- active_chat -->
+                          <div  class="chat_list " v-for="(users,i) in allUsers" v-bind:key="i">
                             <div class="chat_people" @click="fillProfile(users)">
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" src="https://ptetutorials.com/images/user-profile.png" alt="Anika"> </div>
@@ -35,35 +36,25 @@
                           </div>
                       </div>
                       <div class="mesgs">
-                        <div class="msg_history">
-                          <div class="incoming_msg">
+                        <div v-if="selected_messages.length>0" class="msg_history">
+                          <div  v-for="(items,i) in selected_messages" :key="i">
+                            <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg">
                             <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="Anika"> </div>
                             <div class="received_msg">
                               <div class="received_withd_msg">
-                                <p>Test which is a new approach to have all
-                                  solutions</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span></div>
+                                <p>{{items.message}}</p>
+                                <span class="time_date"> {{items.date}}</span></div>
                             </div>
                           </div>
-                          <div class="outgoing_msg">
+                          <div v-else class="outgoing_msg">
                             <div class="sent_msg">
-                              <p>Test which is a new approach to have all
-                                solutions</p>
-                              <span class="time_date"> 11:01 AM    |    June 9</span> </div>
+                              <p>{{items.message}}</p>
+                              <span class="time_date"> {{items.date}}</span> </div>
                           </div>
-                          <div class="incoming_msg">
-                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="Anika"> </div>
-                            <div class="received_msg">
-                              <div class="received_withd_msg">
-                                <p>Test, which is a new approach to have</p>
-                                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                            </div>
                           </div>
-                          <div class="outgoing_msg">
-                            <div class="sent_msg">
-                              <p>Rabbit University, River City, Pakistan</p>
-                              <span class="time_date"> 11:01 AM    |    Today</span> </div>
-                          </div>
+                        </div>
+                        <div v-else class="msg_history">
+                            <p>No Messages with this user</p>
                         </div>
                         <div class="type_msg">
                           <div class="input_msg_write">
@@ -150,7 +141,8 @@ export default {
   },
   data(){
     return{
-      selected_user:{}
+      selected_user:{},
+      loggeduser:'',
     }
   },
   watch:{
@@ -160,13 +152,18 @@ export default {
   },
   methods:{
     fillProfile(arg_user){
-      // console.log(users)
       this.selected_user=arg_user;
     }
   },
   computed:{
-    ...mapGetters(['allUsers','messages']),
+    ...mapGetters(['allUsers','getMessages','user']),
+    selected_messages(){
+     return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
+    }
 
+  },
+  created(){
+    this.loggeduser=JSON.parse(localStorage.getItem('loggedUser'));
   },
   mounted(){
     if(this.allUsers.length>0){
