@@ -71,6 +71,11 @@
           <b>Profile</b>
         </router-link>
       </li>
+      <li class="nav-item" v-if="!this.logout">
+        <router-link class="navbar-brand nav-link text-success" to="/messages">
+          <b>Messages</b>
+        </router-link>
+      </li>
 
       <li class="nav-item" v-if="!this.logout" @click="userLogout">
         <router-link class="navbar-brand nav-link text-success" to="/">
