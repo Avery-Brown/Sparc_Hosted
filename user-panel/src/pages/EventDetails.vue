@@ -173,7 +173,7 @@
     <modal :show.sync="modals.participateModal" headerClasses="justify-content-center">
       <h4 slot="header" class="title title-up">Event Participation</h4>
       <h4 class="text-danger text-center">{{msg}}</h4>
-      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Copy Link</a>
+      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Share</a>
       <button class="btn btn-danger btn-block" @click="dismiss">Close</button>
     </modal>
 
@@ -189,7 +189,7 @@
         </div>
 
       </div>
-      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Copy Link</a>
+      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Share</a>
       <button class="btn btn-danger btn-block" @click="dismiss">Close</button>
       </modal>
 
