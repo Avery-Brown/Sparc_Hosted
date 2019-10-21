@@ -17,10 +17,11 @@
             </div>
             
             <div class="row" >
-              <div class="col-md-8">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
                 <b-card-group deck >
                     <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
-                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="500" height="200" alt="">
+                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="50" height="200" alt="">
                         <img v-else src="../../public/sparclogo.png" width="500" height="200" alt=""> -->
                         <b-card-text>
                           <div class="row">
@@ -48,6 +49,8 @@
                         </b-card-text>
                     </b-card>
                 </b-card-group>
+                <div class="col-md-2"></div>
+
 
                 <b-card class="mt-3" v-if="getSelectedEvent[0].event_video != null">
                   <h4 class="title-up text-info">Engagement Video</h4>
