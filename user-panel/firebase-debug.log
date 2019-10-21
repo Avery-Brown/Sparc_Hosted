@@ -1,0 +1,90 @@
+[debug] [2019-10-18T18:18:29.558Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:18:29.560Z] Command:       /Users/kate/.nvm/versions/node/v12.11.1/bin/node /Users/kate/.nvm/versions/node/v12.11.1/bin/firebase deploy --only hosting:sparc-test-408
+[debug] [2019-10-18T18:18:29.560Z] CLI Version:   7.6.1
+[debug] [2019-10-18T18:18:29.560Z] Platform:      darwin
+[debug] [2019-10-18T18:18:29.560Z] Node Version:  v12.11.1
+[debug] [2019-10-18T18:18:29.561Z] Time:          Fri Oct 18 2019 14:18:29 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-18T18:18:29.561Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:18:29.561Z] 
+[debug] [2019-10-18T18:18:29.574Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-18T18:18:29.574Z] > authorizing via signed-in user
+[debug] [2019-10-18T18:18:29.574Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-10-18T18:18:29.576Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-18T18:18:29.820Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-18T18:18:29.822Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-18T18:18:29.969Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'sparc-9d9cb'...
+[info] 
+[info] i  deploying hosting
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/sparc-9d9cb/overview
+[debug] [2019-10-18T18:18:31.102Z] TypeError: Cannot read property 'deploys' of undefined
+    at /Users/kate/.nvm/versions/node/v12.11.1/lib/node_modules/firebase-tools/lib/deploy/index.js:84:36
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-10-18T18:25:50.091Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:25:50.093Z] Command:       /Users/kate/.nvm/versions/node/v12.11.1/bin/node /Users/kate/.nvm/versions/node/v12.11.1/bin/firebase deploy --only hosting:sparc-test-408
+[debug] [2019-10-18T18:25:50.093Z] CLI Version:   7.6.1
+[debug] [2019-10-18T18:25:50.093Z] Platform:      darwin
+[debug] [2019-10-18T18:25:50.093Z] Node Version:  v12.11.1
+[debug] [2019-10-18T18:25:50.100Z] Time:          Fri Oct 18 2019 14:25:50 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-18T18:25:50.100Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:25:50.100Z] 
+[debug] [2019-10-18T18:25:50.110Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-18T18:25:50.110Z] > authorizing via signed-in user
+[debug] [2019-10-18T18:25:50.111Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-10-18T18:25:50.112Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-18T18:25:51.452Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-18T18:25:51.454Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-18T18:25:51.603Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'sparc-9d9cb'...
+[info] 
+[info] i  deploying hosting
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/sparc-9d9cb/overview
+[debug] [2019-10-18T18:25:52.791Z] TypeError: Cannot read property 'deploys' of undefined
+    at /Users/kate/.nvm/versions/node/v12.11.1/lib/node_modules/firebase-tools/lib/deploy/index.js:84:36
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2019-10-18T18:27:23.889Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:27:23.891Z] Command:       /Users/kate/.nvm/versions/node/v12.11.1/bin/node /Users/kate/.nvm/versions/node/v12.11.1/bin/firebase deploy --only hosting:sparc-test-408
+[debug] [2019-10-18T18:27:23.891Z] CLI Version:   7.6.1
+[debug] [2019-10-18T18:27:23.891Z] Platform:      darwin
+[debug] [2019-10-18T18:27:23.891Z] Node Version:  v12.11.1
+[debug] [2019-10-18T18:27:23.892Z] Time:          Fri Oct 18 2019 14:27:23 GMT-0400 (Eastern Daylight Time)
+[debug] [2019-10-18T18:27:23.892Z] ----------------------------------------------------------------------
+[debug] [2019-10-18T18:27:23.892Z] 
+[debug] [2019-10-18T18:27:23.901Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-18T18:27:23.901Z] > authorizing via signed-in user
+[debug] [2019-10-18T18:27:23.901Z] [iam] checking project sparc-9d9cb for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-10-18T18:27:23.902Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/sparc-9d9cb:testIamPermissions  
+
+[debug] [2019-10-18T18:27:24.133Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-18T18:27:24.141Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/sparc-9d9cb  
+ 
+[debug] [2019-10-18T18:27:24.292Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'sparc-9d9cb'...
+[info] 
+[info] i  deploying hosting
+[info] 
+[info] ✔  Deploy complete!
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/sparc-9d9cb/overview
+[debug] [2019-10-18T18:27:25.437Z] TypeError: Cannot read property 'deploys' of undefined
+    at /Users/kate/.nvm/versions/node/v12.11.1/lib/node_modules/firebase-tools/lib/deploy/index.js:84:36
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+[error] 
+[error] Error: An unexpected error has occurred.
