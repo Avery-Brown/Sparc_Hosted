@@ -17,15 +17,14 @@
             </div>
 
             <div class="row" >
-              <div class="col-md-8">
+              <div class="col-md-2"></div>
+              <div class="col-md-4">
                 <b-card-group deck >
-                    <!-- <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top> -->
-
-                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="500" height="200" alt="">
-                        <img v-else src="../../public/sparc_card_back.jpg" width="500" height="200" alt=""> -->
+                    <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
+                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="50" height="200" alt="">
+                        <img v-else src="../../public/sparclogo.png" width="500" height="200" alt=""> -->
                         <b-card-text>
                           <div class="row">
-
                           <div class="col-md-12">
                             <h5 class="text-success"><b> {{ getSelectedEvent[0].event_name }}</b></h5>
                             <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
@@ -49,6 +48,8 @@
                         </b-card-text>
                     </b-card>
                 </b-card-group>
+                <div class="col-md-2"></div>
+
 
                 <b-card class="mt-3" v-if="getSelectedEvent[0].event_video != null">
                   <h4 class="title-up text-info">Engagement Video</h4>
