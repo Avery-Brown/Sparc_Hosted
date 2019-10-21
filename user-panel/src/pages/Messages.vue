@@ -118,7 +118,18 @@
                 <span ><strong>{{selected_user.institute}}</strong></span>
               </div>
             </div>
+            <div class="row text-center mt-4">
+              <div class="col-md-4">
+                <span>Block User</span>
+              </div>
+              <div class="col-md-8">
+                <b-form-checkbox v-model="checked" name="check-button" switch>
+                  <!-- Switch Checkbox <b>(Checked: {{ checked }})</b> -->
+                </b-form-checkbox>
+              </div>
+            </div>
           </b-card-body>
+          
             <!-- <b-card-text>
               Some quick example text to build on the card title and make up the bulk of the card's content.
             </b-card-text> -->
@@ -143,6 +154,7 @@ export default {
   },
   data(){
     return{
+      checked:false,
       selected_user:{},
       loggeduser:'',
       message:''
@@ -315,7 +327,7 @@ img{ max-width:100%;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
-  padding: 30px 15px 0 0;
+  padding: 30px 15px 0 10px;
   width: 60%;
 }
 
