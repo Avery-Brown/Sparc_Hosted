@@ -123,8 +123,7 @@
                 <span>Block User</span>
               </div>
               <div class="col-md-8">
-                <b-form-checkbox v-model="checked" name="check-button" switch>
-                  <!-- Switch Checkbox <b>(Checked: {{ checked }})</b> -->
+                <b-form-checkbox v-model="checked" @change="blocking()" name="check-button" switch>
                 </b-form-checkbox>
               </div>
             </div>
@@ -147,6 +146,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import nativeToast from 'native-toast'
 import moment from  'moment'
+import { EHOSTUNREACH } from 'constants';
 export default {
   name: 'profile',
   bodyClass: 'profile-page',
@@ -173,10 +173,20 @@ export default {
       this.selected_user=arg_user;
       this.scroller()
     },
+    blocking(){
+
+    },
     sendMessage(){
-      if(this.message!=''){
+      if(this.get_block_status==true){
+        nativeToast({
+          message: 'You are not allowed to send message to this user',
+          position: 'north-east',
+          timeout: 3000,
+          type: 'error'
+        })
+      }
+      else if(this.message!=''){
       let date=moment().format('LT')+" | "+moment().format('D MMM') ;
-      console.log(date)
       let msg_obj={date:date,
       message:this.message,
       receiver_id:this.selected_user.id,
@@ -208,6 +218,20 @@ export default {
     ...mapGetters(['allUsers','getMessages','user']),
     selected_messages(){
      return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
+    },
+    blocked_users(){
+      return Object.keys(this.loggeduser.blocked_by).map(blocked_key=> {
+          return {id:this.loggeduser.blocked_by[blocked_key].blocker_id}
+      })
+    },
+    get_block_status(){
+      let block_user_find=this.blocked_users.find(blocked_user=>blocked_user.id==this.selected_user.id)
+      if(block_user_find!=null){
+        return true
+      }
+      else{
+        return false
+      }
     }
 
   },
