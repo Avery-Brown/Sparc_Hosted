@@ -316,7 +316,11 @@ export default {
       ...mapActions(['fetchTags','createEvent', 'fetchCharities', 'updateTags']),
 
       validateEvent() {
-          
+          console.log(this.eventPayload.event_cause1);
+          console.log(this.eventPayload.charity1);
+          console.log(this.eventPayload.event_cause2);
+          console.log(this.eventPayload.charity2);
+
           if(this.eventPayload.event_name == null || this.eventPayload.event_location == null || this.eventPayload.host_contact == null || this.eventPayload.event_space == null || this.eventPayload.event_address == null || this.eventPayload.event_location_access == null || this.eventPayload.date == null || this.eventPayload.start_time == null || this.eventPayload.end_time == null || this.eventPayload.event_description == null || this.eventPayload.tags == null){
               this.message = "Please Fill Required Fields"
               this.warning = true
@@ -377,15 +381,16 @@ export default {
               this.message = "Please Select Valid Percentage for Charity 1"
               this.warning = true
           }
-          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 > 100) {
+          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && parseInt(this.eventPayload.event_cause1) > 100) {
               this.message = "Please select a percentage amount that is less than 100"
               this.warning = true
           }     
-          else if(this.eventPayload.charity2 != null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 + this.eventPayload.event_cause2 > 100) {
-              this.message = "Please Select Percentage Amounts that are less than 100"
+          else if(this.eventPayload.charity2 != null && this.eventPayload.charity1 != null && (parseInt(this.eventPayload.event_cause1) + parseInt(this.eventPayload.event_cause2) > 100)) {
+              console.log(this.eventPayload.event_cause2 + this.eventPayload.event_cause1);
+              this.message = "Please Select Percentage Amounts that total less than 100"
               this.warning = true
           }
-          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && this.eventPayload.event_cause1 > 100) {
+          else if(this.eventPayload.charity2 == null && this.eventPayload.charity1 != null && parseInt(this.eventPayload.event_cause1) > 100) {
               this.message = "Please select a percentage amount that is less than 100"
               this.warning = true
           }                   
