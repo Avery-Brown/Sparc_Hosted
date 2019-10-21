@@ -85,7 +85,7 @@
       </li>
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info text-white" to="/host" v-if="!this.logout">
-          Become a Host
+          Host
         </router-link>
       </li>
     </template>
