@@ -22,8 +22,8 @@
                         </div>
                         <div class="inbox_chat">
                           <!-- active_chat -->
-                          <div  class="chat_list " v-for="(users,i) in allUsers" v-bind:key="i">
-                            <div class="chat_people" @click="fillProfile(users)">
+                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in allUsers" v-bind:key="i">
+                            <div class="chat_people" >
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                               <div class="chat_ib">
@@ -36,7 +36,7 @@
                           </div>
                       </div>
                       <div class="mesgs">
-                        <div v-if="selected_messages.length>0" class="msg_history">
+                        <div v-if="selected_messages.length>0" id="msg_containers" class="msg_history">
                           <div  v-for="(items,i) in selected_messages" :key="i">
                             <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg">
                             <!-- <div class="incoming_msg_img"> <img :src="items.profile_image!=null ? items.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div> -->
@@ -47,7 +47,7 @@
                             </div>
                           </div>
                           <div v-else class="outgoing_msg">
-                            <div class="sent_msg">
+                            <div class="sent_msg mr-1">
                               <p>{{items.message}}</p>
                               <span class="time_date"> {{items.date}}</span> </div>
                           </div>
@@ -58,8 +58,8 @@
                         </div>
                         <div class="type_msg">
                           <div class="input_msg_write">
-                            <input type="text" class="write_msg" placeholder="Type a message" />
-                            <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                            <input type="text" class="write_msg ml-1 mr-1" style="border:none !important;" @keyup.enter="sendMessage()" v-model="message" placeholder="Type a message" />
+                            <button class="msg_send_btn"  @click="sendMessage()" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                           </div>
                         </div>
                       </div>
@@ -134,6 +134,8 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import nativeToast from 'native-toast'
+import moment from  'moment'
 export default {
   name: 'profile',
   bodyClass: 'profile-page',
@@ -143,16 +145,51 @@ export default {
     return{
       selected_user:{},
       loggeduser:'',
+      message:''
     }
   },
   watch:{
     allUsers(){
     this.selected_user=this.allUsers[0];
+    // this.scroller()
+
     }
   },
   methods:{
+    ...mapActions(['sendMessages']),
     fillProfile(arg_user){
       this.selected_user=arg_user;
+      this.scroller()
+    },
+    sendMessage(){
+      if(this.message!=''){
+      let date=moment().format('LT')+" | "+moment().format('D MMM') ;
+      console.log(date)
+      let msg_obj={date:date,
+      message:this.message,
+      receiver_id:this.selected_user.id,
+      sender_id:this.loggeduser.id}
+      console.log(msg_obj)
+      this.sendMessages(msg_obj)
+      this.message=''
+      this.scroller()
+      }
+      else{
+        nativeToast({
+          message: 'Please fill message field',
+          position: 'north-east',
+          timeout: 3000,
+          type: 'error'
+        })
+      }
+      
+    },
+    scroller(){
+      var container = this.$el.querySelector("#msg_containers"); 
+      this.typed_message=''
+      this.$nextTick(() => {
+          container.scrollTop = container.scrollHeight;        
+        });
     }
   },
   computed:{
@@ -168,12 +205,17 @@ export default {
   mounted(){
     if(this.allUsers.length>0){
       this.selected_user=this.allUsers[0];
-
     }
   }
 };
 </script>
 <style scoped>
+input:focus { 
+  /* border: none !important; */
+  outline: none !important;
+    border:1px solid red;
+    box-shadow:none;
+}
 .users{
  
     display: block;
@@ -273,7 +315,7 @@ img{ max-width:100%;}
 .received_withd_msg { width: 57%;}
 .mesgs {
   float: left;
-  padding: 30px 15px 0 25px;
+  padding: 30px 15px 0 0;
   width: 60%;
 }
 
@@ -317,5 +359,23 @@ img{ max-width:100%;}
 .msg_history {
   height: 516px;
   overflow-y: auto;
+}
+
+/* width */	
+::-webkit-scrollbar {	
+  width: 10px;	
+}	
+ /* Track */	
+::-webkit-scrollbar-track {	
+  background: #f1f1f1; 	
+}	
+ 	
+/* Handle */	
+::-webkit-scrollbar-thumb {	
+  background: #888; 	
+}	
+ /* Handle on hover */	
+::-webkit-scrollbar-thumb:hover {	
+  background: #555; 	
 }
 </style>
