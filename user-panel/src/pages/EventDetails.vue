@@ -15,26 +15,27 @@
                 <h2 class="text-center ml-3 title title-up mb-5">Engagement Details</h2>
               </div>
             </div>
-            
+
             <div class="row" >
               <div class="col-md-8">
                 <b-card-group deck >
-                    <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
+                    <!-- <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top> -->
+
                         <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="500" height="200" alt="">
-                        <img v-else src="../../public/sparclogo.png" width="500" height="200" alt=""> -->
+                        <img v-else src="../../public/sparc_card_back.jpg" width="500" height="200" alt=""> -->
                         <b-card-text>
                           <div class="row">
 
                           <div class="col-md-12">
                             <h5 class="text-success"><b> {{ getSelectedEvent[0].event_name }}</b></h5>
                             <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
-                            
-                           </div> 
+
+                           </div>
                            </div>
                            <div class="row">
                              <div class="col-md-6">
                                <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ getSelectedEvent[0].event_location }}</h6>
-                                
+
                               <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ getSelectedEvent[0].start_time + " - " + getSelectedEvent[0].end_time }} </h6>
                               <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ getSelectedEvent[0].date }}</h6>
                               <h6 v-if="isUserLogged" class="text-info"> <i class="fa fa-mobile"></i> {{ getSelectedEvent[0].host_contact }}</h6>
@@ -55,7 +56,7 @@
                     <div class="col-md-12">
                       <video :src="getSelectedEvent[0].event_video" controls height="300" ></video>
                     </div>
-                </div>  
+                </div>
                 </b-card>
 
                 <b-card class="mt-3" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
@@ -76,8 +77,8 @@
                       <h6>{{getSelectedEvent[0].google_link}}</h6>
                     </div>
                   </div>
-                  
-                 
+
+
                 </b-card>
                 <b-card class="mt-3" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date) && isUserParticipant && !isUserRated">
                   <b-card-text>
@@ -124,7 +125,7 @@
                       <h6 v-if="getSelectedEvent[0].event_cause2 != null"><b class="text-success">Charity 2: </b> {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}</h6>
                       <h6 v-if="getSelectedEvent[0].event_price_per_person != null"><b class="text-success">Engagement Price: </b> $ {{getSelectedEvent[0].event_price_per_person}} PER PERSON</h6>
                       <h6><b class="text-success">Engagement Cause: </b> {{getSelectedEvent[0].cause}}</h6>
-                      
+
                       <h6 v-if="getSelectedEvent[0].capacity != null"><b class="text-success">People capacity: </b> {{getSelectedEvent[0].capacity}}</h6>
                       <h6 v-if="getSelectedEvent[0].capacity != null"><b class="text-success">Seats Reserved: </b> {{total}}</h6>
                       <div v-if="getSelectedEvent[0].capacity == null && getSelectedEvent[0].virtual_capacity != null">
@@ -135,7 +136,7 @@
                         <h6><b class="text-success">Virtual capacity: </b> {{getSelectedEvent[0].virtual_capacity}}</h6>
                         <h6><b class="text-success">Seats Reserved: </b> {{totalVirtual}}</h6>
                       </div>
-                      
+
                       <h5 class="text-info mt-4"><b>Engagement Tags</b></h5>
                       <span class="badge badge-pill badge-success" v-for="(tag,index) in getEventTags" :key="index">{{tag.value}}</span>
                   </div>
@@ -144,7 +145,7 @@
                      <p style="display:none;">{{getUserDetails(getSelectedEvent[0].created_by) }}</p>
                      <img class="rounded-circle" v-if="userDetails.profile_image != null" :src="userDetails.profile_image" width="30" alt="">
                      <span class="ml-3" v-if="userDetails.first_name != undefined">
-                       <b>{{userDetails.first_name + " " + userDetails.last_name}}</b> 
+                       <b>{{userDetails.first_name + " " + userDetails.last_name}}</b>
                      </span>
                      <button class="btn btn-info btn-block" @click="viewProfile(getSelectedEvent[0].created_by)">View Profile</button>
                   </div>
@@ -162,7 +163,7 @@
                       </div>
                   </div>
                   </div>
-                  
+
               </div>
             </div>
           </div>
@@ -186,7 +187,7 @@
         <div class="col-md-4">
           <button class="btn btn-info" @click="inPersonClick"><i class="fa fa-user"></i> In Person</button>
         </div>
-        
+
       </div>
       <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Copy Link</a>
       <button class="btn btn-danger btn-block" @click="dismiss">Close</button>
@@ -197,7 +198,7 @@
         <div ref="card"></div>
         <button class="btn btn-primary btn-block" :disabled="disablePay" v-on:click="purchase(userEmail, getSelectedEvent[0].event_price_per_person)">Pay Now</button>
       </modal>
-    
+
   </div>
 </template>
 <script>
@@ -243,7 +244,7 @@ export default {
   },
   data() {
     return {
-      
+
       noImage: require('../../public/sparcS.png'),
       modals: {
         participateModal: false,
@@ -298,7 +299,7 @@ export default {
         return this.fetchedTags.map(element => {
             let eventTag = this.allTags.find(tag => tag.id==element)
             return eventTag
-        });   
+        });
     },
 
     getParticipantsList() {
@@ -354,12 +355,12 @@ export default {
       return user_obj
     },
 
-    getUserDetails(id) {      
+    getUserDetails(id) {
        let user_obj=this.allUsers.find(user_item=>user_item.id==id)
        this.userDetails = user_obj
        return user_obj
     },
-    
+
     participateEvent() {
       const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
       if(loggedUser != null) {
@@ -404,7 +405,7 @@ export default {
         //this.msg = "Please Pay Engagement Fee to particpate"
         return;
       }
-      
+
       this.sendEmail()
       this.eventParticipant(this.newEvent)
       this.total++;
@@ -412,7 +413,7 @@ export default {
       this.msg = "Your Seat has been confirmed"
       this.shown = false
       return;
-    
+
     },
 
     virtualParticipate() {
@@ -475,7 +476,7 @@ export default {
         return;
       }
     },
-    
+
     viewProfile(id) {
       this.$router.push({path:'/users/'+id})
     },
@@ -525,14 +526,14 @@ export default {
         stripeToken: result.token
       }).then(result => {
           if(result.data.status == 'succeeded'){
-            
+
             self.paidParticipant(price, self.getSelectedEvent[0].created_by);
           }
         }).catch(err => {
           self.disablePay = false;
           console.log(err)
         })
-      
+
     });
   },
 
@@ -562,9 +563,9 @@ export default {
     this.newEvent.id = this.$route.params.eventId
     this.fetchTags();
     this.fetchParticipants(this.newEvent);
- 
+
     this.fetchVirtualParticipants(this.newEvent);
-   
+
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -589,7 +590,7 @@ export default {
         // }
         if(this.userEvents.find(element => element == this.newEvent.id)) {
           this.isUserParticipant = true
-          console.log(this.isUserParticipant) 
+          console.log(this.isUserParticipant)
         }
 
         for(var key in loggedUser.events_rated) {
@@ -597,7 +598,7 @@ export default {
         }
         if(this.ratedEvents.find(element => element == this.newEvent.id)) {
           this.isUserRated = true
-          console.log("Rated" + this.isUserRated) 
+          console.log("Rated" + this.isUserRated)
         }
     }
   },
@@ -693,4 +694,3 @@ export default {
   background-color: #fefde5 !important;
 }
 </style>
-  
