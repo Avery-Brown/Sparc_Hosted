@@ -1,3 +1,3 @@
 module.exports = {
-    stripe: 'pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3'
+    stripe: 'sk_live_OoIEbZz5Dgl9pg3c3EzatptY00jvcmds6A'
 }

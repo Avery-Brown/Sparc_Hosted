@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "site": "sparc-test-lizzet",
+    "site": "sparc-test-elin",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -9,8 +9,7 @@
     ],
     "rewrites": [
       {
-        "source": "/api/v1**",
-        "function": "webApi",
+        "source": "**",
         "destination": "/index.html"
       }
     ]
