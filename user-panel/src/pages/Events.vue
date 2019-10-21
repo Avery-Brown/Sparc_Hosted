@@ -48,7 +48,7 @@
                 <div class="card" style="cursor: pointer">
                   <div class="card-header">
                     <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="" @click="viewEvent(event.id)">
-                    <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="" @click="viewEvent(event.id)">
+                    <img v-else src="../../public/sparc_card_back.jpg" class="lizzet_image" alt="" @click="viewEvent(event.id)">
                   </div>
                   <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                     <h5 class="text-success title-up"><b> {{ event.event_name }} </b></h5>
@@ -59,14 +59,13 @@
                     <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
                     <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
                     <!-- <h6>{{event.tags}}</h6> -->
-
+                    <div class="col-md-4" v-if="now == 1">
+                        <h5 class="text-danger title-up">Sorry! No Engagements Found</h5>
+                    </div>
                   </div>
                 </div>
                 </div>
               </div>
-              <div class="col-md-4" v-if="filters.length <= 0">
-                  <h5 class="text-danger title-up">Sorry! No Engagement Found</h5>
-                </div>
             </div>
           </div>
         </div>
@@ -96,6 +95,7 @@ export default {
         dateFilter: '',
         locationFilter: '',
         filters: [],
+        now: 0,
         userName: '',
         data_name: '',
         getUsers: [],
@@ -216,20 +216,21 @@ export default {
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
-    this.fetchEvents();
+
     this.filters = []
     this.filters = this.getEvents
-    this.fetchAllUsers();
+
     this.getUsers = []
     this.getUsers = this.allUsers
     this.fetchTags();
   },
-  
+
   watch: {
     getEvents(val) {
       if(val) {
         this.filters = []
         this.filters = this.getEvents
+        now = 1;
       }
     },
     allUsers(val) {

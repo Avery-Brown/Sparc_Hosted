@@ -25,19 +25,33 @@ const getters = {
 const actions = {
     createEvent({commit}, payload) {
         commit('unsetEventCreated', 'failed')
-        if(payload.event_image == null) {
-            firebase.database().ref('events').push(payload).then(event => {
-                const key = event.key;
-                firebase.auth().onAuthStateChanged(user => {
-                    if(user) {
-                        firebase.database().ref('users').child(user.uid).child('events_hosted').push(key)
-                        .then(() => {
-                            console.log('Event Registered')
-                            commit('setEventCreated', 'success')
+        if(payload.event_image == null && payload.event_video != null) {
+            var videoRef = firebase.storage().ref('event_videos/'+payload.event_video.name);
+            let uploadVideo = videoRef.put(payload.event_video);
+
+            uploadVideo.on('state_changed', snapshot => {
+            }, function(err){
+                console.log(err.message);
+            }, function() {
+                    uploadVideo.snapshot.ref.getDownloadURL().then(downloadURL => {
+                    payload.event_video = downloadURL;
+                    console.log("After " + payload.event_video);
+                }).then(() => {
+                    firebase.database().ref('events').push(payload).then(event => {
+                        const key = event.key;
+                        firebase.auth().onAuthStateChanged(user => {
+                            if(user) {
+                                firebase.database().ref('users').child(user.uid).child('events_hosted').push(key)
+                                .then(() => {
+                                    console.log('Event Registered')
+                                    commit('setEventCreated', 'success')
+                                })
+                            }
                         })
-                    }
+                        
+                    }).catch(err => console.log(err.message));
                 })
-            }).catch(err => console.log(err.message));
+            })
         }
         else {
             var storageRef = firebase.storage().ref('event_images/'+payload.event_image.name);
