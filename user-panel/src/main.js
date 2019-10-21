@@ -12,8 +12,6 @@ import Clipboard from 'v-clipboard'
 import 'native-toast/dist/native-toast.css'
 import VueStripeCheckout from 'vue-stripe-checkout'
 
-const keys = require("./config/keys");
-
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
@@ -62,7 +60,7 @@ Vue.component('multiselect', Multiselect)
 Vue.component('star-rating', StarRating)
 
 const options = {
-  key: keys.stripe,
+  key: 'pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3',
   image: 'https://cdn.meme.am/images/100x100/15882140.jpg',
   locale: 'auto',
   currency: 'USD',
