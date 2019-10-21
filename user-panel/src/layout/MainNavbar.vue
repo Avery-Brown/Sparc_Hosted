@@ -155,11 +155,16 @@ export default {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
     z-index: 1;
+    background-color: rgba(0,0,0,0);
   }
 
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
+
+  .dropdown {
+    font-weight: bold;
+  }
 
 </style>
