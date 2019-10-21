@@ -44,7 +44,7 @@
         }
 
         .nav-link:not(.btn){
-            text-transform: uppercase;
+            // text-transform: uppercase;
             font-size: $font-size-mini;
             font-size: 14px;
             padding: $padding-base-vertical $padding-base-horizontal;
@@ -106,11 +106,13 @@
     }
 
     .navbar-brand{
-        text-transform: uppercase;
+        // text-transform: uppercase;
         font-size: $font-size-small;
         padding-top: $padding-base-vertical;
         padding-bottom: $padding-base-vertical;
         line-height: $line-height-nav-link;
+        text-align: center;
+        width: 100%;
     }
 
     .navbar-toggler{

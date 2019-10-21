@@ -17,7 +17,7 @@
                   <div class="card" style="cursor: pointer" >
                     <div class="card-header">
                     <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="" @click="viewEvent(event.id)">
-                    <img v-else src="../../public/sparcS.png" class="lizzet_image" alt="">
+                    <img v-else src="../../public/sparc_card_back.jpg" class="lizzet_image" alt="">
                     <div class="text-success pull-right mt-4 mr-3" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><i class="fa fa-copy"></i></div>
                     </div>
                     <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">

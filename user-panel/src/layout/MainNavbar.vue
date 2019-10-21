@@ -47,7 +47,7 @@
         </router-link>
       </li>
       <li class="nav-item dropdown">
-        <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
+        <a class="navbar-brand nav-link dropdown-toggle text-success" style="font-weight: bold;">Your Engagements</a>
         <div class="dropdown-content">
           <li class="nav-item" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
