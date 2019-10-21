@@ -46,8 +46,8 @@
           <b>Contact</b>
         </router-link>
       </li>
-      <li class="nav-item dropdown">
-        <a class="navbar-brand nav-link dropdown-toggle text-success" style="font-weight: bold;">Your Engagements</a>
+      <li class="nav-item dropdown" v-if="!this.logout">
+        <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
         <div class="dropdown-content">
           <li class="nav-item" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
@@ -155,11 +155,16 @@ export default {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
     z-index: 1;
+    background-color: rgba(0,0,0,0);
   }
 
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {display: block;}
+
+  .dropdown {
+    font-weight: bold;
+  }
 
 </style>
