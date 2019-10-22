@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
     user: [],
     status: null,
@@ -304,7 +306,23 @@ const mutations = {
 
     setAllUsers: (state, payload) => (state.allUsers.push(payload)),
     unsetAllSetUsers: (state) => state.allUsers = [],
-    resetPassword: (state, payload) => (state.reset = payload)
+    resetPassword: (state, payload) => (state.reset = payload),
+    removeBlocker: (state, payload) => {
+        console.log("came")
+        delete state.allUsers[payload.index].blocked_by[payload.key]
+        console.log(state.allUsers)
+    },
+    burbery(state,payload){
+        const blocked_user_inst = state.allUsers.find(user_item => user_item.id == payload.receiver_id);
+        if (blocked_user_inst.blocked_by == null) {
+            Vue.set(blocked_user_inst, 'blocked_by', {});
+            Vue.set(blocked_user_inst.blocked_by, payload.key, {blocker_id:payload.blocker_id});
+        } 
+        else
+        {
+            Vue.set(blocked_user_inst.blocked_by, payload.key, {blocker_id:payload.blocker_id});
+        }
+    }
 };
 
 export default {
