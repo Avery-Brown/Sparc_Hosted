@@ -162,22 +162,46 @@ export default {
   },
   watch:{
     allUsers(){
-    this.selected_user=this.allUsers[0];
+      if(Object.keys(this.selected_user).length>0){
+      this.selected_user=this.selected_user;
+      }else{
+        this.selected_user=this.allUsers[0];
+      }
+    this.checked=this.get_receiver_blocked_status.check
     // this.scroller()
 
     }
   },
   methods:{
-    ...mapActions(['sendMessages']),
-    fillProfile(arg_user){
+    ...mapActions(['sendMessages','blockingProcess']),
+    fillProfile(arg_user) {
       this.selected_user=arg_user;
+      if(this.selected_user.blocked_by!=null){
+        if(Object.keys(this.selected_user.blocked_by).length>0){
+        this.checked=this.get_receiver_blocked_status.check;
+        }
+        else{
+        this.checked=false;
+        }
+      }
+      else{
+        this.checked=false;
+
+      }
       this.scroller()
     },
     blocking(){
-
+      const remove_blocker_index = this.allUsers.findIndex(user_item => user_item.id == this.selected_user.id);
+      if(!this.checked==false){
+      //removing blocked ids from the state
+      this.$store.commit('removeBlocker',{key:this.get_receiver_blocked_status.key,index:remove_blocker_index})
+      //removing block ids from currently selectd user
+      delete this.selected_user.blocked_by[this.get_receiver_blocked_status.key]
+      }
+      this.blockingProcess({receiver_id:this.selected_user.id,sender_id:this.loggeduser.id,flag:!this.checked})
     },
     sendMessage(){
-      if(this.get_block_status==true){
+      if(this.get_my_block_status==true){
         nativeToast({
           message: 'You are not allowed to send message to this user',
           position: 'north-east',
@@ -191,7 +215,6 @@ export default {
       message:this.message,
       receiver_id:this.selected_user.id,
       sender_id:this.loggeduser.id}
-      console.log(msg_obj)
       this.sendMessages(msg_obj)
       this.message=''
       this.scroller()
@@ -216,21 +239,39 @@ export default {
   },
   computed:{
     ...mapGetters(['allUsers','getMessages','user']),
-    selected_messages(){
+    selected_messages() {
      return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
     },
+    //Ppl who have blocked me
     blocked_users(){
       return Object.keys(this.loggeduser.blocked_by).map(blocked_key=> {
           return {id:this.loggeduser.blocked_by[blocked_key].blocker_id}
       })
     },
-    get_block_status(){
+    get_my_block_status(){
       let block_user_find=this.blocked_users.find(blocked_user=>blocked_user.id==this.selected_user.id)
       if(block_user_find!=null){
         return true
       }
       else{
         return false
+      }
+    },
+    //Ppl i have blocked
+    receiver_blocked_users(){
+        return Object.keys(this.selected_user.blocked_by).map(blocked_key=> {
+            return {id:this.selected_user.blocked_by[blocked_key].blocker_id,
+            key:blocked_key}
+        })
+      
+    },
+    get_receiver_blocked_status(){
+      let block_user_find=this.receiver_blocked_users.find(blocked_user=>blocked_user.id==this.loggeduser.id)
+      if(block_user_find!=null){
+        return {...block_user_find,check:true}
+      }
+      else{
+        return {...block_user_find,check:false}
       }
     }
 
