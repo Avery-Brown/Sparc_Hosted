@@ -17,8 +17,7 @@
             </div>
 
             <div class="row" >
-              <div class="col-md-2"></div>
-              <div class="col-md-4">
+              <div class="col-md-7">
                 <b-card-group deck >
                     <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
                         <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="50" height="200" alt="">
@@ -48,14 +47,13 @@
                         </b-card-text>
                     </b-card>
                 </b-card-group>
-                <div class="col-md-2"></div>
 
 
-                <b-card class="mt-3" v-if="getSelectedEvent[0].event_video != null">
+                <b-card class="mt-3 ml-auto mr-auto col text-center" v-if="getSelectedEvent[0].event_video != null">
                   <h4 class="title-up text-info">Engagement Video</h4>
                   <div class="row">
-                    <div class="col-md-12">
-                      <video :src="getSelectedEvent[0].event_video" controls height="300" ></video>
+                    <div class="col">
+                      <video :src="getSelectedEvent[0].event_video" controls height="80%" class="ml-auto mr-auto "></video>
                     </div>
                 </div>
                 </b-card>
@@ -209,6 +207,7 @@ let stripe = Stripe(`pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3`),
 import { Parallax, FormGroupInput, Alert, Modal } from '@/components';
 import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
+import nativeToast from 'native-toast'
 import moment from 'moment'
 export default {
   name: 'event-details',
@@ -344,6 +343,14 @@ export default {
     },
     clipboardSuccessHandler({ value, event }) {
         console.log('success', value)
+
+        nativeToast({
+          message: 'Link Copied to Clipboard',
+          position: 'north-east',
+          // Self destroy in 5 seconds
+          timeout: 3000,
+          type: 'success'
+        })
     },
 
     reviewedBy(id) {
@@ -501,7 +508,15 @@ export default {
     sendEmail() {
       axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendMail', {
         dest: this.userEmail,
-        event: this.getSelectedEvent[0].event_name
+        event: this.getSelectedEvent[0].event_name,
+        end_time: this.getSelectedEvent[0].end_time,
+        start_time: this.getSelectedEvent[0].start_time,
+        date: this.getSelectedEvent[0].date,
+        host_contact: this.getSelectedEvent[0].host_contact,
+        event_address: this.getSelectedEvent[0].event_address,
+        event_location_access: this.getSelectedEvent[0].event_location_access,
+        event_space: this.getSelectedEvent[0].event_space,
+
       }).then(() => {
         console.log('Email Sent')
       }).catch(err => console.log("Error " + err))
@@ -693,5 +708,9 @@ export default {
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
+}
+
+.video-element {
+  margin-left: 30px;
 }
 </style>

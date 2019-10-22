@@ -9,7 +9,7 @@
                         <!-- <div class="space-50"></div> -->
                         <div class="row">
                             <div class="col-md-6 col-lg-6">
-                                <label for="">Upload Engagement Featured Image</label>
+                                <label for="">Upload Engagement Featured Image*</label>
                                 <input type="file" class="btn btn-primary mb-3" @change="onFileSelected">
                             </div>
                             <div class="col-md-6 col-lg-6">
@@ -264,7 +264,7 @@ export default {
           createButton: 'Create Engagement',
           pickerOptions: {
             disabledDate(time) {
-                return time.getTime() < Date.now();
+                return time.getTime() < Date.now() - 3600 * 1000 * 24;
             },
           },
           timeValue: {

@@ -52,7 +52,7 @@
                   </div>
                   <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                     <h5 class="text-success title-up"><b> {{ event.event_name }} </b></h5>
-                    <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"></i></b></div>
+                    <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"> Share Engagement</i></b></div>
                     <h6 class="text-info"> <i class ="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                     <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                     <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
@@ -108,7 +108,7 @@ export default {
     ...mapGetters(['getEvents', 'allUsers', 'allTags', 'allRatings']),
 
     getFiltered() {
-      this.filterEvents = [];
+      this.filterEvents = []
       let event = this.filters.filter(event => Date.parse(this.currentDate) <= Date.parse(event.date))
       return event
     },
