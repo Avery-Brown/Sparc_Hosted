@@ -53,7 +53,7 @@
                   <h4 class="title-up text-info">Engagement Video</h4>
                   <div class="row">
                     <div class="col">
-                      <video :src="getSelectedEvent[0].event_video" controls height="80%" class="ml-auto mr-auto "></video>
+                      <video :src="getSelectedEvent[0].event_video" controls class="ml-auto mr-auto video-element"></video>
                     </div>
                 </div>
                 </b-card>
@@ -710,7 +710,7 @@ export default {
   background-color: #fefde5 !important;
 }
 
-.video-element {
-  margin-left: 30px;
+video {
+  width: 100%;
 }
 </style>
