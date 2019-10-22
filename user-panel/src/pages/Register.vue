@@ -4,7 +4,6 @@
     <div class="content">
       <div class="container">
         <div class="col-md-8 ml-auto mr-auto">
-          <div class="alert alert-success" v-if="success">Verification Link has been sent. Please Check Email</div>
             <card class="register-card">
               <h3 class="text-center text-info"><b>CREATE ACCOUNT</b></h3>
             <form action="" >
@@ -149,6 +148,7 @@
               </div>
               </form>
             </card>
+            <div class="alert alert-success" v-if="success">Verification Link has been sent. Please Check Email</div>
         </div>
       </div>
     </div>
