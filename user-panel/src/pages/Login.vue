@@ -58,8 +58,8 @@ export default {
       success: true,
       userVerified: true,
       userPayload: {
-        email: '',
-        password: '',
+        email: 'travis.nicks@duke.edu',
+        password: 'travis',
       },
 
     }
