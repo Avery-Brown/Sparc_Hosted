@@ -14,7 +14,7 @@
                           </div>
                           <div class="srch_bar">
                             <div class="stylish-input-group">
-                              <input type="text" class="search-bar"  placeholder="Search" >
+                              <input type="text" class="search-bar"  placeholder="Search"  v-model="search" v-on:keydown="filter_name">
                               <span class="input-group-addon">
                               <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
                               </span> </div>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="inbox_chat">
                           <!-- active_chat -->
-                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in allUsers" v-bind:key="i">
+                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters" v-bind:key="i">
                             <div class="chat_people" >
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
@@ -63,11 +63,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    
-
-                    
+                    </div> 
               </div>
             </div>
         </div>
@@ -154,10 +150,12 @@ export default {
   },
   data(){
     return{
+      search:'',
       checked:false,
       selected_user:{},
       loggeduser:'',
-      message:''
+      message:'',
+      filters:[]
     }
   },
   watch:{
@@ -174,6 +172,16 @@ export default {
   },
   methods:{
     ...mapActions(['sendMessages','blockingProcess']),
+    filter_name() {
+      let arrs=this.allUsers.filter(user_item=>user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
+            if(arrs.length>0){
+            this.filters=arrs
+
+            }
+            else{
+                this.filters=[]
+            }
+      },
     fillProfile(arg_user) {
       this.selected_user=arg_user;
       if(this.selected_user.blocked_by!=null){
@@ -278,6 +286,7 @@ export default {
   },
   created(){
     this.loggeduser=JSON.parse(localStorage.getItem('loggedUser'));
+    this.filters=this.allUsers
   },
   mounted(){
     if(this.allUsers.length>0){
