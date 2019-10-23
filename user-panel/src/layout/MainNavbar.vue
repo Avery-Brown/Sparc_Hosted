@@ -48,15 +48,15 @@
       </li>
       <li class="nav-item dropdown" v-if="!this.logout">
         <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
-        <div class="dropdown-content">
+        <div class="dropdown-content text-center">
           <li class="nav-item" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
-              <b>Upcoming Engagements</b>
+              <b class = "drop-down-text">Upcoming Engagements</b>
             </router-link>
           </li>
           <li class="nav-item" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/past-events">
-              <b>Past Engagements</b>
+              <b class = "drop-down-text">Past Engagements</b>
             </router-link>
           </li>
         </div>
@@ -66,7 +66,19 @@
         Billing History
         </router-link>
       </li> -->
-      <li class="nav-item" v-if="!this.logout">
+      <li class="nav-item dropdown" v-if="!this.logout">
+        <router-link class="navbar-brand nav-link text-success" to="/profile">
+          <b class="dropdown-toggle">Profile</b>
+        </router-link>
+        <div class="dropdown-content">
+          <li class="nav-item logout-dropdown" v-if="!this.logout" @click="userLogout">
+            <router-link class="navbar-brand nav-link text-success" to="/">
+              <b>Logout</b>
+            </router-link>
+          </li>
+        </div>
+      </li>
+      <!-- <li class="nav-item" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="/profile">
           <b>Profile</b>
         </router-link>
@@ -76,7 +88,7 @@
         <router-link class="navbar-brand nav-link text-success" to="/">
           <b>Logout</b>
         </router-link>
-      </li>
+      </li> -->
 
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info" to="/login" v-if="this.logout">
@@ -166,5 +178,15 @@ export default {
   .dropdown {
     font-weight: bold;
   }
+
+  .drop-down-text {
+    font-size: 12px;
+  }
+
+  .logout-dropdown {
+    width: 65%;
+  }
+
+
 
 </style>
