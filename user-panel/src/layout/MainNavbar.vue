@@ -36,7 +36,22 @@
           <b>Home</b>
         </router-link>
       </li>
-      <li class="nav-item">
+      <li class="nav-item dropdown" v-if="!this.logout">
+        <a class="navbar-brand nav-link dropdown-toggle text-success">About</a>
+        <div class="dropdown-content text-center">
+          <li class="nav-item about-dropdown" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
+              <b class = "drop-down-text">Meet the Team</b>
+            </router-link>
+          </li>
+          <li class="nav-item about-dropdown" v-if="!this.logout">
+            <router-link class="navbar-brand nav-link text-success" to="/past-events">
+              <b class = "drop-down-text">Contact Us</b>
+            </router-link>
+          </li>
+        </div>
+      </li>
+      <!-- <li class="nav-item">
         <router-link class="navbar-brand nav-link text-success" to="/about">
           <b>About Us</b>
         </router-link>
@@ -45,10 +60,10 @@
         <router-link class="navbar-brand nav-link text-success" to="/contact">
           <b>Contact</b>
         </router-link>
-      </li>
+      </li> -->
       <li class="nav-item dropdown" v-if="!this.logout">
         <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
-        <div class="dropdown-content text-center">
+        <div class="dropdown-content">
           <li class="nav-item" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
               <b class = "drop-down-text">Upcoming Engagements</b>
@@ -185,6 +200,9 @@ export default {
 
   .logout-dropdown {
     width: 65%;
+  }
+  .about-dropdown {
+    width: 80%;
   }
 
 
