@@ -6,7 +6,7 @@
           <div class="container">
               <!-- <h3 class=" text-center">Messaging</h3> -->
               <div class="messaging">
-                    <div class="inbox_msg">
+                    <div class="inbox_msg" style="height:500px;">
                       <div class="inbox_people">
                         <div class="headind_srch">
                           <div class="recent_heading">
@@ -27,9 +27,8 @@
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                               <div class="chat_ib">
-                                <h5>{{users.first_name}} <span class="chat_date">Dec 25</span></h5>
-                                <p>Test, which is a new approach to have all solutions 
-                                  astrology under one roof.</p>
+                                <h5>{{users.first_name}} <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
+                                 <p>{{chatdate(users.id).message}}</p>
                               </div>
                             </div> 
                           </div>
@@ -171,6 +170,20 @@ export default {
     }
   },
   methods:{
+    chatdate(id){
+      console.log(id)
+      let arrs= this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==id)) 
+      // console.log(arrs)
+      if(arrs.length>0){
+        // console.log(arrs[0])
+        let dt=arrs[arrs.length-1].date.split('|')
+        console.log(dt[1])
+        return {date:dt[1],message:arrs[arrs.length-1].message}
+      }
+      else{
+      return {date:'NA',message:'No messages yet'}
+      }
+    },
     ...mapActions(['sendMessages','blockingProcess']),
     filter_name() {
       let arrs=this.allUsers.filter(user_item=>user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
@@ -369,7 +382,7 @@ img{ max-width:100%;}
   margin: 0;
   padding: 18px 16px 10px;
 }
-.inbox_chat { height: 550px; overflow-y: scroll;}
+.inbox_chat { height: 450px; overflow-y: scroll;}
 
 .active_chat{ background:#ebebeb;}
 
@@ -443,7 +456,7 @@ img{ max-width:100%;}
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
-  height: 516px;
+  height: 400px;
   overflow-y: auto;
 }
 
