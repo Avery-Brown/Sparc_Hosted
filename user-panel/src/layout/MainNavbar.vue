@@ -40,12 +40,12 @@
         <a class="navbar-brand nav-link dropdown-toggle text-success">About</a>
         <div class="dropdown-content text-center">
           <li class="nav-item about-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
+            <router-link class="navbar-brand nav-link text-success" to="/about">
               <b class = "drop-down-text">Meet the Team</b>
             </router-link>
           </li>
           <li class="nav-item about-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/past-events">
+            <router-link class="navbar-brand nav-link text-success" to="/contact">
               <b class = "drop-down-text">Contact Us</b>
             </router-link>
           </li>
