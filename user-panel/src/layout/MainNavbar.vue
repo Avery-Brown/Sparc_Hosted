@@ -37,7 +37,7 @@
         </router-link>
       </li>
       <li class="nav-item dropdown" v-if="!this.logout">
-        <a class="navbar-brand nav-link dropdown-toggle text-success">About</a>
+        <a class="navbar-brand nav-link dropdown-toggle text-success" style="margin-right: 35px;">About</a>
         <div class="dropdown-content text-center">
           <li class="nav-item about-dropdown" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/about">
@@ -62,14 +62,14 @@
         </router-link>
       </li> -->
       <li class="nav-item dropdown" v-if="!this.logout">
-        <a class="navbar-brand nav-link dropdown-toggle text-success">Your Engagements</a>
+        <a class="navbar-brand nav-link dropdown-toggle text-success" style="margin-right: 35px;">Your Engagements</a>
         <div class="dropdown-content">
-          <li class="nav-item" v-if="!this.logout">
+          <li class="nav-item engage-dropdown" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
               <b class = "drop-down-text">Upcoming Engagements</b>
             </router-link>
           </li>
-          <li class="nav-item" v-if="!this.logout">
+          <li class="nav-item engage-dropdown" v-if="!this.logout">
             <router-link class="navbar-brand nav-link text-success" to="/past-events">
               <b class = "drop-down-text">Past Engagements</b>
             </router-link>
@@ -83,12 +83,12 @@
       </li> -->
       <li class="nav-item dropdown" v-if="!this.logout">
         <router-link class="navbar-brand nav-link text-success" to="/profile">
-          <b class="dropdown-toggle">Profile</b>
+          <b class="dropdown-toggle" style="margin-left: 15px; margin-right: 20px;">Profile</b>
         </router-link>
         <div class="dropdown-content">
           <li class="nav-item logout-dropdown" v-if="!this.logout" @click="userLogout">
             <router-link class="navbar-brand nav-link text-success" to="/">
-              <b>Logout</b>
+              <b class = "drop-down-text">Logout</b>
             </router-link>
           </li>
         </div>
@@ -106,7 +106,7 @@
       </li> -->
 
       <li class="nav-item">
-        <router-link class="navbar-brand nav-link btn btn-info" to="/login" v-if="this.logout">
+        <router-link class="navbar-brand nav-link btn btn-info" style="width: 100%;" to="/login" v-if="this.logout">
           <b>Login</b>
         </router-link>
       </li>
@@ -180,11 +180,13 @@ export default {
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 160px;
+    text-align: center;
+    /*background-color: #f1f1f1;*/
+    /*background-color: white;*/
+    width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0);
     z-index: 1;
-    background-color: rgba(0,0,0,0);
+    background-color: white;
   }
 
   /* Show the dropdown menu on hover */
@@ -196,13 +198,21 @@ export default {
 
   .drop-down-text {
     font-size: 12px;
+    color: rgb(29, 104, 47);
   }
 
   .logout-dropdown {
-    width: 65%;
+    width: 100%;
+    margin-right: 0px;
+    color: rgb(29, 104, 47);
   }
   .about-dropdown {
-    width: 80%;
+    width: 100%;
+    color: rgb(29, 104, 47);
+  }
+  .engage-dropdown {
+    width: 100%;
+    color: rgb(29, 104, 47);
   }
 
 

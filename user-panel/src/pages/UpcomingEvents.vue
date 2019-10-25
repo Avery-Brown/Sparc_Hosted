@@ -18,12 +18,15 @@
                     </div>
                       <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                       <h5 class="text-success"><strong> {{ event.event_name }}</strong></h5>
-                      <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                      <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><u><b>Share Engagement</b></u></div>
+
                       <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                       <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                       <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
-                      <div class="text-success" style="position: absolute; bottom:10px; right: 20px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"> Share Engagement <i class="fa fa-copy"></i></div>
-                      <h6 class="text-success pull-right"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
+                      <!-- <div class="text-success" style="position: absolute; bottom:10px; right: 20px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"> Share Engagement <i class="fa fa-copy"></i></div> -->
+                      <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+
+                      <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
 
                     </div>
                 </div>
