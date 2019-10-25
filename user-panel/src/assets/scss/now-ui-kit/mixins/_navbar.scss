@@ -139,13 +139,21 @@
 
 
   .toggled {
+    // margin-left: -10px;
+    // padding-left: -10px;
+
     .top-bar {
     transform: rotate(45deg);
     transform-origin: 0%;
+    // transform: translate(-3px);
+    // margin-right: -3px;
+    // padding-left: 3px;
   }
     .bottom-bar {
       transform: rotate(-45deg);
       transform-origin: 0%;
+      // transform: translate(-3px);
+      // padding-left: 3px;
     }
     .middle-bar {
       opacity: 0;
@@ -214,8 +222,9 @@
 
         .navbar-nav:not(.navbar-logo){
             .nav-link {
-                margin: 0 1rem;
+                // margin: 0 1rem;
                 margin-top: 0.3125rem;
+                width: 100%;
 
                 &:not(.btn){
                     color: $white-color !important;
