@@ -16,6 +16,14 @@ const actions = {
         .catch(err => console.log(err.message));
          
     },
+    toggleEmailNotifications({commit}, payload) {
+        firebase.database().ref('users').child(payload.loggeduser_id).child('email_notifications').set(payload.flag)
+            .then(()=>{
+                console.log("notification updated")
+            })
+            .catch(err => console.log(err.message));
+
+    },
     blockingProcess({commit,rootState}, payload) {
         if(payload.flag==true){
             let key=firebase.database().ref('users').child(payload.receiver_id).child('blocked_by').push().getKey()
