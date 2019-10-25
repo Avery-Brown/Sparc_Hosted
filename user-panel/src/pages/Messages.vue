@@ -10,7 +10,9 @@
                       <div class="inbox_people">
                         <div class="headind_srch">
                           <div class="recent_heading">
-                            <h4>Recent</h4>
+                          <b-form-checkbox @change="toggleEmailNotifs()" v-model="notif_toggle"  name="check-button" switch>
+                            Email Notifications
+                          </b-form-checkbox>
                           </div>
                           <div class="srch_bar">
                             <div class="stylish-input-group">
@@ -142,6 +144,8 @@ import { mapGetters, mapActions } from 'vuex'
 import nativeToast from 'native-toast'
 import moment from  'moment'
 import { EHOSTUNREACH } from 'constants';
+import axios from 'axios'
+
 export default {
   name: 'profile',
   bodyClass: 'profile-page',
@@ -149,6 +153,7 @@ export default {
   },
   data(){
     return{
+      notif_toggle:false,
       search:'',
       checked:false,
       selected_user:{},
@@ -170,21 +175,34 @@ export default {
     }
   },
   methods:{
+    toggleEmailNotifs(){
+      this.loggeduser={...this.loggeduser,email_notifications:!this.notif_toggle}
+      localStorage.setItem("loggedUser", JSON.stringify(this.loggeduser));
+      this.toggleEmailNotifications({flag:!this.notif_toggle,loggeduser_id:this.loggeduser.id})
+
+    },
+    sendEmail(date) {
+
+      axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendMessageNotification', {
+        sender_name:this.selected_user.first_name,
+        message: this.message,
+        time:date,
+        dest:this.selected_user.email
+      }).then(() => {
+        console.log('Email Sent')
+      }).catch(err => console.log("Error " + err))
+    },
     chatdate(id){
-      console.log(id)
       let arrs= this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==id)) 
-      // console.log(arrs)
       if(arrs.length>0){
-        // console.log(arrs[0])
         let dt=arrs[arrs.length-1].date.split('|')
-        console.log(dt[1])
         return {date:dt[1],message:arrs[arrs.length-1].message}
       }
       else{
       return {date:'NA',message:'No messages yet'}
       }
     },
-    ...mapActions(['sendMessages','blockingProcess']),
+    ...mapActions(['sendMessages','blockingProcess','toggleEmailNotifications']),
     filter_name() {
       let arrs=this.allUsers.filter(user_item=>user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
             if(arrs.length>0){
@@ -222,6 +240,7 @@ export default {
       this.blockingProcess({receiver_id:this.selected_user.id,sender_id:this.loggeduser.id,flag:!this.checked})
     },
     sendMessage(){
+      console.log(this.blocked_users)
       if(this.get_my_block_status==true){
         nativeToast({
           message: 'You are not allowed to send message to this user',
@@ -232,6 +251,12 @@ export default {
       }
       else if(this.message!=''){
       let date=moment().format('LT')+" | "+moment().format('D MMM') ;
+      if(this.notif_toggle==true){
+          this.sendEmail(date)
+      }
+      else{
+        console.log("no didnt run")
+      }
       let msg_obj={date:date,
       message:this.message,
       receiver_id:this.selected_user.id,
@@ -265,9 +290,15 @@ export default {
     },
     //Ppl who have blocked me
     blocked_users(){
-      return Object.keys(this.loggeduser.blocked_by).map(blocked_key=> {
-          return {id:this.loggeduser.blocked_by[blocked_key].blocker_id}
-      })
+      if(this.loggeduser.blocked_by!=null){
+        return Object.keys(this.loggeduser.blocked_by).map(blocked_key=> {
+            return {id:this.loggeduser.blocked_by[blocked_key].blocker_id}
+        })
+      }
+      else{
+       return []
+      }
+      
     },
     get_my_block_status(){
       let block_user_find=this.blocked_users.find(blocked_user=>blocked_user.id==this.selected_user.id)
@@ -300,6 +331,12 @@ export default {
   created(){
     this.loggeduser=JSON.parse(localStorage.getItem('loggedUser'));
     this.filters=this.allUsers
+    if(this.loggeduser.email_notifications==null || this.loggeduser.email_notifications==false){
+      this.notif_toggle=false
+    }
+    else{
+      this.notif_toggle=true  
+    }
   },
   mounted(){
     if(this.allUsers.length>0){
