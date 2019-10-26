@@ -52,24 +52,13 @@ const actions = {
 
     },
     fetchMessages({commit}) {
-        // commit('setMessages');
-        // firebase.database().ref('messages').on("value", function(snapshot) {
-        //     console.log(snapshot.val());
-        //     console.log("cameeees")
-        //   }, function (errorObject) {
-        //     console.log("The read failed: " + errorObject.code);
-        //   });
          firebase.database().ref('messages').on('child_added', snapshot => {
             let user=JSON.parse(localStorage.getItem('loggedUser'))
             let date=moment().format('LT')+" | "+moment().format('D MMM') ;
             if(date==snapshot.val().date){
-                console.log("yehhh")
-                  
                 if(user.id==snapshot.val().receiver_id) {
-                    console.log(snapshot.val())
                     commit('setNotifications',{message:snapshot.val().message,type:"info"})
                 }
-
             }
             commit('setMessages', {
                 ...snapshot.val(),
