@@ -71,6 +71,32 @@ exports.sendMail = functions.https.onRequest((req, res) => {
 });
 
 
+exports.sendMessageNotification = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+      if(req.method == 'POST') {
+          const sender_name = req.body.sender_name;
+          const message = req.body.message;
+          const time = req.body.time;
+          const dest=req.body.dest;
+
+          sgMail.send({
+              to: dest,
+              from: 'info@sparc.world',
+              subject: 'New Message Notification',
+              text: 'Notification Details',
+              html: '<p>Your have received new message from  ' + sender_name + 
+              '</p> <p><strong>Time </strong>' + time + 
+              '</p> <p><strong>Message </strong>' + message 
+              // html: 'Your Participation for ' + event + ' has been confirmed. Here is some information ' + host_contact + ' Thanks for participating! </strong>',
+          }).then(res => res.send('Email Sent')).catch(err => res.send(err));
+      }
+      else {
+          res.send("Error " + " " + SENDGRID_API_KEY)
+      }
+  });    
+});
+
+
 
 exports.sendContact = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
