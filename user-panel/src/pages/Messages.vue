@@ -24,7 +24,7 @@
                         </div>
                         <div class="inbox_chat">
                           <!-- active_chat -->
-                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters" v-bind:key="i">
+                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=loggeduser.id" v-bind:key="i">
                             <div class="chat_people" >
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
