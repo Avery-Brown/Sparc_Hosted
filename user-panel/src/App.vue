@@ -8,6 +8,9 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
+  import nativeToast from 'native-toast'
+
 export default {
 
   created () {
@@ -15,6 +18,23 @@ export default {
     this.$store.dispatch("fetchRatings")
     this.$store.dispatch("fetchEvents")
     this.$store.dispatch("fetchMessages")
+  },
+  computed:{
+    ...mapGetters(['notification'])
+  },
+  watch:{
+    notification (val){
+      if(val){
+          nativeToast({
+          message: this.notification.message,
+          position: 'south-east',
+          timeout: 5000,
+          type: this.notification.type
+        })
+        this.$store.commit("unSetNotifications")
+      }
+
+    }
   }
 
 };
