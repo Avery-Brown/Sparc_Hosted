@@ -8,15 +8,46 @@ const state = {
 const getters = {
     getMessages: state => state.messages,
     notification:state=>state.notification
+
 };
 
 const actions = {
     sendMessages(context, payload) {
+        if(payload.rawfile==null){
+            console.log("no raw")
         firebase.database().ref('messages').push(payload)
         .then(() => {
             console.log('message sent')
         })
         .catch(err => console.log(err.message));
+    }
+    else{
+        console.log("yes raw")
+        let customkey = firebase.database().ref('messages').push().getKey()
+        let ext = payload.rawfile.name.slice(payload.rawfile.name.lastIndexOf('.'))
+
+        firebase.storage().ref('message_attachements/' + customkey + ext.toLowerCase()).put(payload.rawfile)
+                .then((filedata) => {
+                    filedata.ref.getDownloadURL()
+                        .then((URL) => {
+                            console.log("uploaded")
+                            firebase.database().ref('messages').push({
+                                type: 'file',
+                                file_url: URL,
+                                date:payload.date,
+                                message:payload.message,
+                                receiver_id:payload.receiver_id,
+                                sender_id:payload.sender_id
+                            })
+                            .then(()=>{
+                                console.log("inserted")
+                            })
+                            .catch(error=>(console.log(error.message)))
+
+                        })
+                    })
+                .catch(error => console.log(error.message))
+    }
          
     },
     toggleEmailNotifications({commit}, payload) {
@@ -51,13 +82,15 @@ const actions = {
         }
 
     },
-    fetchMessages({commit}) {
+    fetchMessages({commit,rootState}) {
          firebase.database().ref('messages').on('child_added', snapshot => {
             let user=JSON.parse(localStorage.getItem('loggedUser'))
+            // console.log()
             let date=moment().format('LT')+" | "+moment().format('D MMM') ;
             if(date==snapshot.val().date){
                 if(user.id==snapshot.val().receiver_id) {
-                    commit('setNotifications',{message:snapshot.val().message,type:"info"})
+                   let sender_user=rootState.user.allUsers.find(item=>item.id==snapshot.val().sender_id)
+                    commit('setNotifications',{message:sender_user.first_name+' : '+snapshot.val().message,type:"success"})
                 }
             }
             commit('setMessages', {
