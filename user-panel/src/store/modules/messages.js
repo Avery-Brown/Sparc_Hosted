@@ -14,15 +14,12 @@ const getters = {
 const actions = {
     sendMessages(context, payload) {
         if(payload.rawfile==null){
-            console.log("no raw")
         firebase.database().ref('messages').push(payload)
         .then(() => {
-            console.log('message sent')
         })
         .catch(err => console.log(err.message));
     }
     else{
-        console.log("yes raw")
         let customkey = firebase.database().ref('messages').push().getKey()
         let ext = payload.rawfile.name.slice(payload.rawfile.name.lastIndexOf('.'))
 
@@ -85,7 +82,6 @@ const actions = {
     fetchMessages({commit,rootState}) {
          firebase.database().ref('messages').on('child_added', snapshot => {
             let user=JSON.parse(localStorage.getItem('loggedUser'))
-            // console.log()
             let date=moment().format('LT')+" | "+moment().format('D MMM') ;
             if(date==snapshot.val().date){
                 if(user.id==snapshot.val().receiver_id) {
