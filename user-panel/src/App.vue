@@ -27,7 +27,7 @@ export default {
       if(val){
           nativeToast({
           message: this.notification.message,
-          position: 'south-east',
+          position: 'north-east',
           timeout: 5000,
           type: this.notification.type
         })
