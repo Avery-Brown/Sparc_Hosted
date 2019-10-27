@@ -17,12 +17,12 @@
             <h4 class="text-center text-success"><b>{{userData.first_name + " " + userData.last_name}}</b></h4>
             <h5 class="text-center"><b class="text-info">Age :</b> {{ userData.age }} Years</h5>
             <span id="about">{{userData.about}}</span>
-            
+
           </div>
           <div class="user-info mt-2">
             <h4 class="text-info">INTERESTS</h4>
             <span class="badge badge-pill badge-success" v-for="(tag,index) in fetchedTags" :key="index">{{tag}}</span>
-          </div> 
+          </div>
         </div>
         <div class="col-md-8">
           <h2 class="title-up">Profile Video</h2>
@@ -37,9 +37,9 @@
       </div>
     </div>
     <!-- <div class="page-header clear-filter">
-      
+
       <div class="container">
-        
+
         <n-button type="primary" @click.native="modals.classic = true">
             Edit Profile
         </n-button>
@@ -48,7 +48,7 @@
         </n-button>
       </div>
     </div> -->
-    
+
          <!-- Classic Modal -->
     <modal :show.sync="modals.classic" headerClasses="justify-content-center">
       <h4 slot="header" class="title title-up">Update Profile</h4>
@@ -80,7 +80,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="row">
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
@@ -156,15 +156,15 @@
           <div class="col-md-12 col-lg-12">
             <div class="form-group">
               <label for="">Pick Interests</label>
-              <multiselect v-model="value" 
-                :options="allTags" 
-                :multiple="true" 
-                :close-on-select="false" 
-                :clear-on-select="false" 
-                :preserve-search="true" 
-                placeholder="Pick Your Interests" 
-                label="value" 
-                track-by="value" 
+              <multiselect v-model="value"
+                :options="allTags"
+                :multiple="true"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                placeholder="Pick Your Interests"
+                label="value"
+                track-by="value"
                 :preselect-first="false">
                   <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
               </multiselect>
@@ -179,7 +179,7 @@
       </template>
     </modal>
 
-    
+
   </div>
 </template>
 <script>
@@ -197,7 +197,7 @@ export default {
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput
   },
-  computed: { 
+  computed: {
       ...mapGetters(['allTags', 'status', 'error', 'user', 'loggedUser']),
 
       getInterests() {
@@ -240,24 +240,24 @@ export default {
           about: '',
           interests: [],
       },
-      
+
     }
   },
   methods: {
     ...mapActions(['fetchTags', 'updateUserProfile', 'updateImage', 'updateVideo']),
 
     onPickVideo() {
-      this.$refs.VideoInput.click();  
+      this.$refs.VideoInput.click();
     },
     onVideoSelected(event) {
           let videoFile = event.target.files[0];
           this.userVideo.profile_video = videoFile
           this.updateVideo(this.userVideo)
       },
-    onPickFile() { 
+    onPickFile() {
        this.$refs.FileInput.click();
     },
-    onFilePicked(event) { 
+    onFilePicked(event) {
       this.picture = event.target.files[0].name;
       this.userImage.profile_image = event.target.files[0]
       this.updateImage(this.userImage);
@@ -268,7 +268,7 @@ export default {
             this.value.forEach(item => {
             this.interestId.push(item.id)
           })
-          
+
           this.userData.interests = this.interestId,
 
           this.updateUserProfile(this.userData)
@@ -310,7 +310,7 @@ export default {
   },
 
   created() {
-    
+
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
     if(loggedUser != null) {
       this.userData.first_name = loggedUser.first_name
