@@ -6,7 +6,7 @@
           <div class="container">
               <!-- <h3 class=" text-center">Messaging</h3> -->
               <div class="messaging">
-                    <div class="inbox_msg" style="height:500px;">
+                    <div   :class="['inbox_msg' ,getClass]">
                       <div class="inbox_people">
                         <div class="headind_srch">
                           <div class="recent_heading">
@@ -39,17 +39,19 @@
                       <div class="mesgs">
                         <div v-if="selected_messages.length>0" id="msg_containers" class="msg_history">
                           <div  v-for="(items,i) in selected_messages" :key="i">
-                            <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg">
+                            <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg mt-2">
                             <!-- <div class="incoming_msg_img"> <img :src="items.profile_image!=null ? items.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div> -->
                             <div class="received_msg">
                               <div class="received_withd_msg">
                                 <p>{{items.message}}</p>
+                                <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
                                 <span class="time_date"> {{items.date}}</span></div>
                             </div>
                           </div>
                           <div v-else class="outgoing_msg">
                             <div class="sent_msg mr-1">
                               <p>{{items.message}}</p>
+                                <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
                               <span class="time_date"> {{items.date}}</span> </div>
                           </div>
                           </div>
@@ -61,6 +63,9 @@
                           <div class="input_msg_write">
                             <input type="text" class="write_msg ml-1 mr-1" style="border:none !important;" @keyup.enter="sendMessage()" v-model="message" placeholder="Type a message" />
                             <button class="msg_send_btn"  @click="sendMessage()" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                            <button class="file_send_btn"  @click="onPickFile()"  type="button"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+                            <input type="file" style="display:none;" @change="onFilePicked" ref="FileInput" accept="images/*" >
+                             <span @click="rawfile=null" class="fa fa-trash  btn btn-primary" v-if="rawfile!=null"> {{rawfile[0].name}}</span> 
                           </div>
                         </div>
                       </div>
@@ -153,6 +158,7 @@ export default {
   },
   data(){
     return{
+      rawfile:null,
       notif_toggle:false,
       search:'',
       checked:false,
@@ -175,6 +181,27 @@ export default {
     }
   },
   methods:{
+    onPickFile() { 
+      this.$refs.FileInput.click();
+    },
+    onFilePicked(event)
+     { 
+
+      //  this.image=[]
+       const files=event.target.files; 
+       if(files[0].size<1000000){
+
+       this.rawfile=files
+       }
+       else{
+          nativeToast({
+          message: 'File size should be less then 1MB',
+          position: 'north-east',
+          timeout: 3000,
+          type: 'error'
+        })       
+        }
+     },
     toggleEmailNotifs(){
       this.loggeduser={...this.loggeduser,email_notifications:!this.notif_toggle}
       localStorage.setItem("loggedUser", JSON.stringify(this.loggeduser));
@@ -252,6 +279,7 @@ export default {
       else if(this.message!=''){
       let date=moment().format('LT')+" | "+moment().format('D MMM') ;
       if(this.notif_toggle==true){
+        console.log("mail was sent")
           this.sendEmail(date)
       }
       else{
@@ -260,9 +288,11 @@ export default {
       let msg_obj={date:date,
       message:this.message,
       receiver_id:this.selected_user.id,
+      rawfile:this.rawfile!=null? this.rawfile[0]:null,
       sender_id:this.loggeduser.id}
       this.sendMessages(msg_obj)
       this.message=''
+      this.rawfile=null
       this.scroller()
       }
       else{
@@ -325,6 +355,9 @@ export default {
       else{
         return {...block_user_find,check:false}
       }
+    },
+    getClass(){
+      return this.rawfile!=null ? 'padded-heights':'normal-heights'
     }
 
   },
@@ -346,6 +379,12 @@ export default {
 };
 </script>
 <style scoped>
+.normal-heights{
+height:500px;
+}
+.padded-heights{
+height:531px;
+}
 input:focus { 
   /* border: none !important; */
   outline: none !important;
@@ -489,6 +528,20 @@ img{ max-width:100%;}
   position: absolute;
   right: 0;
   top: 11px;
+  width: 33px;
+}
+.file_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  right:36px;
   width: 33px;
 }
 .messaging { padding: 0 0 50px 0;}
