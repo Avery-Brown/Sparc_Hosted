@@ -24,7 +24,7 @@
                         </div>
                         <div class="inbox_chat">
                           <!-- active_chat -->
-                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=loggeduser.id" v-bind:key="i">
+                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
                             <div class="chat_people" >
                               <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
@@ -39,7 +39,7 @@
                       <div class="mesgs">
                         <div v-if="selected_messages.length>0" id="msg_containers" class="msg_history">
                           <div  v-for="(items,i) in selected_messages" :key="i">
-                            <div v-if="items.sender_id!=loggeduser.id" class="incoming_msg mt-2">
+                            <div v-if="items.sender_id!=lc_loggeduser.id" class="incoming_msg mt-2">
                             <!-- <div class="incoming_msg_img"> <img :src="items.profile_image!=null ? items.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div> -->
                             <div class="received_msg">
                               <div class="received_withd_msg">
@@ -163,12 +163,18 @@ export default {
       search:'',
       checked:false,
       selected_user:{},
-      loggeduser:'',
+      lc_loggeduser:'',
       message:'',
       filters:[]
     }
   },
   watch:{
+    loggedUser(){
+        if(this.loggedUser!=null){
+          this.lc_loggeduser= this.loggedUser
+          console.log(this.loggedUser)
+        }
+    },
     allUsers(){
       if(Object.keys(this.selected_user).length>0){
       this.selected_user=this.selected_user;
@@ -203,9 +209,9 @@ export default {
         }
      },
     toggleEmailNotifs(){
-      this.loggeduser={...this.loggeduser,email_notifications:!this.notif_toggle}
-      localStorage.setItem("loggedUser", JSON.stringify(this.loggeduser));
-      this.toggleEmailNotifications({flag:!this.notif_toggle,loggeduser_id:this.loggeduser.id})
+      this.lc_loggeduser={...this.lc_loggeduser,email_notifications:!this.notif_toggle}
+      localStorage.setItem("loggedUser", JSON.stringify(this.lc_loggeduser));
+      this.toggleEmailNotifications({flag:!this.notif_toggle,loggeduser_id:this.lc_loggeduser.id})
 
     },
     sendEmail(date) {
@@ -220,7 +226,7 @@ export default {
       }).catch(err => console.log("Error " + err))
     },
     chatdate(id){
-      let arrs= this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==id)) 
+      let arrs= this.getMessages.filter(messages_item=>(messages_item.sender_id==this.lc_loggeduser.id && messages_item.receiver_id==id) || (messages_item.receiver_id==this.lc_loggeduser.id && messages_item.sender_id==id)) 
       if(arrs.length>0){
         let dt=arrs[arrs.length-1].date.split('|')
         return {date:dt[1],message:arrs[arrs.length-1].message}
@@ -264,7 +270,7 @@ export default {
       //removing block ids from currently selectd user
       delete this.selected_user.blocked_by[this.get_receiver_blocked_status.key]
       }
-      this.blockingProcess({receiver_id:this.selected_user.id,sender_id:this.loggeduser.id,flag:!this.checked})
+      this.blockingProcess({receiver_id:this.selected_user.id,sender_id:this.lc_loggeduser.id,flag:!this.checked})
     },
     sendMessage(){
       console.log(this.blocked_users)
@@ -289,7 +295,7 @@ export default {
       message:this.message,
       receiver_id:this.selected_user.id,
       rawfile:this.rawfile!=null? this.rawfile[0]:null,
-      sender_id:this.loggeduser.id}
+      sender_id:this.lc_loggeduser.id}
       this.sendMessages(msg_obj)
       this.message=''
       this.rawfile=null
@@ -314,15 +320,15 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['allUsers','getMessages','user']),
+    ...mapGetters(['allUsers','getMessages','user','loggedUser']),
     selected_messages() {
-     return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
+     return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.lc_loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.lc_loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
     },
     //Ppl who have blocked me
     blocked_users(){
-      if(this.loggeduser.blocked_by!=null){
-        return Object.keys(this.loggeduser.blocked_by).map(blocked_key=> {
-            return {id:this.loggeduser.blocked_by[blocked_key].blocker_id}
+      if(this.lc_loggeduser.blocked_by!=null){
+        return Object.keys(this.lc_loggeduser.blocked_by).map(blocked_key=> {
+            return {id:this.lc_loggeduser.blocked_by[blocked_key].blocker_id}
         })
       }
       else{
@@ -348,7 +354,7 @@ export default {
       
     },
     get_receiver_blocked_status(){
-      let block_user_find=this.receiver_blocked_users.find(blocked_user=>blocked_user.id==this.loggeduser.id)
+      let block_user_find=this.receiver_blocked_users.find(blocked_user=>blocked_user.id==this.lc_loggeduser.id)
       if(block_user_find!=null){
         return {...block_user_find,check:true}
       }
@@ -362,9 +368,9 @@ export default {
 
   },
   created(){
-    this.loggeduser=JSON.parse(localStorage.getItem('loggedUser'));
+    this.lc_loggeduser=JSON.parse(localStorage.getItem('loggedUser'));
     this.filters=this.allUsers
-    if(this.loggeduser.email_notifications==null || this.loggeduser.email_notifications==false){
+    if(this.lc_loggeduser.email_notifications==null || this.lc_loggeduser.email_notifications==false){
       this.notif_toggle=false
     }
     else{
