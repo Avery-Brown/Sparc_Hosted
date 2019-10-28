@@ -18,6 +18,9 @@ export default {
     this.$store.dispatch("fetchRatings")
     this.$store.dispatch("fetchEvents")
     this.$store.dispatch("fetchMessages")
+    if(JSON.parse(localStorage.getItem('loggedUser'))!=null){
+    this.$store.commit('setLoggedUser',JSON.parse(localStorage.getItem('loggedUser')))
+    }
   },
   computed:{
     ...mapGetters(['notification'])
