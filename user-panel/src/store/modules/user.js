@@ -257,6 +257,15 @@ const actions = {
 
     fetchAllUsers({commit}) {
         commit('unsetAllSetUsers')
+        firebase.database().ref('users').on('child_changed', snapshot => {
+            let loggeduser=JSON.parse(localStorage.getItem("loggedUser"))
+            if(snapshot.key==loggeduser.id){
+               localStorage.setItem('loggedUser',JSON.stringify({...snapshot.val(),id:snapshot.key}))
+               commit('setLoggedUser', {
+                ...snapshot.val(),
+                id: snapshot.key})
+            }
+        })
         firebase.database().ref('users').on('child_added', snapshot => {
             if(snapshot.val()) {
                 commit('setAllUsers', {
