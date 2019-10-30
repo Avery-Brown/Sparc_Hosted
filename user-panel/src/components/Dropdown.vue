@@ -79,5 +79,6 @@ export default {
 
 .dropdown .dropdown-toggle {
   cursor: pointer;
+  width: 100%;
 }
 </style>

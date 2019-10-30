@@ -34,11 +34,13 @@
                 </div>
                 <div class="col-md-4">
                     <h3 class="text-info"><b>Host Details</b></h3>
-                    <div class="card card-plain">
-                        <div class="card-header">
+                    <div class="card card-plain" style="height: 840px;">
+                        <div class="card-header" style="height: 840px;">
                             <h4 class="text-success"><b></b></h4>
                             <div class="photo-container text-center mt-3">
-                                <img class="rounded-circle" v-if="this.user.profile_image!= null" :src="this.user.profile_image" alt="" />
+                              <!-- <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6> -->
+
+                                <img class="rounded-circle" width="150" height="150" v-if="this.user.profile_image!= null" :src="this.user.profile_image" alt="" />
                             </div>
                             <div class="user-details text-center mt-3">
                                 <h5 class="text-success"><b>{{ this.user.first_name + " " + this.user.last_name}}</b></h5>

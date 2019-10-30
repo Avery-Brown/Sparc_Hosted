@@ -9,8 +9,8 @@
               <Card class="login-card">
                 <h3 class="text-center text-info"><b>A People-Centric Marketplace</b></h3>
                 <form action="" @submit="loginUser">
-                <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
-                <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_lock-circle-open" placeholder="Password" v-model="userPayload.password" type="password"></fg-input>
+                <fg-input id="login_input" class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
+                <fg-input id="login_input" class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_lock-circle-open" placeholder="Password" v-model="userPayload.password" type="password"></fg-input>
                 <div class="card-footer text-center">
                 <input type="submit"
                   @click="loginUser"
@@ -121,5 +121,8 @@ export default {
   }
   .login-card {
     margin-top:100px;
+  }
+  .login_input {
+    border-radius: 50px;
   }
 </style>

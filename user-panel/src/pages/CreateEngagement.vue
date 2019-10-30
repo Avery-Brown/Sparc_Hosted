@@ -375,7 +375,7 @@ export default {
               this.message = "Please select a percentage amount that is less than 100"
               this.warning = true
 
-          }     
+          }
           else if(this.eventPayload.charity2 != null && this.eventPayload.charity1 != null && (parseInt(this.eventPayload.event_cause1) + parseInt(this.eventPayload.event_cause2) > 100)) {
               this.message = "Please Select Percentage Amounts that total less than 100"
               this.warning = true
