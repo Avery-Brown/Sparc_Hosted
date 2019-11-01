@@ -17,7 +17,7 @@
               </div>
             </div>
             <div class="inbox_chat">
-              <div  class="chat_list active_chat " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
+              <div  :class="{chat_list:'chat_list',active_chat:selected_user.id==users.id ? 'active_chat':''}" @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
                 <div class="chat_people" >
                   <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                   <div class="chat_ib">
@@ -540,7 +540,7 @@ input:focus {
          .container{max-width:1170px; margin:auto;}
 img{ max-width:100%;}
 .inbox_people {
-  background: #f8f8f8 none repeat scroll 0 0;
+  background: #ffffff none repeat scroll 0 0;
   float: left;
   overflow: hidden;
   width: 100%; border-right:1px solid #dcdcdc;
@@ -595,6 +595,9 @@ img{ max-width:100%;}
   border-bottom: 1px solid #dcdcdc;
   margin: 0;
   padding: 18px 16px 10px;
+}
+.chat_list:hover {
+background:#ebebeb;
 }
 .inbox_chat { height: 480px; overflow-y: scroll;}
 
