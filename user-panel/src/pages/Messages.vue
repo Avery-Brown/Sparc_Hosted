@@ -1,18 +1,148 @@
 <template>
   <div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8">
+    <div class="container-fluid ">
+      <div class="row ml-1 mr-1" style="border:1px solid #dcdcdc">
+        <div class="col-md-3 pl-0" >
+          <div class="inbox_people">
+            <div class="headind_srch">
+              <div class="recent_heading">
+                <h4>Recent</h4>
+              </div>
+              <div class="srch_bar">
+                <div class="stylish-input-group">
+                  <input type="text" class="search-bar"  placeholder="Search"  v-model="search" v-on:keydown="filter_name">
+                  <span class="input-group-addon">
+                  <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                  </span> </div>
+              </div>
+            </div>
+            <div class="inbox_chat">
+              <div  class="chat_list active_chat " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
+                <div class="chat_people" >
+                  <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
+                  <div class="chat_ib">
+                    <h5>{{users.first_name}} <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
+                      <p>{{chatdate(users.id).message}}</p>
+                  </div>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" >
+          <div v-if="selected_messages.length>0" id="msg_containers" class="msg_history">
+              <div  v-for="(items,i) in selected_messages" :key="i">
+                <div v-if="items.sender_id!=lc_loggeduser.id" class="incoming_msg mt-2">
+                <div class="received_msg">
+                  <div class="received_withd_msg">
+                    <p>{{items.message}}</p>
+                    <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
+                    <span class="time_date"> {{items.date}}</span></div>
+                </div>
+              </div>
+              <div v-else class="outgoing_msg">
+                <div class="sent_msg mr-1">
+                  <p>{{items.message}}</p>
+                    <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
+                  <span class="time_date"> {{items.date}}</span> </div>
+              </div>
+              </div>
+            </div>
+            <div v-else class="msg_history">
+                <p>No Messages with this user</p>
+            </div>
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <input type="text" class="write_msg ml-1 mr-1" style="border:none !important;" @keyup.enter="sendMessage()" v-model="message" placeholder="Type a message" />
+                <button class="msg_send_btn"  @click="sendMessage()" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                <button class="file_send_btn"  @click="onPickFile()"  type="button"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+                <input type="file" style="display:none;" @change="onFilePicked" ref="FileInput" accept="images/*" >
+                  <span @click="rawfile=null" class="fa fa-trash  btn btn-primary" v-if="rawfile!=null"> {{rawfile[0].name}}</span> 
+              </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="border-left:1px solid #dcdcdc" >
+           <b-card    
+            tag="article"
+            style="-webkit-box-shadow:none;"
+            class="mb-2">
+            <template v:slot="header">
+              <h4 class="text-center"> <b> About </b></h4>
+            </template>
+            <b-card-body>
+              <div class="photo-container text-center" >
+                
+                <img class="pic"  :src="selected_user.profile_image!=null ? selected_user.profile_image :'https://ptetutorials.com/images/user-profile.png'" alt="" />
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 class="users text-center">{{selected_user.first_name}}</h6>
+                </div>
+                <div class="col-md-12">
+                  <h6 class="users text-muted text-center" style="margin-top:-15px;">{{selected_user.job_occupation}}</h6>
+                </div>
+
+
+              </div>
+              <div class="row text-center">
+                <div class="col-md-6">
+                  <span>D.O.B</span>
+                </div>
+                <div class="col-md-6">
+                  <span ><strong>{{selected_user.age}}</strong></span>
+                </div>
+              </div>
+              <!-- <div class="row text-center mt-4">
+                <div class="col-md-6">
+                  <span style="font-size">Email</span>
+                </div>
+                <div class="col-md-6">
+                  <span ><strong>{{selected_user.email}}</strong></span>
+                </div>
+              </div> -->
+              <div class="row text-center mt-4">
+                <div class="col-md-6 pl-0 pr-0">
+                  <span>Institution</span>
+                </div>
+                <div class="col-md-6 pr-0 pl-0">
+                  <span ><strong>{{selected_user.institute}}</strong></span>
+                </div>
+              </div>
+              <div class="row text-center mt-4">
+                <div class="col-md-6">
+                  <span>Block User</span>
+                </div>
+                <div class="col-md-6">
+                  <b-form-checkbox v-model="checked" @change="blocking()" name="check-button" switch>
+                  </b-form-checkbox>
+                </div>
+              </div>
+              <div class="row text-center mt-4">
+                <div class="col-md-6 pr-0 pl-0">
+                  <span>All Conversations</span>
+                </div>
+                <div class="col-md-6">
+                  <b-form-checkbox @change="toggleEmailNotifs()" v-model="notif_toggle"  name="check-button" switch>
+                  </b-form-checkbox>
+                </div>
+              </div>
+
+            </b-card-body>
+            
+          </b-card>
+
+        </div>
+      </div>
+    </div>
+  </div>
+        <!-- <div class="col-md-8">
           <div class="container">
-              <!-- <h3 class=" text-center">Messaging</h3> -->
               <div class="messaging">
                     <div   :class="['inbox_msg' ,getClass]">
                       <div class="inbox_people">
                         <div class="headind_srch">
                           <div class="recent_heading">
-                          <b-form-checkbox @change="toggleEmailNotifs()" v-model="notif_toggle"  name="check-button" switch>
-                            Email Notifications
-                          </b-form-checkbox>
+                            <h4>Recent</h4>
                           </div>
                           <div class="srch_bar">
                             <div class="stylish-input-group">
@@ -23,10 +153,8 @@
                           </div>
                         </div>
                         <div class="inbox_chat">
-                          <!-- active_chat -->
-                          <div  class="chat_list " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
+                          <div  class="chat_list active_chat " @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
                             <div class="chat_people" >
-                              <!-- users.profile_image!=null ? user.profile_image : -->
                               <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                               <div class="chat_ib">
                                 <h5>{{users.first_name}} <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
@@ -34,13 +162,12 @@
                               </div>
                             </div> 
                           </div>
-                          </div>
+                        </div>
                       </div>
                       <div class="mesgs">
                         <div v-if="selected_messages.length>0" id="msg_containers" class="msg_history">
                           <div  v-for="(items,i) in selected_messages" :key="i">
                             <div v-if="items.sender_id!=lc_loggeduser.id" class="incoming_msg mt-2">
-                            <!-- <div class="incoming_msg_img"> <img :src="items.profile_image!=null ? items.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div> -->
                             <div class="received_msg">
                               <div class="received_withd_msg">
                                 <p>{{items.message}}</p>
@@ -72,77 +199,82 @@
                     </div> 
               </div>
             </div>
-        </div>
-        <div class="col-md-4">
-           <b-card
-           
-            title="User Info"
+        </div> -->
+        <!-- <div class="col-md-4">
+           <b-card    
             tag="article"
             style="max-width: 30rem;-webkit-box-shadow:none;border:1px solid #dcdcdc"
-            class="mb-2"
-          >
-          <b-card-body>
-            <div class="photo-container text-center" >
-              <!--   -->
-              <img class="pic"  :src="selected_user.profile_image!=null ? selected_user.profile_image :'https://ptetutorials.com/images/user-profile.png'" alt="" />
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <h6 class="users text-center">{{selected_user.first_name}}</h6>
+            class="mb-2">
+            <template v:slot="header">
+              <h4 class="text-center"> <b> About </b></h4>
+            </template>
+            <b-card-body>
+              <div class="photo-container text-center" >
+                
+                <img class="pic"  :src="selected_user.profile_image!=null ? selected_user.profile_image :'https://ptetutorials.com/images/user-profile.png'" alt="" />
               </div>
-               <div class="col-md-12">
-                <h6 class="users text-muted text-center" style="margin-top:-15px;">{{selected_user.job_occupation}}</h6>
-              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h6 class="users text-center">{{selected_user.first_name}}</h6>
+                </div>
+                <div class="col-md-12">
+                  <h6 class="users text-muted text-center" style="margin-top:-15px;">{{selected_user.job_occupation}}</h6>
+                </div>
 
 
-            </div>
-            <div class="row text-center">
-              <div class="col-md-3">
-                <span>D.O.B</span>
               </div>
-              <div class="col-md-9">
-                <span ><strong>{{selected_user.age}}</strong></span>
+              <div class="row text-center">
+                <div class="col-md-3">
+                  <span>D.O.B</span>
+                </div>
+                <div class="col-md-9">
+                  <span ><strong>{{selected_user.age}}</strong></span>
+                </div>
               </div>
-            </div>
-             <div class="row text-center mt-4">
-              <div class="col-md-3">
-                <span>Email</span>
+              <div class="row text-center mt-4">
+                <div class="col-md-3">
+                  <span>Email</span>
+                </div>
+                <div class="col-md-9">
+                  <span ><strong>{{selected_user.email}}</strong></span>
+                </div>
               </div>
-              <div class="col-md-9">
-                <span ><strong>{{selected_user.email}}</strong></span>
+              <div class="row text-center mt-4">
+                <div class="col-md-4">
+                  <span>Institution</span>
+                </div>
+                <div class="col-md-8">
+                  <span ><strong>{{selected_user.institute}}</strong></span>
+                </div>
               </div>
-            </div>
-             <div class="row text-center mt-4">
-              <div class="col-md-4">
-                <span>Institution</span>
+              <div class="row text-center mt-4">
+                <div class="col-md-4">
+                  <span>Block User</span>
+                </div>
+                <div class="col-md-8">
+                  <b-form-checkbox v-model="checked" @change="blocking()" name="check-button" switch>
+                  </b-form-checkbox>
+                </div>
               </div>
-              <div class="col-md-8">
-                <span ><strong>{{selected_user.institute}}</strong></span>
+              <div class="row text-center mt-4">
+                <div class="col-md-5">
+                  <span>All Conversations</span>
+                </div>
+                <div class="col-md-6">
+                  <b-form-checkbox @change="toggleEmailNotifs()" v-model="notif_toggle"  name="check-button" switch>
+                  </b-form-checkbox>
+                </div>
               </div>
-            </div>
-            <div class="row text-center mt-4">
-              <div class="col-md-4">
-                <span>Block User</span>
-              </div>
-              <div class="col-md-8">
-                <b-form-checkbox v-model="checked" @change="blocking()" name="check-button" switch>
-                </b-form-checkbox>
-              </div>
-            </div>
-          </b-card-body>
-          
-            <!-- <b-card-text>
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </b-card-text> -->
 
-            <!-- <b-button href="#" variant="primary">Go somewhere</b-button> -->
+            </b-card-body>
+            
           </b-card>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div>
     </div>
 
     
-  </div>
+  </div> -->
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -411,10 +543,10 @@ img{ max-width:100%;}
   background: #f8f8f8 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
+  width: 100%; border-right:1px solid #dcdcdc;
 }
 .inbox_msg {
-  border: 1px solid #c4c4c4;
+  border: 1px solid #dcdcdc;
   clear: both;
   overflow: hidden;
 }
@@ -428,7 +560,7 @@ img{ max-width:100%;}
   width: 60%; 
   /* padding:1 mission*/
 }
-.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
+.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #dcdcdc;}
 
 .recent_heading h4 {
   color: #05728f;
@@ -460,11 +592,11 @@ img{ max-width:100%;}
 
 .chat_people{ overflow:hidden; clear:both;}
 .chat_list {
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid #dcdcdc;
   margin: 0;
   padding: 18px 16px 10px;
 }
-.inbox_chat { height: 450px; overflow-y: scroll;}
+.inbox_chat { height: 480px; overflow-y: scroll;}
 
 .active_chat{ background:#ebebeb;}
 
@@ -522,7 +654,7 @@ img{ max-width:100%;}
   width: 100%;
 }
 
-.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.type_msg {border-top: 1px solid #dcdcdc;position: relative;}
 .msg_send_btn {
   background: #05728f none repeat scroll 0 0;
   border: medium none;
@@ -552,7 +684,7 @@ img{ max-width:100%;}
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
-  height: 400px;
+  height: 450px;
   overflow-y: auto;
 }
 
