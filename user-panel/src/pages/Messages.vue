@@ -304,7 +304,6 @@ export default {
     loggedUser(){
         if(this.loggedUser!=null){
           this.lc_loggeduser= this.loggedUser
-          console.log(this.loggedUser)
         }
     },
     allUsers(){
@@ -379,6 +378,7 @@ export default {
             }
       },
     fillProfile(arg_user) {
+      // console.log(arg_user)
       this.selected_user=arg_user;
       if(this.selected_user.blocked_by!=null){
         if(Object.keys(this.selected_user.blocked_by).length>0){
@@ -405,7 +405,6 @@ export default {
       this.blockingProcess({receiver_id:this.selected_user.id,sender_id:this.lc_loggeduser.id,flag:!this.checked})
     },
     sendMessage(){
-      console.log(this.blocked_users)
       if(this.get_my_block_status==true){
         nativeToast({
           message: 'You are not allowed to send message to this user',
@@ -414,11 +413,12 @@ export default {
           type: 'error'
         })
       }
-      else if(this.message!=''){
+      else if(this.message!='') {
+      
       let date=moment().format('LT')+" | "+moment().format('D MMM') ;
-      if(this.notif_toggle==true){
+      if(this.selected_user.email_notifications!=null && this.selected_user.email_notifications==true)  {
         console.log("mail was sent")
-          this.sendEmail(date)
+          this.sendEmail(date)        
       }
       else{
         console.log("no didnt run")
