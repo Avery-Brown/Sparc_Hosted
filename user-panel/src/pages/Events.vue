@@ -146,18 +146,18 @@
                           <div class = "row">
                             <div class = "col">
                               <p v-if="event.event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400"><i class="fa fa-compass" style = "color: #00487C"></i>&nbsp; Directions</p>
-                              <b-tooltip placement="bottomleft":target="getHoverIdDirectionsByIndex(index)" triggers="hover">
+                              <b-tooltip placement="bottomleft" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
                                 <b>{{ event.event_location_access }}</b>
                               </b-tooltip>
                             </div>
                           </div>
                           <div class = "row">
                             <div class ="col">
-                                <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index<=1"> {{tag.value}} </span>
+                                <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index<=1 && tag != null"> {{tag.value}} </span>
                                 <span v-if="getEventTags(event).length > 1" :id="getHoverIdTagsByIndex(index)" class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;">...</span>
                                 <b-tooltip :target="getHoverIdTagsByIndex(index)" placement="bottomleft" triggers="hover">
                                     <p style="margin-top: 0px; margin-bottom: 1px; font-size: 14px;">Other Tags</p>
-                                    <span v-if class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index>1"> {{tag.value}} </span>
+                                    <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index > 1 && tag != null"> {{tag.value}} </span>
                                 </b-tooltip>
                             </div>
                           </div>
@@ -250,6 +250,7 @@ export default {
     ...mapGetters(['getEvents', 'allUsers', 'allTags', 'allRatings']),
 
     getFiltered() {
+      this.filterEvents = [];
       let event = this.filters.filter(event => Date.parse(this.currentDate) <= Date.parse(event.date))
       return event
     },
@@ -276,8 +277,7 @@ export default {
         })
     },
     getEventTags(event) {
-        this.fetchedTags = event.tags
-        return this.fetchedTags.map(element => {
+        return event.tags.map(element => {
             let eventTag = this.allTags.find(tag => tag.id==element)
             return eventTag
         });
@@ -394,7 +394,7 @@ export default {
       if(val) {
         this.filters = []
         this.filters = this.getEvents
-        now = 1;
+        this.now = 1;
       }
     },
     allUsers(val) {
