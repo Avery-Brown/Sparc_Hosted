@@ -97,6 +97,30 @@ exports.sendMessageNotification = functions.https.onRequest((req, res) => {
 });
 
 
+exports.blockMessageNotification = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+      if(req.method == 'POST') {
+          const blocked_user = req.body.blocked_user;
+          const blocked_by = req.body.blocked_by;
+          const message = req.body.message;
+          sgMail.send({
+              to: 'info@sparc.world',
+              from: 'blocknotifications@sparc.world',
+              subject: 'User Block Notification',
+              text: 'Blocking Details',
+              html: '<p>This user has been blocked  <strong>' + blocked_user+'</strong>' + 
+              '</p> <p><strong>Blocked by </strong>' + blocked_by + 
+              '</p> <p><strong>Block Reaseon </strong>' + message 
+              // html: 'Your Participation for ' + event + ' has been confirmed. Here is some information ' + host_contact + ' Thanks for participating! </strong>',
+          }).then(res => res.send('Email Sent')).catch(err => res.send(err));
+      }
+      else {
+          res.send("Error " + " " + SENDGRID_API_KEY)
+      }
+  });    
+});
+
+
 
 exports.sendContact = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
