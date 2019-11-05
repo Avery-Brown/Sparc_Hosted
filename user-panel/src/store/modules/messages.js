@@ -13,38 +13,51 @@ const getters = {
 
 const actions = {
     sendMessages(context, payload) {
+        if(payload.message_connection==true){
+            firebase.database().ref('users').child(payload.sender_id).child('message_connections').push({id:payload.receiver_id})
+            .then(()=>{
+                console.log("saved inside sender")
+            })
+            .catch(error=>console.log(error.message))
+            firebase.database().ref('users').child(payload.receiver_id).child('message_connections').push({id:payload.sender_id})
+            .then(()=>{
+                console.log("saved inside receiver")
+            })
+            .catch(error=>console.log(error.message))
+        }
+        delete payload.message_connection
         if(payload.rawfile==null){
-        firebase.database().ref('messages').push(payload)
+            firebase.database().ref('messages').push(payload)
         .then(() => {
         })
         .catch(err => console.log(err.message));
-    }
-    else{
-        let customkey = firebase.database().ref('messages').push().getKey()
-        let ext = payload.rawfile.name.slice(payload.rawfile.name.lastIndexOf('.'))
+        }
+        else{
+            let customkey = firebase.database().ref('messages').push().getKey()
+            let ext = payload.rawfile.name.slice(payload.rawfile.name.lastIndexOf('.'))
 
-        firebase.storage().ref('message_attachements/' + customkey + ext.toLowerCase()).put(payload.rawfile)
-                .then((filedata) => {
-                    filedata.ref.getDownloadURL()
-                        .then((URL) => {
-                            console.log("uploaded")
-                            firebase.database().ref('messages').push({
-                                type: 'file',
-                                file_url: URL,
-                                date:payload.date,
-                                message:payload.message,
-                                receiver_id:payload.receiver_id,
-                                sender_id:payload.sender_id
-                            })
-                            .then(()=>{
-                                console.log("inserted")
-                            })
-                            .catch(error=>(console.log(error.message)))
+            firebase.storage().ref('message_attachements/' + customkey + ext.toLowerCase()).put(payload.rawfile)
+                    .then((filedata) => {
+                        filedata.ref.getDownloadURL()
+                            .then((URL) => {
+                                console.log("uploaded")
+                                firebase.database().ref('messages').push({
+                                    type: 'file',
+                                    file_url: URL,
+                                    date:payload.date,
+                                    message:payload.message,
+                                    receiver_id:payload.receiver_id,
+                                    sender_id:payload.sender_id
+                                })
+                                .then(()=>{
+                                    console.log("inserted")
+                                })
+                                .catch(error=>(console.log(error.message)))
 
+                            })
                         })
-                    })
-                .catch(error => console.log(error.message))
-    }
+                    .catch(error => console.log(error.message))
+        }
          
     },
     toggleEmailNotifications({commit}, payload) {
