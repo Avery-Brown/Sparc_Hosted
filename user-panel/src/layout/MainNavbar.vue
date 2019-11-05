@@ -20,7 +20,7 @@
         </div>
       </el-popover> -->
     </template>
-    <template slot="navbar-menu">
+    <template slot="navbar-menu" style="border-bottom: 1px solid gray">
       <!-- <li class="nav-item">
         <a
           class="nav-link"

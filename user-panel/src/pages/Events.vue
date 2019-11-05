@@ -6,13 +6,13 @@
           <div class="col-md-12">
             <div class="row text-center">
               <div class="col-md-12">
-                <h2 class="text-center ml-3 title title-up mb-5">All Engagements</h2>
+                <h2 class="text-center ml-3" style="margin-top: 1.5rem; margin-bottom: 3rem">All Engagements</h2>
               </div>
 
             </div>
             <div class="row mb-5">
               <div class="col-md-3">
-                <label for="typeFilter" class="text-success"><b>Search By Type</b></label>
+                <label for="typeFilter" ><b>Search By Type</b></label>
                 <select class="form-control select" v-model="typeFilter" @change="getType">
                   <option value="">Select Type</option>
                   <option value="virtual">Virtual</option>
@@ -21,7 +21,7 @@
                 </select>
               </div>
               <div class="col-md-3">
-                <label for="" class="text-success"><b>Search By Date</b></label>
+                <label for="" ><b>Search By Date</b></label>
                 <fg-input>
                   <el-date-picker
                       type="date"
@@ -34,15 +34,15 @@
                 </fg-input>
               </div>
               <div class="col-md-3">
-                <label for="" class="text-success"><b>Search By Location</b></label>
+                <label for="" ><b>Search By Location</b></label>
                  <fg-input placeholder="Enter Location" v-model="locationFilter" @input="getLocation"></fg-input>
               </div>
               <div class="col-md-3">
-                <label for="" class="text-success"><b>Search By Tags</b></label>
+                <label for="" ><b>Search By Tags</b></label>
                  <fg-input placeholder="Enter Tags" v-model="tagFilter" @input="getEventsByTag"></fg-input>
               </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
               <div class="col-md-4" v-for="(event, index) in filtered" :key="index">
                 <div>
                 <div class="card" style="cursor: pointer">
@@ -52,20 +52,156 @@
                   </div>
                   <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
                     <h5 class="text-success title-up"><b> {{ event.event_name }} </b></h5>
-                    <!-- <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"> Share Engagement</i></b></div> -->
-                    <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><u><b>Share Engagement</b></u></div>
+                     <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><b><i class="fa fa-copy"> Share Engagement</i></b></div> 
+                   <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><u><b>Share Engagement</b></u></div>
                     <h6 class="text-info"> <i class ="fa fa-map-marker"></i> {{ event.event_location }}</h6>
                     <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
                     <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
                     <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
-                    <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
-                    <!-- <h6>{{event.tags}}</h6> -->
+                    <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6> 
+                    <h6>{{event.tags}}</h6> 
                     <div class="col-md-4" v-if="now == 1">
                         <h5 class="text-danger title-up">Sorry! No Engagements Found</h5>
                     </div>
                   </div>
                 </div>
                 </div>
+              </div>
+            </div>  -->
+            <div class ="row" v-for="(event, index) in filtered" :key="index">
+              <div class="card shadow-md" style = "border-radius: 8px;">
+                <div class="card-body">
+                  <div class = "row">
+                    <div class = "col-md-3 text-center mt-auto mb-auto">
+                      <div class = "row">
+                        <div class = "col">
+                          <img v-if="event.event_image != null" :src="event.event_image" style = "max-width: 100px;" alt="" @click="viewEvent(event.id)">
+                          <img v-else src="../../public/sparc_card_back.jpg" style = "max-width: 100px;" alt="" @click="viewEvent(event.id)">
+                        </div>
+                      </div>
+                      <div class = "row">
+                        <div class = "col">
+                            <button class = 'btn' style="margin-top: 20px; margin-bottom: 20px; background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)">Message Host</button>
+                        </div>
+                      </div>
+                      <div class = "row" style="mt-auto mb-auto">
+                        <div class = "col">
+                          <p v-if="event.event_type === 'both'"><i class ="fa fa-network-wired" style = "color: #00487C"></i>  &nbsp; In Person & Virtual</p>
+                          <p v-else-if="event.event_type === 'virtual'"><i class ="fa fa-tv" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+                          <p v-else><i class ="fa fa-user-check" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "col-md-9 mt-auto mb-auto">
+                      <div class = "row">
+                        <div class = "col">
+                          <h4 :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </h4>
+                            <b-tooltip v-if="event.event_name.length > 63" :target="getHoverIdTitleByIndex(index)" placement="top" triggers="hover">
+                              <p class="mt-auto mb-auto"> {{ event.event_name }} </p>
+                            </b-tooltip>
+                        </div>
+                      </div>
+                      <div class = "row">
+                        <div class = "col-md-8">
+                          <div class = "row">
+                            <div class = "col-md-7">
+                              <div class = "row ml-auto mr-auto">
+                                <div class = "col-md-3 mt-auto mb-auto">
+                                  <img class="image-class" width="45" height="45" :src="getUser(event.created_by).profile_image" alt="">
+                                </div>
+                                <div class = "col-md-9">
+                                  <div class = "row">
+                                      <b>{{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name}}</b>
+                                  </div>
+                                  <div class = "row">
+                                      <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class = "col-md-5 mt-auto mb-auto" >
+                              <button class = 'btn' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)"> Participate</button>
+                            </div>
+                          </div>
+                          <div class = "row">
+                            <div class = "col mt-auto mb-auto" style="transition: 1s">
+                              <read-more  style = "margin-bottom: 15px; font-size: 13px;" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="230"></read-more>
+                            </div>
+                          </div>
+                        </div>
+                        <div class = "col-md-4">
+                          <div class = "row">
+                            <div class = "col">
+                              <p v-if="event.event_price_per_person == null"><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp; Free</p>
+                              <p v-else><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
+                            </div>
+                          </div>
+                              <p v-if="event.event_address != null"><i class="fa fa-location-arrow" style = "color: #00487C"></i>&nbsp; {{ event.event_address }}</p>
+                          <div class = "row">
+                            <div class = "col">
+                              <p v-if="event.event_location != null"><i class="fa fa-building" style = "color: #00487C"></i>&nbsp; {{ event.event_location }}</p>
+                            </div>
+                          </div>
+                          <div class = "row">
+                            <div class = "col">
+                              <p v-if="event.event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400"><i class="fa fa-compass" style = "color: #00487C"></i>&nbsp; Directions</p>
+                              <b-tooltip placement="bottomleft":target="getHoverIdDirectionsByIndex(index)" triggers="hover">
+                                <b>{{ event.event_location_access }}</b>
+                              </b-tooltip>
+                            </div>
+                          </div>
+                          <div class = "row">
+                            <div class ="col">
+                                <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index<=1"> {{tag.value}} </span>
+                                <span v-if="getEventTags(event).length > 1" :id="getHoverIdTagsByIndex(index)" class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;">...</span>
+                                <b-tooltip :target="getHoverIdTagsByIndex(index)" placement="bottomleft" triggers="hover">
+                                    <p style="margin-top: 0px; margin-bottom: 1px; font-size: 14px;">Other Tags</p>
+                                    <span v-if class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index>1"> {{tag.value}} </span>
+                                </b-tooltip>
+                            </div>
+                          </div>
+                        </div>
+                          
+                      </div>
+                    </div>
+                  </div>
+                  <div class = "row">
+                    <div class = "col-md-3 text-center mt-auto mb-auto">
+                      <div class = "row">
+                        <div class = "col-2">
+                        </div>
+                        <div class =" col mt-auto mb-auto">
+                          <i class="fab fa-facebook fa-lg" style = "color: #00487C;"></i>
+                        </div>
+                        <div class =" col mt-auto mb-auto">
+                          <i class="fab fa-twitter fa-lg" style = "color: #00487C"></i>
+                        </div>
+                        <div class =" col mt-auto mb-auto">
+                          <i class="fab fa-linkedin fa-lg" style = "color: #00487C"></i>
+                        </div>
+                        <div class = "col-2">
+                        </div>
+                      </div>
+                    </div>
+                    <div class = "col-md-9 mt-auto mb-auto">
+                      <div class = "row">
+                        <div class = "col-md-8">
+                          <div class = "row">
+                            <div class = "col-md-3">
+                              <p> <i class="fa fa-calendar" style = "color: #00487C"></i> {{ event.date }}</p>
+                            </div>
+                            <div class = "col-md-6">
+                              <p> <i class="fa fa-clock-o" style = "color: #00487C"></i> {{ event.start_time + " - " + event.end_time }} </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class = "col-md-4">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>  
               </div>
             </div>
           </div>
@@ -75,10 +211,13 @@
   </div>
 </template>
 <script>
-import { Parallax, FormGroupInput } from '@/components';
+import Vue from 'vue'
+import { Parallax, FormGroupInput, Button } from '@/components';
 import { DatePicker } from 'element-ui';
 import { mapGetters, mapActions } from 'vuex'
 import nativeToast from 'native-toast'
+import ReadMore from 'vue-read-more';
+Vue.use(ReadMore);
 export default {
   name: 'events',
   bodyClass: 'events-page',
@@ -87,36 +226,37 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     [DatePicker.name]: DatePicker,
     [FormGroupInput.name]: FormGroupInput,
+    Button
   },
   data() {
     return {
       rating: 5,
       url: window.location.href+"/",
-        typeFilter: '',
-        dateFilter: '',
-        locationFilter: '',
-        filters: [],
-        now: 0,
-        userName: '',
-        data_name: '',
-        getUsers: [],
-        filterEvents: [],
-        tagFilter: null,
-        currentDate: null
+      typeFilter: '',
+      dateFilter: '',
+      locationFilter: '',
+      fetchedTags: [],
+      filters: [],
+      now: 0,
+      userName: '',
+      data_name: '',
+      getUsers: [],
+      filterEvents: [],
+      tagFilter: null,
+      currentDate: null,
     }
   },
   computed: {
     ...mapGetters(['getEvents', 'allUsers', 'allTags', 'allRatings']),
 
     getFiltered() {
-      this.filterEvents = []
       let event = this.filters.filter(event => Date.parse(this.currentDate) <= Date.parse(event.date))
       return event
     },
     filtered() {
       let event = this.getFiltered.filter(event => event.deleted === false)
       return event
-    }
+    },
   },
   methods: {
     ...mapActions(['fetchEvents', 'fetchAllUsers', 'fetchTags']),
@@ -134,6 +274,13 @@ export default {
           timeout: 3000,
           type: 'success'
         })
+    },
+    getEventTags(event) {
+        this.fetchedTags = event.tags
+        return this.fetchedTags.map(element => {
+            let eventTag = this.allTags.find(tag => tag.id==element)
+            return eventTag
+        });
     },
     getType(e) {
       if(e.target.options.selectedIndex > 0) {
@@ -208,6 +355,22 @@ export default {
       let user_item = this.getUsers.find(user => user.id === id)
         return user_item
     },
+    getHoverIdDirectionsByIndex(index) {
+      return "tooltip-target-direction" + index;
+    },
+    getHoverIdTagsByIndex(index) {
+      return "tooltip-target-tag" + index;
+    },
+    getHoverIdTitleByIndex(index) {
+      return "tooltip-target-title" + index;
+    },
+    transformTitle(title) {
+      let transformedTitle = title;
+      if (title.split("").length > 63) {
+        transformedTitle = title.substring(0,64) + '...'
+      }
+      return transformedTitle;
+    }
   },
   created() {
     var today = new Date();
@@ -258,4 +421,11 @@ export default {
   .hide {
     display: none;
   }
+
+  .tooltip-inner {
+      max-width: 800px !important;
+  }
+
+  
+
 </style>
