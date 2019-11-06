@@ -201,7 +201,7 @@
   </div>
 </template>
 <script>
-let stripe = Stripe(`pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3`),
+let stripe = Stripe('pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3'),
     elements = stripe.elements(),
     card = undefined;
 import { Parallax, FormGroupInput, Alert, Modal } from '@/components';

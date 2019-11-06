@@ -26,6 +26,7 @@
     "vue-lazy-load": "^0.0.7",
     "vue-lazyload": "^1.2.6",
     "vue-multiselect": "^2.1.6",
+    "vue-read-more": "^1.1.1",
     "vue-router": "^3.0.2",
     "vue-star-rating": "^1.6.1",
     "vue-stripe-checkout": "^3.0.0-beta.11",
