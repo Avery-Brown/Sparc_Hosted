@@ -120,15 +120,15 @@
                                 </div>
                               </div>
                             </div>
-                            <div class = "col-md-5 mt-auto mb-auto" >
-                              <button class = 'btn' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)"> Participate</button>
+                            <div class = "col-md-5 mb-auto" >
+                                <button class = 'btn pull-right' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)"> Participate</button>
                             </div>
-                          </div>
-                          <div class = "row">
-                            <div class = "col mt-auto mb-auto" style="transition: 1s">
-                              <read-more  style = "margin-bottom: 15px; font-size: 13px;" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="230"></read-more>
+                           </div>
+                            <div class = "row">
+                              <div class = "col mt-auto mb-auto">
+                                <read-more  style = "margin-bottom: 15px; font-size: 13px;" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="230"></read-more>
+                              </div>
                             </div>
-                          </div>
                         </div>
                         <div class = "col-md-4">
                           <div class = "row">
@@ -171,14 +171,14 @@
                       <div class = "row">
                         <div class = "col-2">
                         </div>
-                        <div class =" col mt-auto mb-auto">
-                          <i class="fab fa-facebook fa-lg" style = "color: #00487C;"></i>
+                        <div class =" col ">
+                          <p><i class="fab fa-facebook fa-lg" style = "color: #00487C;"></i></p>
                         </div>
-                        <div class =" col mt-auto mb-auto">
-                          <i class="fab fa-twitter fa-lg" style = "color: #00487C"></i>
+                        <div class =" col ">
+                          <p><i class="fab fa-twitter fa-lg" style = "color: #00487C"></i></p>
                         </div>
-                        <div class =" col mt-auto mb-auto">
-                          <i class="fab fa-linkedin fa-lg" style = "color: #00487C"></i>
+                        <div class =" col ">
+                          <p><i class="fab fa-linkedin fa-lg" style = "color: #00487C"></i></p>
                         </div>
                         <div class = "col-2">
                         </div>
@@ -285,6 +285,9 @@ export default {
     getType(e) {
       if(e.target.options.selectedIndex > 0) {
         console.log(this.typeFilter)
+        if (this.typeFilter === 'In-Person & Digital') {
+          this.typeFilter = 'both';
+        }
         this.filters = this.getEvents.filter(el => {
           return el.event_type == this.typeFilter
         })
