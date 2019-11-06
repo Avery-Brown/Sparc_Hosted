@@ -57,7 +57,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">First Name</label>
-              <fg-input
+              <fg-input id="login_input"
                   class="no-border input-lg"
                   addon-left-icon="now-ui-icons users_single-02"
                   placeholder="First Name"
@@ -70,7 +70,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">Last Name</label>
-              <fg-input
+              <fg-input id="login_input"
                 class="no-border input-lg"
                 addon-left-icon="now-ui-icons users_single-02"
                 placeholder="Last Name"
@@ -85,7 +85,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">Age</label>
-              <fg-input
+              <fg-input id="login_input"
                   class="no-border input-lg"
                   addon-left-icon="now-ui-icons users_single-02"
                   placeholder="Age"
@@ -98,7 +98,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">Email</label>
-              <fg-input
+              <fg-input id="login_input"
                 class="no-border input-lg"
                 addon-left-icon="now-ui-icons ui-1_email-85"
                 placeholder="Email"
@@ -113,7 +113,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">Occupation</label>
-              <fg-input
+              <fg-input id="login_input"
                 class="no-border input-lg"
                 addon-left-icon="now-ui-icons business_briefcase-24"
                 placeholder="Occupation"
@@ -126,7 +126,7 @@
           <div class="col-md-6 col-lg-6">
             <div class="form-group">
               <label for="">School</label>
-              <fg-input
+              <fg-input id="login_input"
                 class="no-border input-lg"
                 addon-left-icon="now-ui-icons education_hat"
                 placeholder="School"
@@ -141,7 +141,7 @@
           <div class="col-md-12 col-lg-12">
             <div class="form-group">
               <label for="">About</label>
-              <fg-input
+              <fg-input id="login_input"
                 class="no-border input-lg"
                 addon-left-icon="now-ui-icons ui-2_chat-round"
                 placeholder="About"
