@@ -153,7 +153,7 @@
                           </div>
                           <div class = "row">
                             <div class ="col">
-                                <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index<=1 && tag != null"> {{tag.value}} </span>
+                                <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags(event)" :key="index" v-if="index <= 1 && tag != null"> {{tag.value}} </span>
                                 <span v-if="getEventTags(event).length > 1" :id="getHoverIdTagsByIndex(index)" class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;">...</span>
                                 <b-tooltip :target="getHoverIdTagsByIndex(index)" placement="bottomleft" triggers="hover">
                                     <p style="margin-top: 0px; margin-bottom: 1px; font-size: 14px;">Other Tags</p>
@@ -276,20 +276,29 @@ export default {
           type: 'success'
         })
     },
-    getEventTags(event) {
+    getEventTags(event, hasHidden) {
         return event.tags.map(element => {
             let eventTag = this.allTags.find(tag => tag.id==element)
             return eventTag
         });
     },
+    getTwoEventTags(event) {
+      return event.tags.map((element, index) => {
+            if (index < 2) {
+              let eventTag = this.allTags.find(tag => tag.id==element)
+              return eventTag
+            }
+        });
+    },
     getType(e) {
       if(e.target.options.selectedIndex > 0) {
         console.log(this.typeFilter)
+        let typeToChose = this.typeFilter
         if (this.typeFilter === 'In-Person & Digital') {
-          this.typeFilter = 'both';
+          typeToChose = 'both';
         }
         this.filters = this.getEvents.filter(el => {
-          return el.event_type == this.typeFilter
+          return el.event_type == typeToChose
         })
       }
       else {
@@ -323,12 +332,30 @@ export default {
         this.filters = this.getEvents
       }
       else {
-         let obj=this.allTags.find(tag_item=>tag_item.value.toLowerCase().includes(this.tagFilter.toLowerCase()))
-          console.log(obj)
+          this.filters = this.getEvents;
+         let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().includes(this.tagFilter.toLowerCase()));
+             
           //compare with all events that have that id
-          if(obj) {
-          let arrs=this.getEvents.filter(event_item=>event_item.tags.includes(obj.id))
-          return this.filters=arrs
+          if(tags) {
+            let result = []
+
+            this.getEvents.forEach((event_item) => {
+              for (var i = 0; i < tags.length; i++) {
+                console.log(tags[i].id)
+                console.log(tags[i].value)
+                if (event_item.tags != null) {
+                  event_item.tags.filter(tag => tag == tags[i].id)
+                  for (var j = 0; j < event_item.tags.length; j++) {
+                    console.log(j);
+                    console.log(event_item.tags[j])
+                    if(event_item.tags[j] == tags[i].id) {
+                      result.push(event_item);
+                    }
+                  }
+                }
+              }
+            })     
+            this.filters = result;    
           }
           else {
             return this.filters=[]
@@ -369,8 +396,8 @@ export default {
     },
     transformTitle(title) {
       let transformedTitle = title;
-      if (title.split("").length > 63) {
-        transformedTitle = title.substring(0,64) + '...'
+      if (title.split("").length > 49) {
+        transformedTitle = title.substring(0,49) + '...'
       }
       return transformedTitle;
     }
