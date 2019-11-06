@@ -1,12 +1,9 @@
 <template>
   <div>
     <div class="main">
-      <div class="section section-images">
+      <div class="section section-images" style="max-height: 80vh;">
         <div class="container">
           <div class="col-md-12">
-            <div class="row text-center">
-
-            </div>
             <div class="row">
               <div class="col-md-12 text-center">
                 <img src="sparclogo1.png" width="400" alt="">
@@ -22,10 +19,19 @@
                 <input type="submit" class="btn btn-info text-white" @click="save" value="Search" />
                 </form>
               </div>
-
             </div>
           </div>
+          <div style="position: absolute; bottom: 15px; margin-left: 10px;">
+          <!-- <div style="margin-top: 150px;"> -->
+            <router-link class="link footer-link pull-left" to="/about">
+              About&nbsp;|
+            </router-link>
+            <router-link class="link footer-link pull-left" to="/contact">
+              &nbsp;Contact
+            </router-link>
+          </div>
         </div>
+
       </div>
     </div>
     <!-- <carousel-section></carousel-section>

@@ -124,7 +124,7 @@
 
       <li class="nav-item">
         <router-link class="navbar-brand nav-link btn btn-info" style="width: 100%;" to="/login" v-if="this.logout">
-          <b>Login</b>
+          Login
         </router-link>
       </li>
       <li class="nav-item">
