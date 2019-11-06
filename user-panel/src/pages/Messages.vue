@@ -16,9 +16,10 @@
                   </span> </div>
               </div>
             </div>
-            <div class="inbox_chat">
-              <div  :class="{chat_list:'chat_list',active_chat:selected_user.id==users.id ? 'active_chat':''}" @click="fillProfile(users)" v-for="(users,i) in filters"  v-if="users.id!=lc_loggeduser.id" v-bind:key="i">
-                <div class="chat_people" >
+            <div class="inbox_chat" >
+              <!-- getUsers -->
+              <div   v-for="(users,i) in search==''? getSortedUsers : filters"   v-bind:key="i" :class="{chat_list:'chat_list',active_chat:selected_user.id==users.id ? 'active_chat':''}" @click="fillProfile(users)">
+                <div class="chat_people" v-if="users.id!=lc_loggeduser.id">
                   <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                   <div class="chat_ib">
                     <h5>{{users.first_name}} <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
@@ -159,6 +160,7 @@ export default {
   },
   data(){
     return{
+      new_msg_connection:false,
       block_message:'',
       rawfile:null,
       notif_toggle:false,
@@ -238,7 +240,7 @@ export default {
     },
     ...mapActions(['sendMessages','blockingProcess','toggleEmailNotifications']),
     filter_name() {
-      let arrs=this.allUsers.filter(user_item=>user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
+      let arrs=this.allUsers.filter(user_item=>user_item.id!=this.lc_loggeduser.id && user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
             if(arrs.length>0){
             this.filters=arrs
 
@@ -248,7 +250,7 @@ export default {
             }
       },
     fillProfile(arg_user) {
-      // console.log(arg_user)
+      console.log(arg_user)
       this.selected_user=arg_user;
       if(this.selected_user.blocked_by!=null){
         if(Object.keys(this.selected_user.blocked_by).length>0){
@@ -280,7 +282,6 @@ export default {
     },
     sendBlockNotifiation(){
       if(this.block_message!='') {
-          console.log(this.selected_user.first_name+''+this.block_message+''+this.lc_loggeduser.first_name)
         axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/blockMessageNotification', {
           blocked_user:this.selected_user.first_name,
           message: this.block_message,
@@ -292,7 +293,6 @@ export default {
       else{
         console.log("notifiers")
       }
-      
     },
     sendMessage(){
       if(this.get_my_block_status==true){
@@ -304,26 +304,47 @@ export default {
         })
       }
       else if(this.message!='') {
-      
+      var dates = new Date();  
+      var hours = dates.getHours();
+      var minutes = dates.getMinutes();
+      var last_time = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + dates.getSeconds()).slice(-2);  
+      var last_date =dates.getFullYear() +'-'+ ('0' + (dates.getMonth()+1)).slice(-2) + '-' + ('0' + dates.getDate()).slice(-2) ;
+
       let date=moment().format('LT')+" | "+moment().format('D MMM') ;
       if(this.selected_user.email_notifications!=null && this.selected_user.email_notifications==true)  {
-        console.log("mail was sent")
-          this.sendEmail(date)        
+        this.sendEmail(date)        
+      }
+      if(this.lc_loggeduser.message_connections==null) {
+        console.log("sending message to a new person")
+        this.new_msg_connection=true
       }
       else{
-        console.log("no didnt run")
+        let exists=Object.keys(this.lc_loggeduser.message_connections).find(key=>this.lc_loggeduser.message_connections[key].id==this.selected_user.id)
+        console.log("connections not empty but same connections appear")
+        // console.log(exists)
+        if(exists==null){
+          this.new_msg_connection=true
+        }
       }
-      let msg_obj={date:date,
+      let msg_obj={
+      date:date,
       message:this.message,
+      last_date:last_date,
+      last_time:last_time,
       receiver_id:this.selected_user.id,
       rawfile:this.rawfile!=null? this.rawfile[0]:null,
-      sender_id:this.lc_loggeduser.id}
+      sender_id:this.lc_loggeduser.id,
+      message_connection:this.new_msg_connection
+      }
       this.sendMessages(msg_obj)
       this.message=''
       this.rawfile=null
       this.scroller()
+      this.new_msg_connection=false
+      this.search=''
+
       }
-      else{
+      else {
         nativeToast({
           message: 'Please fill message field',
           position: 'north-east',
@@ -337,11 +358,33 @@ export default {
       var container = this.$el.querySelector("#msg_containers"); 
       this.typed_message=''
       this.$nextTick(() => {
+           if(container.scrollHeight!=null){
           container.scrollTop = container.scrollHeight;        
+           }
         });
     }
   },
   computed:{
+    getUsers() {
+        if(this.lc_loggeduser.message_connections!=null) {
+         return Object.keys(this.lc_loggeduser.message_connections).map(key=>{
+              let use=this.filters.find(item=>item.id==this.lc_loggeduser.message_connections[key].id)
+              return {...use,last_time:this.lc_loggeduser.message_connections[key].last_time,last_date:this.lc_loggeduser.message_connections[key].last_date}
+          })
+        }
+        else{
+          return []
+        }
+
+    },
+    getSortedUsers(){
+      if(this.getUsers.length>0){
+      return this.getUsers.sort((a, b) => b.last_date.localeCompare(a.last_date) || b.last_time.localeCompare(a.last_time))
+      }
+      else{
+        return []
+      }
+    },
     ...mapGetters(['allUsers','getMessages','user','loggedUser']),
     selected_messages() {
      return this.getMessages.filter(messages_item=>(messages_item.sender_id==this.lc_loggeduser.id && messages_item.receiver_id==this.selected_user.id) || (messages_item.receiver_id==this.lc_loggeduser.id && messages_item.sender_id==this.selected_user.id)) 
@@ -489,7 +532,7 @@ img{ max-width:100%;}
 .chat_list:hover {
 background:#ebebeb;
 }
-.inbox_chat { height: 480px; overflow-y: scroll;}
+.inbox_chat { height: 480px; overflow-y: auto;}
 
 .active_chat{ background:#ebebeb;}
 
