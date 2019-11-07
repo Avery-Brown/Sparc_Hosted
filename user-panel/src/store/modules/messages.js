@@ -12,6 +12,14 @@ const getters = {
 };
 
 const actions = {
+    unsetNewMessages(context,payload){
+        firebase.database().ref('users').child(payload.sender_id).child('message_connections').orderByChild('id').
+        equalTo(payload.receiver_id).once('child_added',snapshot=>{
+            firebase.database().ref('users').child(payload.sender_id).child('message_connections').child(snapshot.key)
+            .update({new_messages:0})
+
+        })
+    },
     sendMessages(context, payload) {
         if(payload.message_connection==true){
             firebase.database().ref('users').child(payload.sender_id).child('message_connections').push({id:payload.receiver_id,last_date:payload.last_date,last_time:payload.last_time})
@@ -19,7 +27,7 @@ const actions = {
                 console.log("saved inside sender")
             })
             .catch(error=>console.log(error.message))
-            firebase.database().ref('users').child(payload.receiver_id).child('message_connections').push({id:payload.sender_id,last_date:payload.last_date,last_time:payload.last_time})
+            firebase.database().ref('users').child(payload.receiver_id).child('message_connections').push({id:payload.sender_id,last_date:payload.last_date,last_time:payload.last_time,new_messages:payload.new_messages})
             .then(()=>{
                 console.log("saved inside receiver")
             })
@@ -35,13 +43,14 @@ const actions = {
             firebase.database().ref('users').child(payload.receiver_id).child('message_connections').orderByChild('id').
             equalTo(payload.sender_id).once('child_added',snapshot=>{
                 firebase.database().ref('users').child(payload.receiver_id).child('message_connections').child(snapshot.key)
-                .update({last_date:payload.last_date,last_time:payload.last_time})
+                .update({new_messages:payload.new_messages,last_date:payload.last_date,last_time:payload.last_time})
 
             })
         }
         delete payload.message_connection
         delete payload.last_date
         delete payload.last_time
+        delete payload.new_messages
         if(payload.rawfile==null){
             firebase.database().ref('messages').push(payload)
         .then(() => {
