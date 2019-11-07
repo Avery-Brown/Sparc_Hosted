@@ -432,6 +432,7 @@ export default {
           var extension = file.name.substring(file.name.lastIndexOf('.')+1);
           // show image here
           image_true = true
+          vm.$forceUpdate();
       },
       onVideoSelected(event) {
           let video = event.target.files[0];
