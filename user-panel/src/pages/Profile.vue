@@ -173,9 +173,9 @@
         </div>
       </form>
       <template slot="footer">
-        <n-button type="danger" @click.native="modals.classic = false"
-          >Close</n-button>
-          <n-button type="success" @click="updateProfile">Update Profile</n-button>
+        <n-button class = "now-ui-icons ui-1_simple-remove" type="danger" @click.native="modals.classic = false">Close</n-button>
+
+        <n-button type="success" @click="updateProfile">Update Profile</n-button>
       </template>
     </modal>
 
