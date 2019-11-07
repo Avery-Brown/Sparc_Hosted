@@ -11,6 +11,12 @@
                             <div class="col-md-6 col-lg-6">
                                 <label for="">Upload Engagement Featured Image*</label>
                                 <input type="file" class="btn btn-primary mb-3" @change="onFileSelected">
+                                <!-- <div v-if="image_true != false">
+                                  <img :src="file.image" />
+                                  <div>
+                                    hi
+                                  </div>
+                                </div> -->
                             </div>
                             <div class="col-md-6 col-lg-6">
                                 <label for="">Upload Engagement Video</label><br/>
@@ -298,6 +304,7 @@ export default {
             start_time: null,
             end_time: null,
             event_description: null,
+            image_true: false,
             event_image: null,
             event_video: null,
         },
@@ -423,6 +430,8 @@ export default {
           let file = event.target.files[0]
           this.eventPayload.event_image = file
           var extension = file.name.substring(file.name.lastIndexOf('.')+1);
+          // show image here
+          image_true = true
       },
       onVideoSelected(event) {
           let video = event.target.files[0];
