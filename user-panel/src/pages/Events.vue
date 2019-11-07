@@ -6,7 +6,6 @@
           <div class="col-md-12">
             <div class="row text-center">
               <div class="col-md-12">
-                <h2 class="text-center ml-3" style="margin-top: 1.5rem; margin-bottom: 3rem">All Engagements</h2>
               </div>
 
             </div>
@@ -217,6 +216,7 @@ import { DatePicker } from 'element-ui';
 import { mapGetters, mapActions } from 'vuex'
 import nativeToast from 'native-toast'
 import ReadMore from 'vue-read-more';
+import axios from 'axios';
 Vue.use(ReadMore);
 export default {
   name: 'events',
@@ -247,7 +247,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getEvents', 'allUsers', 'allTags', 'allRatings']),
+    ...mapGetters(['allUsers', 'allTags', 'allRatings']),
 
     getFiltered() {
       this.filterEvents = [];
@@ -290,72 +290,77 @@ export default {
             }
         });
     },
-    getType(e) {
+    async getType(e) {
       if(e.target.options.selectedIndex > 0) {
         console.log(this.typeFilter)
         let typeToChose = this.typeFilter
         if (this.typeFilter === 'In-Person & Digital') {
           typeToChose = 'both';
         }
-        this.filters = this.getEvents.filter(el => {
+        var events = await this.getEvents()
+        this.filters = events.filter(el => {
           return el.event_type == typeToChose
         })
       }
       else {
-        this.filters = this.getEvents
+        this.filters = await this.getEvents()
       }
     },
-    getDate() {
+    async getDate() {
       if(this.dateFilter == null) {
-        this.filters = this.getEvents
+        this.filters = await this.getEvents()
       }
       else {
         this.dateFilter = this.dateFilter.toLocaleDateString()
         console.log('Date ' + this.dateFilter)
-        this.filters = this.getEvents.filter(el => {
+        var events = await this.getEvents();
+        this.filters = events.filter(el => {
           return el.date == this.dateFilter
         })
       }
     },
-    getLocation() {
+    async getLocation() {
       if(this.locationFilter == null) {
-        this.filters = this.getEvents
+        this.filters = await this.getEvents()
       }
       else {
-        this.filters = this.getEvents.filter(el => {
+        var events = await this.getEvents();
+        this.filters = events.filter(el => {
           return el.event_location.toLowerCase().includes(this.locationFilter.toLowerCase())
         })
       }
     },
-    getEventsByTag() {
+    async getEventsByTag() {
       if(this.tagFilter == null || this.tagFilter == '') {
-        this.filters = this.getEvents
+        console.log("TRUE");
+        this.filters = await this.getEvents()
       }
       else {
-          this.filters = this.getEvents;
-         let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().includes(this.tagFilter.toLowerCase()));
+          this.filters = await this.getEvents();
+          let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().includes(this.tagFilter.toLowerCase()));
              
           //compare with all events that have that id
           if(tags) {
-            let result = []
+            let result = new Set();
 
-            this.getEvents.forEach((event_item) => {
+            var events = await this.getEvents();
+
+            events.forEach((event_item) => {
               for (var i = 0; i < tags.length; i++) {
-                console.log(tags[i].id)
-                console.log(tags[i].value)
+                
                 if (event_item.tags != null) {
                   event_item.tags.filter(tag => tag == tags[i].id)
                   for (var j = 0; j < event_item.tags.length; j++) {
-                    console.log(j);
-                    console.log(event_item.tags[j])
+                    
                     if(event_item.tags[j] == tags[i].id) {
-                      result.push(event_item);
+                      result.add(event_item);
                     }
                   }
                 }
               }
-            })     
-            this.filters = result;    
+            }) 
+            console.log(result);    
+            this.filters = [...result];    
           }
           else {
             return this.filters=[]
@@ -382,8 +387,11 @@ export default {
       }
     },
     getUser(id) {
-      let user_item = this.getUsers.find(user => user.id === id)
-        return user_item
+      let user_item = this.getUsers.find(user => 
+         Object.keys(user)[0] === id
+      )
+      var user = user_item[Object.keys(user_item)[0]]
+      return user;
     },
     getHoverIdDirectionsByIndex(index) {
       return "tooltip-target-direction" + index;
@@ -400,9 +408,26 @@ export default {
         transformedTitle = title.substring(0,49) + '...'
       }
       return transformedTitle;
+    },
+    async getEvents() {
+      var events = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getEvents');
+      var eventsArray = [];
+      Object.keys(events.data).forEach((key) => {
+        eventsArray.push(events.data[key]);
+      });
+      return eventsArray;
+    },
+    async getAllUsers() {
+      var users = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getUsers');
+      var usersArray = [];
+      Object.keys(users.data).forEach((key) => {
+        usersArray.push({[key]: users.data[key]});
+      });
+      return usersArray;
+
     }
   },
-  created() {
+  async created() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -411,26 +436,26 @@ export default {
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
 
-    this.filters = []
-    this.filters = this.getEvents
+    this.filters = [];
+    this.filters = await this.getEvents();
 
     this.getUsers = []
-    this.getUsers = this.allUsers
+    this.getUsers = await this.getAllUsers();
     this.fetchTags();
   },
 
   watch: {
-    getEvents(val) {
+    async getEvents(val) {
       if(val) {
         this.filters = []
-        this.filters = this.getEvents
+        this.filters = await this.getEvents()
         this.now = 1;
       }
     },
-    allUsers(val) {
+    async allUsers(val) {
       if(val) {
         this.getUsers = []
-        this.getUsers = this.allUsers
+        this.getUsers = await this.getAllUsers();
       }
     }
   }
