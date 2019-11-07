@@ -22,8 +22,15 @@
                 <div class="chat_people" v-if="users.id!=lc_loggeduser.id">
                   <div class="chat_img"> <img class="rounded-circle" style="height:2rem;" :src="users.profile_image!=null ? users.profile_image: 'https://ptetutorials.com/images/user-profile.png'" alt="Anika"> </div>
                   <div class="chat_ib">
-                    <h5>{{users.first_name}} <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
-                      <p>{{chatdate(users.id).message}}</p>
+                    <h5>{{users.first_name}}  <span class="chat_date">{{chatdate(users.id).date}}</span></h5>
+                      <div class="row">
+                        <div class="col-md-9">
+                          <p>{{chatdate(users.id).message}}</p>
+                        </div>
+                        <div v-if="users.new_messages>0" class="col-md-3">
+                          <i class="fas fa-circle" style="color:#fe0002;"></i>
+                        </div>
+                      </div>
                   </div>
                 </div> 
               </div>
@@ -238,7 +245,7 @@ export default {
       return {date:'NA',message:'No messages yet'}
       }
     },
-    ...mapActions(['sendMessages','blockingProcess','toggleEmailNotifications']),
+    ...mapActions(['sendMessages','blockingProcess','toggleEmailNotifications','unsetNewMessages']),
     filter_name() {
       let arrs=this.allUsers.filter(user_item=>user_item.id!=this.lc_loggeduser.id && user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
             if(arrs.length>0){
@@ -250,7 +257,12 @@ export default {
             }
       },
     fillProfile(arg_user) {
-      console.log(arg_user)
+      if(arg_user.new_messages>0) {
+        let op_user=this.getUsers.find(user=>user.id==arg_user.id)
+        op_user.new_messages=0
+        this.unsetNewMessages({sender_id:this.lc_loggeduser.id,receiver_id:arg_user.id})
+      }
+
       this.selected_user=arg_user;
       if(this.selected_user.blocked_by!=null){
         if(Object.keys(this.selected_user.blocked_by).length>0){
@@ -295,6 +307,7 @@ export default {
       }
     },
     sendMessage(){
+      let new_messages=0;
       if(this.get_my_block_status==true){
         nativeToast({
           message: 'You are not allowed to send message to this user',
@@ -321,11 +334,26 @@ export default {
       else{
         let exists=Object.keys(this.lc_loggeduser.message_connections).find(key=>this.lc_loggeduser.message_connections[key].id==this.selected_user.id)
         console.log("connections not empty but same connections appear")
-        // console.log(exists)
-        if(exists==null){
+        if(exists==null) {
           this.new_msg_connection=true
         }
       }
+      //if selected user has message connections and you 
+      // want to check how many new messages you have with 
+      // this guy
+      if(this.selected_user.message_connections!=null){
+      let yourself=Object.keys(this.selected_user.message_connections).find(key=>this.selected_user.message_connections[key].id==this.lc_loggeduser.id)
+      //how many msgs i hv with this guy 
+      // console.log(this.selected_user.message_connections[yourself])
+        if(this.selected_user.message_connections[yourself].new_messages!=null) {
+          new_messages=this.selected_user.message_connections[yourself].new_messages+1
+          this.selected_user.message_connections[yourself].new_messages=new_messages
+        }
+      }
+      else {
+        console.log("this guy doesnt have any messages with anybody")
+      }
+
       let msg_obj={
       date:date,
       message:this.message,
@@ -334,8 +362,10 @@ export default {
       receiver_id:this.selected_user.id,
       rawfile:this.rawfile!=null? this.rawfile[0]:null,
       sender_id:this.lc_loggeduser.id,
-      message_connection:this.new_msg_connection
+      message_connection:this.new_msg_connection,
+      new_messages:new_messages
       }
+      console.log(msg_obj)
       this.sendMessages(msg_obj)
       this.message=''
       this.rawfile=null
@@ -369,13 +399,12 @@ export default {
         if(this.lc_loggeduser.message_connections!=null) {
          return Object.keys(this.lc_loggeduser.message_connections).map(key=>{
               let use=this.filters.find(item=>item.id==this.lc_loggeduser.message_connections[key].id)
-              return {...use,last_time:this.lc_loggeduser.message_connections[key].last_time,last_date:this.lc_loggeduser.message_connections[key].last_date}
+              return {...use,new_messages:this.lc_loggeduser.message_connections[key].new_messages,last_time:this.lc_loggeduser.message_connections[key].last_time,last_date:this.lc_loggeduser.message_connections[key].last_date}
           })
         }
-        else{
+        else {
           return []
         }
-
     },
     getSortedUsers(){
       if(this.getUsers.length>0){
