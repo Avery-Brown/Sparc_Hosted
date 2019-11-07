@@ -37,7 +37,10 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
+
+
+  </div>
 </template>
 
 <script>
@@ -75,7 +78,7 @@ export default {
             // return moment(event_date).isBefore(moment().format("MM/DD/YYYY"))
           let event_item=this.getEvents.find(event_item=> event_item.id==event_id )// Date.parse(this.currentDate) <= Date.parse(event_item.date))
 
-return event_item;
+          return event_item;
           })
       },
       dates(){
