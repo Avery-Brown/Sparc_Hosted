@@ -137,6 +137,15 @@ exports.getUsers = functions.https.onRequest((req, res) => {
   })
 })
 
+exports.getRatings = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var ratingsRef = admin.database().ref('ratings');
+    ratingsRef.on('value', (snapshot) => {
+      res.send(snapshot.val());
+    })
+  })
+})
+
 exports.webApi = functions.https.onRequest(main);
 
 

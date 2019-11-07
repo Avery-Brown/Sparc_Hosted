@@ -241,6 +241,7 @@ export default {
       userName: '',
       data_name: '',
       getUsers: [],
+      ratings: [],
       filterEvents: [],
       tagFilter: null,
       currentDate: null,
@@ -369,7 +370,7 @@ export default {
     },
     getRatings(id) {
       let avgRating = [];
-      this.allRatings.filter(rating => {
+      this.ratings.filter(rating => {
         if(rating.host_id == id) {
           avgRating.push(rating.ratingStars)
         }
@@ -413,8 +414,9 @@ export default {
       var events = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getEvents');
       var eventsArray = [];
       Object.keys(events.data).forEach((key) => {
-        eventsArray.push(events.data[key]);
+        eventsArray.push({...events.data[key], id: key});
       });
+      console.log(eventsArray);
       return eventsArray;
     },
     async getAllUsers() {
@@ -425,6 +427,14 @@ export default {
       });
       return usersArray;
 
+    },
+    async getAllRatings() {
+      var ratings = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getRatings');
+      var ratingsArray = [];
+      Object.keys(ratings.data).forEach((key) => {
+        ratingsArray.push(ratings.data[key]);
+      });
+      return ratingsArray;
     }
   },
   async created() {
@@ -439,8 +449,12 @@ export default {
     this.filters = [];
     this.filters = await this.getEvents();
 
-    this.getUsers = []
+    this.getUsers = [];
     this.getUsers = await this.getAllUsers();
+
+    this.ratings = [];
+    this.ratings = await this.getAllRatings();
+
     this.fetchTags();
   },
 
