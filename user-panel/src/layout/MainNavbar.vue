@@ -33,92 +33,92 @@
         </a>
       </li> -->
       <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/events">
-          <b>Home</b>
+        <router-link class="navbar-brand nav-link" to="/events">
+          <b style="color: #484848; font-weight: 400">Home</b>
         </router-link>
       </li>
       <li class="nav-item dropdown" v-if="!this.logout">
-        <a class="navbar-brand nav-link dropdown-toggle text-success" style="margin-right: 35px;">About</a>
+        <a class="navbar-brand nav-link dropdown-toggle" style="margin-right: 35px; color: #484848; font-weight: 400">About</a>
         <div class="dropdown-content text-center">
           <li class="nav-item about-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/about">
+            <router-link class="navbar-brand nav-link" to="/about">
               <b class = "drop-down-text">Meet the Team</b>
             </router-link>
           </li>
           <li class="nav-item about-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/contact">
+            <router-link class="navbar-brand nav-link" to="/contact">
               <b class = "drop-down-text">Contact Us</b>
             </router-link>
           </li>
         </div>
       </li>
       <!-- <li class="nav-item">
-        <router-link class="navbar-brand nav-link text-success" to="/about">
+        <router-link class="navbar-brand nav-link" to="/about">
           <b>About Us</b>
         </router-link>
       </li>
       <li class="nav-item">
-        <router-link class="navbar-brand nav-link text-success" to="/contact">
+        <router-link class="navbar-brand nav-link" to="/contact">
           <b>Contact</b>
         </router-link>
       </li> -->
       <li class="nav-item dropdown" v-if="!this.logout">
-        <a class="navbar-brand nav-link dropdown-toggle text-success" style="margin-right: 35px;">Engagements</a>
+        <a class="navbar-brand nav-link dropdown-toggle" style="margin-right: 35px; color: #484848; font-weight: 400">Engagements</a>
         <div class="dropdown-content">
           <li class="nav-item engage-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/upcoming-events">
+            <router-link class="navbar-brand nav-link" to="/upcoming-events">
               <b class = "drop-down-text">Upcoming Engagements</b>
             </router-link>
           </li>
           <li class="nav-item engage-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/past-events">
+            <router-link class="navbar-brand nav-link" to="/past-events">
               <b class = "drop-down-text">Past Engagements</b>
             </router-link>
           </li>
           <li class="nav-item engage-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/host">
+            <router-link class="navbar-brand nav-link" to="/host">
               <b class = "drop-down-text">Hosted Engagements</b>
             </router-link>
           </li>
         </div>
       </li>
       <!-- <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="">
+        <router-link class="navbar-brand nav-link" to="">
         Billing History
         </router-link>
       </li> -->
       <li class="nav-item dropdown" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/profile">
-          <b class="dropdown-toggle" style="margin-left: 15px; margin-right: 20px;">Profile</b>
+        <router-link class="navbar-brand nav-link text-nav" to="/profile">
+          <b class="dropdown-toggle" style="margin-left: 15px; margin-right: 20px; color: #484848; font-weight: 400">Profile</b>
         </router-link>
         <div class="dropdown-content">
           <li class="nav-item logout-dropdown" v-if="!this.logout">
-            <router-link class="navbar-brand nav-link text-success" to="/billing-history">
+            <router-link class="navbar-brand nav-link" to="/billing-history">
               <b class = "drop-down-text">Billing History</b>
             </router-link>
           </li>
           <li class="nav-item logout-dropdown" v-if="!this.logout" @click="userLogout">
-            <router-link class="navbar-brand nav-link text-success" to="/">
+            <router-link class="navbar-brand nav-link" to="/">
               <b class = "drop-down-text">Logout</b>
             </router-link>
           </li>
         </div>
         <!-- <div class="dropdown-content">
           <li class="nav-item logout-dropdown" v-if="!this.logout" @click="userLogout">
-            <router-link class="navbar-brand nav-link text-success" to="/">
+            <router-link class="navbar-brand nav-link" to="/">
               <b class = "drop-down-text">Logout</b>
             </router-link>
           </li>
         </div> -->
       </li>
       <!-- <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/profile">
+        <router-link class="navbar-brand nav-link" to="/profile">
           <b>Profile</b>
         </router-link>
       </li>
 
       <li class="nav-item" v-if="!this.logout" @click="userLogout">
-        <router-link class="navbar-brand nav-link text-success" to="/">
+        <router-link class="navbar-brand nav-link" to="/">
           <b>Logout</b>
         </router-link>
       </li> -->
@@ -237,7 +237,6 @@ export default {
     width: 100%;
     color: rgb(29, 104, 47);
   }
-
 
 
 </style>
