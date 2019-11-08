@@ -492,7 +492,7 @@ export default {
             this.noListingsFound = true;
           }
           resolve(eventsArray);
-        }, 300)
+        }, 500)
 
       })
     },

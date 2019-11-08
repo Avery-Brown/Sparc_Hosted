@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import ArgonDashboard from './plugins/argon-dashboard'
+import ReadMore from 'vue-read-more';
+
 //importing store 
 import store from '@/store/index'
 import firebase from 'firebase'
@@ -45,6 +47,7 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
+Vue.use(ReadMore);
 
 
 Vue.use(ArgonDashboard)
