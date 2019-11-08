@@ -7,8 +7,8 @@
             <div class = "container-fluid">
               <div class ="row" style="margin-top: 0.5rem;">
                 <div class ="col">
-                  <h2>Learn something <p style="display: inline-block; color: #0fe031; font-weight: 400; font-size: 36px;">new</p></h2>
-                  <h4 style="margin-top: -40px;">From algebra tutoring to advanced financial modeling, Sparc has you covered</h4>
+                  <h2>Learn and <p style="display: inline-block; color: #0fe031; font-weight: 400; font-size: 36px;">connect</p> in a meaningful way</h2>
+                  <h4 style="margin-top: -40px;">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
                 </div>
               </div>
               <div class = "row" style="margin-top: 2rem">
@@ -18,7 +18,24 @@
                       <div style="margin-top: 0rem;margin-left: -40px">
                         <div class = "row">
                           <div class = "col">
-                            <fg-input label = "Search By Tags" placeholder="Ex: Finance, Trading" v-model="tagFilter" @input="filterAll"></fg-input>
+                            <label>Search by Tags</label>
+                            <multiselect 
+                              v-model="tagFilters"
+                              :options="allTags"
+                              :multiple="true"
+                              :close-on-select="true"
+                              :clear-on-select="true"
+                              :preserve-search="false"
+                              :selectLabel="null"
+                              :deselectLabel="null"
+                              placeholder="Tags"
+                              label="value"
+                              track-by="value"
+                              :taggable="false"
+                              :preselect-first="false"
+                              @select="filterAll"
+                              @remove="filterAll">
+                            </multiselect>
                           </div>
                         </div>
                         <div class = "row" style="margin-top: 20px;">
@@ -92,11 +109,11 @@
                 <div class = "col-md-10">
                   <div class="scroll-pane-cards">
                     <div v-if="!noListingsFound && filtered.length == 0">
-                      <lottie :options="loadingOptions" width="200" height="200" style="margin-top: 3rem;"/>
+                      <lottie :options="loadingOptions" :width="200" :height="200" style="margin-top: 3rem;"/>
                     </div>
                     <div v-else-if="noListingsFound" class="text-center">
                       <h4><p style="display: inline-block; font-size: 23px; color: red; font-weight: 400;">Oops!</p> Looks like no engagements were found with that criteria</h4>
-                      <second-lottie :options="errorOptions" width="300" height="300" />
+                      <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
                       <div class="card shadow-md" style = "border-radius: 8px;">
@@ -256,8 +273,9 @@ import isEmpty from '../isEmpty';
 import Lottie from 'vue-lottie'
 import loadingAnimationData from '../../lotties/40-loading.json'
 import errorAnimationData from '../../lotties/629-empty-box.json'
+import Multiselect from 'vue-multiselect'
+import { PassThrough } from 'stream';
 
-Vue.use(Lottie);
 Vue.use(ReadMore);
 export default {
   name: 'events',
@@ -269,7 +287,8 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     Button,
     'lottie': Lottie,
-    'second-lottie': Lottie
+    'second-lottie': Lottie,
+    Multiselect,
   },
   data() {
     return {
@@ -292,6 +311,7 @@ export default {
       ratings: [],
       filterEvents: [],
       tagFilter: null,
+      tagFilters: [],
       currentDate: null,
       pickerOptions: {
         disabledDate(time) {
@@ -372,6 +392,9 @@ export default {
         }
     },
     async getDate() {
+      if(this.dateFrom == null && this.dateTo == null) {
+        return;
+      }
       if (this.dateFrom != null && this.dateTo == null) {
         var from = this.dateFrom.toLocaleDateString();
         this.filters = this.filters.filter(el => {
@@ -396,33 +419,24 @@ export default {
         })
     },
     async getEventsByTag() {
-          let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().trim().includes(this.tagFilter.toLowerCase().trim()));
-             
-          //compare with all events that have that id
-          if(tags) {
-            let result = new Set();
+          var tagValues = this.tagFilters.map((tag) => tag.id)
 
-            this.filters.forEach((event_item) => {
-              for (var i = 0; i < tags.length; i++) {
-                
-                if (event_item.tags != null) {
-                  event_item.tags.filter(tag => tag == tags[i].id)
-                  for (var j = 0; j < event_item.tags.length; j++) {
-                    
-                    if(event_item.tags[j] == tags[i].id) {
-                      result.add(event_item);
+          console.log(tagValues);
+
+          var result =  new Set();
+
+          if(this.tagFilters.length > 0) {
+            this.filters.forEach((event) => {
+                if(event.tags != null) {
+                  event.tags.forEach((tag_id) => {
+                    if (tagValues.includes(tag_id)) {
+                      result.add(event)
                     }
-                  }
-                }
-              }
-            }) 
-            console.log(result);    
-            this.filters = [...result];    
+                  })
+                }            
+            })
+            this.filters = [...result];
           }
-          else {
-            return this.filters=[]
-          }
-      
     },
     getRatings(id) {
       let avgRating = [];
@@ -576,6 +590,20 @@ export default {
     background: white
 
   }
+
+
+  .multiselect .multiselect__tags {
+    font-size: 12px;
+  }
+ 
+  .multiselect {
+    font-size: 12px;
+  }
+
+  .multiselect .multiselect__select {
+    font-size: 15px;
+  }
+
 
   
 

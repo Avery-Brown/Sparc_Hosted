@@ -156,7 +156,7 @@
           <div class="col-md-12 col-lg-12">
             <div class="form-group">
               <label for="">Pick Interests</label>
-              <multiselect v-model="value"
+              <multiselect style="font-size: 8px;" v-model="value"
                 :options="allTags"
                 :multiple="true"
                 :close-on-select="false"
