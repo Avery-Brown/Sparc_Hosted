@@ -3,6 +3,7 @@
           type="info"
           :color-on-scroll="colorOnScroll"
           menu-classes="ml-auto"
+          style="border-bottom: 0.5px solid #e4e4e4; margin-top: -10px;"
   >
     <template>
       <router-link class="navbar-brand" to="/">
@@ -20,7 +21,7 @@
         </div>
       </el-popover> -->
     </template>
-    <template slot="navbar-menu" style="border-bottom: 1px solid gray">
+    <template slot="navbar-menu">
       <!-- <li class="nav-item">
         <a
           class="nav-link"
