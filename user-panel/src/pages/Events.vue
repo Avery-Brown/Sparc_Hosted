@@ -88,11 +88,17 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div class = "col-md-10">
                   <div class="scroll-pane-cards">
-                    <div class ="row"  v-for="(event, index) in filtered" :key="index">
+                    <div v-if="!noListingsFound && filtered.length == 0">
+                      <lottie :options="loadingOptions" width="200" height="200" style="margin-top: 3rem;"/>
+                    </div>
+                    <div v-else-if="noListingsFound" class="text-center">
+                      <h4><p style="display: inline-block; font-size: 23px; color: red; font-weight: 400;">Oops!</p> Looks like no engagements were found with that criteria</h4>
+                      <second-lottie :options="errorOptions" width="300" height="300" />
+                    </div>
+                    <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
                       <div class="card shadow-md" style = "border-radius: 8px;">
                         <div class="card-body">
                           <div class = "row">
@@ -247,6 +253,11 @@ import nativeToast from 'native-toast'
 import ReadMore from 'vue-read-more';
 import axios from 'axios';
 import isEmpty from '../isEmpty';
+import Lottie from 'vue-lottie'
+import loadingAnimationData from '../../lotties/40-loading.json'
+import errorAnimationData from '../../lotties/629-empty-box.json'
+
+Vue.use(Lottie);
 Vue.use(ReadMore);
 export default {
   name: 'events',
@@ -256,10 +267,15 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     [DatePicker.name]: DatePicker,
     [FormGroupInput.name]: FormGroupInput,
-    Button
+    Button,
+    'lottie': Lottie,
+    'second-lottie': Lottie
   },
   data() {
     return {
+      noListingsFound: false,
+      loadingOptions: { animationData: loadingAnimationData },
+      errorOptions: { animationData: errorAnimationData },
       options: [{ text: 'Virtual', value: 'virtual' },
                 { text: 'In Person', value: 'in Person' },
                 { text: 'In Person & Digital', value: 'both' },
@@ -267,16 +283,11 @@ export default {
       rating: 5,
       url: window.location.href+"/",
       typeFilters: [],
-      dateFilter: '',
       dateFrom: null,
       dateTo: null,                                                 
       locationFilter: '',
-      fetchedTags: [],
-      previousFilters: [],
       filters: [],
       now: 0,
-      userName: '',
-      data_name: '',
       getUsers: [],
       ratings: [],
       filterEvents: [],
@@ -338,11 +349,15 @@ export default {
         });
     },
     async filterAll() {
+      this.filters = [];
       this.filters = await this.getEvents();
       this.getType();
       this.getDate();
       this.getLocation();
       this.getEventsByTag();
+      if (this.filtered.length == 0) {
+        this.noListingsFound = true;
+      } 
     },
     async getType() {
         var filteredEvents = [];
@@ -381,7 +396,7 @@ export default {
         })
     },
     async getEventsByTag() {
-          let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().includes(this.tagFilter.toLowerCase()));
+          let tags=this.allTags.filter( tag_item => tag_item.value.toLowerCase().trim().includes(this.tagFilter.toLowerCase().trim()));
              
           //compare with all events that have that id
           if(tags) {
@@ -451,13 +466,25 @@ export default {
       }
       return transformedTitle;
     },
+    eventsPromise() {
+      return new Promise((resolve, reject) => {
+        setTimeout(async () => {
+          var events = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getEvents');
+          var eventsArray = [];
+          Object.keys(events.data).forEach((key) => {
+            eventsArray.push({...events.data[key], id: key});
+          });
+          if (eventsArray.length == 0) {
+            this.noListingsFound = true;
+          }
+          resolve(eventsArray);
+        }, 300)
+
+      })
+    },
     async getEvents() {
-      var events = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getEvents');
-      var eventsArray = [];
-      Object.keys(events.data).forEach((key) => {
-        eventsArray.push({...events.data[key], id: key});
-      });
-      console.log(eventsArray);
+      this.noListingsFound = false;
+      var eventsArray = await this.eventsPromise();
       return eventsArray;
     },
     async getAllUsers() {
