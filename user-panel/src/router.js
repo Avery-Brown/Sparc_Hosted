@@ -118,9 +118,6 @@ export default new Router({
       props: {
         header: { colorOnScroll: 400 }
       },
-      meta: {
-        requiresAuth: true,
-      }
     },
     {
       path: '/events/:eventId',
@@ -128,6 +125,9 @@ export default new Router({
       components: { default: EventDetails, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 }
+      },
+      meta: {
+        requiresAuth: true,
       }
     },
     {

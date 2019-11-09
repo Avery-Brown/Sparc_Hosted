@@ -11,13 +11,17 @@
             </div>
             <div class="row">
               <div class="col-md-8 ml-auto mr-auto mt-3 text-center">
-                <form action="" @submit="save">
                 <div>
-                  <fg-input v-model="search" class = "rq-form-element" placeholder="" autofocus></fg-input>
-                  <i></i>
+                  <b-input-group>
+                    <b-input-group-prepend>
+                      <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
+                    </b-input-group-prepend>
+                    <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  v-model="search" size="lg" placeholder="What would you like to learn today?" autofocus>
+                    </b-form-input>
+                  </b-input-group>
+                  <!-- <fg-input v-model="search" class = "rq-form-element" placeholder="What would you like to learn today?" autofocus></fg-input> -->
                 </div>
-                <input type="submit" class="btn btn-info text-white" @click="save" value="Search" />
-                </form>
+                <button class="btn" style="background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px;" @click="save">Search</button>
               </div>
             </div>
           </div>
@@ -88,7 +92,7 @@ export default {
   data() {
     return {
       rating: 5,
-      search: null,
+      search: '',
        modals: {
         classic: false,
       },
@@ -119,9 +123,6 @@ export default {
   created() {
     this.fetchEvents();
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-    if(loggedUser != null) {
-      this.$router.push({path: '/events'})
-    }
   }
 };
 </script>
