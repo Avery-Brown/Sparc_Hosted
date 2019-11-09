@@ -6,9 +6,20 @@
           style="border-bottom: 0.5px solid #e4e4e4; margin-top: -7px;"
   >
     <template>
-      <router-link class="navbar-brand" to="/">
-        <img src="sparcS.png" width="30"  alt="">
-      </router-link>
+      <li style="display: inline-block;">
+        <router-link to="/">
+          <img src="sparcS.png" width="30"  style="padding-bottom: 6px;" alt="">
+        </router-link>
+      </li>
+      <li style="display: inline-block; margin-left: 20px; width: 20rem; margin-bottom: -10px;" v-if="getRoute() != '/'">
+            <b-input-group>
+              <b-input-group-prepend>
+                <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
+              </b-input-group-prepend>
+                <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  @keyup.enter="saveAndSearch" v-model="search" size="lg" placeholder="Search Engagements..." autofocus/>
+            </b-input-group>
+
+        </li>
       <!-- <el-popover
         ref="popover1"
         popper-class="popover"
@@ -34,7 +45,7 @@
       </li> -->
         <li class="nav-item">
         <router-link class="nav-link-v2" style="color: #484848" to="/events">
-          Explore
+          <div @click="goToAndRefreshEvents">Explore</div>
         </router-link>
       </li>
       <!-- <li class="nav-item dropdown" v-if="!this.logout">
@@ -54,7 +65,7 @@
       </li> -->
       <li class="nav-item">
         <router-link class="nav-link-v2" style="color: #484848" to="/about">
-          Meet the Team
+          About
         </router-link>
       </li>
       <li class="nav-item">
@@ -99,7 +110,8 @@
       </li> -->
       <li class="dropdown" v-if="!this.logout">
           <!-- <b class="nav-link-v2" style= "margin-right: 20px;" >Profile</b> -->
-        <img :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 5px; border: 1px solid #00487c" v-b-toggle.collapse-a.collapse-b/>
+        <img :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #00487c;" v-b-toggle.collapse-a/>
+        <p v-b-toggle.collapse-a style="color: #484848; font-weight: 600; padding: 9px; font-size: 13px;">Hi, {{user.first_name}}<i class="fa fa-chevron-down fa-sm" style=" padding: 2px;"/> </p>
         <div class="dropdown-content-profile shadow-sm">
           <b-collapse id="collapse-a" v-if="!this.logout">
             <router-link to="/past-events">
@@ -128,7 +140,7 @@
           </b-collapse>
           <b-collapse id="collapse-a" v-if="!this.logout">
             <router-link to="/">
-              <p @click="userLogout" class="drop-down-text-v2">Logout</p>
+              <div @click="userLogout" class="drop-down-text-v2">Logout</div>
             </router-link>
           </b-collapse>
         </div>
@@ -176,6 +188,14 @@
 import { mapGetters, mapActions } from 'vuex'
 import { DropDown, NavbarToggleButton, Navbar, NavLink } from '@/components';
 import { Popover } from 'element-ui';
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+
+extend('required', {
+  ...required,
+  message: 'Please search for something!'
+});
+
 export default {
   name: 'main-navbar',
   props: {
@@ -190,20 +210,38 @@ export default {
     Navbar,
     NavbarToggleButton,
     NavLink,
-    [Popover.name]: Popover
+    [Popover.name]: Popover,
+    ValidationProvider
   },
   data() {
     return {
       logout: true,
       userEmail: '',
       user: null,
+      search: null,
     }
   },
   methods: {
-    ...mapActions(['finalSignoutrequest']),
+    ...mapActions(['finalSignoutrequest', 'saveSearch']),
 
     userLogout() {
       this.finalSignoutrequest();
+    },
+    getRoute() {
+      return this.$route.path
+    },
+    saveAndSearch() {
+      if(this.search == null || this.search.trim() =='') {
+        return;
+      } else {
+        this.saveSearch(this.search);
+        this.$router.push({path: '/events/search/' + this.search})
+        window.location.reload(true);
+      }
+    },
+    goToAndRefreshEvents() {
+      this.$router.push({path: '/events'})
+       window.location.reload(true);
     }
   },
   watch: {
@@ -220,8 +258,8 @@ export default {
     },
   },
   async created() {
+    console.log(this.$route.path)
     const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-    console.log("test");
     if(loggedUser != null) {
       this.logout = false;
       this.user = loggedUser;
@@ -250,9 +288,7 @@ export default {
 
   .dropdown-content-profile {
     text-align: left;
-    margin-top: 21px;
-    margin-left: -60px;
-    margin-right: 20px;
+    margin-top: 16px;
     position: absolute;
     z-index: 1;
     width: 250px;
@@ -299,8 +335,8 @@ export default {
   .nav-link-v2 {
     color: #484848;
     font-size: 13px;
-    margin-top: 14px;
-    padding-bottom: 12px;
+    margin-top: 10px;
+    padding-bottom: 10px;
     height: 100%;
     font-weight: 600;
     display: block;

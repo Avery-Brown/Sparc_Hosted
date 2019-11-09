@@ -28,5 +28,9 @@ export default {
   padding-right:0 !important;
   }
 
+  body{
+    color: #484848;
+  }
+
 </style>
 

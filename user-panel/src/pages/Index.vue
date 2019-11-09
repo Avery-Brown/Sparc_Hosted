@@ -11,28 +11,37 @@
             </div>
             <div class="row">
               <div class="col-md-8 ml-auto mr-auto mt-3 text-center">
-                <div>
+                <validation-provider rules="required" v-slot="{ errors }" mode="eager">
                   <b-input-group>
                     <b-input-group-prepend>
                       <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
                     </b-input-group-prepend>
-                    <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  v-model="search" size="lg" placeholder="What would you like to learn today?" autofocus>
-                    </b-form-input>
+                      <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  @keyup.enter="saveAndSearch" v-model="search" size="lg" placeholder="What would you like to learn today?" autofocus/>
+
                   </b-input-group>
+                  <span style="color: red;">{{errors[0]}}</span>
+
+                </validation-provider>
+
                   <!-- <fg-input v-model="search" class = "rq-form-element" placeholder="What would you like to learn today?" autofocus></fg-input> -->
-                </div>
-                <button class="btn" style="background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px;" @click="save">Search</button>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-md-12 text-center">
+                <button class="btn" style="background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px;" @click="saveAndSearch">Search</button>
               </div>
             </div>
           </div>
           <div style="position: absolute; bottom: 15px; margin-left: 10px;">
           <!-- <div style="margin-top: 150px;"> -->
-            <router-link class="link footer-link pull-left" to="/about">
-              About&nbsp;|
+            <router-link class="link footer-link pull-left" to="/about" style= "color: #00487c">
+              Meet the Team&nbsp;|
             </router-link>
-            <router-link class="link footer-link pull-left" to="/contact">
-              &nbsp;Contact
-            </router-link>
+            <a class = "social-link" style = "color: #00487c" href="https://www.facebook.com/SparcTheWorld/"><i class="fab fa-facebook fa-lg"/></a>
+            <a class = "social-link" style = "color: #00487c" href="https://www.instagram.com/SparcTheWorld/"><i class="fab fa-instagram fa-lg"/></a>
+            <a class = "social-link" style = "color: #00487c" href="https://twitter.com/SparcTheWorld/"><i class="fab fa-twitter fa-lg"/></a>
+            <a class = "social-link" style = "color: #00487c" href="linkedin.com/company/SparcTheWorld"><i class="fab fa-linkedin fa-lg"/></a>
+            <a class = "social-link" style = "color: #00487c" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg"><i class="fab fa-youtube fa-lg"/></a>
           </div>
         </div>
 
@@ -67,19 +76,25 @@
     <!-- <signup-form></signup-form> -->
     <!-- <examples-section></examples-section>
     <download-section></download-section> -->
-    <modal :show.sync="modals.classic" headerClasses="justify-content-center">
+    <!-- <modal :show.sync="modals.classic" headerClasses="justify-content-center">
       <h6 slot="header" class="text-danger">Please Login to View Engagements</h6>
       <template slot="footer">
           <n-button type="success" @click="gotoLogin" class="pull-right">Login</n-button>
       </template>
-    </modal>
+    </modal> -->
   </div>
 </template>
 <script>
 import { Parallax, Modal, FormGroupInput, Button } from '@/components';
-
-
 import { mapGetters, mapActions } from 'vuex'
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+
+extend('required', {
+  ...required,
+  message: 'Please search for something!'
+});
+
 export default {
   name: 'index',
   bodyClass: 'index-page',
@@ -88,11 +103,12 @@ export default {
     Modal,
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput,
+    ValidationProvider,
   },
   data() {
     return {
       rating: 5,
-      search: '',
+      search: null,
        modals: {
         classic: false,
       },
@@ -104,21 +120,14 @@ export default {
   methods: {
     ...mapActions(['fetchEvents', 'saveSearch']),
 
-    save() {
-      if(this.search !== null) {
-        this.modals.classic = true
-        console.log("Search")
-        console.log(this.search)
-        this.saveSearch(this.search)
-        this.search = null
-      }
-      else {
-        console.log("Please Enter Something")
+    saveAndSearch() {
+      if(this.search == null || this.search.trim() =='') {
+        return;
+      }  else {
+        this.saveSearch(this.search);
+        this.$router.push({path: '/events/search/' + this.search})
       }
     },
-    gotoLogin() {
-      this.$router.push({path: '/login'})
-    }
   },
   created() {
     this.fetchEvents();
@@ -129,5 +138,10 @@ export default {
 <style scoped>
   input[type="text"] {
     color: #fff;
+  }
+
+  .social-link {
+    margin-left: 3px;
+    margin-right: 3px;
   }
 </style>
