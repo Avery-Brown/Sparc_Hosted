@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="main">
+    <div v-bind:class="{searchClass: this.searchQuery != null}">
       <div class="section section-images">
         <div class="container" id="top">
           <div class="col-md-12">
@@ -117,7 +117,7 @@
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
-                      <div class="card shadow-md" style = "border-radius: 8px;">
+                      <div class="card shadow" style = "border-radius: 8px;">
                         <div class="card-body">
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
@@ -260,6 +260,9 @@
         </div>
       </div>
     </div>
+    <div>
+    &nbsp;
+    </div>
   </div>
 </template>
 <script>
@@ -299,7 +302,7 @@ export default {
       errorOptions: { animationData: errorAnimationData },
       options: [{ text: 'Virtual', value: 'virtual' },
                 { text: 'In Person', value: 'in Person' },
-                { text: 'In Person & Digital', value: 'both' },
+                { text: 'In Person & Virtual', value: 'both' },
               ],
       rating: 5,
       url: window.location.href+"/",
@@ -372,18 +375,37 @@ export default {
         });
     },
     async filterBySearch(fromCreation) {
+      // Add filtering by author
+      // Add filtering by location
       if(fromCreation) {
         this.filters = await this.getEvents();
       }
-      var allTags = await this.getTags();
-      let tags = allTags.filter((tag) => tag.value.toLowerCase().trim().includes(this.searchQuery.trim()));
-      let tagIds = tags.map(tag => tag.id);
+      var searchQuery = this.searchQuery.split(/[\s,]+/);
+      var searchQueryArray = searchQuery.map((query) => query.toLowerCase());
       var resultEvents = new Set();
+
+      // By Tags
+      var allTags = await this.getTags();
+      let tagIds = new Set();
+      allTags.forEach(tag => {
+        if (searchQueryArray.includes(tag.value.toLowerCase().trim())) {
+          tagIds.add(tag.id)
+        }
+      })
+      tagIds = [...tagIds];
       this.filters.forEach(event => {
         if (event.tags != null) {
           if(event.tags.some(tag => tagIds.includes(tag))) {
             resultEvents.add(event)
           }
+        }
+      })
+
+      // By event names
+      this.filters.forEach(event => {
+        var eventNames = event.event_name.split(/[\s,]+/);
+        if(eventNames.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+          resultEvents.add(event)
         }
       })
       this.filters = [...resultEvents]
@@ -660,6 +682,10 @@ export default {
 
   .multiselect .multiselect__select {
     font-size: 15px;
+  }
+
+  .searchClass {
+    margin-bottom: 75px;
   }
 
 
