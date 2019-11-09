@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-bottom: -80px;">
     <div class="main">
       <div class="section section-images" style="max-height: 80vh;">
         <div class="container">
@@ -11,37 +11,21 @@
             </div>
             <div class="row">
               <div class="col-md-8 ml-auto mr-auto mt-3 text-center">
-                <validation-provider rules="required" v-slot="{ errors }" mode="eager">
-                  <b-input-group>
+                  <b-input-group class = "shadow-sm" style="border-radius: 30px;">
                     <b-input-group-prepend>
                       <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
                     </b-input-group-prepend>
                       <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  @keyup.enter="saveAndSearch" v-model="search" size="lg" placeholder="What would you like to learn today?" autofocus/>
 
                   </b-input-group>
-                  <span style="color: red;">{{errors[0]}}</span>
-
-                </validation-provider>
-
                   <!-- <fg-input v-model="search" class = "rq-form-element" placeholder="What would you like to learn today?" autofocus></fg-input> -->
               </div>
             </div>
             <div class = "row">
               <div class = "col-md-12 text-center">
-                <button class="btn" style="background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px;" @click="saveAndSearch">Search</button>
+                <button class="btn" style="background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px; border-radius: 7px;" @click="saveAndSearch">Search</button>
               </div>
             </div>
-          </div>
-          <div style="position: absolute; bottom: 15px; margin-left: 10px;">
-          <!-- <div style="margin-top: 150px;"> -->
-            <router-link class="link footer-link pull-left" to="/about" style= "color: #00487c">
-              Meet the Team&nbsp;|
-            </router-link>
-            <a class = "social-link" style = "color: #00487c" href="https://www.facebook.com/SparcTheWorld/"><i class="fab fa-facebook fa-lg"/></a>
-            <a class = "social-link" style = "color: #00487c" href="https://www.instagram.com/SparcTheWorld/"><i class="fab fa-instagram fa-lg"/></a>
-            <a class = "social-link" style = "color: #00487c" href="https://twitter.com/SparcTheWorld/"><i class="fab fa-twitter fa-lg"/></a>
-            <a class = "social-link" style = "color: #00487c" href="linkedin.com/company/SparcTheWorld"><i class="fab fa-linkedin fa-lg"/></a>
-            <a class = "social-link" style = "color: #00487c" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg"><i class="fab fa-youtube fa-lg"/></a>
           </div>
         </div>
 
@@ -87,13 +71,6 @@
 <script>
 import { Parallax, Modal, FormGroupInput, Button } from '@/components';
 import { mapGetters, mapActions } from 'vuex'
-import { ValidationProvider, extend } from 'vee-validate';
-import { required } from 'vee-validate/dist/rules';
-
-extend('required', {
-  ...required,
-  message: 'Please search for something!'
-});
 
 export default {
   name: 'index',
@@ -103,7 +80,6 @@ export default {
     Modal,
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput,
-    ValidationProvider,
   },
   data() {
     return {
@@ -122,7 +98,8 @@ export default {
 
     saveAndSearch() {
       if(this.search == null || this.search.trim() =='') {
-        return;
+        this.saveSearch("NOTHING SEARCHED")
+        this.$router.push({path: '/events/'})
       }  else {
         this.saveSearch(this.search);
         this.$router.push({path: '/events/search/' + this.search})
@@ -141,7 +118,7 @@ export default {
   }
 
   .social-link {
-    margin-left: 3px;
-    margin-right: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 </style>

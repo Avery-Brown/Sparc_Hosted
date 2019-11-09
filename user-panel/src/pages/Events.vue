@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="main">
+    <div v-bind:class="{searchClass: this.searchQuery != null}">
       <div class="section section-images">
         <div class="container" id="top">
           <div class="col-md-12">
@@ -117,7 +117,7 @@
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
-                      <div class="card shadow-md" style = "border-radius: 8px;">
+                      <div class="card shadow" style = "border-radius: 8px;">
                         <div class="card-body">
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
@@ -260,6 +260,9 @@
         </div>
       </div>
     </div>
+    <div>
+    &nbsp;
+    </div>
   </div>
 </template>
 <script>
@@ -299,7 +302,7 @@ export default {
       errorOptions: { animationData: errorAnimationData },
       options: [{ text: 'Virtual', value: 'virtual' },
                 { text: 'In Person', value: 'in Person' },
-                { text: 'In Person & Digital', value: 'both' },
+                { text: 'In Person & Virtual', value: 'both' },
               ],
       rating: 5,
       url: window.location.href+"/",
@@ -660,6 +663,10 @@ export default {
 
   .multiselect .multiselect__select {
     font-size: 15px;
+  }
+
+  .searchClass {
+    margin-bottom: 75px;
   }
 
 

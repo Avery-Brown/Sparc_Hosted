@@ -12,7 +12,7 @@
         </router-link>
       </li>
       <li style="display: inline-block; margin-left: 20px; width: 20rem; margin-bottom: -10px;" v-if="getRoute() != '/'">
-            <b-input-group>
+            <b-input-group class = "shadow-sm" style="border-radius: 30px;">
               <b-input-group-prepend>
                 <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
               </b-input-group-prepend>
@@ -113,32 +113,32 @@
         <img :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #00487c;" v-b-toggle.collapse-a/>
         <p v-b-toggle.collapse-a style="color: #484848; font-weight: 600; padding: 9px; font-size: 13px;">Hi, {{user.first_name}}<i class="fa fa-chevron-down fa-sm" style=" padding: 2px;"/> </p>
         <div class="dropdown-content-profile shadow-sm">
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/past-events">
               <p class="drop-down-text-v2">Past Engagements</p>
             </router-link>
           </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/upcoming-events">
               <p class="drop-down-text-v2">Upcoming Engagements</p>
             </router-link>
           </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/host">
               <p class="drop-down-text-v2">Hosted Engagements</p>
             </router-link>
           </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/create_engagement">
               <p class="drop-down-text-v2">Create Engagement</p>
             </router-link>
           </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/billing-history">
               <p class="drop-down-text-v2">Billing History</p>
             </router-link>
           </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/">
               <div @click="userLogout" class="drop-down-text-v2">Logout</div>
             </router-link>
@@ -232,7 +232,9 @@ export default {
     },
     saveAndSearch() {
       if(this.search == null || this.search.trim() =='') {
-        return;
+        this.saveSearch("NOTHING SEARCHED")
+        this.$router.push({path: '/events/'})
+        window.location.reload(true);
       } else {
         this.saveSearch(this.search);
         this.$router.push({path: '/events/search/' + this.search})
@@ -335,7 +337,7 @@ export default {
   .nav-link-v2 {
     color: #484848;
     font-size: 13px;
-    margin-top: 10px;
+    margin-top: 11px;
     padding-bottom: 10px;
     height: 100%;
     font-weight: 600;

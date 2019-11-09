@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Index from './pages/Index.vue';
-import About from './pages/About.vue';
+import About from './pages/About.vue'
+import MeetTeam from './pages/MeetTeam.vue';
 import Contact from './pages/Contact.vue';
 import Host from './pages/Host.vue';
 import CreateEngagement from './pages/CreateEngagement.vue';
@@ -19,7 +20,6 @@ import HostUpcomingEvents from './pages/HostUpcomingEvents.vue';
 import HostPastEvents from './pages/HostPastEvents.vue';
 import BillingHistory from './pages/BillingHistory.vue';
 import MainNavbar from './layout/MainNavbar.vue';
-import StarterNavbar from './layout/StarterNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 
 Vue.use(Router);
@@ -33,16 +33,22 @@ export default new Router({
       components: { default: Index, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       }
     },
     {
-      path:'/about',
-      name: 'about',
-      components: { default: About, header: MainNavbar, footer: MainFooter},
+      path:'/meet-team',
+      name: 'meet-team',
+      components: { default: MeetTeam, header: MainNavbar, footer: MainFooter},
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
+      }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      components: {default: About, header: MainNavbar, footer: MainFooter},
+      props: {
+        header: { colorOnScroll: 400 },
       }
     },
     {
@@ -51,16 +57,14 @@ export default new Router({
       components: { default: Contact, header: MainNavbar, footer: MainFooter},
       props: {
         header: { colorOnScroll: 400 }, 
-        footer: { backgroundColor: 'black' }
       }
     }, 
     {
       path: '/host',
       name: 'host',
-      components: { default: Host, header: StarterNavbar, footer: MainFooter },
+      components: { default: Host, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       },
       meta: {
         requiresAuth: true,
@@ -69,7 +73,7 @@ export default new Router({
     {
       path: '/create_engagement',
       name: 'create_engagement',
-      components: { default: CreateEngagement, header: StarterNavbar, footer: MainFooter },
+      components: { default: CreateEngagement, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }
@@ -90,7 +94,7 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      components: { default: Login, header: MainNavbar },
+      components: { default: Login, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       }
@@ -114,7 +118,7 @@ export default new Router({
     {
       path: '/events',
       name: 'events',
-      components: { default: Events, header: MainNavbar },
+      components: { default: Events, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       },
@@ -122,7 +126,7 @@ export default new Router({
     {
       path: '/events/search/:searchQuery',
       name: 'events',
-      components: { default: Events, header: MainNavbar },
+      components: { default: Events, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
       },
@@ -174,7 +178,7 @@ export default new Router({
     {
       path: '/host-upcoming-engagements',
       name: 'host-upcoming-engagements',
-      components: { default: HostUpcomingEvents, header: StarterNavbar },
+      components: { default: HostUpcomingEvents, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 }
       },
@@ -185,7 +189,7 @@ export default new Router({
     {
       path: '/host-past-engagements',
       name: 'host-past-engagements',
-      components: { default: HostPastEvents, header: StarterNavbar },
+      components: { default: HostPastEvents, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 }
       },
@@ -196,7 +200,7 @@ export default new Router({
     {
       path: '/billing-history',
       name: 'billing-history',
-      components: { default: BillingHistory, header: StarterNavbar },
+      components: { default: BillingHistory, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 }
       },
