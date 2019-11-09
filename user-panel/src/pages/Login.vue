@@ -84,10 +84,10 @@ export default {
         console.log("auth state watched")
 
             if (val) {
-                setTimeout(() => {
                   console.log('VAL',val)
                   this.$router.push('/events')
-                }, 500)
+                  window.location.reload(true);
+
             }
             else{
               this.success = false
@@ -97,11 +97,9 @@ export default {
         verified (val) {
         //&& val.uid.length > 0
             if (val) {
-                setTimeout(() => {
                   if(val == 'no'){
                     this.userVerified = false
                   }
-                }, 500)
             }
             else{
               this.success = false
