@@ -29,8 +29,8 @@
           </router-link>
           <a class = "social-link" style = "color: #00487c" href="https://www.facebook.com/SparcTheWorld/" target="_blank"><i class="fab fa-facebook fa-lg"/></a>
           <a class = "social-link" style = "color: #00487c" href="https://www.instagram.com/SparcTheWorld/" target="_blank"><i class="fab fa-instagram fa-lg"/></a>
+          <a class = "social-link" style = "color: #00487c" href="https://linkedin.com/company/SparcTheWorld" target="_blank"><i class="fab fa-linkedin fa-lg"/></a>
           <a class = "social-link" style = "color: #00487c" href="https://twitter.com/SparcTheWorld/" target="_blank"><i class="fab fa-twitter fa-lg"/></a>
-          <a class = "social-link" style = "color: #00487c" href="linkedin.com/company/SparcTheWorld" target="_blank"><i class="fab fa-linkedin fa-lg"/></a>
           <a class = "social-link" style = "color: #00487c" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg" target="_blank"><i class="fab fa-youtube fa-lg"/></a>
         <!-- &copy; {{ year }}, Designed by -->
         <!-- <a href="https:///www.invisionapp.com" target="_blank" rel="noopener"

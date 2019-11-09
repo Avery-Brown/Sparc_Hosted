@@ -375,18 +375,37 @@ export default {
         });
     },
     async filterBySearch(fromCreation) {
+      // Add filtering by author
+      // Add filtering by location
       if(fromCreation) {
         this.filters = await this.getEvents();
       }
-      var allTags = await this.getTags();
-      let tags = allTags.filter((tag) => tag.value.toLowerCase().trim().includes(this.searchQuery.trim()));
-      let tagIds = tags.map(tag => tag.id);
+      var searchQuery = this.searchQuery.split(/[\s,]+/);
+      var searchQueryArray = searchQuery.map((query) => query.toLowerCase());
       var resultEvents = new Set();
+
+      // By Tags
+      var allTags = await this.getTags();
+      let tagIds = new Set();
+      allTags.forEach(tag => {
+        if (searchQueryArray.includes(tag.value.toLowerCase().trim())) {
+          tagIds.add(tag.id)
+        }
+      })
+      tagIds = [...tagIds];
       this.filters.forEach(event => {
         if (event.tags != null) {
           if(event.tags.some(tag => tagIds.includes(tag))) {
             resultEvents.add(event)
           }
+        }
+      })
+
+      // By event names
+      this.filters.forEach(event => {
+        var eventNames = event.event_name.split(/[\s,]+/);
+        if(eventNames.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+          resultEvents.add(event)
         }
       })
       this.filters = [...resultEvents]
