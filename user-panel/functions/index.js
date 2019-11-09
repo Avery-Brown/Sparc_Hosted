@@ -146,6 +146,15 @@ exports.getRatings = functions.https.onRequest((req, res) => {
   })
 })
 
+exports.getTags = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var tagsRef = admin.database().ref('tags');
+    tagsRef.on('value', snapshot => {
+      res.send(snapshot.val())
+    })
+  })
+})
+
 exports.webApi = functions.https.onRequest(main);
 
 

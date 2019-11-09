@@ -6,9 +6,10 @@
           <div class="col-md-12">
             <div class = "container-fluid">
               <div class ="row" style="margin-top: 0.5rem;">
-                <div class ="col">
-                  <h2>Learn and <p style="display: inline-block; color: #0fe031; font-weight: 400; font-size: 36px;">connect</p> in a meaningful way</h2>
-                  <h4 style="margin-top: -40px;">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
+                <div class ="col" style="margin-left: -40px;">
+                  <h2 style="color: #484848;">Learn and connect in a meaningful way</h2>
+                  <h4 style="margin-top: -20px; color: #484848">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
+                  <h5 v-if="this.searchQuery != null" style="font-weight: 600; color: #484848; margin-top: 50px; margin-bottom: -.25rem">Search Results for '<p style="display: inline-block; font-weight: 600; font-size: 18px; color: #484848">{{this.searchQuery}}</p>'</h5>
                 </div>
               </div>
               <div class = "row" style="margin-top: 2rem">
@@ -108,7 +109,7 @@
                 </div>
                 <div class = "col-md-10">
                   <div class="scroll-pane-cards">
-                    <div v-if="!noListingsFound && filtered.length == 0">
+                    <div v-if="!noListingsFound && filtered.length == 0 || !noListingsFound && isFiltering">
                       <lottie :options="loadingOptions" :width="200" :height="200" style="margin-top: 3rem;"/>
                     </div>
                     <div v-else-if="noListingsFound" class="text-center">
@@ -155,11 +156,11 @@
                                     <div class = "col-md-7">
                                       <div class = "row ml-auto mr-auto">
                                         <div class = "col-md-4 mt-auto mb-auto">
-                                          <img class="image-class" width="40" height="40" :src="getUser(event.created_by).profile_image" alt="">
+                                          <img class="image-class" width="40" height="40" :src="getPhoto(getUser(event.created_by))" alt="">
                                         </div>
                                         <div class = "col-md-8">
                                           <div class = "row">
-                                              <b>{{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name}}</b>
+                                              <b>{{getName(getUser(event.created_by))}}</b>
                                           </div>
                                           <div class = "row">
                                               <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
@@ -271,7 +272,7 @@ import ReadMore from 'vue-read-more';
 import axios from 'axios';
 import isEmpty from '../isEmpty';
 import Lottie from 'vue-lottie'
-import loadingAnimationData from '../../lotties/40-loading.json'
+import loadingAnimationData from '../../lotties/1301-round-cap-material-loading.json'
 import errorAnimationData from '../../lotties/629-empty-box.json'
 import Multiselect from 'vue-multiselect'
 import { PassThrough } from 'stream';
@@ -293,6 +294,7 @@ export default {
   data() {
     return {
       noListingsFound: false,
+      isFiltering: false,
       loadingOptions: { animationData: loadingAnimationData },
       errorOptions: { animationData: errorAnimationData },
       options: [{ text: 'Virtual', value: 'virtual' },
@@ -301,6 +303,7 @@ export default {
               ],
       rating: 5,
       url: window.location.href+"/",
+      saerchQuery: '',
       typeFilters: [],
       dateFrom: null,
       dateTo: null,                                                 
@@ -368,16 +371,38 @@ export default {
             }
         });
     },
+    async filterBySearch(fromCreation) {
+      if(fromCreation) {
+        this.filters = await this.getEvents();
+      }
+      var allTags = await this.getTags();
+      let tags = allTags.filter((tag) => tag.value.toLowerCase().trim().includes(this.searchQuery.trim()));
+      let tagIds = tags.map(tag => tag.id);
+      var resultEvents = new Set();
+      this.filters.forEach(event => {
+        if (event.tags != null) {
+          if(event.tags.some(tag => tagIds.includes(tag))) {
+            resultEvents.add(event)
+          }
+        }
+      })
+      this.filters = [...resultEvents]
+    },
     async filterAll() {
+      this.isFiltering = true;
       this.filters = [];
       this.filters = await this.getEvents();
       this.getType();
       this.getDate();
       this.getLocation();
       this.getEventsByTag();
+      if (this.searchQuery != null) {
+        await this.filterBySearch(false);
+      }
       if (this.filtered.length == 0) {
-        this.noListingsFound = true;
+          this.noListingsFound = true;
       } 
+      this.isFiltering = false;
     },
     async getType() {
         var filteredEvents = [];
@@ -421,8 +446,6 @@ export default {
     async getEventsByTag() {
           var tagValues = this.tagFilters.map((tag) => tag.id)
 
-          console.log(tagValues);
-
           var result =  new Set();
 
           if(this.tagFilters.length > 0) {
@@ -461,8 +484,24 @@ export default {
       let user_item = this.getUsers.find(user => 
          Object.keys(user)[0] === id
       )
-      var user = user_item[Object.keys(user_item)[0]]
-      return user;
+      if (user_item != null){
+        var user = user_item[Object.keys(user_item)[0]]
+        return user;
+      }
+    },
+    getPhoto(user) {
+      if (user == null){
+        return
+      } else {
+        return user.profile_image;
+      }
+    },
+    getName(user) {
+      if (user == null) {
+        return
+      } else {
+        return user.first_name + " " + user.last_name;
+      }
     },
     getHoverIdDirectionsByIndex(index) {
       return "tooltip-target-direction" + index;
@@ -492,7 +531,7 @@ export default {
             this.noListingsFound = true;
           }
           resolve(eventsArray);
-        }, 500)
+        }, 750)
 
       })
     },
@@ -516,6 +555,14 @@ export default {
         ratingsArray.push(ratings.data[key]);
       });
       return ratingsArray;
+    },
+    async getTags() {
+      var tags = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getTags');
+      var tagsArray = [];
+      Object.keys(tags.data).forEach((key) => {
+        tagsArray.push({...tags.data[key], id: key});
+      })
+      return tagsArray;
     }
   },
   async created() {
@@ -524,11 +571,21 @@ export default {
     var mm = today.getMonth() + 1;
     var yyyy = today.getFullYear();
 
+    this.searchQuery = this.$route.params.searchQuery;
+
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
 
-    this.filters = [];
-    this.filters = await this.getEvents();
+    if (this.searchQuery != null) {
+      this.isFiltering = true;
+      await this.filterBySearch(true);
+      this.isFiltering = false;
+      if (this.filters.length == 0) {
+        this.noListingsFound = true;
+      }
+    } else {
+      this.filters = await this.getEvents();
+    }
 
     this.getUsers = [];
     this.getUsers = await this.getAllUsers();
@@ -537,6 +594,7 @@ export default {
     this.ratings = await this.getAllRatings();
 
     this.fetchTags();
+
   },
 
   watch: {

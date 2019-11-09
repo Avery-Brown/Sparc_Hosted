@@ -21,6 +21,7 @@
     "native-toast": "^2.0.0",
     "nouislider": "^11.1.0",
     "v-clipboard": "^2.2.2",
+    "vee-validate": "^3.0.11",
     "vue": "^2.6.10",
     "vue-ctk-date-time-picker": "^2.2.0",
     "vue-lazy-load": "^0.0.7",

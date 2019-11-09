@@ -120,6 +120,14 @@ export default new Router({
       },
     },
     {
+      path: '/events/search/:searchQuery',
+      name: 'events',
+      components: { default: Events, header: MainNavbar },
+      props: {
+        header: { colorOnScroll: 400 }
+      },
+    },
+    {
       path: '/events/:eventId',
       name: 'event-details',
       components: { default: EventDetails, header: MainNavbar },
