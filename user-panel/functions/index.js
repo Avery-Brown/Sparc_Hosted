@@ -115,6 +115,46 @@ exports.sendContact = functions.https.onRequest((req, res) => {
   })
 })
 
+exports.getEvents = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var eventsRef = admin.database().ref('events');
+    eventsRef.on("value", (snapshot) => {
+      console.log(snapshot.val());
+      res.send(snapshot.val())
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  })
+})
+
+exports.getUsers = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var usersRef = admin.database().ref('users');
+    usersRef.on("value", (snapshot) => {
+      console.log(snapshot.val());
+      res.send(snapshot.val())
+    })
+  })
+})
+
+exports.getRatings = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var ratingsRef = admin.database().ref('ratings');
+    ratingsRef.on('value', (snapshot) => {
+      res.send(snapshot.val());
+    })
+  })
+})
+
+exports.getTags = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    var tagsRef = admin.database().ref('tags');
+    tagsRef.on('value', snapshot => {
+      res.send(snapshot.val())
+    })
+  })
+})
+
 exports.webApi = functions.https.onRequest(main);
 
 
