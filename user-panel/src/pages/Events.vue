@@ -109,10 +109,10 @@
                 </div>
                 <div class = "col-md-10">
                   <div class="scroll-pane-cards">
-                    <div v-if="!noListingsFound && filtered.length == 0 || !noListingsFound && isFiltering">
+                    <div v-if="isFiltering">
                       <lottie :options="loadingOptions" :width="200" :height="200" style="margin-top: 3rem;"/>
                     </div>
-                    <div v-else-if="noListingsFound" class="text-center">
+                    <div v-else-if="filtered.length == 0" class="text-center">
                       <h4><p style="display: inline-block; font-size: 23px; color: red; font-weight: 400;">Oops!</p> Looks like no engagements were found with that criteria</h4>
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
@@ -129,7 +129,7 @@
                               </div>
                               <div class = "row">
                                 <div class = "col">
-                                    <button class = 'btn' style="margin-top: 20px; margin-bottom: 20px; background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)">Message Host</button>
+                                    <button class = 'btn' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="viewEvent(event.id)">Message Host</button>
                                 </div>
                               </div>
                               <div class = "row" style="mt-auto mb-auto">
@@ -169,7 +169,7 @@
                                       </div>
                                     </div>
                                     <div class = "col-md-5 mb-auto" >
-                                        <button class = 'btn pull-right' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)"> Participate</button>
+                                        <button class = 'btn pull-right' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px;" @click="viewEvent(event.id)"> Participate</button>
                                     </div>
                                     </div>
                                     <div class = "row">
@@ -296,7 +296,6 @@ export default {
   },
   data() {
     return {
-      noListingsFound: false,
       isFiltering: false,
       loadingOptions: { animationData: loadingAnimationData },
       errorOptions: { animationData: errorAnimationData },
@@ -375,20 +374,25 @@ export default {
         });
     },
     async filterBySearch(fromCreation) {
-      // Add filtering by author
-      // Add filtering by location
       if(fromCreation) {
         this.filters = await this.getEvents();
+        this.getUsers = await this.getAllUsers();
       }
       var searchQuery = this.searchQuery.split(/[\s,]+/);
-      var searchQueryArray = searchQuery.map((query) => query.toLowerCase());
+      var searchQueryLower = searchQuery.map((query) => query.toLowerCase());
+      var searchQueryArray = [];
+      searchQueryLower.forEach(query => {
+        searchQueryArray.push(query);
+        searchQueryArray.push(query + 's')
+      })
+      
       var resultEvents = new Set();
 
       // By Tags
       var allTags = await this.getTags();
       let tagIds = new Set();
       allTags.forEach(tag => {
-        if (searchQueryArray.includes(tag.value.toLowerCase().trim())) {
+        if(searchQueryArray.some(value => tag.value.toLowerCase().trim().split(" ").includes(value))) {
           tagIds.add(tag.id)
         }
       })
@@ -404,10 +408,44 @@ export default {
       // By event names
       this.filters.forEach(event => {
         var eventNames = event.event_name.split(/[\s,]+/);
-        if(eventNames.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+        var eventNamesWithS = [];
+        eventNames.forEach(event => {
+          eventNamesWithS.push(event);
+          eventNamesWithS.push(event + 's');
+        })
+        if(eventNamesWithS.some(name => searchQueryArray.includes(name.toLowerCase()))) {
           resultEvents.add(event)
         }
       })
+
+      // By author
+      this.filters.forEach(event => {
+        let user_item = this.getUsers.find(user => 
+         Object.keys(user)[0] === event.created_by
+        )
+        if (user_item != null) {
+          var user = user_item[Object.keys(user_item)[0]]
+          var userName = [user.first_name, user.last_name]
+          if(userName.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+            resultEvents.add(event)
+          }
+        }
+      })
+
+      // By description
+      this.filters.forEach(event => {
+        var eventDescription= event.event_description.toLowerCase().split(/[\s,]+/);
+        var eventDescriptionWithS  = [];
+        eventDescription.forEach(key => {
+          eventDescriptionWithS.push(key);
+          eventDescriptionWithS.push(key + 's')
+        })
+        if(eventDescriptionWithS.some(key => searchQueryArray.includes(key.trim()))) {
+          resultEvents.add(event);
+        }
+      })
+
+      // Collect...
       this.filters = [...resultEvents]
     },
     async filterAll() {
@@ -421,9 +459,6 @@ export default {
       if (this.searchQuery != null) {
         await this.filterBySearch(false);
       }
-      if (this.filtered.length == 0) {
-          this.noListingsFound = true;
-      } 
       this.isFiltering = false;
     },
     async getType() {
@@ -549,16 +584,12 @@ export default {
           Object.keys(events.data).forEach((key) => {
             eventsArray.push({...events.data[key], id: key});
           });
-          if (eventsArray.length == 0) {
-            this.noListingsFound = true;
-          }
           resolve(eventsArray);
         }, 750)
 
       })
     },
     async getEvents() {
-      this.noListingsFound = false;
       var eventsArray = await this.eventsPromise();
       return eventsArray;
     },
@@ -597,20 +628,18 @@ export default {
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
-
     if (this.searchQuery != null) {
       this.isFiltering = true;
       await this.filterBySearch(true);
       this.isFiltering = false;
-      if (this.filters.length == 0) {
-        this.noListingsFound = true;
-      }
     } else {
+      this.isFiltering = true;
       this.filters = await this.getEvents();
+      this.getUsers = await this.getAllUsers();
+      this.isFiltering = false;
     }
-
-    this.getUsers = [];
-    this.getUsers = await this.getAllUsers();
+    // this.getUsers = [];
+    // this.getUsers = await this.getAllUsers();
 
     this.ratings = [];
     this.ratings = await this.getAllRatings();
