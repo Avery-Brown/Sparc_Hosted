@@ -71,9 +71,10 @@
           <b>Profile</b>
         </router-link>
       </li>
-      <li class="nav-item" v-if="!this.logout">
-        <router-link class="navbar-brand nav-link text-success" to="/messages">
-          <b>Messages</b>
+      <li class="nav-item" v-if="!this.logout" @click="hide=true">
+        <router-link class="navbar-brand nav-link text-success" to="/messages" >
+          <b>Messages<b-badge v-if="getNewMessages>0 && hide==false"  style="position:relative;top:-0.5rem;" variant="danger">{{getNewMessages}} </b-badge></b>
+
         </router-link>
       </li>
 
@@ -108,7 +109,27 @@ export default {
     transparent: Boolean,
     colorOnScroll: Number
   },
-  computed: { ...mapGetters(['loggedUser'])},
+  computed: { 
+    ...mapGetters(['loggedUser']),
+    getNewMessages(){
+      let user=JSON.parse(localStorage.getItem('loggedUser'))
+      let cnt=0
+      if(user.message_connections!=null){
+      Object.keys(user.message_connections).forEach(key=>{
+        cnt=cnt+user.message_connections[key].new_messages
+              console.log(user.message_connections[key].new_messages)
+
+
+      })
+      // console.log(cnt)
+      return cnt
+      }
+      else{
+        return 0
+      }
+    }
+  
+  },
   components: {
     DropDown,
     Navbar,
@@ -118,6 +139,7 @@ export default {
   },
   data() {
     return {
+      hide:false,
       logout: true,
       userEmail: '',
     }
