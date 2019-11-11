@@ -257,7 +257,7 @@ export default {
             }
       },
     fillProfile(arg_user) {
-      if(arg_user.new_messages>0) {
+      if(arg_user.new_messages!=null && arg_user.new_messages>0) {
         let op_user=this.getUsers.find(user=>user.id==arg_user.id)
         op_user.new_messages=0
         this.unsetNewMessages({sender_id:this.lc_loggeduser.id,receiver_id:arg_user.id})
@@ -307,7 +307,7 @@ export default {
       }
     },
     sendMessage(){
-      let new_messages=0;
+      let new_messages=1;
       if(this.get_my_block_status==true){
         nativeToast({
           message: 'You are not allowed to send message to this user',
@@ -344,11 +344,14 @@ export default {
       if(this.selected_user.message_connections!=null){
       let yourself=Object.keys(this.selected_user.message_connections).find(key=>this.selected_user.message_connections[key].id==this.lc_loggeduser.id)
       //how many msgs i hv with this guy 
-      // console.log(this.selected_user.message_connections[yourself])
+      console.log(yourself)
+      if(yourself!=null){
         if(this.selected_user.message_connections[yourself].new_messages!=null) {
           new_messages=this.selected_user.message_connections[yourself].new_messages+1
           this.selected_user.message_connections[yourself].new_messages=new_messages
         }
+      }
+        
       }
       else {
         console.log("this guy doesnt have any messages with anybody")
@@ -480,10 +483,10 @@ export default {
 </script>
 <style scoped>
 .normal-heights{
-height:500px;
+height:70vh;
 }
 .padded-heights{
-height:531px;
+height:70vh;
 }
 input:focus { 
   /* border: none !important; */
@@ -561,7 +564,7 @@ img{ max-width:100%;}
 .chat_list:hover {
 background:#ebebeb;
 }
-.inbox_chat { height: 480px; overflow-y: auto;}
+.inbox_chat { height: 70vh; overflow-y: auto;}
 
 .active_chat{ background:#ebebeb;}
 
@@ -649,7 +652,7 @@ background:#ebebeb;
 }
 .messaging { padding: 0 0 50px 0;}
 .msg_history {
-  height: 450px;
+  height: 70vh;
   overflow-y: auto;
 }
 
