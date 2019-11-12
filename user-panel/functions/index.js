@@ -155,6 +155,17 @@ exports.getTags = functions.https.onRequest((req, res) => {
   })
 })
 
+exports.checkUser = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
+    try {
+      await admin.auth().getUserByEmail(req.body.email)
+      res.status(400).send({"error": "User already exists with this email"})
+    } catch (e) {
+      res.status(200).send("GOOD TO GO")
+    }
+  }) 
+})
+
 exports.webApi = functions.https.onRequest(main);
 
 

@@ -6,10 +6,10 @@
           <div class="col-md-9 ml-auto mr-auto">
             <div class="alert alert-danger" dismissible v-if="!success">Invalid Email or Password</div>
             <div class="alert alert-warning" dismissible v-if="!userVerified">Please Verifiy your Email address to continue</div>
-              <Card class="login-card" style="margin-top: 8rem">
+              <Card class="login-card" style="margin-top: 7rem; padding-top: 30px; padding-bottom: 30px;" >
                 <div class = "row mt-auto mb-auto">
-                  <div class = "col-md-5 text-center mt-auto mb-auto" style="border-right: 0.5px solid gainsboro;">
-                    <img src="sparclogo1.png" width="400" alt="">
+                  <div class = "col-md-5 text-center mt-auto mb-auto" >
+                    <img src="sparcS.png" width="125"  style="margin-top: 10px; margin-bottom: 12px;"  alt="">
                     <p class="text-center" style="font-weight: 500; color: #484848">A People-Centric Marketplace</p>
                   </div>
                   <div class = "col-md-7">
@@ -22,26 +22,40 @@
                           @click="loginUser"
                           value="Login"
                           class="btn btn-info btn-lg btn-block"
-                          style = "background: #0655f3"
+                          style = "background: #32d477"
                           />
                         </div>
                         </form>
                       <div>
-                        <h6>
-                          <router-link class="link footer-link pull-right" to="/register" style="color: #484848; font-weight: 600">
+                          <div class = "row">
+                            <div class = "col-md-6">
+                            
+                              <p style="display: inline-block; font-size: 11px; font-weight: 600; color: #484848;">Need an Account?
+                                <router-link style="display: inline-block; color:dodgerblue; font-size: 11px; font-weight: 600; text-decoration: none;" to ="/register">
+                                Register
+                              </router-link>
+                              </p>
+                            </div>
+                            <div class = "col-md-6 text-right">
+                              <p style="display: inline-block; font-size: 11px; font-weight: 600; color: #484848">Forgot Password?
+                              </p>
+                              <router-link class = "text-center" style="display: inline-block; color:dodgerblue; font-size: 11px; font-weight: 600; text-decoration: none;" to ="/forgot-password">
+                                &nbsp;Reset
+                              </router-link>
+                            </div>
+                          </div>
+                          
+                          
+                          <!-- <router-link class="link footer-link pull-right" to="/register" style="color: #484848; font-weight: 600">
                             Need an Account? Register
-                          </router-link>
-                        </h6>
-                        <h6>
-                          <router-link class="link footer-link text-center" to="/forgot-password" style="color: #484848; font-weight: 600">
-                            Forgot Password? Reset
-                          </router-link>
-                        </h6>
+                          </router-link> -->
+                      
+                          
                       </div>
                   </div>
                 </div>
               </Card>
-              <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #484848; text-decoration: none; font-size: 14px;">
+          <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #484848; text-decoration: none; font-size: 14px;">
               Meet the Team&nbsp;&nbsp;&nbsp;|
           </router-link>
           <a class = "social-link" style = "color: #484848" href="https://www.facebook.com/SparcTheWorld/" target="_blank"><i class="fab fa-facebook fa-lg"/></a>
