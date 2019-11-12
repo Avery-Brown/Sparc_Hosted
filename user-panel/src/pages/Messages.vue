@@ -43,15 +43,17 @@
                 <div v-if="items.sender_id!=lc_loggeduser.id" class="incoming_msg mt-2">
                 <div class="received_msg">
                   <div class="received_withd_msg">
+                    <a target="_blank" :href="items.file_url"><img v-if="items.type!=null" style="cursor:pointer;height:30vh;width:100vh" :src="items.file_url" alt=""></a> 
                     <p>{{items.message}}</p>
-                    <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
+                    <!-- <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub> -->
                     <span class="time_date"> {{items.date}}</span></div>
                 </div>
               </div>
               <div v-else class="outgoing_msg">
                 <div class="sent_msg mr-1">
+                  <a target="_blank" :href="items.file_url"><img v-if="items.type!=null" style="cursor:pointer;height:30vh;width:100vh" :src="items.file_url" alt=""></a> 
                   <p>{{items.message}}</p>
-                    <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub>
+                    <!-- <sub v-if="items.type!=null"> <a v-if="items.type!=null" target="_blank" :href="items.file_url">View Here</a> </sub> -->
                   <span class="time_date"> {{items.date}}</span> </div>
               </div>
               </div>
