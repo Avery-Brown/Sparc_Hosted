@@ -1,3 +1,4 @@
+/*
 <template>
   <div>
     <div class="main mt-5">
@@ -200,6 +201,439 @@
 
   </div>
 </template>
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+<template>
+  <div>
+    <div class="main mt-5">
+      <div class="section section-images">
+        <div class="container" id="top">
+          <div class="col-md-12">
+              <div class="row">
+                  <div class="col-md-12">
+                      <b-alert class="mb-5" v-if="!success && success != null" show variant="danger" dismissible> <i class="fa fa-warning"></i> {{msg}}</b-alert> <br/>
+                      <b-alert class="mb-5" v-if="success" show variant="success" dismissible>{{msg}}</b-alert> <br/>
+                  </div>
+              </div>
+            <div class="row text-center" id="card-margin">
+                <div class="col-md-12">
+                <h2 class="text-center ml-3 title title-up mb-5">{{ getSelectedEvent[0].event_name }}</h2>
+              	</div>
+            </div>
+
+
+           	<div class= "row">
+           	  <div class="col-md-3">
+                <b-card-group deck >
+
+                    <b-card border-variant="white" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-alt="Engagement image">
+                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="50" height="200" alt="">
+                        <img v-else src="../../public/sparclogo.png" width="500" height="200" alt=""> -->
+                        <b-card-text>
+                          <div class="row">
+                          <div class="col-md-12">
+                          	<a class='btn btn-block' style="background-color: white; border: 1px solid #04773B; color: #04773B;" id="myBtn" @click="participateEvent" v-if="Date.parse(currentDate) <= Date.parse(getSelectedEvent[0].date) && shown "> <span v-if="participated">Already Signed Up</span> <span v-if="!participated">PARTICIPATE NOW</span> </a>
+                          	<button class = 'btn btn-block' style="background-color: white; border: 1px solid #04773B; color: #04773B;" v-else-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)" disabled>Engagement Expired</button>
+                          	<button class = 'btn btn-block' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewProfile(getSelectedEvent[0].created_by)">MESSAGE HOST</button>
+                          	<h5>    </h5>
+                          	<div class = "row">
+                        	  <div class = "col-2">
+                        	  </div>
+                        	  <div class =" col mt-auto mb-auto">
+                          		<i class="fab fa-facebook fa-lg" style = "color: #00487C;"></i>
+                        	  </div>
+                        	  <div class =" col mt-auto mb-auto">
+                          		<i class="fab fa-twitter fa-lg" style = "color: #00487C"></i>
+                        	  </div>
+                        	  <div class =" col mt-auto mb-auto">
+                          		<i class="fab fa-linkedin fa-lg" style = "color: #00487C"></i>
+                        	  </div>
+                        	  <div class = "col-2">
+                        	  </div>
+                      		</div>
+                      		<div class= "col-md-12">
+                      		  <div class ="row">
+                        	  </div>
+                      		</div>
+                      		<h5>    </h5>
+                      		<h6 v-if= "getSelectedEvent[0].event_type == 'both'"><i class ="fa fa-network-wired" style = "color: #00487C"></i>   In Person and Virtual</h6>
+                      		<h6 v-else-if= "getSelectedEvent[0].event_type == 'virtual'"><i class ="fa fa-tv" style = "color: #00487C"></i> Virtual</h6>
+                      		<h6 v-else> <i class ="fa fa-user-check" style = "color: #00487C"></i> {{getSelectedEvent[0].event_type.charAt(0).toUpperCase() + getSelectedEvent[0].event_type.substring(1)}}</h6>
+
+                      		<h5 v-if= "getSelectedEvent[0].event_free == 'yes'"> <i class="fa fa-hand-holding-usd" style = "color: #00487C"></i><b> FREE</b></h5>
+                      		<h6 v-if="getSelectedEvent[0].event_price_per_person != null"><b> $ {{getSelectedEvent[0].event_price_per_person}} PER PERSON</b></h6>
+                          	
+                          	<h6 v-if="getSelectedEvent[0].event_cause1 != null"><b class style= "color: #00487C">Charity 1: </b> {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}} </h6>
+                      		<h6 v-if="getSelectedEvent[0].event_cause2 != null"><b class style= "color: #00487C">Charity 2: </b> {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}</h6>
+                          	
+                          	<h5>   </h5>
+                          	<h6 v-if="getSelectedEvent[0].capacity != null"><b class style= "color: #00487C">In Person Enrolled: </b>{{total}}/{{getSelectedEvent[0].capacity}}</h6>
+                      		<div v-if="getSelectedEvent[0].capacity != null && getSelectedEvent[0].virtual_capacity != null">
+                      		  <h6><b class style= "color: #00487C">Virtual Enrolled: </b> {{totalVirtual}}/{{getSelectedEvent[0].virtual_capacity}}</h6>
+                      		</div>
+
+                      		<h4>   </h4>
+
+                          	<h6 class style = "color: #00487C"> <i class="fa fa-calendar" style = "color: #00487C"></i> {{ getSelectedEvent[0].date }}</h6>
+                          	<h6 class style = "color: #00487C"> <i class="fa fa-clock-o" style = "color: #00487C"></i> {{ getSelectedEvent[0].start_time + " - " + getSelectedEvent[0].end_time }} </h6>
+
+
+
+						   </div>
+                           </div>
+                        </b-card-text>
+                    </b-card>
+                  </b-card-group>
+                
+
+                <b-card>
+                <div class="panel-group" id="accordion">
+  					<div class="panel panel-default">
+    					<div class="panel-heading">
+      						<h5 class="panel-title">
+        						<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+       								In Person Participants</a>
+      						</h5>
+    					</div>
+    					<div id="collapse1" class="panel-collapse collapse in">
+      						<div class="panel-body">
+      							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      						</div>
+    					</div>
+  					</div>
+  					<div class="panel panel-default">
+    					<div class="panel-heading">
+      						<h5 class="panel-title">
+        						<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        						  Virtual Participants</a>
+      						</h5>
+    					</div>
+    					<div id="collapse2" class="panel-collapse collapse">
+      						<div class="panel-body">
+      							Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      						</div>
+      					</div>
+      				</div>
+      				</div>
+      				</b-card>
+      				
+      			
+
+
+
+
+
+
+              </div>
+              <div class="col-md-6">
+              	  <div class="event-info">
+              	  <h5 class="text-info"></h5>
+              	  <h4><b> Event Description </b></h4>
+              	  <p>{{ getSelectedEvent[0].event_description }}</p>
+              	  <h6 class="text-danger text-center"></h6>
+              	  <div class="col-md-12" v-if="isUserLogged">
+              	      <h5 class="text-info"> <i class="fa fa-map-marker" style = "color: #00487C"></i> {{ getSelectedEvent[0].event_location }}</h5>
+                      <h5 class="text-info"> <i class="fa fa-address-card-o" style = "color: #00487C"></i> {{ getSelectedEvent[0].event_address }}</h5>
+                      <div class="row">
+                      <div class="col-md-4">
+                      <h5 class="text-info" v-if="getSelectedEvent[0].event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400"><i class="fa fa-compass" style = "color: #00487C"></i> Directions</h5>
+                        <b-tooltip placement="right" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
+                          	<b>{{ getSelectedEvent[0].event_location_access }}</b>
+                        </b-tooltip>
+                      </div>
+                      </div>
+                  </div>
+                  
+
+              	  <div class= "col-md-12" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
+                  	  <h5 class="title-up text-info"><i class ="fa fa-tv" style = "color: #00487C"></i>Engagement Links</h5>
+                  		<div class="row">
+                    	  <div class= "col-md-1">
+                    	  </div>
+                    	  <div class="col-md-8">
+                      	    <h6>{{getSelectedEvent[0].zoom_link}}</h6>
+                    	  </div>
+                  		</div>	
+              	  </div>
+
+              	  <div class="col-md-12">
+              	  	<span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags" :key="index">{{tag.value}}</span>
+              	  </div>
+
+              	  </div>
+              	  <b-card class="mt-3 ml-auto mr-auto col text-center" v-if="getSelectedEvent[0].event_video != null">
+                  <h4 class="title-up text-info">Engagement Video</h4>
+                  <div class="row">
+                    <div class="col">
+                      <video :src="getSelectedEvent[0].event_video" controls class="ml-auto mr-auto video-element"></video>
+                    </div>
+                  </div>
+                  </b-card>
+              </div>
+              <div class="col-md-3">
+              	  <div class="about-info">
+            	  <img class="rounded-circle" v-if="userDetails.profile_image != null" :src="userDetails.profile_image" width="30" alt="">
+                     <span class="ml-3" v-if="userDetails.first_name != undefined">
+                       <b>About {{userDetails.first_name}}</b>
+                       <h6> {{userDetails.about}} </h6>
+                       <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                       <h6 v-if="isUserLogged" class="text-info"> <i class="fa fa-mobile"></i> {{ getSelectedEvent[0].host_contact }}</h6>
+                     </span>
+                   <button class="btn btn-info btn-block" @click="viewProfile(getSelectedEvent[0].created_by)">View Profile</button>
+            	  </div>
+              </div>
+            </div>
+
+            <div class= "row" >
+
+              <div class= "col-md-4">
+              <b-card class="mt-3" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date) && isUserParticipant && !isUserRated">
+                  <b-card-text>
+                    <div class="col-md-12">
+                      <h4 class="title-up text-info">Rate Your Experience</h4>
+                      <star-rating v-model="submitEventRating.ratingStars" :star-size="36" :increment="0.5"></star-rating>
+                      <h6 class="mt-3">Feedback</h6>
+                      <div class="row">
+                        <div class="col-md-8">
+                        <textarea class="form-control" v-model="submitEventRating.feedback" placeholder="Give your Feedback..."></textarea>
+                      </div>
+                      <div class="col-md-3">
+                        <button class="btn btn-success mt-3" @click="rateEngagementNow">Rate Now</button>
+                      </div>
+                      </div>
+                    </div>
+                  </b-card-text>
+                </b-card>
+                </div>
+
+                <div class= "col-md-4">
+                <b-card class="mt-2" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)">
+                  <b-card-text>
+                    <h4 class="title-up text-info">Engagement Reviews</h4>
+                    <div class="col-md-12" v-for="(rating, index) in getRatings" :key="index">
+                      <h6 class="text-success">{{reviewedBy(rating.user_id).first_name}}</h6>
+                      <star-rating :rating="rating.ratingStars" :read-only="true" :star-size="16" :increment="0.5"></star-rating>
+                      <strong>{{rating.feedback}}</strong>
+                      <hr>
+                    </div>
+                  </b-card-text>
+                </b-card>
+                </div>
+            </div>
+
+            
+
+
+
+
+
+
+            <div class="row" >
+              <div class="col-md-7">
+                <b-card-group deck >
+                    <b-card border-variant="primary" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-height="300" img-alt="Engagement image" img-top>
+                        <!-- <img v-if="getSelectedEvent[0].event_image != null" :src="getSelectedEvent[0].event_image" width="50" height="200" alt="">
+                        <img v-else src="../../public/sparclogo.png" width="500" height="200" alt=""> -->
+                        <b-card-text>
+                          <div class="row">
+                          <div class="col-md-12">
+                            <h5 class="text-success"><b> {{ getSelectedEvent[0].event_name }}</b></h5>
+                            <h6> <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+
+                           </div>
+                           </div>
+                           <div class="row">
+                             <div class="col-md-6">
+                               <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ getSelectedEvent[0].event_location }}</h6>
+
+                              <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ getSelectedEvent[0].start_time + " - " + getSelectedEvent[0].end_time }} </h6>
+                              <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ getSelectedEvent[0].date }}</h6>
+                              <h6 v-if="isUserLogged" class="text-info"> <i class="fa fa-mobile"></i> {{ getSelectedEvent[0].host_contact }}</h6>
+                             </div>
+                             <div class="col-md-6" v-if="isUserLogged">
+                               <h6 class="text-info"> <i class="fa fa-address-card-o"></i> {{ getSelectedEvent[0].event_address }}</h6>
+                               <h6 class="text-info"> <i class="fa fa-globe-americas"></i> {{ getSelectedEvent[0].event_location_access }}</h6>
+                               <h6 class="text-info"> <i class="fa fa-location-arrow"></i> {{ getSelectedEvent[0].event_space }}</h6>
+                               <h6 v-if="getSelectedEvent[0].event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400"><i class="fa fa-compass" style = "color: #00487C"></i> Directions</p></h6>
+                              	<b-tooltip placement="bottomleft" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
+                                  <b>{{ getSelectedEvent[0].event_location_access }}</b>
+                              	</b-tooltip>
+                             </div>
+                           </div>
+                        </b-card-text>
+                    </b-card>
+                </b-card-group>
+
+
+                <b-card class="mt-3 ml-auto mr-auto col text-center" v-if="getSelectedEvent[0].event_video != null">
+                  <h4 class="title-up text-info">Engagement Video</h4>
+                  <div class="row">
+                    <div class="col">
+                      <video :src="getSelectedEvent[0].event_video" controls class="ml-auto mr-auto video-element"></video>
+                    </div>
+                </div>
+                </b-card>
+
+                <b-card class="mt-3" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
+                  <h4 class="title-up text-info">Engagement Links</h4>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h6 class="text-success">Zoom:</h6>
+                    </div>
+                    <div class="col-md-8">
+                      <h6>{{getSelectedEvent[0].zoom_link}}</h6>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h6 class="text-success">Google Hangout:</h6>
+                    </div>
+                    <div class="col-md-8">
+                      <h6>{{getSelectedEvent[0].google_link}}</h6>
+                    </div>
+                  </div>
+
+
+                </b-card>
+                <b-card class="mt-3" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date) && isUserParticipant && !isUserRated">
+                  <b-card-text>
+                    <div class="col-md-12">
+                      <h4 class="title-up text-info">Rate Your Experience</h4>
+                      <star-rating v-model="submitEventRating.ratingStars" :star-size="36" :increment="0.5"></star-rating>
+                      <h6 class="mt-3">Feedback</h6>
+                      <div class="row">
+                        <div class="col-md-8">
+                        <textarea class="form-control" v-model="submitEventRating.feedback" placeholder="Give your Feedback..."></textarea>
+                      </div>
+                      <div class="col-md-3">
+                        <button class="btn btn-success mt-3" @click="rateEngagementNow">Rate Now</button>
+                      </div>
+                      </div>
+                    </div>
+                  </b-card-text>
+                </b-card>
+                <b-card class="mt-2" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)">
+                  <b-card-text>
+                    <h4 class="title-up text-info">Engagement Reviews</h4>
+                    <div class="col-md-12" v-for="(rating, index) in getRatings" :key="index">
+                      <h6 class="text-success">{{reviewedBy(rating.user_id).first_name}}</h6>
+                      <star-rating :rating="rating.ratingStars" :read-only="true" :star-size="16" :increment="0.5"></star-rating>
+                      <strong>{{rating.feedback}}</strong>
+                      <hr>
+                    </div>
+                  </b-card-text>
+                </b-card>
+
+
+              
+
+
+              
+              </div>
+              <div class="col-md-4">
+                  <div class="event-info">
+                      <h5 class="text-info"><b>Engagement Description</b></h5>
+                      <p>{{ getSelectedEvent[0].event_description }}</p>
+                      <h6 class="text-danger text-center"></h6>
+                      <a class="btn btn-success text-white btn-block" id="myBtn" @click="participateEvent" v-if="Date.parse(currentDate) <= Date.parse(getSelectedEvent[0].date) && shown "> <span v-if="participated">Already Signed Up</span> <span v-if="!participated">PARTICIPATE NOW</span> </a>
+                      <button class="btn btn-danger btn-block" v-else-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)" disabled>Engagement Expired</button>
+                  </div>
+                  <div class="event-info mt-2">
+                      <h5 class="text-info"><b>Engagement Extras</b></h5>
+                      <h6><b class="text-success">Engagement Free: </b> {{getSelectedEvent[0].event_free}}</h6>
+                      <h6><b class="text-success">Engagement Type: </b> {{getSelectedEvent[0].event_type}}</h6>
+                      <h6 v-if="getSelectedEvent[0].event_cause1 != null"><b class="text-success">Charity 1: </b> {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}} </h6>
+                      <h6 v-if="getSelectedEvent[0].event_cause2 != null"><b class="text-success">Charity 2: </b> {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}</h6>
+                      <h6 v-if="getSelectedEvent[0].event_price_per_person != null"><b class="text-success">Engagement Price: </b> $ {{getSelectedEvent[0].event_price_per_person}} PER PERSON</h6>
+                      <h6><b class="text-success">Engagement Cause: </b> {{getSelectedEvent[0].cause}}</h6>
+
+                      <h6 v-if="getSelectedEvent[0].capacity != null"><b class="text-success">People capacity: </b> {{getSelectedEvent[0].capacity}}</h6>
+                      <h6 v-if="getSelectedEvent[0].capacity != null"><b class="text-success">Seats Reserved: </b> {{total}}</h6>
+                      <div v-if="getSelectedEvent[0].capacity == null && getSelectedEvent[0].virtual_capacity != null">
+                        <h6><b class="text-success">Virtual capacity: </b> {{getSelectedEvent[0].virtual_capacity}}</h6>
+                        <h6><b class="text-success">Seats Reserved: </b> {{totalVirtual}}</h6>
+                      </div>
+                      <div v-if="getSelectedEvent[0].capacity != null && getSelectedEvent[0].virtual_capacity != null">
+                        <h6><b class="text-success">Virtual capacity: </b> {{getSelectedEvent[0].virtual_capacity}}</h6>
+                        <h6><b class="text-success">Seats Reserved: </b> {{totalVirtual}}</h6>
+                      </div>
+
+                      <h5 class="text-info mt-4"><b>Engagement Tags</b></h5>
+                      <span class="badge badge-pill badge-success" style="margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags" :key="index">{{tag.value}}</span>
+                  </div>
+                  <div class="event-info mt-2">
+                    <h5 class="text-info"><b>Host Information</b></h5>
+                     <p style="display:none;">{{getUserDetails(getSelectedEvent[0].created_by) }}</p>
+                     <img class="rounded-circle" v-if="userDetails.profile_image != null" :src="userDetails.profile_image" width="30" alt="">
+                     <span class="ml-3" v-if="userDetails.first_name != undefined">
+                       <b>{{userDetails.first_name + " " + userDetails.last_name}}</b>
+                     </span>
+                     <button class="btn btn-info btn-block" @click="viewProfile(getSelectedEvent[0].created_by)">View Profile</button>
+                  </div>
+                  <div class="mb-5">
+                    <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'in Person' || getSelectedEvent[0].event_type == 'both'">
+                    <h5 class="text-info"><b>In Person Participants</b></h5>
+                      <div class="col-md-12" v-for="(user, index) in getParticipantsList" :key="index">
+                        <strong class="text-success">{{ user.first_name + " " + user.last_name}}</strong>
+                      </div>
+                  </div>
+                  <div class="event-info mt-2" v-if="getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both'">
+                    <h5 class="text-info"><b>Virtual Participants</b></h5>
+                      <div class="col-md-12" v-for="(user, index) in getVirtualParticipantsList" :key="index">
+                        <strong class="text-success">{{ user.first_name + " " + user.last_name}}</strong>
+                      </div>
+                  </div>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <modal :show.sync="modals.participateModal" headerClasses="justify-content-center">
+      <h4 slot="header" class="title title-up">Event Participation</h4>
+      <h4 class="text-danger text-center">{{msg}}</h4>
+      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Share</a>
+      <button class="btn btn-danger btn-block" @click="dismiss">Close</button>
+    </modal>
+
+    <modal :show.sync="modals.selectModal" headerClasses="justify-content-center">
+      <h4 slot="header" class="title title-up">I want to Participate in</h4>
+      <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <button class="btn btn-warning" @click="virtualClick"> <i class="fa fa-video-camera"></i> Virtual</button>
+          </div>
+        <div class="col-md-4">
+          <button class="btn btn-info" @click="inPersonClick"><i class="fa fa-user"></i> In Person</button>
+        </div>
+
+      </div>
+      <a class="btn btn-success text-center text-white btn-block" v-clipboard="() => url" v-clipboard:success="clipboardSuccessHandler">Share</a>
+      <button class="btn btn-danger btn-block" @click="dismiss">Close</button>
+      </modal>
+
+      <modal :show.sync="modals.payModal" headerClasses="justify-content-center">
+        <h4 slot="header" class="text-danger text-center">Please Pay Participation Amount to Continue</h4>
+        <div ref="card"></div>
+        <button class="btn btn-primary btn-block" :disabled="disablePay" v-on:click="purchase(userEmail, getSelectedEvent[0].event_price_per_person)">Pay Now</button>
+      </modal>
+
+  </div>
+</template>
+
 <script>
 let stripe = Stripe('pk_live_w6Z8KIXE8kMyrpj5jZ0Tqd1G00DWtY0TU3'),
     elements = stripe.elements(),
@@ -215,6 +649,7 @@ export default {
   destroyed() {
     card.destroy(this.$refs.card)
   },
+
    mounted: function () {
 
      let style = {
@@ -329,6 +764,11 @@ export default {
       this.modals.participateModal = false
       this.modals.selectModal = false
     },
+
+    getHoverIdDirectionsByIndex(index) {
+      return "tooltip-target-direction" + index;
+    },
+
     inPersonClick() {
       this.inPersonParticipate();
     },
@@ -341,6 +781,7 @@ export default {
       console.log(copyText)
       document.execCommand("copy");
     },
+
     clipboardSuccessHandler({ value, event }) {
         console.log('success', value)
 
@@ -521,6 +962,24 @@ export default {
         console.log('Email Sent')
       }).catch(err => console.log("Error " + err))
     },
+
+    sendReminder(){
+        axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendReminder', {
+            dest: this.userEmail,
+            event: this.getSelectedEvent[0].event_name,
+            end_time: this.getSelectedEvent[0].end_time,
+            start_time: this.getSelectedEvent[0].start_time,
+            date: this.getSelectedEvent[0].date,
+            host_contact: this.getSelectedEvent[0].host_contact,
+            event_address: this.getSelectedEvent[0].event_address,
+            event_location_access: this.getSelectedEvent[0].event_location_access,
+            event_space: this.getSelectedEvent[0].event_space,
+
+        }).then(() => {
+            console.log('Email Sent')
+        }).catch(err => console.log("Error " + err))
+    },
+
     purchase(userEmail, price) {
       console.log('pay')
       this.disablePay = true
@@ -661,6 +1120,7 @@ export default {
       }
   }
 };
+
 </script>
 <style scoped>
   input[type="text"] {
@@ -674,9 +1134,14 @@ export default {
   #card-margin {
       margin-top: -70px;
   }
+  .about-info {
+    padding: 10px;
+    border: 2px solid #F5F5F5;
+    background-color: #F5F5F5;
+  }
   .event-info {
     padding: 10px;
-    border: 2px solid #e5e5e5;
+    border: 2px solid #ffffff;
   }
   #top {
     margin-top: -70px;
