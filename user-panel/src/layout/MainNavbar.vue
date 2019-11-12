@@ -112,12 +112,12 @@ export default {
   computed: { 
     ...mapGetters(['loggedUser']),
     getNewMessages(){
-      let user=JSON.parse(localStorage.getItem('loggedUser'))
+      // let user=JSON.parse(localStorage.getItem('loggedUser'))
       let cnt=0
-      if(user.message_connections!=null){
-      Object.keys(user.message_connections).forEach(key=>{
-        cnt=cnt+user.message_connections[key].new_messages
-              console.log(user.message_connections[key].new_messages)
+      if(this.loggedUser.message_connections!=null){
+      Object.keys(this.loggedUser.message_connections).forEach(key=>{
+      cnt=cnt+this.loggedUser.message_connections[key].new_messages
+      console.log(this.loggedUser.message_connections[key].new_messages)
 
 
       })
