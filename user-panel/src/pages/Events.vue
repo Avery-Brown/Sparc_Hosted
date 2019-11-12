@@ -73,9 +73,7 @@
                                       placeholder="Select Date"
                                       v-model="dateFrom"
                                       @change="filterAll"
-                                      :picker-options="pickerOptions"
-                                  >
-                                  </el-date-picker>
+                                  />
                                 </fg-input>
                               </div>
                             </div>
@@ -95,9 +93,7 @@
                                       placeholder="Select Date"
                                       v-model="dateTo"
                                       @change="filterAll"
-                                      :picker-options="pickerOptions"
-                                  >
-                                  </el-date-picker>
+                                  />
                                 </fg-input>
                               </div>
                             </div>
@@ -529,8 +525,6 @@ export default {
     },
     getPast() {
       if (this.pastFilter.length > 0) {
-        console.log(this.filters);
-        console.log(this.pastFilter[0])
         this.filters = this.filters.filter(event => new Date(event.date) >= new Date(this.pastFilter[0]) && new Date(event.date) < Date.now())
       } 
     },
@@ -702,6 +696,7 @@ export default {
       this.filterAll();
     },
     pastFilter: function() {
+      console.log(this.pastFilter.length> 0);
       this.filterAll();
     }
   }
