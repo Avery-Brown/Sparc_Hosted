@@ -1,12 +1,25 @@
+//<h1 style="margin-top: 50px;">What is Sparc?</h1>
+
 <template>
     <div class = "container about-body">
-        <h1 style="margin-top: 50px;">What is Sparc?</h1>
-        <h2>Mission</h2>
-        <p>Sparc’s mission is to create a peer-to-peer social network community that economically empowers you for what you enjoy doing at times you enjoy doing them.</p>
-        <br/>
-        <h2>Our Community</h2>
+        <img src= "../../public/sparclogo1.png" alt= "Sparc logo" width="600" height="170" class="center">
+
+      <div class = "mission" style= "background-color: #0356fc">
+      	<div class = "missionInner" style= "margin-top: 60px">
+        <h2 style= "margin-bottom: 20px"><b><span class= "sparcGreen">O</span>ur <span class= "sparcGreen">M</span>ission</b></h2>
+        <h3>Creating a peer-to-peer social network community that economically empowers you for what you enjoy doing at times you enjoy doing them.</h3>
+        </div>
+      </div>
+
+      <div class = "community" style= "margin-top: 60px">
+        <h2 style = "margin-bottom: 30px">Our Community</h2>
         <p>Sparc’s community facilitates organic connections and meaningful interactions between uncommon friends–standing in contrast to traditional social media or networking models that prioritize connections among acquaintances, friends or family.</p>
         <br/>
+      </div>
+
+      	<h3> ––––––––––––––––––––––––––––––––––––––––––</h3>
+
+      <div class = "advantage">
         <h2>What’s in it for me</h2>
         <div style="margin-left: 40px;">
             <h3 style="margin-top: 15px;">As a Host</h3>
@@ -19,6 +32,7 @@
                 </li>
             </ul>
         </div>
+      </div>
         <div style="margin-left: 40px;">
             <h3 style="margin-top: 10px;">As a Guest</h3>
             <ul style="margin-top: 10px;">
@@ -31,8 +45,11 @@
             </ul>
         </div>
         <br/>
+
+        <h3> ––––––––––––––––––––––––––––––––––––––––––</h3>
+
         <h2>How it works</h2>
-        <p>The “host” determines many variables: price point, date, time, time parameters, and location of the engagement.</p>
+        <p>The “host” determines: price, date, time, and location of the engagement.</p>
         <p>The “guest” may choose to accept the terms or conditions from any host.</p>
         <p>Monies are then held in escrow (Sparc a.k.a. Escrow House) at the point of transaction and transferred to the host after successful completion of their engagement.</p>
     </div>
@@ -41,6 +58,29 @@
 .about-body{
     color: #484848;
 }
+.mission {
+  display: block;
+  width: 100%;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+}
+.missionInner {
+  margin-top: 60px;
+  margin-right: 100px;
+  margin-bottom: 60px;
+  margin-left: 100px;
+  display: block;
+  width: 80%;
+}
+
+.community {
+	margin-top: 30px;
+}
+
+.sparcGreen {
+  color: #2ade36;
+}
 
 h2{
     margin-bottom: 5px;
@@ -48,6 +88,30 @@ h2{
 
 h3 {
     margin-bottom: 0px;
+}
+.center {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.mission {
+  padding: 10px;
+  border: 2px solid #E8E8E8;
+  background-color: #E8E8E8;
+}
+
+.community {
+  padding: 10px;
+  border: 2px solid #ffffff;
+  background-color: #ffffff;
+}
+
+.advantage {
+	margin-top: 40px;
 }
 
 </style>
