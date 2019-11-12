@@ -2,10 +2,10 @@
   <div>
     <div v-bind:class="{searchClass: this.searchQuery != null}">
       <div class="section section-images">
-        <div class="container" id="top">
+        <div class="container" id="top" style="height: 100vh">
           <div class="col-md-12">
             <div class = "container-fluid">
-              <div class ="row" style="margin-top: 0.5rem;">
+              <div class ="row" style="margin-top: 1rem;">
                 <div class ="col" style="margin-left: -40px;">
                   <h2 style="color: #484848;">Learn and connect in a meaningful way</h2>
                   <h4 style="margin-top: -20px; color: #484848">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
@@ -81,7 +81,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class = "row" style="margin-bottom: 40px;">
+                        <div class = "row">
                           <div class = "col">
                             <div class = "row mt-auto mb-auto">
                               <div class = "col-md-3">
@@ -103,16 +103,30 @@
                             </div>
                           </div>
                         </div>
+                        <div class = "row" style="margin-bottom: 40px; margin-top: 20px;">
+                          <div class = "col">
+                            <b-form-group>
+                              <b-form-checkbox
+                                v-for="option in optionsPast"
+                                v-model="pastFilter"
+                                :key="option.value"
+                                :value="option.value"
+                              >
+                                {{ option.text }}
+                              </b-form-checkbox>
+                            </b-form-group>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class = "col-md-10">
                   <div class="scroll-pane-cards">
-                    <div v-if="!noListingsFound && filtered.length == 0 || !noListingsFound && isFiltering">
+                    <div v-if="isFiltering">
                       <lottie :options="loadingOptions" :width="200" :height="200" style="margin-top: 3rem;"/>
                     </div>
-                    <div v-else-if="noListingsFound" class="text-center">
+                    <div v-else-if="filtered.length == 0" class="text-center">
                       <h4><p style="display: inline-block; font-size: 23px; color: red; font-weight: 400;">Oops!</p> Looks like no engagements were found with that criteria</h4>
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
@@ -123,13 +137,13 @@
                             <div class = "col-md-3 text-center mt-auto mb-auto">
                               <div class = "row">
                                 <div class = "col">
-                                  <img v-if="event.event_image != null" :src="event.event_image" style = "width: 100px; height: 110px;" alt="" @click="viewEvent(event.id)">
+                                  <img v-if="event.event_image != null" :src="event.event_image" style = "width: 110px; height: 110px; border-radius: 50%;" alt="" @click="viewEvent(event.id)">
                                   <img v-else src="../../public/sparc_card_back.jpg" style = "max-width: 100px;" alt="" @click="viewEvent(event.id)">
                                 </div>
                               </div>
                               <div class = "row">
                                 <div class = "col">
-                                    <button class = 'btn' style="margin-top: 20px; margin-bottom: 20px; background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)">Message Host</button>
+                                    <button class = 'btn' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="viewEvent(event.id)">Message Host</button>
                                 </div>
                               </div>
                               <div class = "row" style="mt-auto mb-auto">
@@ -169,7 +183,7 @@
                                       </div>
                                     </div>
                                     <div class = "col-md-5 mb-auto" >
-                                        <button class = 'btn pull-right' style="background-color: white; border: 1px solid #04773B; color: #04773B;" @click="viewEvent(event.id)"> Participate</button>
+                                        <button class = 'btn pull-right' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px;" @click="viewEvent(event.id)"> {{pastFilter.length == 0 ? 'Participate' : 'View Engagement'}}</button>
                                     </div>
                                     </div>
                                     <div class = "row">
@@ -278,7 +292,6 @@ import Lottie from 'vue-lottie'
 import loadingAnimationData from '../../lotties/1301-round-cap-material-loading.json'
 import errorAnimationData from '../../lotties/629-empty-box.json'
 import Multiselect from 'vue-multiselect'
-import { PassThrough } from 'stream';
 
 Vue.use(ReadMore);
 export default {
@@ -296,10 +309,12 @@ export default {
   },
   data() {
     return {
-      noListingsFound: false,
       isFiltering: false,
       loadingOptions: { animationData: loadingAnimationData },
       errorOptions: { animationData: errorAnimationData },
+      optionsPast: [{
+        text: 'Past Engagements', value:'10/1/2019'
+      }],
       options: [{ text: 'Virtual', value: 'virtual' },
                 { text: 'In Person', value: 'in Person' },
                 { text: 'In Person & Virtual', value: 'both' },
@@ -307,12 +322,15 @@ export default {
       rating: 5,
       url: window.location.href+"/",
       saerchQuery: '',
+      checkPast: true,
       typeFilters: [],
+      pastFilter: [],
       dateFrom: null,
       dateTo: null,                                                 
       locationFilter: '',
       filters: [],
       now: 0,
+      allTags: [],
       getUsers: [],
       ratings: [],
       filterEvents: [],
@@ -327,19 +345,31 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['allUsers', 'allTags', 'allRatings']),
+    ...mapGetters(['allUsers', 'allRatings']),
 
     getFiltered() {
       this.filterEvents = [];
-      let event = this.filters.filter(event => Date.parse(this.currentDate) <= Date.parse(event.date))
+      let event = [];
+      if (this.pastFilter.length == 0) {
+        event = this.filters.filter(event => Date.now() <= Date.parse(event.date))
+      } else {
+        event = this.filters;
+      }
       return event
     },
     filtered() {
       let event = this.getFiltered.filter(event => event.deleted === false)
-      event.sort((a, b) => {
-        var dateA = new Date(a.date), dateB = new Date(b.date);
-        return dateA - dateB
-      })
+      if (this.pastFilter.length == 0) {
+        event.sort((a, b) => {
+          var dateA = new Date(a.date), dateB = new Date(b.date);
+          return dateA - dateB
+        })  
+      } else {
+        event.sort((a, b) => {
+          var dateA = new Date(a.date), dateB = new Date(b.date);
+          return dateB - dateA;
+        })
+      }
       return event
     },
   },
@@ -375,20 +405,25 @@ export default {
         });
     },
     async filterBySearch(fromCreation) {
-      // Add filtering by author
-      // Add filtering by location
       if(fromCreation) {
         this.filters = await this.getEvents();
+        this.getUsers = await this.getAllUsers();
+        this.allTags = await this.getTags();
       }
       var searchQuery = this.searchQuery.split(/[\s,]+/);
-      var searchQueryArray = searchQuery.map((query) => query.toLowerCase());
+      var searchQueryLower = searchQuery.map((query) => query.toLowerCase());
+      var searchQueryArray = [];
+      searchQueryLower.forEach(query => {
+        searchQueryArray.push(query);
+        searchQueryArray.push(query + 's')
+      })
+      
       var resultEvents = new Set();
 
       // By Tags
-      var allTags = await this.getTags();
       let tagIds = new Set();
-      allTags.forEach(tag => {
-        if (searchQueryArray.includes(tag.value.toLowerCase().trim())) {
+      this.allTags.forEach(tag => {
+        if(searchQueryArray.some(value => tag.value.toLowerCase().trim().split(" ").includes(value))) {
           tagIds.add(tag.id)
         }
       })
@@ -404,16 +439,51 @@ export default {
       // By event names
       this.filters.forEach(event => {
         var eventNames = event.event_name.split(/[\s,]+/);
-        if(eventNames.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+        var eventNamesWithS = [];
+        eventNames.forEach(event => {
+          eventNamesWithS.push(event);
+          eventNamesWithS.push(event + 's');
+        })
+        if(eventNamesWithS.some(name => searchQueryArray.includes(name.toLowerCase()))) {
           resultEvents.add(event)
         }
       })
+
+      // By author
+      this.filters.forEach(event => {
+        let user_item = this.getUsers.find(user => 
+         Object.keys(user)[0] === event.created_by
+        )
+        if (user_item != null) {
+          var user = user_item[Object.keys(user_item)[0]]
+          var userName = [user.first_name, user.last_name]
+          if(userName.some(name => searchQueryArray.includes(name.toLowerCase().trim()))) {
+            resultEvents.add(event)
+          }
+        }
+      })
+
+      // By description
+      this.filters.forEach(event => {
+        var eventDescription= event.event_description.toLowerCase().split(/[\s,]+/);
+        var eventDescriptionWithS  = [];
+        eventDescription.forEach(key => {
+          eventDescriptionWithS.push(key);
+          eventDescriptionWithS.push(key + 's')
+        })
+        if(eventDescriptionWithS.some(key => searchQueryArray.includes(key.trim()))) {
+          resultEvents.add(event);
+        }
+      })
+
+      // Collect...
       this.filters = [...resultEvents]
     },
     async filterAll() {
       this.isFiltering = true;
       this.filters = [];
       this.filters = await this.getEvents();
+      this.getPast();
       this.getType();
       this.getDate();
       this.getLocation();
@@ -421,9 +491,6 @@ export default {
       if (this.searchQuery != null) {
         await this.filterBySearch(false);
       }
-      if (this.filtered.length == 0) {
-          this.noListingsFound = true;
-      } 
       this.isFiltering = false;
     },
     async getType() {
@@ -459,6 +526,13 @@ export default {
           return new Date(el.date) <= new Date(to) && new Date(el.date) >= new Date(from);
         })
       }
+    },
+    getPast() {
+      if (this.pastFilter.length > 0) {
+        console.log(this.filters);
+        console.log(this.pastFilter[0])
+        this.filters = this.filters.filter(event => new Date(event.date) >= new Date(this.pastFilter[0]) && new Date(event.date) < Date.now())
+      } 
     },
     async getLocation() {
         this.filters = this.filters.filter(el => {
@@ -549,16 +623,12 @@ export default {
           Object.keys(events.data).forEach((key) => {
             eventsArray.push({...events.data[key], id: key});
           });
-          if (eventsArray.length == 0) {
-            this.noListingsFound = true;
-          }
           resolve(eventsArray);
         }, 750)
 
       })
     },
     async getEvents() {
-      this.noListingsFound = false;
       var eventsArray = await this.eventsPromise();
       return eventsArray;
     },
@@ -597,25 +667,20 @@ export default {
 
     this.currentDate = mm + "/" + dd + "/" + yyyy;
 
-
     if (this.searchQuery != null) {
       this.isFiltering = true;
       await this.filterBySearch(true);
       this.isFiltering = false;
-      if (this.filters.length == 0) {
-        this.noListingsFound = true;
-      }
     } else {
+      this.isFiltering = true;
       this.filters = await this.getEvents();
+      this.getUsers = await this.getAllUsers();
+      this.allTags = await this.getTags();
+      this.isFiltering = false;
     }
-
-    this.getUsers = [];
-    this.getUsers = await this.getAllUsers();
 
     this.ratings = [];
     this.ratings = await this.getAllRatings();
-
-    this.fetchTags();
 
   },
 
@@ -634,6 +699,9 @@ export default {
       }
     },
     typeFilters: function() {
+      this.filterAll();
+    },
+    pastFilter: function() {
       this.filterAll();
     }
   }

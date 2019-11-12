@@ -24,14 +24,14 @@
           </li>
         </ul>
       </nav> -->
-          <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #00487c; text-decoration: none; font-size: 14px;">
+          <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #484848; text-decoration: none; font-size: 14px;">
               Meet the Team&nbsp;&nbsp;&nbsp;|
           </router-link>
-          <a class = "social-link" style = "color: #00487c" href="https://www.facebook.com/SparcTheWorld/" target="_blank"><i class="fab fa-facebook fa-lg"/></a>
-          <a class = "social-link" style = "color: #00487c" href="https://www.instagram.com/SparcTheWorld/" target="_blank"><i class="fab fa-instagram fa-lg"/></a>
-          <a class = "social-link" style = "color: #00487c" href="https://linkedin.com/company/SparcTheWorld" target="_blank"><i class="fab fa-linkedin fa-lg"/></a>
-          <a class = "social-link" style = "color: #00487c" href="https://twitter.com/SparcTheWorld/" target="_blank"><i class="fab fa-twitter fa-lg"/></a>
-          <a class = "social-link" style = "color: #00487c" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg" target="_blank"><i class="fab fa-youtube fa-lg"/></a>
+          <a class = "social-link" style = "color: #484848" href="https://www.facebook.com/SparcTheWorld/" target="_blank"><i class="fab fa-facebook fa-lg"/></a>
+          <a class = "social-link" style = "color: #484848" href="https://www.instagram.com/SparcTheWorld/" target="_blank"><i class="fab fa-instagram fa-lg"/></a>
+          <a class = "social-link" style = "color: #484848" href="https://linkedin.com/company/SparcTheWorld" target="_blank"><i class="fab fa-linkedin fa-lg"/></a>
+          <a class = "social-link" style = "color: #484848" href="https://twitter.com/SparcTheWorld/" target="_blank"><i class="fab fa-twitter fa-lg"/></a>
+          <a class = "social-link" style = "color: #484848" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg" target="_blank"><i class="fab fa-youtube fa-lg"/></a>
         <!-- &copy; {{ year }}, Designed by -->
         <!-- <a href="https:///www.invisionapp.com" target="_blank" rel="noopener"
           >Invision</a
