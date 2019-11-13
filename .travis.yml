@@ -3,7 +3,7 @@ node_js:
   - "node"
 cache: 
   directories: 
-    -user-panel/node_modules
+    - user-panel/node_modules
 
 script: 
-  -cd user-panel && npm run test:unit
+  - cd user-panel && npm run test:unit
