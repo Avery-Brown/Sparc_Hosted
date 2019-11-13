@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "@pencilpix/vue2-clock-picker": "^0.1.6",
     "@tygr/vue-time-picker": "^1.0.9",
     "axios": "^0.19.0",
