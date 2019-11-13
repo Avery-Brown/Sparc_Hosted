@@ -3,7 +3,7 @@
     "env": {
       "test": {
         "plugins": ["@babel/plugin-syntax-object-rest-spread"],
-        "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
+        "presets": [["@babel/preset-env", { "targets": { "node": "9" } }]]
       }
     }
   }
