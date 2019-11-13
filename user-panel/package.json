@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@babel/core": "^7.6.4",
     "@pencilpix/vue2-clock-picker": "^0.1.6",
     "@tygr/vue-time-picker": "^1.0.9",
     "axios": "^0.19.0",
@@ -39,7 +40,6 @@
     "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.2",
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
@@ -47,7 +47,6 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "@vue/test-utils": "^1.0.0-beta.29",
-    "babel-core": "^6.26.3",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^24.9.0",
     "babel-loader": "^7.1.1",
