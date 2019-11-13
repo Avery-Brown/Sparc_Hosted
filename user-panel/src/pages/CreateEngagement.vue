@@ -11,8 +11,10 @@
                             <div class="col-md-6 col-lg-6">
                                 <label for="">Upload Engagement Featured Image*</label>
                                 <input type="file" class="btn btn-primary mb-3" @change="onFileSelected">
-                                <!-- <div v-if="image_true != false">
-                                  <img :src="file.image" />
+                                <!-- <div v-if="imageKey > 0" :key="imageKey">
+                                <div v-if="image_true != null"> -->
+                                <!-- <div :key="imageKey" > -->
+                                  <!-- <img :src="file.image" />
                                   <div>
                                     hi
                                   </div>
@@ -266,6 +268,7 @@ export default {
   computed: { ...mapGetters(['allTags', 'eventCreated', 'charities'])},
   data() {
       return {
+          // imageKey: 0,
           file: '',
           createButton: 'Create Engagement',
           pickerOptions: {
@@ -431,8 +434,12 @@ export default {
           this.eventPayload.event_image = file
           var extension = file.name.substring(file.name.lastIndexOf('.')+1);
           // show image here
-          image_true = true
-          vm.$forceUpdate();
+          // image_true = file.name;
+          this.imageKey = 1
+          // vm.$forceUpdate();
+          // forceRerender();
+          // vm.$set('image_true', true)
+          // forceRerender();
       },
       onVideoSelected(event) {
           let video = event.target.files[0];

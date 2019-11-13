@@ -1,154 +1,323 @@
 <template>
-  <div class="">
+  <div class="main" style="background: whitesmoke; margin-top: -20px;" :class="[this.stage===4 ? 'stage-4' : 'stage-before' ]">
 
     <div class="content">
       <div class="container">
-        <div class="col-md-8 ml-auto mr-auto">
-            <card class="register-card">
-              <h3 class="text-center text-info"><b>CREATE ACCOUNT</b></h3>
-            <form action="" >
-              <div class="row">
-                  <div class="col-md-6">
-                      <fg-input
+        <div class = "row">
+          <div class = "col-md-8 ml-auto mr-auto text-center">
+            <div class = "row" style ="margin-top: 3rem;">
+              <div class="card shadow-md"> 
+                <div class = "row" style="margin-top: 30px;">
+                  <div class = "col">
+                    <p style="font-weight: 600; font-size: 30px; color: #484848">Sign Up</p>
+                    <p style="font-size: 20px; font-weight: 400; color: #484848; margin-top: -15px;">Ready to learn, teach, and share?</p>
+                  </div>
+                </div>
+                <div class = "top" style="margin-top: -10px;">
+                  <div class = "divider-line" :style="{width: `${(100/(4) * (4 - 1)) - 10}%`}"/>
+                  <div class = "icon-wrapper">
+                    <div class = "step">
+                      <div class = "circle">
+                          <i :class="['fa fa-user', stage===0 || stage ===1 || stage === 2 || stage === 3 || stage === 4 ? 'active' : 'inactive']"/>
+                      </div>
+                    </div>
+                    <div class = "step">
+                      <div class = "circle">
+                          <i :class="['fa fa-user-lock', stage===1 || stage === 2  || stage === 3 || stage === 4 ? 'active' : 'inactive']"/>
+                      </div>
+                    </div>
+                    <div class = "step">
+                      <div class = "circle">
+                          <i :class="['fa fa-user-edit', stage===2  || stage === 3 || stage === 4 ? 'active' : 'inactive']"/>
+                      </div>
+                    </div>
+                    <div class = "step">
+                      <div class = "circle">
+                          <i :class="['fa fa-share-alt', stage===3 || stage === 4 ? 'active' : 'inactive']"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <transition name="slide">
+                  <div v-if="stage===0" class="card-body">
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <p style="font-size: 23px; font-weight: 300; color:#484848 ">Nice to meet you, {{firstName}}!</p>
+                      </div>
+                    </div>
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <label>First Name</label>
+                        <fg-input
+                          id="login_input"
                           class="no-border input-lg"
                           addon-left-icon="now-ui-icons users_single-02"
                           placeholder="First Name"
                           v-model="firstName"
-                          type="text">
-                      </fg-input>
-                  </div>
-                  <div class="col-md-6">
-                      <fg-input
+                          type="text"/>
+                        <label>Last Name</label>
+                        <fg-input
+                          id="login_input"
                           class="no-border input-lg"
                           addon-left-icon="now-ui-icons users_single-02"
                           placeholder="Last Name"
                           v-model="lastName"
-                          type="text">
-                      </fg-input>
-                  </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons ui-1_email-85"
-                          placeholder="Email"
-                          v-model="email"
-                          type="email">
-                      </fg-input>
-                </div>
-                <div class="col-md-6">
-                      <fg-input>
-                        <el-date-picker
-                          type="date"
-                          class="bgc"
-                          popper-class="date-picker date-picker-success"
-                          placeholder="Birth Date"
-                          v-model="age"
-                        >
-                      </el-date-picker>
-                      </fg-input>
-                </div>
-              </div>
-              <div class="row inputField">
-                  <div class="col-md-6">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons business_briefcase-24"
-                          placeholder="Occupation"
-                          v-model="job_occupation"
-
-                          type="text">
-                      </fg-input>
-                  </div>
-                  <div class="col-md-6">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons education_hat"
-                          placeholder="School"
-                          v-model="institute"
-
-                          type="text">
-                      </fg-input>
-                  </div>
-              </div>
-              <div class="row inputField">
-                  <div class="col-md-6">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons ui-1_lock-circle-open"
-                          placeholder="Password"
-                          v-model="password"
-                          type="password">
-                      </fg-input>
-                  </div>
-                  <div class="col-md-6">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons ui-1_lock-circle-open"
-                          placeholder="Confirm Password"
-                          v-model="confirmPassword"
-
-                          type="password">
-                      </fg-input>
-                  </div>
-              </div>
-
-              <div class="row inputField">
-                  <div class="col-md-12">
-                      <fg-input
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons ui-2_chat-round"
-                          placeholder="About"
-                          v-model="about"
-
-                          type="text">
-                      </fg-input>
-                  </div>
-              </div>
-
-              <div class="row inputField">
-                  <div class="col-md-12">
-                      <multiselect v-model="value"
-                        :options="allTags"
-                        :multiple="true"
-                        :close-on-select="false"
-                        :clear-on-select="false"
-                        :preserve-search="true"
-                        placeholder="Pick Your Interests"
-                        label="value"
-                        track-by="value"
-                        :preselect-first="false">
-                          <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
-                      </multiselect>
-                      <div class="card-footer text-center" id="button">
-                    <!-- <button class="btn btn-info btn-round btn-block" @click="validateUser">Register</button> -->
-                    <alert type="danger" v-if="warning" dismissible>
-                      <div class="alert-icon">
-                        <i class="now-ui-icons objects_support-17"></i>
+                          type="text"/>
+                        <label>Birthday</label>
+                        <fg-input class="no-border input-lg" style="width: 10rem;">
+                          <el-date-picker
+                            style="border-radius: 20px;"
+                            type="date"
+                            popper-class="date-picker date-picker-success"
+                            placeholder="YYYY-MM-DD"
+                            v-model="age"
+                          >
+                        </el-date-picker>
+                        </fg-input>
                       </div>
-                      <strong>Something went wrong!</strong> {{ message }}
-                    </alert>
-                    <input type="submit"
-                    value="Register"
-                    @click="validateUser"
-                    class="btn btn-info text-white btn-round btn-lg btn-block"
-                    />
-                </div>
-                <div class="text-center">
-                  <h6>
-                    <router-link class="link footer-link text-center text-success" to="/login">
-                      Already Have an Account? Login
-                    </router-link>
-                  </h6>
-                </div>
-                      <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
-                      <!-- <b-form-select v-model="selected" :options="options" multiple class="multiple"></b-form-select> -->
+                      </div>
+                      <div class="row">
+                      <div class = "col text-left">
+                        <button
+                            :class="[( firstName =='' || lastName =='' || age==null) ? 'next-button-disabled' : 'next-button' ]"  
+                            :disabled="firstName =='' || lastName =='' || age==null"
+                            @click="incrementStage"
+                          >Next</button>
+                      </div>
+                    </div>
                   </div>
-              </div>
-              </form>
-            </card>
-            <div class="alert alert-success" v-if="success">Verification Link has been sent. Please Check Email</div>
+                </transition>
+                <transition name="slide">
+                  <div v-if="stage===1" class="card-body">
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <p style="font-size: 23px; font-weight: 300; color:#484848 ">Let's get some account information</p>
+                      </div>
+                    </div>
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <alert type="danger" v-if="this.warning" dismissible>
+                            <div class="alert-icon">
+                              <i class="now-ui-icons objects_support-17"></i>
+                            </div>
+                          <strong>Something went wrong!</strong> {{ message }}
+                        </alert>
+                        <label>Email</label>
+                        <fg-input
+                              id="login_input"
+                              class="no-border input-lg"
+                              addon-left-icon="now-ui-icons ui-1_email-85"
+                              placeholder="Email"
+                              v-model="email"
+                              type="text"/>
+                      <label>Password</label>
+                      <fg-input
+                              id="login_input"
+                              class="no-border input-lg"
+                              addon-left-icon="now-ui-icons ui-1_lock-circle-open"
+                              placeholder="Password"
+                              v-model="password"
+                              type="password"/>
+                      <p v-if="password.length < 6 && password != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
+                      <label>Confirm Password</label>
+                      <fg-input
+                                id="login_input"
+                                class="no-border input-lg"
+                                addon-left-icon="now-ui-icons ui-1_lock-circle-open"
+                                placeholder="Confirm Password"
+                                v-model="confirmPassword"
+                                type="password"/>
+                      <p v-if="confirmPassword != password && confirmPassword != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Passwords much match</p>
+                      <div class = "row">
+                        <div class = "col text-left">
+                          <button
+                            class="previous-button"
+                            @click="decrementStage"
+                          >Previous</button>
+                          <button
+                              :class="[(email =='' || password =='' || confirmPassword == '' || confirmPassword != password) ? 'next-button-disabled' : 'next-button' ]"  
+                              :disabled="email =='' || password =='' || confirmPassword == '' || confirmPassword != password"
+                              @click="incrementStage"
+                            >Next</button>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </transition>
+                <transition name="slide">
+                  <div v-if="stage===2" class = "card-body">
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <p style="font-size: 23px; font-weight: 300; color:#484848 ">Let's get to know you some more (optional)</p>
+                        <div class = "row">
+                          <div class="col-md-6">
+                            <label>Occupation</label>
+                            <fg-input
+                                id="login_input"
+                                class="no-border input-lg"
+                                addon-left-icon="now-ui-icons business_briefcase-24"
+                                placeholder="Occupation"
+                                v-model="job_occupation"
+
+                                type="text">
+                            </fg-input>
+                          </div>
+                          <div class="col-md-6">
+                          <label>School</label>
+                              <fg-input
+                                  id="login_input"
+                                  class="no-border input-lg"
+                                  addon-left-icon="now-ui-icons education_hat"
+                                  placeholder="School"
+                                  v-model="institute"
+
+                                  type="text">
+                              </fg-input>
+                          </div>
+                        </div>
+                        <div class = "row">
+                          <div class = "col text-left">
+                            <label>About</label>
+                            <b-form-textarea
+                              style="background: #f5f5f5; border: none; border-radius: 15px; padding-left: 20px; padding-bottom: 20px; margin-bottom: 20px;"  
+                              placeholder="About"
+                              v-model="about"
+                              type="text"/>
+                              <label>Pick your interests</label>
+                              <multiselect 
+                                v-model="value"
+                                :options="allTags"
+                                :multiple="true"
+                                :close-on-select="true"
+                                :clear-on-select="true"
+                                :preserve-search="false"
+                                placeholder="Pick your interests"
+                                label="value"
+                                track-by="value"
+                                :taggable="false"
+                                :preselect-first="false"
+                                />
+                          </div>
+                        </div>
+                        <div class = "row" style="margin-top: 15px;">
+                          <div class = "col">
+                            <button class = "update-button" @click="onPickImage">Add Profile Image</button>
+                            <span v-if="this.image != null && this.image.profile_image != null">{{this.image.profile_image.name}}</span>
+                            <input type="file" accept="image/*" @change="onImageSelected" style="display:none;" ref="ImageInput">
+                          </div>
+                        </div>
+                        <div class = "row" style="margin-top: 10px;">
+                          <div class = "col">
+                            <button class = "update-button" @click="onPickVideo">Add Profile Video</button>
+                            <span v-if="this.video != null && this.video.profile_video != null">{{this.video.profile_video.name}}</span>
+                            <input type="file" accept="video/*" @change="onVideoSelected" style="display:none;" ref="VideoInput">
+                          </div>
+                        </div>
+                        <div class = "row " style="margin-top: 10px;">
+                          <div class = "col text-left">
+                            <button
+                              class="previous-button"
+                              @click="decrementStage"
+                            >Previous</button>
+                            <button
+                                class='next-button' 
+                                @click="incrementStage"
+                              >Next</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+                <transition name="slide">
+                  <div v-if="stage===3" class = "card-body">
+                    <div class = "row">
+                      <div class = "col text-left">
+                        <p style="font-size: 23px; font-weight: 300; color:#484848 ">Want to share social media? (optional)</p>
+                        <div class = "row" style="margin-top: 10px;">
+                          <div class = "col">
+                            <label>Facebook</label>
+                            <fg-input
+                                  id="login_input"
+                                  class="no-border input-lg"
+                                  addon-left-icon="fab fa-facebook"
+                                  placeholder="Facebook"
+                                  v-model="facebook"
+                                  type="text"/>
+                            <label>Instagram</label>
+                            <fg-input
+                                    id="login_input"
+                                    class="no-border input-lg"
+                                    addon-left-icon="fab fa-instagram"
+                                    placeholder="Instagram"
+                                    v-model="instagram"
+                                    type="text"/>
+                            <p v-if="password.length < 6 && password != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
+                            <label>Linkedin</label>
+                            <fg-input
+                                      id="login_input"
+                                      class="no-border input-lg"
+                                      addon-left-icon="fab fa-linkedin"
+                                      placeholder="Linkedin"
+                                      v-model="linkedin"
+                                      type="text"/>
+                            <label>Twitter</label>
+                            <fg-input
+                                      id="login_input"
+                                      class="no-border input-lg"
+                                      addon-left-icon="fab fa-twitter"
+                                      placeholder="Twitter"
+                                      v-model="twitter"
+                                      type="text"/>
+                          </div>
+                        </div>
+                        <div class = "row">
+                          <div class = "col text-left">
+                            <button
+                              class="previous-button"
+                              @click="decrementStage"
+                            >Previous</button>
+                            <button
+                                class='next-button' 
+                                @click="incrementStage"
+                              >Sign up</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+                <transition name="slide">
+                  <div v-if="stage === 4" class = "card-body">
+                    <div class = "row">
+                      <div class = "col text-center">
+                        <p style="font-weight: 500; font-size: 30px; color: #484848">Thank you for signing up!</p>
+                        <lottie :options="checkOptions" :width="100" :height="100" v-on:animCreated="handleAnimation"/>
+                        <p style="font-weight :400; font-size: 15px; color: #484848; margin-top: 20px;"> A verification link has been sent to your email! </p>
+                        <button class="go-to-login" @click="goToLogin" style="margin: 0">Login Here</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class = "row">
+                    <div class = "col text-left">
+                      <p v-if="stage!=4" style="display: inline-block; font-weight: 400; font-size: 13px; color: #484848; margin-left: 20px;"> Already have an account?</p> <router-link v-if="stage!=4" to="/login" style="font-size: 13px; font-weight: 500; color: #32d477; display: inline-block; text-decoration: none"> &nbsp;Login</router-link>
+                    </div>
+                  </div>
+                </transition>
+                </div>
+              <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #484848; text-decoration: none; font-size: 14px;">
+                Meet the Team&nbsp;&nbsp;&nbsp;|
+              </router-link>
+              <a class = "social-link" style = "color: #484848" href="https://www.facebook.com/SparcTheWorld/" target="_blank"><i class="fab fa-facebook fa-lg"/></a>
+              <a class = "social-link" style = "color: #484848" href="https://www.instagram.com/SparcTheWorld/" target="_blank"><i class="fab fa-instagram fa-lg"/></a>
+              <a class = "social-link" style = "color: #484848" href="https://linkedin.com/company/SparcTheWorld" target="_blank"><i class="fab fa-linkedin fa-lg"/></a>
+              <a class = "social-link" style = "color: #484848" href="https://twitter.com/SparcTheWorld/" target="_blank"><i class="fab fa-twitter fa-lg"/></a>
+              <a class = "social-link" style = "color: #484848" href="https://www.youtube.com/channel/UCJldpwGu1lritWkFXbQBGMg" target="_blank"><i class="fab fa-youtube fa-lg"/></a>
+            </div>
+            
+          </div>
         </div>
       </div>
     </div>
@@ -156,11 +325,19 @@
 </template>
 <script>
 import { Card, Button, FormGroupInput, Alert } from '@/components';
+import {BButton }from 'bootstrap-vue'
 import MainFooter from '@/layout/MainFooter';
 import { DatePicker } from 'element-ui';
 import Multiselect from 'vue-multiselect'
 import { mapGetters, mapActions } from 'vuex';
 import { setTimeout } from 'timers';
+import HorizontalStepper from 'vue-stepper';
+import axios from 'axios';
+import Lottie from 'vue-lottie'
+import checkAnimationData from '../../lotties/782-check-mark-success.json'
+
+import WelcomeStep from './components/registration/WelcomeStep'
+
 export default {
   name: 'register-page',
   bodyClass: 'login-page',
@@ -171,24 +348,39 @@ export default {
     Multiselect,
     MainFooter,
     [Button.name]: Button,
-    [FormGroupInput.name]: FormGroupInput
+    [FormGroupInput.name]: FormGroupInput,
+    HorizontalStepper,
+    'lottie': Lottie,
+
   },
-  computed: { ...mapGetters(['allTags', 'status', 'error', 'user'])},
+  computed: { ...mapGetters(['status', 'error', 'user'])},
   data() {
       return {
-
+        checkOptions: { animationData: checkAnimationData, loop: false, autoplay: false },
+        stage: 0,
         success: false,
-        firstName: null,
-        lastName: null,
+        firstName: '',
+        lastName: '',
         age: null,
-        email: null,
-        job_occupation: null,
-        institute: null,
-        about: null,
-        password: null,
-        confirmPassword: null,
+        email: '',
+        job_occupation: '',
+        institute: '',
+        about: '',
+        password: '',
+        confirmPassword: '',
+        allTags: [],
         value: [],
         interestId: [],
+        image: {
+          profile_image: null
+        },
+        video: {
+          profile_video: null
+        },
+        facebook: '',
+        instagram:'',
+        linkedin: '',
+        twitter: '',
         userData: {
           first_name: '',
           last_name: '',
@@ -202,13 +394,60 @@ export default {
         },
         message: '',
         warning: false,
-
       }
   },
-
   methods: {
-      ...mapActions(['fetchTags', 'createUser']),
-
+      ...mapActions(['fetchTags', 'createUser', 'updateImage', 'updateVideo']),
+      handleAnimation: function(anim) {
+        if(this.stage === 4) {
+          this.anim = anim;
+          this.anim.play();
+        }
+      },
+      goToLogin() {
+        this.$router.push('/login')
+      },
+      decrementStage() {
+        this.stage--;
+      },
+      onPickVideo() {
+        this.$refs.VideoInput.click();
+      },
+      onVideoSelected(event) {
+          this.video.profile_video = event.target.files[0];
+      },
+      onPickImage() {
+       this.$refs.ImageInput.click();
+      },
+      onImageSelected(event) {
+        this.image.profile_image = event.target.files[0];
+      },
+      goToLogin() {
+        this.$router.push('/login')
+      },
+      
+      async incrementStage() {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (this.stage == 1) {
+          if (!re.test(this.email.toLowerCase())) {
+            this.warning = true;
+            this.message = "Please enter a valid email"
+            return;
+          }
+          try {
+            await axios.post("https://us-central1-sparc-9d9cb.cloudfunctions.net/checkUser", {email: this.email});
+          } catch (err) {
+            this.warning = true;
+            this.message = "User already exists with this email";
+            return;
+          }
+        }
+        if (this.stage == 3) {
+          this.registerUser();
+        }
+        this.warning = false;
+        this.stage++;
+      },
       validateUser() {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if(this.firstName == null || this.lastName == null || this.age == null || this.email == null || this.password == null || this.confirmPassword == null || this.job_occupation == null || this.institute == null){
@@ -227,41 +466,43 @@ export default {
           this.registerUser();
         }
       },
-    registerUser() {
-        const newDate = this.age.toLocaleDateString()
-        this.userData.age = newDate;
-        if(this.value != null) {
-          this.value.forEach(item => {
-            this.interestId.push(item.id)
+      async registerUser() {
+          const newDate = this.age.toLocaleDateString()
+          this.userData.age = newDate;
+          if(this.value != null) {
+            this.value.forEach(item => {
+              this.interestId.push(item.id)
+            })
+            this.userData.interests = this.interestId
+        
+          }
+          this.userData.first_name = this.firstName;
+          this.userData.last_name = this.lastName;
+          this.userData.email = this.email;
+          this.userData.password = this.password;
+          this.userData.job_occupation = this.job_occupation;
+          this.userData.institute = this.institute;
+          this.userData.about = this.about;
+          this.userData.facebook = this.facebook;
+          this.userData.instagram = this.instagram;
+          this.userData.twitter = this.twitter;
+          this.userData.linkedin = this.linkedin;
+          await this.createUser(this.userData);
+          if (this.image != null) {
+            await this.updateImage(this.image);
+          }
+          if (this.video != null) {
+            await this.updateVideo(this.video);
+          }
+        },
+        async getTags() {
+          var tags = await axios.get('https://us-central1-sparc-9d9cb.cloudfunctions.net/getTags');
+          var tagsArray = [];
+          Object.keys(tags.data).forEach((key) => {
+            tagsArray.push({...tags.data[key], id: key});
           })
-
-          this.userData.first_name = this.firstName;
-          this.userData.last_name = this.lastName;
-
-          this.userData.email = this.email;
-          this.userData.password = this.password;
-          this.userData.job_occupation = this.job_occupation;
-          this.userData.institute = this.institute;
-          this.userData.about = this.about;
-          this.userData.interests = this.interestId
-
-          this.createUser(this.userData);
+          return tagsArray;
         }
-        else {
-          this.userData.first_name = this.firstName;
-          this.userData.last_name = this.lastName;
-          this.userData.email = this.email;
-          this.userData.password = this.password;
-          this.userData.job_occupation = this.job_occupation;
-          this.userData.institute = this.institute;
-          this.userData.about = this.about;
-
-          this.createUser(this.userData);
-
-        }
-        console.log(this.userData.age)
-
-   },
   },
   watch: {
     status(val) {
@@ -295,15 +536,13 @@ export default {
       }
     }
   },
-
-  created() {
-    this.fetchTags();
+  async created() {
+    this.allTags = await this.getTags();
   }
 };
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-
   /* .inputField {
       margin-top: -55px;
   } */
@@ -322,8 +561,123 @@ export default {
     outline: none;
     border-radius: 25px;
   }
-  .bgc {
-    background: #f5f5f5;
-    border-radius: 20px;
+  .top {
+    margin-top: 0rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
   }
+  .divider-line {
+    border-bottom: 1px solid #e2e2e2;
+      height: 2px;
+      position: absolute;
+  }
+  
+  .icon-wrapper { 
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      width: 95%;
+      left: 0;
+      padding: 2% 4%;
+  }
+  .icon-wrapper .step {
+     position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+  }
+  
+  .icon-wrapper .step .circle {
+    margin-bottom: 1rem;
+          padding: 0 1rem;
+          background-color: white;
+  }
+  .icon-wrapper .step .circle .active{
+    background-color: #32d477;
+            color: white;
+            border-radius: 50%;
+            padding: 1rem
+  }
+  .icon-wrapper .step .circle .inactive{
+    background-color: #e2e2e2;
+            color: #8f8f8f;
+            border-radius: 50%;
+            padding: 1rem
+  }
+
+  .previous-button {
+    background: dimgray;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    height: 3rem;
+    width: 7rem;
+    margin-right: 10px;
+    font-weight: 500;
+    margin-top: 1rem
+  }
+
+  .next-button-disabled {
+    background: #89e3a7;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    height: 3rem;
+    width: 7rem;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+  
+  .next-button {
+    background: #32d477;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    height: 3rem;
+    width: 7rem;
+    font-weight: 500;
+    margin-top: 1rem;
+  }
+
+  .about-text::placeholder {
+    margin-left: 20px;
+  }
+
+  .update-button {
+    margin-right: 10px;
+    background: #f4f4f4;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+  }
+
+  .go-to-login {
+    background: #f4f4f4; color: #5f6368; font-weight: 500; font-size: 15px; border-radius: 7px
+  }
+
+  .stage-before {
+    height: 130vh;
+  }
+  
+  .stage-4{
+    height: 100vh;
+  }
+
+  .slide-enter-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+.slide-leave-to {
+  transform: translateX(-30px);
+  opacity: 0;
+}
 </style>
