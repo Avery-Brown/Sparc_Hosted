@@ -110,9 +110,14 @@
       </li> -->
       <li class="dropdown" v-if="!this.logout">
           <!-- <b class="nav-link-v2" style= "margin-right: 20px;" >Profile</b> -->
-        <img :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #00487c;" v-b-toggle.collapse-a/>
+        <img v-if="user != null" :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #00487c;" v-b-toggle.collapse-a/>
         <p v-b-toggle.collapse-a style="color: #484848; font-weight: 600; padding: 9px; font-size: 13px;">Hi, {{user.first_name}}<i class="fa fa-chevron-down fa-sm" style=" padding: 2px;"/> </p>
         <div class="dropdown-content-profile shadow-sm">
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
+            <router-link to="/profile">
+              <p class="drop-down-text-v2">Profile</p>
+            </router-link>
+          </b-collapse>
           <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/past-events">
               <p class="drop-down-text-v2">Past Engagements</p>
