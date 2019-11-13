@@ -6,4 +6,4 @@ cache:
     - user-panel/node_modules
 
 script: 
-  - cd user-panel && npm run test
+  - cd user-panel && npm install && npm run test
