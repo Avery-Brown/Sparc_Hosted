@@ -9,14 +9,19 @@
     "test": "jest"
   },
   "dependencies": {
-    "babel-core": "^7.0.0-bridge.0",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/runtime": "^7.7.2",
     "@pencilpix/vue2-clock-picker": "^0.1.6",
     "@tygr/vue-time-picker": "^1.0.9",
     "axios": "^0.19.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "bootstrap-vue-datatable": "^1.0.7",
+    "core-js": "^3.4.1",
     "element-ui": "^2.5.4",
     "firebase": "^6.3.4",
     "moment": "^2.24.0",
@@ -41,8 +46,6 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
-    "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.7.1",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
@@ -53,7 +56,7 @@
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
     "jest": "^24.9.0",
@@ -79,10 +82,8 @@
       "^.+\\.vue$": "vue-jest",
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
     },
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "**/*.{js,vue}",
-      "!**/node_modules/**"
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
     ]
   }
 }
