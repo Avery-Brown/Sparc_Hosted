@@ -5,14 +5,14 @@
                 <div class = "container">
                     <div class="col-md-6 ml-auto mr-auto"> 
                         <Card class="contact-card"> 
-                            <h3 class="text-center text-info"><b>Send Us a Message</b></h3>
+                            <h3 class="text-center" style= "color: #0356fc"><b>Contact Us</b></h3>
                             <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
                             <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
                             <b-form-textarea class="message-box input-lg" placeholder="Message" v-model="userPayload.message" type="message"></b-form-textarea>
                             <div class="card-footer text-center">
                             <a
                              @click="validateFields"
-                            class="btn btn-info text-white btn-round btn-lg btn-block"
+                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "background-color: #0356fc"
                             >Send</a>
                             </div> 
                         </Card> 
@@ -61,6 +61,7 @@ export default {
             name: "",
             email: "",
             message: "",
+            //phone: "",
         },
         warning: false,
         success: false,
@@ -88,6 +89,7 @@ export default {
           axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendContact', {
               name: this.userPayload.name,
               dest: this.userPayload.email,
+              //text: this.userPayload.phone,
               message: this.userPayload.message,
           }).then(() => {
               console.log("Contact Transaction Success");
