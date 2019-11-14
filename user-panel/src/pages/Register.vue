@@ -172,7 +172,6 @@
                                   addon-left-icon="now-ui-icons education_hat"
                                   placeholder="School"
                                   v-model="institute"
-
                                   type="text">
                               </fg-input>
                           </div>
@@ -351,6 +350,7 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     HorizontalStepper,
     'lottie': Lottie,
+    'el-date-picker': DatePicker,
 
   },
   computed: { ...mapGetters(['status', 'error', 'user'])},
