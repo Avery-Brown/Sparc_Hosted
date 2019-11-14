@@ -4,9 +4,9 @@
     <div class = "container about-body">
         <img src= "../../public/sparclogo1.png" alt= "Sparc logo" width="600" height="170" class="center">
 
-      <div class = "mission" style= "background-color: #0356fc">
+      <div class = "mission" style= "background-color: #E0E0E0">
       	<div class = "missionInner" style= "margin-top: 60px">
-        <h2 style= "margin-bottom: 20px"><b><span class= "sparcGreen">O</span>ur <span class= "sparcGreen">M</span>ission</b></h2>
+        <h2 style= "margin-bottom: 20px"><b>Our Mission</b></h2>
         <h3>Creating a peer-to-peer social network community that economically empowers you for what you enjoy doing at times you enjoy doing them.</h3>
         </div>
       </div>
@@ -61,8 +61,7 @@
 .mission {
   display: block;
   width: 100%;
-  border-radius: 50%;
-  color: white;
+  border-radius: 25px;
   text-align: center;
 }
 .missionInner {
@@ -78,9 +77,6 @@
 	margin-top: 30px;
 }
 
-.sparcGreen {
-  color: #2ade36;
-}
 
 h2{
     margin-bottom: 5px;
