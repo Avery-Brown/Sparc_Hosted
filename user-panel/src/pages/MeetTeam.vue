@@ -1,5 +1,5 @@
-/*<template>
-    <div class = "main">
+<template>
+    <!-- <div class = "main">
         <div class = "row">
             <div class="container">
                     <h2 class="text-center ml-3 title title-up mb-5"><u>Meet the team</u></h2>
@@ -248,9 +248,9 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 </template>
-*/
+
 
 
 <template>
@@ -407,7 +407,7 @@
                         </div>
                     </div>
                     <div class = "row">
-                        <div class = "col-md-4 ml-auto mr-auto" style= "margin-top: 40px; margin-bottom: 40px; padding-left: 60px; padding-right: 60px"">
+                        <div class = "col-md-4 ml-auto mr-auto" style= "margin-top: 40px; margin-bottom: 40px; padding-left: 60px; padding-right: 60px">
                             <div class = "image-holder">
                                 <img src = "img/team/Kristen Mendoza photo.jpg" class = "about-img" alt =/>
                                 <div class = "overlay">
@@ -416,7 +416,7 @@
                             </div>
                             <h4 class = "title text-center" style = "color: white; margin-top: 4px"> Kristen Mendoza</h4>
                         </div>
-                        <div class = "col-md-4 ml-auto mr-auto" style= "margin-top: 40px; margin-bottom: 40px; padding-left: 60px; padding-right: 60px"">
+                        <div class = "col-md-4 ml-auto mr-auto" style= "margin-top: 40px; margin-bottom: 40px; padding-left: 60px; padding-right: 60px">
                             <div class = "image-holder">
                                 <img src = "img/team/Michelle.jpg" class = "about-img" alt =/>
                                 <div class = "overlay">

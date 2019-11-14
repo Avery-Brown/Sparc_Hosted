@@ -347,7 +347,7 @@ export default {
       this.filterEvents = [];
       let event = [];
       if (this.pastFilter.length == 0) {
-        event = this.filters.filter(event => Date.now() <= Date.parse(event.date))
+        event = this.filters.filter(event => Date.now()- 3600 * 1000 * 24 <= Date.parse(event.date))
       } else {
         event = this.filters;
       }
