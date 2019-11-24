@@ -31,6 +31,7 @@
     "vee-validate": "^3.0.11",
     "vue": "^2.6.10",
     "vue-ctk-date-time-picker": "^2.2.0",
+    "vue-froala-wysiwyg": "^3.0.6",
     "vue-lazy-load": "^0.0.7",
     "vue-lazyload": "^1.2.6",
     "vue-lottie": "^0.2.1",
