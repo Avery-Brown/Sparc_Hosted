@@ -11,13 +11,18 @@ import StarRating from 'vue-star-rating'
 import Clipboard from 'v-clipboard'
 import 'native-toast/dist/native-toast.css'
 import VueStripeCheckout from 'vue-stripe-checkout'
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+
+// Import and use Vue Froala lib.
+import VueFroala from 'vue-froala-wysiwyg'
+Vue.use(VueFroala)
 
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
    //console.log(Vals) requiresAuth &&requiresAuth &&
   if ( requiresAuth &&  !localStorage.getItem("loggedUser")) {
-    
+
       next('/login')
   } else if (requiresAuth && localStorage.getItem("loggedUser")) {
       next()
@@ -69,7 +74,7 @@ const options = {
 }
 
 Vue.use(VueStripeCheckout, options)
- 
+
 Vue.use(Clipboard)
 Vue.use(BootstrapVue)
 

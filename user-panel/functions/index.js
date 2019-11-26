@@ -71,14 +71,14 @@ exports.sendMail = functions.https.onRequest((req, res) => {
               from: 'info@sparc.world',
               subject: 'Sparc Engagement Confirmation',
               text: 'Participation Text',
-              html: '<p>Your participation for ' + event + 
-              ' has been confirmed</p> <p>Here is information about the engagement: </p><p><strong>Date: </strong>' + date + 
-              '</p> <p><strong>Start Time: </strong>' + start_time + 
-              '</p> <p><strong>End Time: </strong>' + end_time + 
-              '</p> <p><strong>Host Contact Information: </strong>' + host_contact + 
-              '</p> <p><strong>Event Address: </strong>' + event_address + 
-              '</p> <p><strong>Event Access Information: </strong>' + event_location_access + 
-              '</p> <p><strong>Event Space:</strong>' + event_space + 
+              html: '<p>Your participation for ' + event +
+              ' has been confirmed</p> <p>Here is information about the engagement: </p><p><strong>Date: </strong>' + date +
+              '</p> <p><strong>Start Time: </strong>' + start_time +
+              '</p> <p><strong>End Time: </strong>' + end_time +
+              '</p> <p><strong>Host Contact Information: </strong>' + host_contact +
+              '</p> <p><strong>Event Address: </strong>' + event_address +
+              '</p> <p><strong>Event Access Information: </strong>' + event_location_access +
+              '</p> <p><strong>Event Space:</strong>' + event_space +
               '</p> <p>Thanks for Participating,</p> <p>Sparc Team</p>',
               // html: 'Your Participation for ' + event + ' has been confirmed. Here is some information ' + host_contact + ' Thanks for participating! </strong>',
           }).then(res => res.send('Email Sent')).catch(err => res.send(err));
@@ -86,7 +86,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
       else {
           res.send("Error " + " " + SENDGRID_API_KEY)
       }
-  });    
+  });
 });
 
 exports.sendReminder = functions.https.onRequest((req, res) => {
@@ -144,7 +144,9 @@ exports.sendContact = functions.https.onRequest((req, res) => {
         to:'info@sparc.world',
         from: 'info@sparc.world',
         subject: 'Contact Request from ' + name,
-        text: message
+        // text: message,
+        html: message,
+        text: html
       }).then(res => res.send('Email Sent to Sparc')).catch(err => res.send(err));
     }
   })
@@ -198,9 +200,7 @@ exports.checkUser = functions.https.onRequest((req, res) => {
     } catch (e) {
       res.status(200).send("GOOD TO GO")
     }
-  }) 
+  })
 })
 
 exports.webApi = functions.https.onRequest(main);
-
-
