@@ -127,7 +127,7 @@
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
-                      <div class="card shadow" style = "border-radius: 8px;">
+                      <div class="card shadow" style="border-radius: 8px">
                         <div class="card-body">
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
@@ -154,7 +154,7 @@
                             <div class = "col-md-9 mt-auto mb-auto">
                               <div class = "row">
                                 <div class = "col">
-                                  <h4 :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </h4>
+                                  <p style="font-size: 20px; margin-top: 12px; font-weight: 500" :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </p>
                                     <b-tooltip v-if="event.event_name.length > 63" :target="getHoverIdTitleByIndex(index)" placement="top" triggers="hover">
                                       <p class="mt-auto mb-auto"> {{ event.event_name }} </p>
                                     </b-tooltip>
@@ -226,17 +226,20 @@
                           </div>
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
-                              <div class = "row">
+                              <div class = "row text-center">
                                 <div class = "col-2">
                                 </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-facebook fa-md" style = "color: #00487C;"></i></p>
+                                <div class =" col-2">
+                                  <p><i class="fab fa-facebook fa-md" style = "color: #3b5998;"></i></p>
                                 </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-twitter fa-md" style = "color: #00487C"></i></p>
+                                <div class =" col-2">
+                                  <p><i class="fab fa-instagram fa-md" style = "color: #cf2872;"></i></p>
                                 </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-linkedin fa-md" style = "color: #00487C"></i></p>
+                                <div class =" col-2">
+                                  <p><i class="fab fa-twitter fa-md" style = "color: #00aced;"></i></p>
+                                </div>
+                                <div class =" col-2">
+                                  <p><i class="fab fa-linkedin fa-md" style = "color: #0077b6;"></i></p>
                                 </div>
                                 <div class = "col-2">
                                 </div>
@@ -247,10 +250,10 @@
                                 <div class = "col-md-8">
                                   <div class = "row">
                                     <div class = "col-md-3">
-                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #00487C"></i> {{ event.date }}</p>
+                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #484848"></i> {{ event.date }}</p>
                                     </div>
                                     <div class = "col-md-9">
-                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #00487C"></i> {{ event.start_time + " - " + event.end_time }} </p>
+                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #484848"></i> {{ event.start_time + " - " + event.end_time }} </p>
                                     </div>
                                   </div>
                                 </div>
@@ -604,8 +607,8 @@ export default {
     },
     transformTitle(title) {
       let transformedTitle = title;
-      if (title.split("").length > 49) {
-        transformedTitle = title.substring(0,49) + '...'
+      if (title.split("").length > 40) {
+        transformedTitle = title.substring(0,40) + '...'
       }
       return transformedTitle;
     },
