@@ -144,9 +144,7 @@ exports.sendContact = functions.https.onRequest((req, res) => {
         to:'info@sparc.world',
         from: 'info@sparc.world',
         subject: 'Contact Request from ' + name,
-        // text: message,
-        html: message,
-        text: html
+        text: message
       }).then(res => res.send('Email Sent to Sparc')).catch(err => res.send(err));
     }
   })

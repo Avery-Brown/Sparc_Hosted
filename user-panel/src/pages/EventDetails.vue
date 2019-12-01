@@ -13,10 +13,11 @@
               </div>
             <div class="row" id="card-margin" style="padding-bottom: 0px;" >
                 <div class="col-md-12">
-                  <div style="font-size: 30px; margin-bottom: 0px; text-align: center; font-weight: 500; padding-top: 20px;">{{ getSelectedEvent[0].event_name }}</div>
+                  <!-- <div style="font-size: 30px; margin-bottom: 0px; text-align: center; font-weight: 500; padding-top: 20px;">{{ getSelectedEvent[0].event_name }}</div> -->
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <b-card v-if="getSelectedEvent[0].event_image != null" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-alt="Engagement image" style="margin-left: 20px; width: 300px; box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); margin-bottom: -20px;"></b-card>
-                    <div style="padding-top: 50px; padding-right: 55px;">
+                    <b-card v-if="getSelectedEvent[0].event_image != null" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-alt="Engagement image" style="margin-left: 30px; padding-top: 50px; width: 350px; box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); margin-bottom: -20px;"></b-card>
+                    <div style="padding-top: 50px; padding-right: 40px;">
+                      <div style="font-size: 30px; margin-bottom: 10px; text-align: left; padding-left: 20px; font-weight: 500;">{{ getSelectedEvent[0].event_name }}</div>
                       <div style="display: flex; flex-direction: row; justify-content: flex-end;">
                         <div style="text-align: right; padding-right: 5px; font-size: 18px; padding-bottom: 5px;">
                           Hosted By
