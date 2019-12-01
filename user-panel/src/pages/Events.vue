@@ -127,7 +127,7 @@
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">
-                      <div class="card shadow" style = "border-radius: 8px;">
+                      <div class="card shadow" style="border-radius: 8px">
                         <div class="card-body">
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
@@ -154,7 +154,7 @@
                             <div class = "col-md-9 mt-auto mb-auto">
                               <div class = "row">
                                 <div class = "col">
-                                  <h4 :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </h4>
+                                  <p style="font-size: 20px; margin-top: 12px; font-weight: 500" :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </p>
                                     <b-tooltip v-if="event.event_name.length > 63" :target="getHoverIdTitleByIndex(index)" placement="top" triggers="hover">
                                       <p class="mt-auto mb-auto"> {{ event.event_name }} </p>
                                     </b-tooltip>
@@ -227,18 +227,14 @@
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
                               <div class = "row">
-                                <div class = "col-2">
-                                </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-facebook fa-md" style = "color: #00487C;"></i></p>
-                                </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-twitter fa-md" style = "color: #00487C"></i></p>
-                                </div>
-                                <div class =" col ">
-                                  <p><i class="fab fa-linkedin fa-md" style = "color: #00487C"></i></p>
-                                </div>
-                                <div class = "col-2">
+                                <div class = "col text-center" style="margin-top: -10px;">
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).facebook != '' && getUser(event.created_by).facebook != null"><a :href="'https://' + getUser(event.created_by).facebook" target="_blank"><i class="fab fa-facebook fa-lg" style = "color: #3b5998; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).instagram != '' && getUser(event.created_by).instagram != null"><a :href="'https://' + getUser(event.created_by).instagram" target="_blank"><i class="fab fa-instagram fa-lg" style = "color: #cf2872; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).twitter != '' && getUser(event.created_by).twitter!= null"><a :href="'https://' + getUser(event.created_by).twitter" target="_blank"><i class="fab fa-twitter fa-lg" style = "color: #00aced; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).linkedin != '' && getUser(event.created_by).linkedin != null"><a :href="'https://' + getUser(event.created_by).linkedin" target="_blank"><i class="fab fa-linkedin fa-lg" style = "color: #0077b6; margin-left: 10px; margin-right: 10px;"></i></a></span>
                                 </div>
                               </div>
                             </div>
@@ -247,10 +243,10 @@
                                 <div class = "col-md-8">
                                   <div class = "row">
                                     <div class = "col-md-3">
-                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #00487C"></i> {{ event.date }}</p>
+                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #484848"></i> {{ event.date }}</p>
                                     </div>
                                     <div class = "col-md-9">
-                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #00487C"></i> {{ event.start_time + " - " + event.end_time }} </p>
+                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #484848"></i> {{ event.start_time + " - " + event.end_time }} </p>
                                     </div>
                                   </div>
                                 </div>
@@ -604,8 +600,8 @@ export default {
     },
     transformTitle(title) {
       let transformedTitle = title;
-      if (title.split("").length > 49) {
-        transformedTitle = title.substring(0,49) + '...'
+      if (title.split("").length > 40) {
+        transformedTitle = title.substring(0,40) + '...'
       }
       return transformedTitle;
     },
