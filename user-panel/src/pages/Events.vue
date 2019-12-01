@@ -226,22 +226,15 @@
                           </div>
                           <div class = "row">
                             <div class = "col-md-3 text-center mt-auto mb-auto">
-                              <div class = "row text-center">
-                                <div class = "col-2">
-                                </div>
-                                <div class =" col-2">
-                                  <p><i class="fab fa-facebook fa-md" style = "color: #3b5998;"></i></p>
-                                </div>
-                                <div class =" col-2">
-                                  <p><i class="fab fa-instagram fa-md" style = "color: #cf2872;"></i></p>
-                                </div>
-                                <div class =" col-2">
-                                  <p><i class="fab fa-twitter fa-md" style = "color: #00aced;"></i></p>
-                                </div>
-                                <div class =" col-2">
-                                  <p><i class="fab fa-linkedin fa-md" style = "color: #0077b6;"></i></p>
-                                </div>
-                                <div class = "col-2">
+                              <div class = "row">
+                                <div class = "col text-center" style="margin-top: -10px;">
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).facebook != '' && getUser(event.created_by).facebook != null"><a :href="'https://' + getUser(event.created_by).facebook" target="_blank"><i class="fab fa-facebook fa-lg" style = "color: #3b5998; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).instagram != '' && getUser(event.created_by).instagram != null"><a :href="'https://' + getUser(event.created_by).instagram" target="_blank"><i class="fab fa-instagram fa-lg" style = "color: #cf2872; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).twitter != '' && getUser(event.created_by).twitter!= null"><a :href="'https://' + getUser(event.created_by).twitter" target="_blank"><i class="fab fa-twitter fa-lg" style = "color: #00aced; margin-left: 10px; margin-right: 10px;"></i></a></span>
+                                
+                                  <span v-if="getUser(event.created_by) != null && getUser(event.created_by).linkedin != '' && getUser(event.created_by).linkedin != null"><a :href="'https://' + getUser(event.created_by).linkedin" target="_blank"><i class="fab fa-linkedin fa-lg" style = "color: #0077b6; margin-left: 10px; margin-right: 10px;"></i></a></span>
                                 </div>
                               </div>
                             </div>

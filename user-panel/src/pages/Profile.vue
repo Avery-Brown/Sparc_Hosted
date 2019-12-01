@@ -171,6 +171,35 @@
             </div>
           </div>
         </div>
+         <div class = "row">
+            <div class = "col">
+              <label>Update Social Media</label>
+              <fg-input id="login_input"
+                class = "no-border input-lg"
+                addon-left-icon="fab fa-facebook"
+                placeholder="Facebook"
+                v-model="userData.facebook"
+                type="text"/>
+              <fg-input id="login_input"
+                class = "no-border input-lg"
+                addon-left-icon="fab fa-instagram"
+                placeholder="Instagram"
+                v-model="userData.instagram"
+                type="text"/>
+              <fg-input id="login_input"
+                class = "no-border input-lg"
+                addon-left-icon="fab fa-twitter"
+                placeholder="Twitter"
+                v-model="userData.twitter"
+                type="text"/>
+              <fg-input id="login_input"
+                class = "no-border input-lg"
+                addon-left-icon="fab fa-linkedin"
+                placeholder="Linkedin"
+                v-model="userData.linkedin"
+                type="text"/>
+            </div>
+        </div>
       </form>
       <template slot="footer">
         <n-button class = "now-ui-icons ui-1_simple-remove" type="danger" @click.native="modals.classic = false">Close</n-button>
@@ -239,6 +268,10 @@ export default {
           institute: '',
           about: '',
           interests: [],
+          facebook: '',
+          instagram: '',
+          twitter: '',
+          linkedin: '',
       },
 
     }
