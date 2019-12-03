@@ -172,7 +172,6 @@
                                   addon-left-icon="now-ui-icons education_hat"
                                   placeholder="School"
                                   v-model="institute"
-
                                   type="text">
                               </fg-input>
                           </div>
@@ -351,6 +350,7 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     HorizontalStepper,
     'lottie': Lottie,
+    'el-date-picker': DatePicker,
 
   },
   computed: { ...mapGetters(['status', 'error', 'user'])},
@@ -483,10 +483,10 @@ export default {
           this.userData.job_occupation = this.job_occupation;
           this.userData.institute = this.institute;
           this.userData.about = this.about;
-          this.userData.facebook = this.facebook;
-          this.userData.instagram = this.instagram;
-          this.userData.twitter = this.twitter;
-          this.userData.linkedin = this.linkedin;
+          this.userData.facebook = this.facebook.substring(this.facebook.indexOf("facebook"));
+          this.userData.instagram = this.instagram.substring(this.instagram.indexOf("instagram"));
+          this.userData.twitter = this.twitter.substring(this.twitter.indexOf("twitter"));
+          this.userData.linkedin = this.linkedin.substring(this.linkedin.indexOf("linkedin"));
           await this.createUser(this.userData);
           if (this.image != null) {
             await this.updateImage(this.image);

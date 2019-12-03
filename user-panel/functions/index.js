@@ -8,6 +8,8 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(SENDGRID_API_KEY);
 const stripe = require("stripe")(Keys.stripe);
 const cors = require('cors')({origin: true});
+const {google} = require('googleapis')
+const GoogleClient = require('./google/index')
 
 admin.initializeApp();
 
@@ -71,14 +73,14 @@ exports.sendMail = functions.https.onRequest((req, res) => {
               from: 'info@sparc.world',
               subject: 'Sparc Engagement Confirmation',
               text: 'Participation Text',
-              html: '<p>Your participation for ' + event + 
-              ' has been confirmed</p> <p>Here is information about the engagement: </p><p><strong>Date: </strong>' + date + 
-              '</p> <p><strong>Start Time: </strong>' + start_time + 
-              '</p> <p><strong>End Time: </strong>' + end_time + 
-              '</p> <p><strong>Host Contact Information: </strong>' + host_contact + 
-              '</p> <p><strong>Event Address: </strong>' + event_address + 
-              '</p> <p><strong>Event Access Information: </strong>' + event_location_access + 
-              '</p> <p><strong>Event Space:</strong>' + event_space + 
+              html: '<p>Your participation for ' + event +
+              ' has been confirmed</p> <p>Here is information about the engagement: </p><p><strong>Date: </strong>' + date +
+              '</p> <p><strong>Start Time: </strong>' + start_time +
+              '</p> <p><strong>End Time: </strong>' + end_time +
+              '</p> <p><strong>Host Contact Information: </strong>' + host_contact +
+              '</p> <p><strong>Event Address: </strong>' + event_address +
+              '</p> <p><strong>Event Access Information: </strong>' + event_location_access +
+              '</p> <p><strong>Event Space:</strong>' + event_space +
               '</p> <p>Thanks for Participating,</p> <p>Sparc Team</p>',
               // html: 'Your Participation for ' + event + ' has been confirmed. Here is some information ' + host_contact + ' Thanks for participating! </strong>',
           }).then(res => res.send('Email Sent')).catch(err => res.send(err));
@@ -86,7 +88,7 @@ exports.sendMail = functions.https.onRequest((req, res) => {
       else {
           res.send("Error " + " " + SENDGRID_API_KEY)
       }
-  });    
+  });
 });
 
 exports.sendReminder = functions.https.onRequest((req, res) => {
@@ -144,7 +146,7 @@ exports.sendContact = functions.https.onRequest((req, res) => {
         to:'info@sparc.world',
         from: 'info@sparc.world',
         subject: 'Contact Request from ' + name,
-        text: message
+        html: message
       }).then(res => res.send('Email Sent to Sparc')).catch(err => res.send(err));
     }
   })
@@ -198,9 +200,34 @@ exports.checkUser = functions.https.onRequest((req, res) => {
     } catch (e) {
       res.status(200).send("GOOD TO GO")
     }
-  }) 
+  })
+})
+
+exports.checkCalendarTest = functions.https.onRequest((req, res) => {
+  GoogleClient.authenticate().then(() => {
+    const calendar = google.calendar({version: 'v3', auth: GoogleClient.oAuth2Client});
+    calendar.events.list({
+      calendarId: 'primary',
+      timeMin: (new Date()).toISOString(),
+      maxResults: 10,
+      singleEvents: true,
+      orderBy: 'startTime',
+    }, (err, res) => {
+      if (err) return console.log('The API returned an error: ' + err);
+      const events = res.data.items;
+      if (events.length) {
+        console.log('Upcoming 10 events:');
+        events.map((event, i) => {
+          const start = event.start.dateTime || event.start.date;
+          console.log(`${start} - ${event.summary}`);
+        });
+      } else {
+        console.log('No upcoming events found.');
+      }
+    });
+  }
+  )
+
 })
 
 exports.webApi = functions.https.onRequest(main);
-
-

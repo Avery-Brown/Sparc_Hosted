@@ -5,27 +5,39 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest"
   },
   "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/runtime": "^7.7.2",
     "@pencilpix/vue2-clock-picker": "^0.1.6",
     "@tygr/vue-time-picker": "^1.0.9",
     "axios": "^0.19.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.27",
     "bootstrap-vue-datatable": "^1.0.7",
-    "debug": "^4.1.1",
+    "core-js": "^2.6.10",
     "element-ui": "^2.5.4",
     "es6-promise": "^4.2.8",
     "firebase": "^6.3.4",
+    "firebase-admin": "^8.8.0",
+    "firebase-functions": "^3.3.0",
+    "googleapis": "^39.2.0",
     "moment": "^2.24.0",
     "native-toast": "^2.0.0",
     "nouislider": "^11.1.0",
+    "server-destroy": "^1.0.1",
     "v-clipboard": "^2.2.2",
     "vee-validate": "^3.0.11",
     "vue": "^2.6.10",
     "vue-ctk-date-time-picker": "^2.2.0",
+    "vue-froala-wysiwyg": "^3.0.6",
+    "vue-google-api": "^0.2.0",
     "vue-lazy-load": "^0.0.7",
     "vue-lazyload": "^1.2.6",
     "vue-lottie": "^0.2.1",
@@ -40,14 +52,45 @@
     "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.7.1",
+    "@babel/plugin-syntax-object-rest-spread": "^7.2.0",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^7.1.1",
     "babel-plugin-component": "^1.1.1",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-env": "^1.3.2",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.22.0",
+    "jest": "^24.9.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "vue-jest": "^3.0.5",
     "vue-template-compiler": "^2.6.6",
     "vuejs-timepicker": "git+https://github.com/xxRockOnxx/vue2-timepicker.git"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ]
   }
 }

@@ -1,25 +1,62 @@
+<!--
+<template>
+  <div id="app">
+    <froala id="edit" :tag="'textarea'" :config="config" v-model="model"></froala>
+  </div>
+</template>
+
+<script>
+import VueFroala from 'vue-froala-wysiwyg';
+
+export default {
+  name: 'app',
+  data () {
+    return {
+      config: {
+        events: {
+          initialized: function () {
+            console.log('initialized')
+          }
+        }
+      },
+      model: 'Edit Your Content Here!'
+    }
+  }
+}
+</script> -->
+
 <template>
     <div>
         <div class = "main">
             <div class = "row">
                 <div class = "container">
-                    <div class="col-md-6 ml-auto mr-auto"> 
-                        <Card class="contact-card"> 
+                    <div class="col-md-9 ml-auto mr-auto">
+                        <Card class="contact-card">
                             <h3 class="text-center" style= "color: #0356fc"><b>Contact Us</b></h3>
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
-                            <b-form-textarea class="message-box input-lg" placeholder="Message" v-model="userPayload.message" type="message"></b-form-textarea>
+                            <fg-input id="login_input" style="border-color: black;" class="input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
+                            <fg-input id="login_input" class="input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
+                            <!-- <b-form-textarea class="message-box input-lg" placeholder="Message" v-model="userPayload.message" type="message"></b-form-textarea> -->
+
+                            <!-- <div id="app">
+                              <froala id="edit" :tag="'textarea'" :config="config" v-model="model"></froala>
+                            </div> -->
+
+                            <div id="app">
+                              <froala id="edit" placeholder="Message" :tag="'textarea'" v-model="userPayload.message" type="message"></froala>
+                            </div>
+
                             <div class="card-footer text-center">
+
                             <a
                              @click="validateFields"
-                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "background-color: #0356fc"
+                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "margin: auto; width: 140px; background-color: #0356fc"
                             >Send</a>
-                            </div> 
-                        </Card> 
+                            </div>
+                        </Card>
                     </div>
                 </div>
             </div>
-            <div class = "row"> 
+            <div class = "row">
                 <div class = "col">
                     <b-alert variant="danger" v-model="warning" dismissible>
                         <div class="alert-icon">
@@ -29,7 +66,7 @@
                     </b-alert>
                 </div>
             </div>
-            <div class = "row"> 
+            <div class = "row">
                 <div class = "col">
                     <b-alert variant="success" v-model="success" dismissible>
                         <div class="alert-icon">
@@ -86,6 +123,9 @@ export default {
 
       sendMessage() {
           this.success = true;
+          console.log(this.userPayload.name);
+          console.log(this.userPayload.email);
+          console.log(this.userPayload.message);
           axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendContact', {
               name: this.userPayload.name,
               dest: this.userPayload.email,
@@ -114,7 +154,7 @@ export default {
           });
       }
   }
-    
+
 }
 </script>
 <style scoped>
