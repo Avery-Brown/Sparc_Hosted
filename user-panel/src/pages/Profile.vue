@@ -1,41 +1,91 @@
 <template>
   <div>
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="user-info">
-            <n-button type="info" style="float: right;" @click.native="modals.classic = true">
-              Edit Profile
-            </n-button>
-            <div style="clear: both"></div>
-            <div class="photo-container text-center"  @click="onPickFile()">
-              <i class="icon fa fa-pencil"></i>
-              <input type="file" @change="onFilePicked" style="display:none;" ref="FileInput">
-              <img class="pic" v-if="profileImage!= null" :src="profileImage" alt="" />
-              <input type="file" style="display:none">
+    <div class="card">
+      <div class="card-body">
+        <div class = "row" style = "margin-top: 40px; margin-bottom: 40px">
+          <div class = "col-md-8">
+            <div class = "row">
+              <div class="col-md-4">
+                <div class="photo-container text-center"  @click="onPickFile()">
+                  <i class="icon fa fa-pencil"></i>
+                  <input type="file" @change="onFilePicked" style="display:none;" ref="FileInput">
+                  <img class="pic" v-if="profileImage!= null" :src="profileImage" alt="" />
+                  <input type="file" style="display:none">
+                </div>
+                <div class = "row" style= "justify-content: center">
+                <n-button type="info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-top: 30px; float: left" @click.native="modals.classic = true">
+                Edit Profile
+                </n-button>
+              </div>
+              </div>
+              <div class = "col-md-8">
+                <h3 class="text-left" style= "margin-top: 25px"><b>{{userData.first_name + " " + userData.last_name}}</b></h3>
+                <h4 style= "color: #00487C">INTERESTS</h4>
+                <div class="row" style = "margin-left: 1px">
+                  <span class="badge badge-pill badge-success" style="font-size: 9px; margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in fetchedTags" :key="index">{{tag}}</span>
+                </div>
+              </div>
             </div>
-            <h4 class="text-center text-success"><b>{{userData.first_name + " " + userData.last_name}}</b></h4>
-            <h5 class="text-center"><b class="text-info">Age :</b> {{ userData.age }} Years</h5>
-            <span id="about">{{userData.about}}</span>
+            <div class = "row" style= "margin-top: 40px; margin-left: 50px">
+              <h3 class= "text-left"><b> About </b></h3>
+              <div class = "row" style= "margin-left: 1px">
+                {{userData.about}}
+              </div>
+            </div>
+            <div class="row" style= "margin-top: 40px; margin-left: 50px">
+              <h3 class="title-up"><b>Profile Video</b></h3>
+              
+            <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
 
-          </div>
-          <div class="user-info mt-2">
-            <h4 class="text-info">INTERESTS</h4>
-            <span class="badge badge-pill badge-success" v-for="(tag,index) in fetchedTags" :key="index">{{tag}}</span>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <h2 class="title-up">Profile Video</h2>
-            <div>
+            <div class = row style= "margin-left: 55px">
                 <h5 v-if="profileVideo == null" class="text-info" style="float: left;">No Profile Video Found.</h5>
-                <n-button class="btn-info" style="float: right;" @click="onPickVideo()">Update Profile Video</n-button>
+                <n-button class="btn-info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px" @click="onPickVideo()">Update Profile Video</n-button>
                 <input type="file" @change="onVideoSelected" style="display:none;" ref="VideoInput">
                 <span style="clear: both;"></span>
+              </div>
             </div>
-            <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
+          </div>
+          
+          <div class = "col-md-4">
+            <div class = "row" style= "margin-right: 60px">
+              <div class = "col-md-12">
+                <div class = "row" style = "margin-left: 60px">
+                  <h3> <b>Quick Facts</b></h3>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <h5><b style= "color: #00487C">Age :</b> {{ userData.age }} Years</h5>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <h5><b style= "color: #00487C">Occupation :</b> {{ userData.job_occupation }}</h5>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <h5><b style= "color: #00487C">Institute :</b> {{ userData.institute }}</h5>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <h5><b style= "color: #00487C">Email :</b> {{ userData.email }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- <div class="page-header clear-filter">
 
       <div class="container">
@@ -357,4 +407,5 @@ export default {
     left: 58%;
     top:30%;
   }
+
 </style>

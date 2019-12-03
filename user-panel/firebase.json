@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "dist",
-    "site": "sparc-test-lizzet",
+    "site": "sparc-test-katelyn",
     "ignore": [
       "firebase.json",
       "**/.*",

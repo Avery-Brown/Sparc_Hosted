@@ -1,3 +1,7 @@
+Import Es6Promise from 'es6-promise'
+var Promise = require('es6-promise').Promise;
+Es6Promise.polyfill()
+
 <template>
   <div id="app">
     <router-view name="header" />
