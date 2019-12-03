@@ -227,7 +227,7 @@ exports.checkCalendarTest = functions.https.onRequest((req, res) => {
     });
   }
   )
-  
+
 })
 
 exports.webApi = functions.https.onRequest(main);

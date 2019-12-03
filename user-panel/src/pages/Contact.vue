@@ -33,8 +33,8 @@ export default {
                     <div class="col-md-9 ml-auto mr-auto">
                         <Card class="contact-card">
                             <h3 class="text-center" style= "color: #0356fc"><b>Contact Us</b></h3>
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
-                            <fg-input class="no-border input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
+                            <fg-input id="login_input" style="border-color: black;" class="input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
+                            <fg-input id="login_input" class="input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
                             <!-- <b-form-textarea class="message-box input-lg" placeholder="Message" v-model="userPayload.message" type="message"></b-form-textarea> -->
 
                             <!-- <div id="app">
@@ -49,7 +49,7 @@ export default {
 
                             <a
                              @click="validateFields"
-                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "background-color: #0356fc"
+                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "margin: auto; width: 140px; background-color: #0356fc"
                             >Send</a>
                             </div>
                         </Card>

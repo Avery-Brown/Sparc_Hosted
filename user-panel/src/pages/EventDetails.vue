@@ -13,24 +13,28 @@
               </div>
             <div class="row" id="card-margin" style="padding-bottom: 0px;" >
                 <div class="col-md-12">
-                  <div style="font-size: 30px; margin-bottom: 0px; text-align: center; font-weight: 500; padding-top: 20px;">{{ getSelectedEvent[0].event_name }}</div>
+                  <!-- <div style="font-size: 30px; margin-bottom: 0px; text-align: center; font-weight: 500; padding-top: 20px;">{{ getSelectedEvent[0].event_name }}</div> -->
                   <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                    <b-card v-if="getSelectedEvent[0].event_image != null" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-alt="Engagement image" style="margin-left: 20px; width: 300px; box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); margin-bottom: -20px;"></b-card>
-                    <div style="padding-top: 50px; padding-right: 55px;">
-                      <div style="display: flex; flex-direction: row; justify-content: flex-end;">
-                        <div style="text-align: right; padding-right: 5px; font-size: 18px; padding-bottom: 5px;">
-                          Hosted By
+                    <b-card v-if="getSelectedEvent[0].event_image != null" :img-src="getSelectedEvent[0].event_image == null ? noImage : getSelectedEvent[0].event_image" img-alt="Engagement image" style="margin-left: 30px; padding-top: 50px; min-width: 350px; max-width: 350px; box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0); margin-bottom: -20px;"></b-card>
+                    <div style="padding-top: 50px; padding-right: 40px; width: 600px;">
+                      <div style="font-size: 30px; margin-bottom: 10px; text-align: left; padding-left: 20px; font-weight: 500;">{{ getSelectedEvent[0].event_name }}</div>
+                      <div style="text-align: right;">
+                        <div style="display: flex; flex-direction: row; justify-content: flex-end;">
+                          <div style="text-align: right; padding-right: 5px; font-size: 18px; padding-bottom: 5px;">
+                            Hosted By
+                          </div>
+                          <div @click="viewProfile(getSelectedEvent[0].created_by)" style="text-align: right; font-size: 18px; padding-bottom: 5px; color: rgb(54, 170, 252); text-decoration: underline;">{{userDetails.first_name}} {{userDetails.last_name}}</div>
                         </div>
-                        <div @click="viewProfile(getSelectedEvent[0].created_by)" style="text-align: right; padding-right: 15px; font-size: 18px; padding-bottom: 5px; color: rgb(54, 170, 252); text-decoration: underline;">{{userDetails.first_name}} {{userDetails.last_name}}</div>
+                        <span class="pull-right" v-if="userDetails.first_name != undefined">
+                          <h6 class="pull-right" style="padding-bottom: 5px;">
+                            <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating>
+                          </h6>
+                          <h6 v-if="isUserLogged" class="text-info">
+                            <i class="fa fa-mobile"></i> {{ getSelectedEvent[0].host_contact }}
+                          </h6>
+                        </span>
                       </div>
-                      <span class="pull-right" v-if="userDetails.first_name != undefined">
-                        <h6 class="pull-right" style="margin-right: 15px; padding-bottom: 5px;">
-                          <star-rating :rating="getAvgRatings(getSelectedEvent[0].created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating>
-                        </h6>
-                        <h6 style="margin-right: 15px;" v-if="isUserLogged" class="text-info">
-                          <i class="fa fa-mobile"></i> {{ getSelectedEvent[0].host_contact }}
-                        </h6>
-                      </span>
+
                     </div>
                   </div>
 
@@ -42,8 +46,8 @@
             </div>
 
            	<div class= "row">
-              <div class="col-sm-12">
-              	  <div class="event-info">
+              <div class="col-sm-12" >
+              	  <div class="event-info" style="margin: auto;">
               	  <h5 class="text-info"></h5>
               	  <h4 style="margin-top: -10px;"><b> Details </b></h4>
               	  <p style="color: black; font-weight: 400;">{{ getSelectedEvent[0].event_description }}</p>
@@ -54,55 +58,62 @@
                   </a>
 
               	  <h6 class="text-danger text-center"></h6>
-              	  <div class="col-md-12" v-if="isUserLogged">
-                      <h6 class="text-info"  style="font-size: 17px; margin-top: 20px; margin-left: -15px; font-weight: normal;">
-                        <i class="fa fa-calendar" style = "color: #00487C;"></i> {{ getSelectedEvent[0].date }}
-                        <i class="fa fa-clock-o" style = "color: #00487C; margin-left: 20px;"></i> {{ getSelectedEvent[0].start_time + " - " + getSelectedEvent[0].end_time }}
+              	  <div class="col-md-12" v-if="isUserLogged" style="display: flex; flex-direction: row; justify-content: space-between; padding-bottom: 15px;">
+                    <div style="margin-top: 20px; max-width: 400px;">
+                      <h6 style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class="fa fa-calendar" style = "color: rgb(54, 170, 252);"></i> {{ getSelectedEvent[0].date }}
                       </h6>
-
-
-                      <h6 class="text-info" style="font-size: 17px; margin-left: -15px; font-weight: normal;">
-                        <i class="fa fa-map-marker" style = "color: #00487C;\"></i>
-                        {{ getSelectedEvent[0].event_location }}
-                        <i class="fa fa-address-card-o" style = "color: #00487C; margin-left: 20px;"></i>
-                        {{ getSelectedEvent[0].event_address }}
+                      <h6 style="color: #00487C; font-size: 17px;  font-weight: normal;">
+                        <i class="fa fa-clock-o" style = "color: rgb(54, 170, 252);"></i> {{ getSelectedEvent[0].start_time + " - " + getSelectedEvent[0].end_time }}
                       </h6>
-
-                      <h6 class="text-info" v-if= "getSelectedEvent[0].event_type == 'both'" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        <i class ="fa fa-network-wired" style = "color: #00487C"></i>   In Person and Virtual
-                      </h6>
-
-                      <h6 class="text-info"  v-else-if= "getSelectedEvent[0].event_type == 'virtual'" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        <i class ="fa fa-tv" style = "color: #00487C"></i> Virtual
-                      </h6>
-
-                      <h6 class="text-info"  v-else style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        <i class ="fa fa-user-check" style = "color: #00487C"></i> {{getSelectedEvent[0].event_type.charAt(0).toUpperCase() + getSelectedEvent[0].event_type.substring(1)}}
-                      </h6>
-
-                      <h6 class="text-info"  v-if= "getSelectedEvent[0].event_free == 'yes'" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        <i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>
+                      <h6 v-if= "getSelectedEvent[0].event_free == 'yes'" style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class="fa fa-hand-holding-usd" style ="color: rgb(54, 170, 252)"></i>
                         Free
                       </h6>
 
-                      <h6 class="text-info"  v-if="getSelectedEvent[0].event_price_per_person != null" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
+                      <h6 v-if="getSelectedEvent[0].event_price_per_person != null" style="color: #00487C; font-size: 17px; margin-top: 10px; font-weight: normal;">
                         $ {{getSelectedEvent[0].event_price_per_person}} PER PERSON
                       </h6>
 
-                      <h6 class="text-info"  v-if="getSelectedEvent[0].event_cause1 != null" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        Charity 1: {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}}
+                    </div>
+                    <div style="margin-top: 20px; max-width: 400px;">
+                      <h6 style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class="fa fa-map-marker" style = "color: rgb(54, 170, 252);"></i>
+                        {{ getSelectedEvent[0].event_location }}
                       </h6>
 
-                      <h6 class="text-info" v-if="getSelectedEvent[0].event_cause2 != null" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
-                        Charity 2: {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}
+                      <h6 style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class="fa fa-address-card-o" style = "color: rgb(54, 170, 252);"></i>
+                        {{ getSelectedEvent[0].event_address }}
                       </h6>
 
-                      <h6 class="text-info"  v-if="getSelectedEvent[0].capacity != null" style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
+                      <h6 style="color: #00487C; font-size: 17px; font-weight: normal;" v-if="getSelectedEvent[0].event_location_access != null" :id="getHoverIdDirectionsByIndex(index)">
+                        <i class="fa fa-compass" style = "color: rgb(54, 170, 252);"></i> Directions
+                        <div style="color: black; font-size: 15px; margin-top: 5px; margin-left: 22px;">
+                          {{ getSelectedEvent[0].event_location_access }}
+                        </div>
+                      </h6>
+
+                    </div>
+                    <div style="margin-top: 20px; max-width: 400px;">
+                      <h6 v-if= "getSelectedEvent[0].event_type == 'both'" style="color: #00487C; font-size: 17px;; font-weight: normal;">
+                        <i class ="fa fa-network-wired" style = "color: rgb(54, 170, 252);"></i>   In Person and Virtual
+                      </h6>
+
+                      <h6 v-else-if= "getSelectedEvent[0].event_type == 'virtual'" style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class ="fa fa-tv" style = "color: rgb(54, 170, 252);"></i> Virtual
+                      </h6>
+
+                      <h6  v-else style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        <i class ="fa fa-user-check" style = "color: rgb(54, 170, 252);"></i> {{getSelectedEvent[0].event_type.charAt(0).toUpperCase() + getSelectedEvent[0].event_type.substring(1)}}
+                      </h6>
+
+                      <h6 v-if="getSelectedEvent[0].capacity != null" style="color: #00487C; font-size: 17px; font-weight: normal;">
                         In Person Enrolled: {{total}}/{{getSelectedEvent[0].capacity}}
                       </h6>
 
                       <div v-if="getSelectedEvent[0].virtual_capacity != null">
-                        <h6 class="text-info"  style="font-size: 17px; margin-top: 10px; margin-left: -15px; font-weight: normal;">
+                        <h6 style="color: #00487C; font-size: 17px; font-weight: normal;">
                           Virtual Enrolled: {{totalVirtual}}/{{getSelectedEvent[0].virtual_capacity}}
                         </h6>
                       </div>
@@ -110,47 +121,56 @@
                         <!-- <button @click="testList"> Test Google </button> -->
                       </div>
 
+                      <h6 v-if="getSelectedEvent[0].event_cause1 != null" style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        Charity 1: {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}}
+                      </h6>
 
-                      <div class="row">
+                      <h6 v-if="getSelectedEvent[0].event_cause2 != null" style="color: #00487C; font-size: 17px; font-weight: normal;">
+                        Charity 2: {{getSelectedEvent[0].charity2 + " (" + getSelectedEvent[0].event_cause2 + "%)"}}
+                      </h6>
+                    </div>
+
+                      <!-- <div class="row">
                         <div class="col-md-12">
                           <h6 class="text-info" style="font-size: 17px; margin-top: 5px; margin-left: -15px; font-weight: normal;" v-if="getSelectedEvent[0].event_location_access != null" :id="getHoverIdDirectionsByIndex(index)">
                             <i class="fa fa-compass" style = "color: #00487C"></i> Directions
                             <div style="color: black; font-size: 15px; margin-top: 5px;">
                               {{ getSelectedEvent[0].event_location_access }}
                             </div>
-                          </h6>
+                          </h6> -->
                         <!-- <b-tooltip placement="right" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
                           	<b>{{ getSelectedEvent[0].event_location_access }}</b>
                         </b-tooltip> -->
-                        </div>
-                      </div>
+                        <!-- </div>
+                      </div> -->
 
                   </div>
-
-
-              	  <div class= "col-md-12" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
-                  	  <h6 class="title-up text-info" style="font-size: 17px; margin-left: -15px; margin-top: 5px; font-weight: normal;">
-                        <i class ="fa fa-tv" style = "color: #00487C"></i> Engagement Links
-                        <div style="color: black; font-size: 15px; margin-top: 5px;">
+                  <div style="margin-bottom: 25px; margin-left: 30px;" v-if="isUserParticipant && (getSelectedEvent[0].event_type == 'virtual' || getSelectedEvent[0].event_type == 'both')">
+                      <h6 class="title-up" style="color: #00487C; font-size: 17px; margin-left: -15px; margin-top: 5px; font-weight: normal;">
+                        <i class ="fa fa-tv" style = "color: rgb(54, 170, 252);"></i> Engagement Link
+                        <div style="color: black; font-size: 15px; margin-top: 5px; margin-left: 27px;">
                           {{ getSelectedEvent[0].zoom_link }}
                         </div>
                       </h6>
-                  		<!-- <div class="row">
-                    	  <div class= "col-md-1">
-                    	  </div>
-                    	  <div class="col-md-8">
-                      	    <h6>{{getSelectedEvent[0].zoom_link}}</h6>
-                    	  </div>
-                  		</div> -->
-              	  </div>
+                      <!-- <div class="row">
+                        <div class= "col-md-1">
+                        </div>
+                        <div class="col-md-8">
+                            <h6>{{getSelectedEvent[0].zoom_link}}</h6>
+                        </div>
+                      </div> -->
+                  </div>
 
-              	  <div class="col-md-12" style="display: flex; flex-direction: row; justify-content: space-around;">
-              	  	<span class="badge badge-pill badge-success" style="padding: 10px; margin-right: 10px; font-size: 15px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in getEventTags" :key="index">{{tag.value}}</span>
+
+
+
+              	  <div class="col-md-12" style="display: flex; flex-direction: row; justify-content: flex-start;">
+              	  	<span class="badge badge-pill badge-success" style="font-weight: normal; padding: 10px; margin-right: 10px; font-size: 15px; background-color: #00487C; border: none; color: white; border-radius: 3px;" v-for="(tag,index) in getEventTags" :key="index">{{tag.value}}</span>
               	  </div>
 
               	  </div>
               	  <b-card class="mt-3 ml-auto mr-auto col text-center" v-if="getSelectedEvent[0].event_video != null">
-                  <h4 class="title-up text-info">Engagement Video</h4>
+                  <h4 class="title-up" style="color: #00487C;">Engagement Video</h4>
                   <div class="row">
                     <div class="col">
                       <video :src="getSelectedEvent[0].event_video" controls class="ml-auto mr-auto video-element"></video>
