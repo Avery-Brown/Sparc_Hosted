@@ -42,7 +42,7 @@ export default {
                             </div> -->
 
                             <div id="app">
-                              <froala id="edit" placeholder="Message" :tag="'textarea'" :config="config" v-model="userPayload.message" type="message"></froala>
+                              <froala id="edit" placeholder="Message" :tag="'textarea'" v-model="userPayload.message" type="message"></froala>
                             </div>
 
                             <div class="card-footer text-center">
@@ -123,6 +123,9 @@ export default {
 
       sendMessage() {
           this.success = true;
+          console.log(this.userPayload.name);
+          console.log(this.userPayload.email);
+          console.log(this.userPayload.message);
           axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/sendContact', {
               name: this.userPayload.name,
               dest: this.userPayload.email,

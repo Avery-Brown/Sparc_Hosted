@@ -117,7 +117,9 @@
                           Virtual Enrolled: {{totalVirtual}}/{{getSelectedEvent[0].virtual_capacity}}
                         </h6>
                       </div>
-
+                      <div>
+                        <!-- <button @click="testList"> Test Google </button> -->
+                      </div>
 
                       <h6 v-if="getSelectedEvent[0].event_cause1 != null" style="color: #00487C; font-size: 17px; font-weight: normal;">
                         Charity 1: {{getSelectedEvent[0].charity1 + " (" + getSelectedEvent[0].event_cause1 + "%)"}}
@@ -341,6 +343,9 @@ import axios from 'axios'
 import { mapGetters, mapActions } from 'vuex'
 import nativeToast from 'native-toast'
 import moment from 'moment'
+// import VueGoogleApi from 'vue-google-api'
+// Vue.use(VueGoogleApi);
+
 export default {
   name: 'event-details',
   bodyClass: 'event-details-page',
@@ -461,6 +466,10 @@ export default {
     dismiss() {
       this.modals.participateModal = false
       this.modals.selectModal = false
+    },
+
+    async testList() {
+      await axios.post('https://us-central1-sparc-9d9cb.cloudfunctions.net/checkCalendarTest')
     },
 
     getHoverIdDirectionsByIndex(index) {
