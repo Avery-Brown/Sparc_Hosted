@@ -31,8 +31,26 @@ export default {
             <div class = "row">
                 <div class = "container">
                     <div class="col-md-9 ml-auto mr-auto">
+                        
+                            
                         <Card class="contact-card">
-                            <h3 class="text-center" style= "color: #0356fc"><b>Contact Us</b></h3>
+                            <b-alert variant="danger" v-model="warning" dismissible style="margin-bottom: -0.5rem">
+                                    <div class="alert-icon">
+                                    <i class="now-ui-icons objects_support-17"></i>
+                                    </div>
+                                    <strong>Something went wrong!</strong> {{ message }}
+                                </b-alert>
+                          
+                        
+                                <b-alert variant="success" v-model="success" dismissible style="margin-bottom: -0.5rem">
+                                    <div class="alert-icon">
+                                    <i class="now-ui-icons objects_support-17"></i>
+                                    </div>
+                                    <strong>Thank you for contacting us!</strong>
+                                </b-alert>
+                            <div class="card-body">
+                            <p style= "color: #484848; font-weight: 400; font-size: 30px; margin-bottom: 0px;">Contact Us</p>
+                            <p style= "color: #484848; font-weight: 400; font-size: 15px">Have a question or just want to chat? Get in contact below</p>
                             <fg-input id="login_input" style="border-color: black;" class="input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
                             <fg-input id="login_input" class="input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>
                             <!-- <b-form-textarea class="message-box input-lg" placeholder="Message" v-model="userPayload.message" type="message"></b-form-textarea> -->
@@ -49,33 +67,15 @@ export default {
 
                             <a
                              @click="validateFields"
-                            class="btn btn-info text-white btn-round btn-lg btn-block" style= "margin: auto; width: 140px; background-color: #0356fc"
+                            class="btn btn-info text-white btn-lg btn-block" style= " width: 140px; background-color: #34b14f; font-weight: 500;"
                             >Send</a>
+                            </div>
                             </div>
                         </Card>
                     </div>
                 </div>
             </div>
-            <div class = "row">
-                <div class = "col">
-                    <b-alert variant="danger" v-model="warning" dismissible>
-                        <div class="alert-icon">
-                        <i class="now-ui-icons objects_support-17"></i>
-                        </div>
-                        <strong>Something went wrong!</strong> {{ message }}
-                    </b-alert>
-                </div>
-            </div>
-            <div class = "row">
-                <div class = "col">
-                    <b-alert variant="success" v-model="success" dismissible>
-                        <div class="alert-icon">
-                        <i class="now-ui-icons objects_support-17"></i>
-                        </div>
-                        <strong>Thank you for contacting us!</strong>
-                    </b-alert>
-                </div>
-            </div>
+            
         </div>
     </div>
 </template>
@@ -109,6 +109,8 @@ export default {
   methods: {
 
       validateFields() {
+          this.warning = false;
+          this.success = false;
           if(this.userPayload.name == "" || this.userPayload.email == ""|| this.userPayload.message == "") {
               this.message = "Please Fill Required Fields";
               this.warning = true;
@@ -123,6 +125,9 @@ export default {
 
       sendMessage() {
           this.success = true;
+          this.userPayload.name = ""
+            this.userPayload.email = ""
+            this.userPayload.message = ""
           console.log(this.userPayload.name);
           console.log(this.userPayload.email);
           console.log(this.userPayload.message);
