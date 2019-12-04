@@ -71,7 +71,8 @@
                                       </div>
                                     </div>
                                     <div class = "col-md-5 mb-auto" >
-                                        <button class = 'btn pull-right' style="background: #c91512; color: white; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="deleteEvent(event.id, event.event_name)">Delete</button>
+                                        <button class = 'btn pull-right' style="background: #f1f1f1; color: #484848; font-weight: 600; font-size: 12px; border-radius: 3px; margin-bottom: 20px; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);" @click="viewEvent(event.id)">View</button>
+                                        <button class = 'btn pull-right' style="background: #c91512; color: white; font-weight: 600; font-size: 12px; border-radius: 3px; margin-bottom: 20px; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3); margin-right: 0.5rem;" @click="deleteEvent(event.id, event.event_name)">Delete</button>
                                     </div>
                                   </div>
                                   <div class = "row">
