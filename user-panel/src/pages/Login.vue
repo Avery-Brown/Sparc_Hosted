@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="main" style="background: whitesmoke; margin-top: -20px; height: 100vh">
+    <div class="main" style="background: whitesmoke; height: 100vh">
       <div class="row">
         <div class="container">
           <div class="col-md-9 ml-auto mr-auto">

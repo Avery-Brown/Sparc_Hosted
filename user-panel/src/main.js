@@ -17,6 +17,10 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 import VueFroala from 'vue-froala-wysiwyg'
 Vue.use(VueFroala)
 
+import VueCropper from 'vue-cropperjs';
+import 'cropperjs/dist/cropper.css';
+Vue.component(VueCropper);
+
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)

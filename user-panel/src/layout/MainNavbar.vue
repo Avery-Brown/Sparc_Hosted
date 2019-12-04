@@ -3,7 +3,8 @@
           type="info"
           :color-on-scroll="colorOnScroll"
           menu-classes="ml-auto"
-          style="border-bottom: 0.5px solid #e4e4e4; margin-top: -7px;"
+          class="shadow-sm"
+          style="border-bottom: 0.5px solid #e4e4e4; margin-top: -7px; z-index: 1"
   >
     <template>
       <li style="display: inline-block;">
@@ -110,12 +111,17 @@
       </li> -->
       <li class="dropdown" v-if="!this.logout">
           <!-- <b class="nav-link-v2" style= "margin-right: 20px;" >Profile</b> -->
-        <img v-if="user != null" :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #00487c;" v-b-toggle.collapse-a/>
+        <img v-if="user != null" :src="user.profile_image" width="35" height="35" style="margin-left: 15px; border-radius: 50%; margin-top: 0px; border: 1px solid #34b14f;" v-b-toggle.collapse-a/>
         <p v-b-toggle.collapse-a style="color: #484848; font-weight: 600; padding: 9px; font-size: 13px;">Hi, {{user.first_name}}<i class="fa fa-chevron-down fa-sm" style=" padding: 2px;"/> </p>
         <div class="dropdown-content-profile shadow-sm">
           <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/profile">
               <p class="drop-down-text-v2">Profile</p>
+            </router-link>
+          </b-collapse>
+          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
+            <router-link to="/create_engagement">
+              <p class="drop-down-text-v2">Create Engagement</p>
             </router-link>
           </b-collapse>
           <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
@@ -131,11 +137,6 @@
           <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
             <router-link to="/host">
               <p class="drop-down-text-v2">Hosted Engagements</p>
-            </router-link>
-          </b-collapse>
-          <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
-            <router-link to="/create_engagement">
-              <p class="drop-down-text-v2">Create Engagement</p>
             </router-link>
           </b-collapse>
           <b-collapse id="collapse-a" v-if="!this.logout" v-b-toggle.collapse-a>
@@ -313,7 +314,7 @@ export default {
   }
 
   .drop-down-text-v2:hover {
-    border-bottom: 1px solid #00487c;
+    border-bottom: 1px solid #34b14f;
   }
 
   .drop-down-text {
@@ -354,7 +355,7 @@ export default {
   }
 
   .nav-link-v2:hover {
-    border-bottom: 2px solid #00487c;
+    border-bottom: 2px solid #34b14f;
 
   }
 

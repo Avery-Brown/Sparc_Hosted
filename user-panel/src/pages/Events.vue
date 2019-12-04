@@ -5,7 +5,7 @@
         <div class="container" id="top" style="height: 100vh">
           <div class="col-md-12">
             <div class = "container-fluid">
-              <div class ="row" style="margin-top: 1rem;">
+              <div class ="row" style="margin-top: 2rem;">
                 <div class ="col" style="margin-left: -40px;">
                   <h2 style="color: #484848;">Learn and connect in a meaningful way</h2>
                   <h4 style="margin-top: -20px; color: #484848">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
@@ -144,9 +144,9 @@
                               </div>
                               <div class = "row" style="mt-auto mb-auto">
                                 <div class = "col">
-                                  <p style = "font-size: 14px;" v-if="event.event_type === 'both'"><i class ="fa fa-network-wired" style = "color: #00487C"></i>  &nbsp; In Person & Virtual</p>
-                                  <p style = "font-size: 14px;" v-else-if="event.event_type === 'virtual'"><i class ="fa fa-tv" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
-                                  <p style = "font-size: 14px;" v-else><i class ="fa fa-user-check" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+                                  <p style = "font-size: 14px; font-weight: 400" v-if="event.event_type === 'both'"><i class ="fa fa-network-wired" style = "color: #484848"></i>  &nbsp; In Person & Virtual</p>
+                                  <p style = "font-size: 14px; font-weight: 400" v-else-if="event.event_type === 'virtual'"><i class ="fa fa-tv" style = "color: #484848"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+                                  <p style = "font-size: 14px; font-weight: 400" v-else><i class ="fa fa-user-check" style = "color: #484848"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
 
                                 </div>
                               </div>
@@ -184,26 +184,26 @@
                                     </div>
                                     <div class = "row">
                                       <div class = "col mt-auto mb-auto">
-                                        <read-more  style = "margin-bottom: 15px; font-size: 12px;" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="200"></read-more>
+                                        <read-more  style = "margin-bottom: 15px; font-size: 12px; font-weight: 500" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="200"></read-more>
                                       </div>
                                     </div>
                                 </div>
                                 <div class = "col-md-4">
                                   <div class = "row">
                                     <div class = "col">
-                                      <p v-if="event.event_price_per_person == null" style="font-size: 14px"><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp; Free</p>
-                                      <p v-else style="font-size: 14px"><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
+                                      <p v-if="event.event_price_per_person == null" style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp; Free</p>
+                                      <p v-else style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
                                     </div>
                                   </div>
-                                      <p v-if="event.event_address != null" style="font-size: 14px"><i class="fa fa-location-arrow" style = "color: #00487C;"></i>&nbsp; {{ event.event_address }}</p>
+                                      <p v-if="event.event_address != null" style="font-size: 14px; font-weight: 400"><i class="fa fa-location-arrow" style = "color: #484848"></i>&nbsp; {{ event.event_address }}</p>
                                   <div class = "row">
                                     <div class = "col">
-                                      <p v-if="event.event_location != null" style="font-size: 14px"><i class="fa fa-building" style = "color: #00487C"></i>&nbsp; {{ event.event_location }}</p>
+                                      <p v-if="event.event_location != null" style="font-size: 14px; font-weight: 400"><i class="fa fa-building" style = "color: #484848"></i>&nbsp; {{ event.event_location }}</p>
                                     </div>
                                   </div>
                                   <div class = "row">
                                     <div class = "col">
-                                      <p v-if="event.event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400; font-size: 14px;"><i class="fa fa-compass" style = "color: #00487C"></i>&nbsp; Directions</p>
+                                      <p v-if="event.event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #50a9eb; font-weight:500; font-size: 14px; text-decoration: underline"><i class="fa fa-compass" style = "color: #484848; margin-right: 7px;" ></i>Directions</p>
                                       <b-tooltip placement="bottomleft" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
                                         <b>{{ event.event_location_access }}</b>
                                       </b-tooltip>
@@ -243,10 +243,10 @@
                                 <div class = "col-md-8">
                                   <div class = "row">
                                     <div class = "col-md-3">
-                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #484848"></i> {{ event.date }}</p>
+                                      <p style="font-size: 14px; font-weight: 400"> <i class="fa fa-calendar" style = "color: #484848"></i> {{ event.date }}</p>
                                     </div>
                                     <div class = "col-md-9">
-                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #484848"></i> {{ event.start_time + " - " + event.end_time }} </p>
+                                      <p style="font-size: 14px; font-weight: 400"> <i class="fa fa-clock-o" style = "color: #484848"></i> {{ event.start_time + " - " + event.end_time }} </p>
                                     </div>
                                   </div>
                                 </div>

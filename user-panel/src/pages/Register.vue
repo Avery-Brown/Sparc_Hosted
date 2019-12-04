@@ -1,19 +1,19 @@
 <template>
-  <div class="main" style="background: whitesmoke; margin-top: -20px;" :class="[this.stage===4 ? 'stage-4' : 'stage-before' ]">
-
+  <div class="main" style="background: whitesmoke; " :class="[this.stage===4 ? 'stage-4' : 'stage-before' ]">
     <div class="content">
       <div class="container">
         <div class = "row">
           <div class = "col-md-8 ml-auto mr-auto text-center">
             <div class = "row" style ="margin-top: 3rem;">
               <div class="card shadow-md"> 
+                <div class = "card-body">
                 <div class = "row" style="margin-top: 30px;">
                   <div class = "col">
                     <p style="font-weight: 600; font-size: 30px; color: #484848">Sign Up</p>
                     <p style="font-size: 20px; font-weight: 400; color: #484848; margin-top: -15px;">Ready to learn, teach, and share?</p>
                   </div>
                 </div>
-                <div class = "top" style="margin-top: -10px;">
+                <div class = "top" style="margin-top: -10px; margin-bottom: -30px;">
                   <div class = "divider-line" :style="{width: `${(100/(4) * (4 - 1)) - 10}%`}"/>
                   <div class = "icon-wrapper">
                     <div class = "step">
@@ -47,43 +47,42 @@
                     </div>
                     <div class = "row">
                       <div class = "col text-left">
-                        <label>First Name</label>
-                        <fg-input
-                          id="login_input"
-                          class="no-border input-lg"
+                        <b-form-group label="First Name">
+                          <b-form-input
+                          class="no-border"
                           addon-left-icon="now-ui-icons users_single-02"
                           placeholder="First Name"
                           v-model="firstName"
                           type="text"/>
-                        <label>Last Name</label>
-                        <fg-input
-                          id="login_input"
-                          class="no-border input-lg"
-                          addon-left-icon="now-ui-icons users_single-02"
-                          placeholder="Last Name"
-                          v-model="lastName"
-                          type="text"/>
-                        <label>Birthday</label>
-                        <fg-input class="no-border input-lg" style="width: 10rem;">
-                          <el-date-picker
-                            style="border-radius: 20px;"
-                            type="date"
-                            popper-class="date-picker date-picker-success"
-                            placeholder="YYYY-MM-DD"
-                            v-model="age"
-                          >
-                        </el-date-picker>
-                        </fg-input>
+                        </b-form-group>
+                        <b-form-group label="Last Name">
+                          <b-form-input
+                            class="no-border"
+                            addon-left-icon="now-ui-icons users_single-02"
+                            placeholder="Last Name"
+                            v-model="lastName"
+                            type="text"/>
+                        </b-form-group>
+                        <b-form-group label="Birthday" style="width: 9rem">
+                            <el-date-picker
+                              style="border-radius: 20px;"
+                              type="date"
+                              popper-class="date-picker date-picker-success"
+                              placeholder="YYYY-MM-DD"
+                              v-model="age"
+                            >
+                            </el-date-picker>
+                        </b-form-group>
                       </div>
                       </div>
                       <div class="row">
-                      <div class = "col text-left">
-                        <button
-                            :class="[( firstName =='' || lastName =='' || age==null) ? 'next-button-disabled' : 'next-button' ]"  
-                            :disabled="firstName =='' || lastName =='' || age==null"
-                            @click="incrementStage"
-                          >Next</button>
-                      </div>
+                        <div class = "col text-left">
+                          <button
+                              :class="[( firstName =='' || lastName =='' || age==null) ? 'next-button-disabled' : 'next-button' ]"  
+                              :disabled="firstName =='' || lastName =='' || age==null"
+                              @click="incrementStage"
+                            >Next</button>
+                        </div>
                     </div>
                   </div>
                 </transition>
@@ -102,32 +101,32 @@
                             </div>
                           <strong>Something went wrong!</strong> {{ message }}
                         </alert>
-                        <label>Email</label>
-                        <fg-input
-                              id="login_input"
-                              class="no-border input-lg"
-                              addon-left-icon="now-ui-icons ui-1_email-85"
+                        <b-form-group label="Email" description="We'll never share your email with anyone else.">
+                          <b-form-input
                               placeholder="Email"
                               v-model="email"
-                              type="text"/>
-                      <label>Password</label>
-                      <fg-input
-                              id="login_input"
-                              class="no-border input-lg"
-                              addon-left-icon="now-ui-icons ui-1_lock-circle-open"
-                              placeholder="Password"
-                              v-model="password"
-                              type="password"/>
-                      <p v-if="password.length < 6 && password != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
-                      <label>Confirm Password</label>
-                      <fg-input
-                                id="login_input"
-                                class="no-border input-lg"
-                                addon-left-icon="now-ui-icons ui-1_lock-circle-open"
-                                placeholder="Confirm Password"
-                                v-model="confirmPassword"
-                                type="password"/>
-                      <p v-if="confirmPassword != password && confirmPassword != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Passwords much match</p>
+                              type="text">           
+                          </b-form-input>
+                        </b-form-group>                        
+                      <b-form-group label="Password">
+                        <b-form-input
+                          placeholder="Password"
+                          v-model="password"
+                          type="password"/>
+                      </b-form-group>
+                      
+                      
+                      <p v-if="password.length < 6 && password != ''" style="color: #c91512; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
+                      <b-form-group label="Confirm Password">
+                        <b-form-input
+                            
+                            placeholder="Confirm Password"
+                            v-model="confirmPassword"
+                            type="password"/>
+
+                      </b-form-group>
+                      
+                      <p v-if="confirmPassword != password && confirmPassword != ''" style="color: #c91512; font-weight: 400; font-size: 13px;">Passwords much match</p>
                       <div class = "row">
                         <div class = "col text-left">
                           <button
@@ -153,51 +152,52 @@
                         <p style="font-size: 23px; font-weight: 300; color:#484848 ">Let's get to know you some more (optional)</p>
                         <div class = "row">
                           <div class="col-md-6">
-                            <label>Occupation</label>
-                            <fg-input
-                                id="login_input"
-                                class="no-border input-lg"
-                                addon-left-icon="now-ui-icons business_briefcase-24"
-                                placeholder="Occupation"
+                            <b-form-group label="Occupation">
+                              <b-form-input
+                            
+                                placeholder="What do you do?"
                                 v-model="job_occupation"
 
-                                type="text">
-                            </fg-input>
+                                type="text"/>
+                            </b-form-group>
+                            
                           </div>
                           <div class="col-md-6">
-                          <label>School</label>
-                              <fg-input
-                                  id="login_input"
-                                  class="no-border input-lg"
-                                  addon-left-icon="now-ui-icons education_hat"
-                                  placeholder="School"
+                            <b-form-group label="School">   
+                              <b-form-input
+                                  placeholder="Attend an institution?"
                                   v-model="institute"
-                                  type="text">
-                              </fg-input>
+                                  type="text"/>
+                            </b-form-group>
+                             
                           </div>
                         </div>
                         <div class = "row">
                           <div class = "col text-left">
-                            <label>About</label>
-                            <b-form-textarea
-                              style="background: #f5f5f5; border: none; border-radius: 15px; padding-left: 20px; padding-bottom: 20px; margin-bottom: 20px;"  
-                              placeholder="About"
-                              v-model="about"
+                            <b-form-group label="About">
+                              <b-form-textarea
+                                style="border: 0.5px solid #e3e3e3; border-radius: 5px; padding-left: 20px; padding-bottom: 20px; margin-bottom: 20px;"  
+                                placeholder="Tell us more about yourself! Your interests, passions, hobbies... anything!"
+                                v-model="about"
                               type="text"/>
-                              <label>Pick your interests</label>
-                              <multiselect 
+                            </b-form-group>
+                            
+                            <b-form-group label = "Pick your interests">
+                               <multiselect 
                                 v-model="value"
                                 :options="allTags"
                                 :multiple="true"
                                 :close-on-select="true"
                                 :clear-on-select="true"
                                 :preserve-search="false"
-                                placeholder="Pick your interests"
+                                placeholder="Select"
                                 label="value"
                                 track-by="value"
                                 :taggable="false"
                                 :preselect-first="false"
                                 />
+                            </b-form-group>
+                             
                           </div>
                         </div>
                         <div class = "row" style="margin-top: 15px;">
@@ -205,6 +205,7 @@
                             <button class = "update-button" @click="onPickImage">Add Profile Image</button>
                             <span v-if="this.image != null && this.image.profile_image != null">{{this.image.profile_image.name}}</span>
                             <input type="file" accept="image/*" @change="onImageSelected" style="display:none;" ref="ImageInput">
+                            <span><i v-if="this.image.profile_image != null" class="fa fa-trash" @click="removeImage" style="margin-left: 1rem"/></span>
                           </div>
                         </div>
                         <div class = "row" style="margin-top: 10px;">
@@ -212,6 +213,7 @@
                             <button class = "update-button" @click="onPickVideo">Add Profile Video</button>
                             <span v-if="this.video != null && this.video.profile_video != null">{{this.video.profile_video.name}}</span>
                             <input type="file" accept="video/*" @change="onVideoSelected" style="display:none;" ref="VideoInput">
+                            <span><i v-if="this.video.profile_video != null" class="fa fa-trash" @click="removeVideo" style="margin-left: 1rem" /></span>
                           </div>
                         </div>
                         <div class = "row " style="margin-top: 10px;">
@@ -244,7 +246,8 @@
                                   addon-left-icon="fab fa-facebook"
                                   placeholder="Facebook"
                                   v-model="facebook"
-                                  type="text"/>
+                                  type="text"
+                                  />
                             <label>Instagram</label>
                             <fg-input
                                     id="login_input"
@@ -253,7 +256,7 @@
                                     placeholder="Instagram"
                                     v-model="instagram"
                                     type="text"/>
-                            <p v-if="password.length < 6 && password != ''" style="color: darkred; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
+                            <p v-if="password.length < 6 && password != ''" style="color: #c91512; font-weight: 400; font-size: 13px;">Password must be at least 6 characters long</p>
                             <label>Linkedin</label>
                             <fg-input
                                       id="login_input"
@@ -305,6 +308,7 @@
                     </div>
                   </div>
                 </transition>
+                </div>
                 </div>
               <router-link class="link footer-link pull-left" to="/meet-team" style= "color: #484848; text-decoration: none; font-size: 14px;">
                 Meet the Team&nbsp;&nbsp;&nbsp;|
@@ -411,13 +415,16 @@ export default {
         this.stage--;
       },
       onPickVideo() {
+        this.$refs.VideoInput.value=null;
         this.$refs.VideoInput.click();
       },
       onVideoSelected(event) {
           this.video.profile_video = event.target.files[0];
+          console.log(this.video.profile_video);
       },
       onPickImage() {
-       this.$refs.ImageInput.click();
+        this.$refs.ImageInput.value = null
+        this.$refs.ImageInput.click();
       },
       onImageSelected(event) {
         this.image.profile_image = event.target.files[0];
@@ -425,10 +432,19 @@ export default {
       goToLogin() {
         this.$router.push('/login')
       },
+
+      removeImage() {
+        this.image.profile_image = null
+      },
+
+      removeVideo() {
+        this.video.profile_video  = null;
+      },
       
       async incrementStage() {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (this.stage == 1) {
+          this.warning = false;
           if (!re.test(this.email.toLowerCase())) {
             this.warning = true;
             this.message = "Please enter a valid email"
@@ -487,6 +503,8 @@ export default {
           this.userData.instagram = this.instagram.substring(this.instagram.indexOf("instagram"));
           this.userData.twitter = this.twitter.substring(this.twitter.indexOf("twitter"));
           this.userData.linkedin = this.linkedin.substring(this.linkedin.indexOf("linkedin"));
+          console.log(this.image);
+          console.log(this.video);
           await this.createUser(this.userData);
           if (this.image != null) {
             await this.updateImage(this.image);
@@ -659,7 +677,7 @@ export default {
   }
 
   .stage-before {
-    height: 130vh;
+    height: 140vh;
   }
   
   .stage-4{

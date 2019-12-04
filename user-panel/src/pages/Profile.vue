@@ -297,6 +297,10 @@ export default {
       console.log(event.target.files[0].name)
     },
     updateProfile() {
+      this.userData.facebook = this.userData.facebook.substring(this.userData.facebook.indexOf("facebook"));
+      this.userData.instagram = this.userData.instagram.substring(this.userData.instagram.indexOf("instagram"));
+      this.userData.twitter = this.userData.twitter.substring(this.userData.twitter.indexOf("twitter"));
+      this.userData.linkedin = this.userData.linkedin.substring(this.userData.linkedin.indexOf("linkedin"));
       if(this.value.length > 0) {
             this.value.forEach(item => {
             this.interestId.push(item.id)
@@ -311,6 +315,7 @@ export default {
       else {
         const loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
         this.userData.interests = loggedUser.interests
+        
         this.updateUserProfile(this.userData)
           this.modals.classic = false
           this.getInterests
@@ -354,6 +359,10 @@ export default {
       this.userData.interests = loggedUser.interests
       this.userData.job_occupation = loggedUser.job_occupation
       this.userData.institute = loggedUser.institute
+      this.userData.facebook = loggedUser.facebook
+      this.userData.instagram = loggedUser.instagram
+      this.userData.twitter = loggedUser.twitter
+      this.userData.linkedin = loggedUser.linkedin
       if(loggedUser.profile_image) {
         this.profileImage = loggedUser.profile_image
       }
