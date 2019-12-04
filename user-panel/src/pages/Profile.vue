@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="card">
-      <div class="card-body">
-        <div class = "row" style = "margin-top: 40px; margin-bottom: 40px; margin-left: 40px; margin-right: 40px">
-          <div class = "col-md-8">
+    <div class="test">
+      <div class="container">
+        <div class = "card" style="margin-top: 3rem;">
+          <div class = "card-body">
+            <div class = "row" style = "margin-top: 40px; margin-bottom: 40px; margin-left: 5rem; margin-right: 5rem">
+          <div class = "col-md-6">
             <div class = "row">
               <div class="col-md-4">
                 <div class="photo-container text-center"  @click="onPickFile()">
@@ -13,22 +15,47 @@
                   <input type="file" style="display:none">
                 </div>
                 <div class = "row" style= "justify-content: center">
-                <n-button type="info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-top: 30px; float: left" @click.native="modals.classic = true">
+                <n-button type="info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-top: 30px; float: left; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3);" @click.native="modals.classic = true">
                 Edit Profile
                 </n-button>
               </div>
               </div>
               <div class = "col-md-8">
-                <h3 class="text-left" style= "margin-top: 25px"><b>{{userData.first_name + " " + userData.last_name}}</b></h3>
-                <h4 style= "color: #484848">INTERESTS</h4>
+                <p class="text-left" style= "margin-top: 30px; font-weight: 500; color: #484848; font-size: 20px; ">{{userData.first_name + " " + userData.last_name}}</p>
+                <p style= "color: #484848; font-weight: 400;">Interests</p>
                 <div class="row" style = "margin-left: 1px">
                   <span class="badge badge-pill badge-success" style="font-size: 9px; margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in fetchedTags" :key="index">{{tag}}</span>
                 </div>
               </div>
             </div>
-            <div class = "row" style= "margin-top: 40px; margin-left: 50px">
+          </div>
+          
+          <div class = "col-md-6">
+            <div class = "row" style= "margin-right: 60px">
+              <div class = "col-md-12">
+                <div class = "row" style = "margin-left: 60px">
+                  <p style="font-size: 25px; font-weight: 500"> Quick Facts</p>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <p style="font-weight: 400"><b style= "color: #484848; font-weight:600;">Birthday :</b> {{ userData.age }} Years</p>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <p style="font-weight: 400"><b style= "color: #484848; font-weight: 600;">Occupation :</b> {{ userData.job_occupation }}</p>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <p style="font-weight: 400"><b style= "color: #484848; font-weight: 600;">Institute :</b> {{ userData.institute }}</p>
+                </div>
+                <div class = "row" style = "margin-left: 60px">
+                  <p style="font-weight: 400"><b style= "color: #484848; font-weight: 600;">Email :</b> {{ userData.email }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class = "row" style= "margin-top: 40px; margin-left: 5rem; margin-right: 5rem;">
               <div class="col-md-4">
-                <h3 class= "text-left"><b> About </b></h3>
+                <p style="font-size: 25px; font-weight: 600;">About</p>
               </div>
               <div class= "col-md-12">
                 <div class = "row" style= "margin-left: 1px">
@@ -36,45 +63,23 @@
                 </div>
               </div>
             </div>
-            <div class="row" style= "margin-top: 40px; margin-left: 50px">
-              <div class= "col-md-4">
-                <h3 class="title-up"><b>Profile Video</b></h3>
-              </div>
-              <div class= "col-md-12">
-                <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
-              </div>
+            <div class="row text-left" style= "margin-top: 3rem; margin-left: 5rem; margin-bottom: 3rem;">
+                  <div class= "col-md-4">
+                     <p style="font-size: 25px; font-weight: 600;">Profile Video</p>
+                  </div>
+                  <div class= "col-md-12">
+                    <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
+                  </div>
 
-            <div class = row style= "margin-left: 232px">
-                <h5 v-if="profileVideo == null" style="float: left;">No Profile Video Found.</h5>
-                <n-button class="btn-info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px" @click="onPickVideo()">Update Profile Video</n-button>
-                <input type="file" @change="onVideoSelected" style="display:none;" ref="VideoInput">
-                <span style="clear: both;"></span>
-              </div>
+                  <div class = "row">
+                    <div class = "col">
+                    <n-button class="btn-info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3); margin-left: 1rem;" @click="onPickVideo()">Update Profile Video</n-button>
+                    <input type="file" @change="onVideoSelected" style="display:none;" ref="VideoInput">
+                    <span style="clear: both;"></span>
+                    </div>
+                  </div>
             </div>
           </div>
-          
-          <div class = "col-md-4">
-            <div class = "row" style= "margin-right: 60px">
-              <div class = "col-md-12">
-                <div class = "row" style = "margin-left: 60px">
-                  <h3> <b>Quick Facts</b></h3>
-                </div>
-                <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #484848">Age :</b> {{ userData.age }} Years</h5>
-                </div>
-                <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #484848">Occupation :</b> {{ userData.job_occupation }}</h5>
-                </div>
-                <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #484848">Institute :</b> {{ userData.institute }}</h5>
-                </div>
-                <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #484848">Email :</b> {{ userData.email }}</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
@@ -450,7 +455,7 @@ export default {
   .icon {
     position: absolute;
     padding: 10px;
-    background: #2CA8FF;
+    background: #34b14f;
     border-radius: 50%;
     color: #fff;
     left: 58%;

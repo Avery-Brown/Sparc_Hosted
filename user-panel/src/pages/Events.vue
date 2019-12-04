@@ -139,7 +139,7 @@
                               </div>
                               <div class = "row">
                                 <div class = "col">
-                                    <button class = 'btn' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="viewEvent(event.id)">Message Host</button>
+                                    <button class = 'btn' style="background: #f1f1f1; color: #484848; font-weight: 600; font-size: 12px; border-radius: 3px; margin-bottom: 20px; box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.3); " @click="viewEvent(event.id)">Message Host</button>
                                 </div>
                               </div>
                               <div class = "row" style="mt-auto mb-auto">
@@ -166,7 +166,7 @@
                                     <div class = "col-md-7">
                                       <div class = "row ml-auto mr-auto">
                                         <div class = "col-md-4 mt-auto mb-auto">
-                                          <img class="image-class" width="40" height="40" :src="getPhoto(getUser(event.created_by))" alt="">
+                                          <img class="image-class" width="40" height="40" :src="getPhoto(getUser(event.created_by))" style="border: 2px solid gainsboro" alt="">
                                         </div>
                                         <div class = "col-md-8">
                                           <div class = "row">
@@ -179,12 +179,12 @@
                                       </div>
                                     </div>
                                     <div class = "col-md-5 mb-auto" >
-                                        <button class = 'btn pull-right' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px;" @click="viewEvent(event.id)"> {{pastFilter.length == 0 ? 'Participate' : 'View Engagement'}}</button>
+                                        <button class = 'btn pull-right' style="background: #34b14f; color: white; font-weight: 600; font-size: 12px; border-radius: 3px; box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.3);" @click="viewEvent(event.id)"> {{pastFilter.length == 0 ? 'Participate' : 'View Engagement'}}</button>
                                     </div>
                                     </div>
                                     <div class = "row">
                                       <div class = "col mt-auto mb-auto">
-                                        <read-more  style = "margin-bottom: 15px; font-size: 12px; font-weight: 500" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="200"></read-more>
+                                        <read-more  class="read-more" style = "margin-bottom: 15px; font-size: 12px; font-weight: 500" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="200"></read-more>
                                       </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                       <p v-if="event.event_price_per_person == null" style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp; Free</p>
                                       <p v-else style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
                                     </div>
-                                  </div>
+                                  </div> 
                                       <p v-if="event.event_address != null" style="font-size: 14px; font-weight: 400"><i class="fa fa-location-arrow" style = "color: #484848"></i>&nbsp; {{ event.event_address }}</p>
                                   <div class = "row">
                                     <div class = "col">
@@ -745,6 +745,10 @@ export default {
 
   .searchClass {
     margin-bottom: 75px;
+  }
+
+  .read-more p {
+    font-weight: 400;
   }
 
 
