@@ -1,7 +1,9 @@
 {
   "hosting": {
     "public": "dist",
+
     "site": "sparc-test-408",
+
     "ignore": [
       "firebase.json",
       "**/.*",

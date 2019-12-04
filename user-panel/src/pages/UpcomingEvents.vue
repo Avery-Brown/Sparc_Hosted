@@ -10,26 +10,137 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-4" v-for="(event, index) in filterUpcoming"  v-if="event.deleted==false" :key="index">
+              <div class="col-md-12" v-for="(event, index) in filterUpcoming"  v-if="event.deleted==false" :key="index">
                 <div class="card" style="cursor: pointer" v-if="Date.parse(currentDate) <= Date.parse(event.date)">
-                    <div class="card-header" >
-                      <img v-if="event.event_image != null" :src="event.event_image" class="lizzet_image" alt="" @click="viewEvent(event.id)">
-                      <img v-else src="../../public/sparc_card_back.jpg" class="lizzet_image" alt="">
+                    <div class="card-body">
+                          <div class = "row">
+                            <div class = "col-md-3 text-center mt-auto mb-auto">
+                              <div class = "row">
+                                <div class = "col">
+                                  <img v-if="event.event_image != null" :src="event.event_image" style = "width: 110px; height: 110px; border-radius: 50%;" alt="" @click="viewEvent(event.id)">
+                                  <img v-else src="../../public/sparc_card_back.jpg" style = "max-width: 100px;" alt="" @click="viewEvent(event.id)">
+                                </div>
+                              </div>
+                              <div class = "row">
+                                <div class = "col">
+                                    <button class = 'btn' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler">Share Engagement</button>
+                                </div>
+                              </div>
+                              
+                              <div class = "row" style="mt-auto mb-auto">
+                                <div class = "col">
+                                  <p style = "font-size: 14px;" v-if="event.event_type === 'both'"><i class ="fa fa-network-wired" style = "color: #00487C"></i>  &nbsp; In Person & Virtual</p>
+                                  <p style = "font-size: 14px;" v-else-if="event.event_type === 'virtual'"><i class ="fa fa-tv" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+                                  <p style = "font-size: 14px;" v-else><i class ="fa fa-user-check" style = "color: #00487C"></i> &nbsp; {{event.event_type.charAt(0).toUpperCase() + event.event_type.substring(1)}}</p>
+                                </div>
+                              </div>
+                            </div>
+                            <div class = "col-md-9 mt-auto mb-auto">
+                              <div class = "row">
+                                <div class = "col">
+                                  <h4 :id="getHoverIdTitleByIndex(index)"> {{ transformTitle(event.event_name) }} </h4>
+                                    <b-tooltip v-if="event.event_name.length > 63" :target="getHoverIdTitleByIndex(index)" placement="top" triggers="hover">
+                                      <p class="mt-auto mb-auto"> {{ event.event_name }} </p>
+                                    </b-tooltip>
+                                </div>
+                              </div>
+                              <div class = "row">
+                                <div class = "col-md-8">
+                                  <div class = "row">
+                                    <div class = "col-md-7">
+                                      <div class = "row ml-auto mr-auto">
+                                        <div class = "col-md-4 mt-auto mb-auto">
+                                          <img class="image-class" width="40" height="40" :src="getPhoto(getUser(event.created_by))" alt="">
+                                        </div>
+                                        <div class = "col-md-8">
+                                          <div class = "row">
+                                              <b>{{getName(getUser(event.created_by))}}</b>
+                                          </div>
+                                          <div class = "row">
+                                              <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class = "col-md-5 mb-auto" >
+                                        <button class = 'btn pull-right' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="viewEvent(event.id)">View</button>
+                                    </div>
+                                  </div>
+                                  <div class = "row">
+                                      <div class = "col mt-auto mb-auto">
+                                        <read-more  style = "margin-bottom: 15px; font-size: 12px;" more-str="Read More..." :text="event.event_description" link="#" less-str="Read Less..." :max-chars="200"></read-more>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class = "col-md-4">
+                                  <div class = "row">
+                                    <div class = "col">
+                                      <p v-if="event.event_price_per_person == null" style="font-size: 14px"><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp; Free</p>
+                                      <p v-else style="font-size: 14px"><i class="fa fa-hand-holding-usd" style = "color: #00487C"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
+                                    </div>
+                                  </div>
+                                      <p v-if="event.event_address != null" style="font-size: 14px"><i class="fa fa-location-arrow" style = "color: #00487C;"></i>&nbsp; {{ event.event_address }}</p>
+                                  <div class = "row">
+                                    <div class = "col">
+                                      <p v-if="event.event_location != null" style="font-size: 14px"><i class="fa fa-building" style = "color: #00487C"></i>&nbsp; {{ event.event_location }}</p>
+                                    </div>
+                                  </div>
+                                  <div class = "row">
+                                    <div class = "col">
+                                      <p v-if="event.event_location_access != null" :id="getHoverIdDirectionsByIndex(index)" style="color: #00487C; font-weight:400; font-size: 14px;"><i class="fa fa-compass" style = "color: #00487C"></i>&nbsp; Directions</p>
+                                      <b-tooltip placement="bottomleft" :target="getHoverIdDirectionsByIndex(index)" triggers="hover">
+                                        <b>{{ event.event_location_access }}</b>
+                                      </b-tooltip>
+                                    </div>
+                                  </div>
+                                  
+                                  
+
+                                  
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <div class = "row">
+                            <div class = "col-md-3 text-center mt-auto mb-auto">
+                              <div class = "row">
+                                <div class = "col-2">
+                                </div>
+                                <div class =" col ">
+                                  <p><i class="fab fa-facebook fa-md" style = "color: #00487C;"></i></p>
+                                </div>
+                                <div class =" col ">
+                                  <p><i class="fab fa-twitter fa-md" style = "color: #00487C"></i></p>
+                                </div>
+                                <div class =" col ">
+                                  <p><i class="fab fa-linkedin fa-md" style = "color: #00487C"></i></p>
+                                </div>
+                                <div class = "col-2">
+                                </div>
+                              </div>
+                            </div>
+                            <div class = "col-md-9 mt-auto mb-auto">
+                              <div class = "row">
+                                <div class = "col-md-8">
+                                  <div class = "row">
+                                    <div class = "col-md-3">
+                                      <p style="font-size: 14px;"> <i class="fa fa-calendar" style = "color: #00487C"></i> {{ event.date }}</p>
+                                    </div>
+                                    <div class = "col-md-9">
+                                      <p style="font-size: 14px;"> <i class="fa fa-clock-o" style = "color: #00487C"></i> {{ event.start_time + " - " + event.end_time }} </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class = "col-md-4">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                     </div>
-                      <div class="card-body" style= "height:260px; position:relative;" @click="viewEvent(event.id)">
-                      <h5 class="text-success"><strong> {{ event.event_name }}</strong></h5>
-                      <div class="text-success mb-2" style="margin-top:-10px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"><u><b>Share Engagement</b></u></div>
+                  </div>
 
-                      <h6 class="text-info"> <i class="fa fa-map-marker"></i> {{ event.event_location }}</h6>
-                      <h6 class="text-info"> <i class="fa fa-clock-o"></i> {{ event.start_time + " - " + event.end_time }} </h6>
-                      <h6 class="text-info"> <i class="fa fa-calendar"></i> {{ event.date }}</h6>
-                      <!-- <div class="text-success" style="position: absolute; bottom:10px; right: 20px;" v-clipboard="() => url+''+event.id" v-clipboard:success="clipboardSuccessHandler"> Share Engagement <i class="fa fa-copy"></i></div> -->
-                      <h6> <star-rating :rating="getRatings(event.created_by)" :increment="0.1" :star-size="16" :read-only="true"></star-rating></h6>
-
-                      <h6 class="text-success" style="position: absolute; bottom:10px; right: 20px;"> <img class="image-class" width="30" height="30" :src="getUser(event.created_by).profile_image" alt=""> {{ getUser(event.created_by).first_name + " " + getUser(event.created_by).last_name[0] + "." }}</h6>
-
-                    </div>
-                </div>
               </div>
             </div>
           </div>
@@ -86,9 +197,46 @@ export default {
           type: 'success'
         })
     },
+        getEventTags(event, hasHidden) {
+        return event.tags.map(element => {
+            let eventTag = this.allTags.find(tag => tag.id==element)
+            return eventTag
+        });
+    },
+    
+    getHoverIdDirectionsByIndex(index) {
+      return "tooltip-target-direction" + index;
+    },
+    getHoverIdTagsByIndex(index) {
+      return "tooltip-target-tag" + index;
+    },
+    getHoverIdTitleByIndex(index) {
+      return "tooltip-target-title" + index;
+    },
+    transformTitle(title) {
+      let transformedTitle = title;
+      if (title.split("").length > 49) {
+        transformedTitle = title.substring(0,49) + '...'
+      }
+      return transformedTitle;
+    },
     getUser(id) {
       let user_item = this.allUsers.find(user => user.id === id)
         return user_item
+    },
+    getPhoto(user) {
+      if (user == null){
+        return
+      } else {
+        return user.profile_image;
+      }
+    },
+    getName(user) {
+      if (user == null) {
+        return
+      } else {
+        return user.first_name + " " + user.last_name;
+      }
     },
     getRatings(id) {
       let avgRating = [];

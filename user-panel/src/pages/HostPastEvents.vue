@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <h2>Past Engagements</h2>
                 <div class="row" v-if="getEvents.length>0">
-                  <div class="col-md-4" v-for="(event, index) in foundEvents" v-if="event.deleted==false" :key="index">
+                  <div class="col-md-12" v-for="(event, index) in foundEvents" v-if="event.deleted==false" :key="index">
                     <div >
                     <div @click="viewEvent(event.id)" style="cursor: pointer">
                         <div class="card">
