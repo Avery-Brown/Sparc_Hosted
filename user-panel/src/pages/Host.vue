@@ -71,7 +71,7 @@
                                       </div>
                                     </div>
                                     <div class = "col-md-5 mb-auto" >
-                                        <button class = 'btn pull-right' style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="viewEvent(event.id)">View</button>
+                                        <button class = 'btn pull-right' style="background: #c91512; color: white; font-weight: 600; font-size: 12px; border-radius: 7px; margin-bottom: 20px;" @click="deleteEvent(event.id, event.event_name)">Delete</button>
                                     </div>
                                   </div>
                                   <div class = "row">
@@ -161,10 +161,34 @@
         </div>
       </div>
     </div>
+    <modal :show.sync="delModal" headerClasses="justify-content-center">
+      <h6 slot="header" class="text-center">Are you sure you want to Delete {{eventName}}?</h6>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button class="btn btn-danger mr-3 shadow" style="background: white;
+    color: #34b14f;
+    border-radius: 2px;
+    border: none;
+    width: 8rem;
+    height: 2.5rem;
+    font-weight: 600;
+    margin-right: 1.5rem;" @click="deleteNow">Yes, Delete</button>
+          <button class = "shadow" style="background: #34b14f;
+    color: white;
+    border-radius: 2px;
+    width: 8rem;
+    height: 2.5rem;
+    font-weight: 600;
+    border: none;" @click="delModal = false">No, Cancel</button>
+        </div>
+
+      </div>
+    </modal>
   </div>
 </template>
 <script>
 import { Parallax, FormGroupInput } from '@/components';
+import { Modal } from '@/components';
 import nativeToast from 'native-toast'
 import { mapGetters, mapActions } from 'vuex'
 import Lottie from 'vue-lottie'
@@ -180,6 +204,7 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     'lottie': Lottie,
     'second-lottie': Lottie,
+    Modal,
   },
   data() {
     return {
@@ -187,12 +212,15 @@ export default {
       currentDate: null,
       userEvents: [],
       allEvents: [],
+      delModal: false,
       isFiltering: false,
       loadingOptions: { animationData: loadingAnimationData },
       errorOptions: { animationData: errorAnimationData },
       url: null,
       foundEvents: [],
       getUsers: [],
+      eventName: null,
+      eventId: null
     }
   },
   computed: {
@@ -211,7 +239,21 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['fetchEvents', 'fetchUser']),
+    ...mapActions(['fetchEvents', 'fetchUser', 'eventDelete']),
+    deleteEvent(id, name) {
+        this.eventName = name
+        this.eventId = id
+        this.delModal = true
+      },
+      deleteNow() {
+        console.log(this.eventId)
+        let abc=this.foundEvents.find(event_item=>event_item.id==this.eventId)
+        // console.log(abc)
+        this.foundEvents.splice(abc, 1);
+        this.eventDelete(this.eventId)
+        this.delModal = false
+        this.$router.push({path: '/events'})
+      },
 
     viewEvent(id) {
       this.$router.push('/events/'+id)
