@@ -725,7 +725,7 @@
                                                     <button class="choose-image-button"  @click="onPickImage">Upload Image</button>
                                                     <span v-if="imgFileName != '' ">{{imgFileName}}</span>
                                                     <input type="file" accept="image/*" @change="onFileSelected" style="display:none;" ref="ImageInput"/>
-                                                    <section class="ml-auto mr-auto" style="width: 300px; margin-top: 1rem;"  v-if="cropping">
+                                                    <section class="ml-auto mr-auto" style="width: 500px; margin-top: 1rem;"  v-if="cropping">
                                                         <p class="bold-text">Please crop your image: </p>
                                                         <vue-cropper
                                                             ref="cropper"
@@ -870,7 +870,7 @@
                                             <div class = "row">
                                                 <div class = "col info-column">
                                                     <p class = "bold-text">Description</p>
-                                                    <p class="info-text-edit">{{eventPayload.event_description}}</p>
+                                                    <p class="info-text-edit"><pre>{{eventPayload.event_description}}</pre></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1136,7 +1136,7 @@ export default {
         mm: "05",
         ss: "00"
         },
-        stage: 0,
+        stage: 6,
         imgSrc: '',
         imgFileName: '',
         finalImgSrc: '',
@@ -1551,6 +1551,12 @@ margin-bottom: 1px;
 
 .main {
     border: 1px solid transparent;
+}
+
+pre {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 </style>

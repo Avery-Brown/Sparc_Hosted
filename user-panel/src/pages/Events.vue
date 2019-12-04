@@ -751,6 +751,12 @@ export default {
     font-weight: 400;
   }
 
+  pre {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 
   
 
