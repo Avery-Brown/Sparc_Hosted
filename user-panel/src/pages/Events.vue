@@ -123,7 +123,7 @@
                       <lottie :options="loadingOptions" :width="200" :height="200" style="margin-top: 3rem;"/>
                     </div>
                     <div v-else-if="filtered.length == 0" class="text-center">
-                      <h4><p style="display: inline-block; font-size: 23px; color: red; font-weight: 400;">Oops!</p> Looks like no engagements were found with that criteria</h4>
+                      <h4><p style="display: inline-block; font-size: 23px; color: #c91512; font-weight: bold;">Oops!</p> Looks like no engagements were found with that criteria</h4>
                       <second-lottie :options="errorOptions" :width="300" :height="300" />
                     </div>
                     <div v-else class ="row"  v-for="(event, index) in filtered" :key="index">

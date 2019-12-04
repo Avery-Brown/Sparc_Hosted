@@ -984,14 +984,14 @@
                                                     <p class = "info-text-edit" v-if="eventPayload.event_free === 'yes'">Free</p>
                                                     <p class = "info-text-edit" v-else>${{eventPayload.event_price_per_person}}</p>
                                                     <p class = "bold-text">Charity Donations</p>
-                                                    <p class = "info-text-edit">{{eventPayload.cause === 'no' ? 'None' : 'Yes'}}</p>
-                                                    <div v-if="eventPayload.charity1 != ''">
+                                                    <p class = "info-text-edit">{{eventPayload.cause === 'no' || eventPayload.event_free === 'yes' ? 'None' : 'Yes'}}</p>
+                                                    <div v-if="eventPayload.charity1 != '' && eventPayload.event_free !== 'yes'">
                                                         <p class = "bold-text">Charity 1</p>
                                                         <p class="info-text-edit">{{eventPayload.charity1}}</p>
                                                         <p class = "bold-text">Percentage to Charity 1</p>
                                                         <p class="info-text-edit">{{eventPayload.event_cause1}}%</p>
                                                     </div>
-                                                    <div v-if="eventPayload.charity2 != ''">
+                                                    <div v-if="eventPayload.charity2 != '' && eventPayload.event_free !== 'yes'">
                                                         <p class = "bold-text">Charity 2</p>
                                                         <p class="info-text-edit">{{eventPayload.charity2}}</p>
                                                         <p class = "bold-text">Percentage to Charity 2</p>
@@ -1304,7 +1304,34 @@ export default {
           if(val == 'success') {
               this.$router.push({path: '/host'})
           }
+      },
+      'eventPayload.cause': function(val) {
+          if (val !== 'no') {
+              this.eventPayload.event_cause1 = null;
+            this.eventPayload.event_cause2 = null;
+            this.eventPayload.charity1 = '';
+            this.eventPayload.charity2 = '';
+          }
+      },
+      'eventPayload.event_free': function(val) {
+          if (val === 'yes') {
+              this.eventPayload.event_price_per_person = null;
+              this.eventPayload.event_cause1 = null;
+            this.eventPayload.event_cause2 = null;
+            this.eventPayload.charity1 = '';
+            this.eventPayload.charity2 = '';
+          }
+      },
+      'eventPayload.event_type': function(val) {
+          if (val === 'in Person') {
+              this.eventPayload.virtual_capacity = null;
+              this.eventPayload.zoom_link = '';
+          } else if (val === 'virtual') {
+              this.eventPayload.capacity = null;
+          }
       }
+      
+
   }
 }
 </script>
