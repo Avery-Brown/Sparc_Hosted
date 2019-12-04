@@ -37,7 +37,7 @@
               
             <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
 
-            <div class = row style= "margin-left: 55px">
+            <div class = row style= "margin-left: 232px">
                 <h5 v-if="profileVideo == null" class="text-info" style="float: left;">No Profile Video Found.</h5>
                 <n-button class="btn-info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px" @click="onPickVideo()">Update Profile Video</n-button>
                 <input type="file" @change="onVideoSelected" style="display:none;" ref="VideoInput">
