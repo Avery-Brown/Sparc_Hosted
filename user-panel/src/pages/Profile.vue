@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-body">
-        <div class = "row" style = "margin-top: 40px; margin-bottom: 40px">
+        <div class = "row" style = "margin-top: 40px; margin-bottom: 40px; margin-left: 40px; margin-right: 40px">
           <div class = "col-md-8">
             <div class = "row">
               <div class="col-md-4">
@@ -20,25 +20,32 @@
               </div>
               <div class = "col-md-8">
                 <h3 class="text-left" style= "margin-top: 25px"><b>{{userData.first_name + " " + userData.last_name}}</b></h3>
-                <h4 style= "color: #00487C">INTERESTS</h4>
+                <h4 style= "color: #484848">INTERESTS</h4>
                 <div class="row" style = "margin-left: 1px">
                   <span class="badge badge-pill badge-success" style="font-size: 9px; margin: 1px; background-color: #e0e0e0; border: none; color: #505050; border-radius: 3px;" v-for="(tag,index) in fetchedTags" :key="index">{{tag}}</span>
                 </div>
               </div>
             </div>
             <div class = "row" style= "margin-top: 40px; margin-left: 50px">
-              <h3 class= "text-left"><b> About </b></h3>
-              <div class = "row" style= "margin-left: 1px">
-                {{userData.about}}
+              <div class="col-md-4">
+                <h3 class= "text-left"><b> About </b></h3>
+              </div>
+              <div class= "col-md-12">
+                <div class = "row" style= "margin-left: 1px">
+                  {{userData.about}}
+                </div>
               </div>
             </div>
             <div class="row" style= "margin-top: 40px; margin-left: 50px">
-              <h3 class="title-up"><b>Profile Video</b></h3>
-              
-            <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
+              <div class= "col-md-4">
+                <h3 class="title-up"><b>Profile Video</b></h3>
+              </div>
+              <div class= "col-md-12">
+                <video v-if="profileVideo != null" :src="profileVideo" controls height="300" width="650"></video>
+              </div>
 
             <div class = row style= "margin-left: 232px">
-                <h5 v-if="profileVideo == null" class="text-info" style="float: left;">No Profile Video Found.</h5>
+                <h5 v-if="profileVideo == null" style="float: left;">No Profile Video Found.</h5>
                 <n-button class="btn-info" style="background: #f4f4f4; color: #5f6368; font-weight: 600; font-size: 12px; border-radius: 7px" @click="onPickVideo()">Update Profile Video</n-button>
                 <input type="file" @change="onVideoSelected" style="display:none;" ref="VideoInput">
                 <span style="clear: both;"></span>
@@ -53,16 +60,16 @@
                   <h3> <b>Quick Facts</b></h3>
                 </div>
                 <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #00487C">Age :</b> {{ userData.age }} Years</h5>
+                  <h5><b style= "color: #484848">Age :</b> {{ userData.age }} Years</h5>
                 </div>
                 <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #00487C">Occupation :</b> {{ userData.job_occupation }}</h5>
+                  <h5><b style= "color: #484848">Occupation :</b> {{ userData.job_occupation }}</h5>
                 </div>
                 <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #00487C">Institute :</b> {{ userData.institute }}</h5>
+                  <h5><b style= "color: #484848">Institute :</b> {{ userData.institute }}</h5>
                 </div>
                 <div class = "row" style = "margin-left: 60px">
-                  <h5><b style= "color: #00487C">Email :</b> {{ userData.email }}</h5>
+                  <h5><b style= "color: #484848">Email :</b> {{ userData.email }}</h5>
                 </div>
               </div>
             </div>
