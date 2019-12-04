@@ -2,7 +2,7 @@
   "hosting": {
     "public": "dist",
 
-    "site": "sparc-test-katelyn",
+    "site": "sparc-test-elin",
 
     "ignore": [
       "firebase.json",

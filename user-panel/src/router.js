@@ -62,7 +62,7 @@ export default new Router({
     {
       path: '/host',
       name: 'host',
-      components: { default: Host, header: MainNavbar, footer: MainFooter },
+      components: { default: Host, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 },
       },
