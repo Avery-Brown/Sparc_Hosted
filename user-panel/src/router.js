@@ -73,10 +73,9 @@ export default new Router({
     {
       path: '/create_engagement',
       name: 'create_engagement',
-      components: { default: CreateEngagement, header: MainNavbar, footer: MainFooter },
+      components: { default: CreateEngagement, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 },
-        footer: { backgroundColor: 'black' }
       },
       meta: {
         requiresAuth: true,
