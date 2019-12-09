@@ -61,18 +61,18 @@
                       </div> -->
 
                   </div>
-                  
+
 
               	  </div>
               	  <div class = "col mt-auto mb-auto" v-if="getSelectedEvent[0].event_video != null" style="mt-auto mb-auto">
-                    
-                    
+
+
                         <video :src="getSelectedEvent[0].event_video" controls class="ml-auto mr-auto video-element"></video>
-                     
+
                   </div>
               </div>
               <div class = "row">
-                
+
               </div>
               <div class = "row" style="margin: 20px;">
               <div class="col-md-12" v-if="isUserLogged" style="display: flex; flex-direction: row; justify-content: space-between; padding-bottom: 15px;">
@@ -206,22 +206,28 @@
                     </div>
                   </b-card-text>
                 </b-card>
-                </div>
+                </div> -->
 
-                <div class= "col-md-4">
-                <b-card class="mt-2" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)">
+                <!-- <div class= "col-md-4"> -->
+                <!-- <b-card class="mt-2" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)"> -->
+                <div style="margin-left: 20px;" v-if="Date.parse(currentDate) > Date.parse(getSelectedEvent[0].date)">
                   <b-card-text>
                     <h4 class="title-up text-info">Engagement Reviews</h4>
-                    <div class="col-md-12" v-for="(rating, index) in getRatings" :key="index">
+                    <div class="col-md-12" v-if="getRatings[0] != null" v-for="(rating, index) in getRatings" :key="index">
                       <h6 class="text-success">{{reviewedBy(rating.user_id).first_name}}</h6>
                       <star-rating :rating="rating.ratingStars" :read-only="true" :star-size="16" :increment="0.5"></star-rating>
                       <strong>{{rating.feedback}}</strong>
                       <hr>
                     </div>
+                    <div class="col-md-12" v-if="getRatings[0] == null">
+                      No Reviews Found
+                    </div>
                   </b-card-text>
-                </b-card>
                 </div>
-            </div> -->
+
+                <!-- </b-card> -->
+                <!-- </div> -->
+            <!-- </div> -->
 
 
 
