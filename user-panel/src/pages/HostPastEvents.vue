@@ -1,3 +1,4 @@
+<!--This code was developed in part by Lizzet Clifton, Eric Lin, Jordan Shapiro, and Katelyn Chang for Duke CS408-->
 <template>
     <div>
 

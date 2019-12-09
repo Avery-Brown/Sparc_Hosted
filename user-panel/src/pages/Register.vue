@@ -1,3 +1,4 @@
+<!--This code was developed in part by Lizzet Clifton, Eric Lin, Jordan Shapiro, and Katelyn Chang for Duke CS408-->
 <template>
   <div class="main" style="background: whitesmoke; " :class="[this.stage===4 ? 'stage-4' : 'stage-before' ]">
     <div class="content">
