@@ -58,7 +58,7 @@ exports.CheckoutSession = functions.https.onRequest((request, response) => {
 
 exports.sendMail = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-      if(req.method == 'POST') {
+    if(req.method == 'POST') {
           const dest = req.body.dest;
           const event = req.body.event;
           const end_time = req.body.end_time;
