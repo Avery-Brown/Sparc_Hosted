@@ -1,3 +1,4 @@
+<!--This code was developed in part by Lizzet Clifton, Eric Lin, Jordan Shapiro, and Katelyn Chang for Duke CS408-->
 //<h1 style="margin-top: 50px;">What is Sparc?</h1>
 
 <template>

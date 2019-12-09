@@ -31,6 +31,9 @@ app.use('/transact', transactRouter.router);
 
 
 exports.CheckoutSession = functions.https.onRequest((request, response) => {
+    /**
+     * CheckoutSession charges a user for a paid engagement
+     */
   cors(request, response, () => {
     const token = request.body.stripeToken
     let amount = request.body.amount;
@@ -57,8 +60,11 @@ exports.CheckoutSession = functions.https.onRequest((request, response) => {
 
 
 exports.sendMail = functions.https.onRequest((req, res) => {
+    /**
+     * Sends a confirmation email with engagement details to a user that siugns up for participating in an event
+     */
   cors(req, res, () => {
-      if(req.method == 'POST') {
+    if(req.method == 'POST') {
           const dest = req.body.dest;
           const event = req.body.event;
           const end_time = req.body.end_time;
@@ -91,7 +97,12 @@ exports.sendMail = functions.https.onRequest((req, res) => {
   });
 });
 
+
 exports.sendReminder = functions.https.onRequest((req, res) => {
+    /**
+     * @deprecated
+     * sendReminder sends a reminder email to a user who will be attending an engagement in the future
+     */
     cors(req, res, () => {
         if(req.method == 'POST') {
             const dest = req.body.dest;
@@ -129,6 +140,9 @@ exports.sendReminder = functions.https.onRequest((req, res) => {
 
 
 exports.sendContact = functions.https.onRequest((req, res) => {
+    /**
+     * sendContact sends a verification email to a user after contacting the Sparc team
+     */
   cors(req, res, () => {
     if(req.method == 'POST') {
       const name = req.body.name;
@@ -153,6 +167,9 @@ exports.sendContact = functions.https.onRequest((req, res) => {
 })
 
 exports.getEvents = functions.https.onRequest((req, res) => {
+    /**
+     * getEvents gets the engagements from the database
+     */
   cors(req, res, () => {
     var eventsRef = admin.database().ref('events');
     eventsRef.on("value", (snapshot) => {
@@ -165,6 +182,9 @@ exports.getEvents = functions.https.onRequest((req, res) => {
 })
 
 exports.getUsers = functions.https.onRequest((req, res) => {
+    /**
+     * getUsers gets the users for a certain event from the database
+     */
   cors(req, res, () => {
     var usersRef = admin.database().ref('users');
     usersRef.on("value", (snapshot) => {
@@ -175,6 +195,9 @@ exports.getUsers = functions.https.onRequest((req, res) => {
 })
 
 exports.getRatings = functions.https.onRequest((req, res) => {
+    /**
+     * getRatings gets the ratings of an event from the database
+     */
   cors(req, res, () => {
     var ratingsRef = admin.database().ref('ratings');
     ratingsRef.on('value', (snapshot) => {
@@ -184,6 +207,9 @@ exports.getRatings = functions.https.onRequest((req, res) => {
 })
 
 exports.getTags = functions.https.onRequest((req, res) => {
+    /**
+     * getTags gets the tag from an event from the database
+     */
   cors(req, res, () => {
     var tagsRef = admin.database().ref('tags');
     tagsRef.on('value', snapshot => {
@@ -193,6 +219,9 @@ exports.getTags = functions.https.onRequest((req, res) => {
 })
 
 exports.checkUser = functions.https.onRequest((req, res) => {
+    /**
+     * Checks if a user already exists with a given email
+     */
   cors(req, res, async () => {
     try {
       await admin.auth().getUserByEmail(req.body.email)
