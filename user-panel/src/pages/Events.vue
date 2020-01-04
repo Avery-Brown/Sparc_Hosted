@@ -118,7 +118,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['fetchEvents', 'fetchAllUsers', 'fetchTags']),
+    ...mapActions(['fetchEvents', 'fetchAllUsers', 'fetchTags','fetchRatings','fetchMessages']),
 
     viewEvent(id) {
       this.$router.push('/events/'+id)
@@ -209,6 +209,13 @@ export default {
     },
   },
   created() {
+    this.$store.dispatch("fetchAllUsers")
+    this.$store.dispatch("fetchRatings")
+    this.$store.dispatch("fetchEvents")
+    this.$store.dispatch("fetchMessages")
+    if(JSON.parse(localStorage.getItem('loggedUser'))!=null){
+    this.$store.commit('setLoggedUser',JSON.parse(localStorage.getItem('loggedUser')))
+    }
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
