@@ -117,7 +117,6 @@ export default {
       if(this.loggedUser.message_connections!=null){
       Object.keys(this.loggedUser.message_connections).forEach(key=>{
       cnt=cnt+this.loggedUser.message_connections[key].new_messages
-      console.log(this.loggedUser.message_connections[key].new_messages)
 
 
       })
