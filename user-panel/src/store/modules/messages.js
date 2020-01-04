@@ -24,12 +24,12 @@ const actions = {
         if(payload.message_connection==true){
             firebase.database().ref('users').child(payload.sender_id).child('message_connections').push({id:payload.receiver_id,last_date:payload.last_date,last_time:payload.last_time})
             .then(()=>{
-                console.log("saved inside sender")
+                // console.log("saved inside sender")
             })
             .catch(error=>console.log(error.message))
             firebase.database().ref('users').child(payload.receiver_id).child('message_connections').push({id:payload.sender_id,last_date:payload.last_date,last_time:payload.last_time,new_messages:payload.new_messages})
             .then(()=>{
-                console.log("saved inside receiver")
+                // console.log("saved inside receiver")
             })
             .catch(error=>console.log(error.message))
         }
