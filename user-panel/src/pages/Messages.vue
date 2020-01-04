@@ -234,7 +234,7 @@ export default {
         time:date,
         dest:this.selected_user.email
       }).then(() => {
-        console.log('Email Sent')
+        // console.log('Email Sent')
       }).catch(err => console.log("Error " + err))
     },
     chatdate(id){
@@ -249,6 +249,7 @@ export default {
     },
     ...mapActions(['sendMessages','blockingProcess','toggleEmailNotifications','unsetNewMessages']),
     filter_name() {
+      // console.log(this.allUsers.filter(user_item=>user_item.first_name==null))
       let arrs=this.allUsers.filter(user_item=>user_item.id!=this.lc_loggeduser.id && user_item.first_name.toLowerCase().includes(this.search.toLowerCase()))
             if(arrs.length>0){
             this.filters=arrs
@@ -278,7 +279,7 @@ export default {
         this.checked=false;
 
       }
-      this.scroller()
+      // this.scroller()
     },
     blocking(){
       const remove_blocker_index = this.allUsers.findIndex(user_item => user_item.id == this.selected_user.id);
@@ -301,11 +302,11 @@ export default {
           message: this.block_message,
           blocked_by:this.lc_loggeduser.first_name,
         }).then(() => {
-          console.log('Email Sent')
+          // console.log('Email Sent')
         }).catch(err => console.log("Error " + err))
       }
       else{
-        console.log("notifiers")
+        // console.log("notifiers")
       }
     },
     sendMessage(){
@@ -330,12 +331,12 @@ export default {
         this.sendEmail(date)        
       }
       if(this.lc_loggeduser.message_connections==null) {
-        console.log("sending message to a new person")
+        // console.log("sending message to a new person")
         this.new_msg_connection=true
       }
       else{
         let exists=Object.keys(this.lc_loggeduser.message_connections).find(key=>this.lc_loggeduser.message_connections[key].id==this.selected_user.id)
-        console.log("connections not empty but same connections appear")
+        // console.log("connections not empty but same connections appear")
         if(exists==null) {
           this.new_msg_connection=true
         }
@@ -346,7 +347,7 @@ export default {
       if(this.selected_user.message_connections!=null){
       let yourself=Object.keys(this.selected_user.message_connections).find(key=>this.selected_user.message_connections[key].id==this.lc_loggeduser.id)
       //how many msgs i hv with this guy 
-      console.log(yourself)
+      // console.log(yourself)
       if(yourself!=null){
         if(this.selected_user.message_connections[yourself].new_messages!=null) {
           new_messages=this.selected_user.message_connections[yourself].new_messages+1
@@ -356,7 +357,7 @@ export default {
         
       }
       else {
-        console.log("this guy doesnt have any messages with anybody")
+        // console.log("this guy doesnt have any messages with anybody")
       }
 
       let msg_obj={
@@ -370,11 +371,11 @@ export default {
       message_connection:this.new_msg_connection,
       new_messages:new_messages
       }
-      console.log(msg_obj)
+      // console.log(msg_obj)
       this.sendMessages(msg_obj)
       this.message=''
       this.rawfile=null
-      this.scroller()
+      // this.scroller()
       this.new_msg_connection=false
       this.search=''
 
@@ -403,7 +404,7 @@ export default {
     getUsers() {
         if(this.lc_loggeduser.message_connections!=null) {
          return Object.keys(this.lc_loggeduser.message_connections).map(key=>{
-              let use=this.filters.find(item=>item.id==this.lc_loggeduser.message_connections[key].id)
+              let use=this.allUsers.find(item=>item.id==this.lc_loggeduser.message_connections[key].id)
               return {...use,new_messages:this.lc_loggeduser.message_connections[key].new_messages,last_time:this.lc_loggeduser.message_connections[key].last_time,last_date:this.lc_loggeduser.message_connections[key].last_date}
           })
         }
@@ -477,9 +478,9 @@ export default {
     }
   },
   mounted(){
-    if(this.allUsers.length>0){
-      this.selected_user=this.allUsers[0];
-    }
+    // if(this.allUsers.length>0){
+      // this.selected_user=this.getSortedUsers[0];
+    // }
   }
 };
 </script>
