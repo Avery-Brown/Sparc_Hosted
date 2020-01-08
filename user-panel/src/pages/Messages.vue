@@ -194,7 +194,7 @@ export default {
         this.selected_user=this.allUsers[0];
       }
     this.checked=this.get_receiver_blocked_status.check
-    // this.scroller()
+    this.scroller()
 
     }
   },
@@ -279,7 +279,7 @@ export default {
         this.checked=false;
 
       }
-      // this.scroller()
+      this.scroller()
     },
     blocking(){
       const remove_blocker_index = this.allUsers.findIndex(user_item => user_item.id == this.selected_user.id);
@@ -375,7 +375,7 @@ export default {
       this.sendMessages(msg_obj)
       this.message=''
       this.rawfile=null
-      // this.scroller()
+      this.scroller()
       this.new_msg_connection=false
       this.search=''
 
