@@ -129,7 +129,7 @@
               </div>
               <div class="row text-center mt-4">
                 <div class="col-md-6 pr-0 pl-0">
-                  <span>All Conversations</span>
+                  <span>Enable Email Notifications</span>
                 </div>
                 <div class="col-md-6">
                   <b-form-checkbox @change="toggleEmailNotifs()" v-model="notif_toggle"  name="check-button" switch>
