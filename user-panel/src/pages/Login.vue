@@ -58,16 +58,14 @@ export default {
       success: true,
       userVerified: true,
       userPayload: {
-        email: 'travis.nicks@duke.edu',
-        password: 'travis',
+        email: '',
+        password: '',
       },
 
     }
   },
-
   methods: {
     ...mapActions(['authenticateLogin']),
-
     loginUser() {
       this.authenticateLogin(this.userPayload);
     }
