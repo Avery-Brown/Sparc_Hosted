@@ -36,7 +36,7 @@
                                   <img v-else src="../../public/sparc_card_back.jpg" style = "max-width: 100px;" alt="" @click="viewEvent(event.id)">
                                 </div>
                               </div>
-                              
+
                               <div class = "row" style="mt-auto mb-auto">
                                 <div class = "col">
                                   <p style = "font-size: 14px;" v-if="event.event_type === 'both'"><i class ="fa fa-network-wired" style = "color: #484848"></i>  &nbsp; In Person & Virtual</p>
@@ -113,10 +113,10 @@
                                         </b-tooltip>
                                     </div>
                                   </div>
-                                  
-                                  
 
-                                  
+
+
+
                                 </div>
                               </div>
 
@@ -128,11 +128,11 @@
                               <div class = "row">
                                 <div class = "col text-center" style="margin-top: -10px;">
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).facebook != '' && getUser(event.created_by).facebook != null"><a :href="'https://' + getUser(event.created_by).facebook" target="_blank"><i class="fab fa-facebook fa-lg" style = "color: #3b5998; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).instagram != '' && getUser(event.created_by).instagram != null"><a :href="'https://' + getUser(event.created_by).instagram" target="_blank"><i class="fab fa-instagram fa-lg" style = "color: #cf2872; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).twitter != '' && getUser(event.created_by).twitter!= null"><a :href="'https://' + getUser(event.created_by).twitter" target="_blank"><i class="fab fa-twitter fa-lg" style = "color: #00aced; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).linkedin != '' && getUser(event.created_by).linkedin != null"><a :href="'https://' + getUser(event.created_by).linkedin" target="_blank"><i class="fab fa-linkedin fa-lg" style = "color: #0077b6; margin-left: 10px; margin-right: 10px;"></i></a></span>
                                 </div>
                               </div>
@@ -260,7 +260,7 @@ export default {
       return transformedTitle;
     },
     getUser(id) {
-      let user_item = this.getUsers.find(user => 
+      let user_item = this.getUsers.find(user =>
          Object.keys(user)[0] === id
       )
       if (user_item != null){
@@ -279,7 +279,7 @@ export default {
       if (user == null) {
         return
       } else {
-        return user.first_name + " " + user.last_name;
+        return user.first_name + " " + user.last_name[0].toUpperCase() + ".";
       }
     },
     getRatings(id) {

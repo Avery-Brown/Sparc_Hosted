@@ -8,8 +8,8 @@
             <div class = "container-fluid">
               <div class ="row" style="margin-top: 2rem;">
                 <div class ="col" style="margin-left: -40px;">
-                  <h2 style="color: #484848;">Learn and connect in a meaningful way</h2>
-                  <h4 style="margin-top: -20px; color: #484848">From tutoring in algebra to Case interview prep, Sparc has you covered</h4>
+                  <h2 style="color: #484848;">Learn, monetize, and connect in a meaningful way</h2>
+                  <h4 style="margin-top: -20px; color: #484848">From Algebra tutoring to case interview prep or yoga, Sparc has your specific interests covered</h4>
                   <h5 v-if="this.searchQuery != null" style="font-weight: 600; color: #484848; margin-top: 50px; margin-bottom: -.25rem">Search Results for '<p style="display: inline-block; font-weight: 600; font-size: 18px; color: #484848">{{this.searchQuery}}</p>'</h5>
                 </div>
               </div>
@@ -21,7 +21,7 @@
                         <div class = "row">
                           <div class = "col">
                             <label>Search by Tags</label>
-                            <multiselect 
+                            <multiselect
                               v-model="tagFilters"
                               :options="allTags"
                               :multiple="true"
@@ -195,7 +195,7 @@
                                       <p v-if="event.event_price_per_person == null" style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp; Free</p>
                                       <p v-else style="font-size: 14px; font-weight: 400"><i class="fa fa-hand-holding-usd" style = "color: #484848"></i>&nbsp;${{ event.event_price_per_person }} per person</p>
                                     </div>
-                                  </div> 
+                                  </div>
                                       <p v-if="event.event_address != null" style="font-size: 14px; font-weight: 400"><i class="fa fa-location-arrow" style = "color: #484848"></i>&nbsp; {{ event.event_address }}</p>
                                   <div class = "row">
                                     <div class = "col">
@@ -221,7 +221,7 @@
                                     </div>
                                   </div>
                                 </div>
-                                  
+
                               </div>
                             </div>
                           </div>
@@ -230,11 +230,11 @@
                               <div class = "row">
                                 <div class = "col text-center" style="margin-top: -10px;">
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).facebook != '' && getUser(event.created_by).facebook != null"><a :href="'https://' + getUser(event.created_by).facebook" target="_blank"><i class="fab fa-facebook fa-lg" style = "color: #3b5998; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).instagram != '' && getUser(event.created_by).instagram != null"><a :href="'https://' + getUser(event.created_by).instagram" target="_blank"><i class="fab fa-instagram fa-lg" style = "color: #cf2872; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).twitter != '' && getUser(event.created_by).twitter!= null"><a :href="'https://' + getUser(event.created_by).twitter" target="_blank"><i class="fab fa-twitter fa-lg" style = "color: #00aced; margin-left: 10px; margin-right: 10px;"></i></a></span>
-                                
+
                                   <span v-if="getUser(event.created_by) != null && getUser(event.created_by).linkedin != '' && getUser(event.created_by).linkedin != null"><a :href="'https://' + getUser(event.created_by).linkedin" target="_blank"><i class="fab fa-linkedin fa-lg" style = "color: #0077b6; margin-left: 10px; margin-right: 10px;"></i></a></span>
                                 </div>
                               </div>
@@ -256,12 +256,12 @@
                               </div>
                             </div>
                           </div>
-                        </div>  
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div> 
+              </div>
             </div>
           </div>
         </div>
@@ -319,7 +319,7 @@ export default {
       typeFilters: [],
       pastFilter: [],
       dateFrom: null,
-      dateTo: null,                                                 
+      dateTo: null,
       locationFilter: '',
       filters: [],
       now: 0,
@@ -356,7 +356,7 @@ export default {
         event.sort((a, b) => {
           var dateA = new Date(a.date), dateB = new Date(b.date);
           return dateA - dateB
-        })  
+        })
       } else {
         event.sort((a, b) => {
           var dateA = new Date(a.date), dateB = new Date(b.date);
@@ -410,7 +410,7 @@ export default {
         searchQueryArray.push(query);
         searchQueryArray.push(query + 's')
       })
-      
+
       var resultEvents = new Set();
 
       // By Tags
@@ -444,7 +444,7 @@ export default {
 
       // By author
       this.filters.forEach(event => {
-        let user_item = this.getUsers.find(user => 
+        let user_item = this.getUsers.find(user =>
          Object.keys(user)[0] === event.created_by
         )
         if (user_item != null) {
@@ -523,7 +523,7 @@ export default {
     getPast() {
       if (this.pastFilter.length > 0) {
         this.filters = this.filters.filter(event => new Date(event.date) >= new Date(this.pastFilter[0]) && new Date(event.date) < Date.now())
-      } 
+      }
     },
     async getLocation() {
         this.filters = this.filters.filter(el => {
@@ -543,7 +543,7 @@ export default {
                       result.add(event)
                     }
                   })
-                }            
+                }
             })
             this.filters = [...result];
           }
@@ -568,7 +568,7 @@ export default {
       }
     },
     getUser(id) {
-      let user_item = this.getUsers.find(user => 
+      let user_item = this.getUsers.find(user =>
          Object.keys(user)[0] === id
       )
       if (user_item != null){
@@ -587,7 +587,7 @@ export default {
       if (user == null) {
         return
       } else {
-        return user.first_name + " " + user.last_name;
+        return user.first_name + " " + user.last_name[0].toUpperCase() + ".";
       }
     },
     getHoverIdDirectionsByIndex(index) {
@@ -721,12 +721,12 @@ export default {
 
   .scroll-pane-cards {
     margin-top: -2rem;
-    height: 83vh; 
-    overflow: scroll; 
-    padding: 40px; 
-    width: 115%; 
-    margin-left: -20px; 
-    border-radius: 8px; 
+    height: 83vh;
+    overflow: scroll;
+    padding: 40px;
+    width: 115%;
+    margin-left: -20px;
+    border-radius: 8px;
     background: white
 
   }
@@ -735,7 +735,7 @@ export default {
   .multiselect .multiselect__tags {
     font-size: 12px;
   }
- 
+
   .multiselect {
     font-size: 12px;
   }
@@ -753,6 +753,6 @@ export default {
   }
 
 
-  
+
 
 </style>

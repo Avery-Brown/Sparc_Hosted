@@ -50,6 +50,14 @@ export default {
                                 </b-alert>
                             <div class="card-body">
                             <p style= "color: #484848; font-weight: 400; font-size: 30px; margin-bottom: 0px;">Contact Us</p>
+                            <div style="display: flex; justify-content: row;">
+                              <div style="color: #484848; font-weight: 400; font-size: 15px">
+                                Text or Call
+                              </div>
+                              <div style="color: rgb(85, 170, 233); font-weight: 400; text-decoration: underline; font-size: 15px; margin-left: 5px;">
+                                +1 (646) 397-8006
+                              </div>
+                            </div>
                             <p style= "color: #484848; font-weight: 400; font-size: 15px">Have a question or just want to chat? Get in contact below</p>
                             <fg-input id="login_input" style="border-color: black;" class="input-lg" addon-left-icon="now-ui-icons emoticons_satisfied" placeholder="Name" v-model="userPayload.name" type="name"></fg-input>
                             <fg-input id="login_input" class="input-lg" addon-left-icon="now-ui-icons ui-1_email-85" placeholder="Email" v-model="userPayload.email" type="email"></fg-input>

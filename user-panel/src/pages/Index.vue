@@ -16,10 +16,10 @@
                     <b-input-group-prepend>
                       <span class="input-group-text" style="width: 48px;"><i class="fa fa-search fa-sm"></i></span>
                     </b-input-group-prepend>
-                      <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  @keyup.enter="saveAndSearch" v-model="search" size="lg" placeholder="What would you like to learn today?" autofocus/>
+                      <b-form-input style="border: solid #e3e3e3 1px; color: black; border-left: none; border-top-right-radius:30px; border-bottom-right-radius: 30px"  @keyup.enter="saveAndSearch" v-model="search" size="lg" placeholder="What would you like to learn? Sparc your next engagement!" autofocus/>
 
                   </b-input-group>
-                  <!-- <fg-input v-model="search" class = "rq-form-element" placeholder="What would you like to learn today?" autofocus></fg-input> -->
+                  <!-- <fg-input v-model="search" class = "rq-form-element" placeholder="What would you like to learn? Sparc your next engagement!" autofocus></fg-input> -->
               </div>
             </div>
             <div class = "row">
